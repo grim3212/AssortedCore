@@ -1,0 +1,53 @@
+package com.grim3212.assorted.core.common.block;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+import com.grim3212.assorted.core.AssortedCore;
+import com.grim3212.assorted.core.common.item.CoreItems;
+
+import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+
+public class CoreBlocks {
+
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, AssortedCore.MODID);
+	public static final DeferredRegister<Item> ITEMS = CoreItems.ITEMS;
+
+	public static final RegistryObject<CoreOreBlock> TIN_ORE = register("tin_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+	public static final RegistryObject<CoreOreBlock> COPPER_ORE = register("copper_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+	public static final RegistryObject<CoreOreBlock> SILVER_ORE = register("silver_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+	public static final RegistryObject<CoreOreBlock> ALUMINUM_ORE = register("aluminum_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+	public static final RegistryObject<CoreOreBlock> NICKEL_ORE = register("nickel_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+	public static final RegistryObject<CoreOreBlock> PLATINUM_ORE = register("platinum_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+	public static final RegistryObject<CoreOreBlock> LEAD_ORE = register("lead_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+	public static final RegistryObject<CoreOreBlock> RUBY_ORE = register("ruby_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+	public static final RegistryObject<CoreOreBlock> AMETHYST_ORE = register("amethyst_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+	public static final RegistryObject<CoreOreBlock> SAPPHIRE_ORE = register("sapphire_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+	public static final RegistryObject<CoreOreBlock> TOPAZ_ORE = register("topaz_ore", () -> new CoreOreBlock(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.6f, 1.0f)));
+
+	private static <T extends Block> RegistryObject<T> register(String name, Supplier<? extends T> sup) {
+		return register(name, sup, block -> item(block));
+	}
+
+	private static <T extends Block> RegistryObject<T> register(String name, Supplier<? extends T> sup, Function<RegistryObject<T>, Supplier<? extends Item>> itemCreator) {
+		RegistryObject<T> ret = registerNoItem(name, sup);
+		ITEMS.register(name, itemCreator.apply(ret));
+		return ret;
+	}
+
+	private static <T extends Block> RegistryObject<T> registerNoItem(String name, Supplier<? extends T> sup) {
+		return BLOCKS.register(name, sup);
+	}
+
+	private static Supplier<BlockItem> item(final RegistryObject<? extends Block> block) {
+		return () -> new BlockItem(block.get(), new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP));
+	}
+}

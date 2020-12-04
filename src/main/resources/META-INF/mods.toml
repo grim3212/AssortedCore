@@ -1,0 +1,31 @@
+# Find more information on toml format here:  https://github.com/toml-lang/toml
+
+modLoader="javafml"
+loaderVersion="[35,)"
+license="GPL-3.0 License"
+issueTrackerURL="https://github.com/grim3212/AssortedCore"
+
+[[mods]] #mandatory
+modId="assortedcore"
+version="${file.jarVersion}"
+displayName="Assorted Core"
+#updateJSONURL=""
+displayURL="https://assortedmods.com/"
+logoFile="logo.png"
+authors="Grim3212"
+description='''
+The core mod that all of the other Assorted Mods depend on. Contains reusable blocks and items as well as provides reusable code for the other mods. 
+'''
+
+[[dependencies.assortedcore]]
+    modId="forge"
+    mandatory=true
+    versionRange="[35,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.assortedcore]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.4]"
+    ordering="NONE"
+    side="BOTH"

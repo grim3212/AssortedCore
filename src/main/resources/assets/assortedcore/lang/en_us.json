@@ -1,0 +1,20 @@
+{
+	"itemGroup.assortedcore": "Assorted Core",
+	
+	"block.assortedcore.tin_ore": "Tin Ore",
+	"block.assortedcore.copper_ore": "Copper Ore",
+	"block.assortedcore.silver_ore": "Silver Ore",
+	"block.assortedcore.aluminum_ore": "Aluminum Ore",
+	"block.assortedcore.lead_ore": "Lead Ore",
+	"block.assortedcore.nickel_ore": "Nickel Ore",
+	"block.assortedcore.platinum_ore": "Platinum Ore",
+	"block.assortedcore.ruby_ore": "Ruby Ore",
+	"block.assortedcore.amethyst_ore": "Amethyst Ore",
+	"block.assortedcore.sapphire_ore": "Sapphire Ore",
+	"block.assortedcore.topaz_ore": "Topaz Ore",
+	
+	"item.assortedcore.ruby": "Ruby",
+	"item.assortedcore.amethyst": "Amethyst",
+	"item.assortedcore.sapphire": "Sapphire",
+	"item.assortedcore.topaz": "Topaz"
+}

@@ -37,6 +37,57 @@ public class CoreItemModelProvider extends ItemModelProvider {
 		genericBlock(CoreBlocks.AMETHYST_ORE.get());
 		genericBlock(CoreBlocks.SAPPHIRE_ORE.get());
 		genericBlock(CoreBlocks.TOPAZ_ORE.get());
+		genericBlock(CoreBlocks.TIN_BLOCK.get());
+		genericBlock(CoreBlocks.COPPER_BLOCK.get());
+		genericBlock(CoreBlocks.SILVER_BLOCK.get());
+		genericBlock(CoreBlocks.ALUMINUM_BLOCK.get());
+		genericBlock(CoreBlocks.NICKEL_BLOCK.get());
+		genericBlock(CoreBlocks.PLATINUM_BLOCK.get());
+		genericBlock(CoreBlocks.LEAD_BLOCK.get());
+		genericBlock(CoreBlocks.RUBY_BLOCK.get());
+		genericBlock(CoreBlocks.AMETHYST_BLOCK.get());
+		genericBlock(CoreBlocks.SAPPHIRE_BLOCK.get());
+		genericBlock(CoreBlocks.TOPAZ_BLOCK.get());
+		genericBlock(CoreBlocks.BRONZE_BLOCK.get());
+		genericBlock(CoreBlocks.ELECTRUM_BLOCK.get());
+		genericBlock(CoreBlocks.INVAR_BLOCK.get());
+		genericBlock(CoreBlocks.STEEL_BLOCK.get());
+		
+		generatedItem(CoreItems.TIN_INGOT.get());
+		generatedItem(CoreItems.COPPER_INGOT.get());
+		generatedItem(CoreItems.SILVER_INGOT.get());
+		generatedItem(CoreItems.ALUMINUM_INGOT.get());
+		generatedItem(CoreItems.NICKEL_INGOT.get());
+		generatedItem(CoreItems.PLATINUM_INGOT.get());
+		generatedItem(CoreItems.LEAD_INGOT.get());
+		generatedItem(CoreItems.BRONZE_INGOT.get());
+		generatedItem(CoreItems.ELECTRUM_INGOT.get());
+		generatedItem(CoreItems.INVAR_INGOT.get());
+		generatedItem(CoreItems.STEEL_INGOT.get());
+		
+		generatedItem(CoreItems.TIN_NUGGET.get());
+		generatedItem(CoreItems.COPPER_NUGGET.get());
+		generatedItem(CoreItems.SILVER_NUGGET.get());
+		generatedItem(CoreItems.ALUMINUM_NUGGET.get());
+		generatedItem(CoreItems.NICKEL_NUGGET.get());
+		generatedItem(CoreItems.PLATINUM_NUGGET.get());
+		generatedItem(CoreItems.LEAD_NUGGET.get());
+		generatedItem(CoreItems.BRONZE_NUGGET.get());
+		generatedItem(CoreItems.ELECTRUM_NUGGET.get());
+		generatedItem(CoreItems.INVAR_NUGGET.get());
+		generatedItem(CoreItems.STEEL_NUGGET.get());
+		
+		generatedItem(CoreItems.TIN_DUST.get());
+		generatedItem(CoreItems.COPPER_DUST.get());
+		generatedItem(CoreItems.SILVER_DUST.get());
+		generatedItem(CoreItems.ALUMINUM_DUST.get());
+		generatedItem(CoreItems.NICKEL_DUST.get());
+		generatedItem(CoreItems.PLATINUM_DUST.get());
+		generatedItem(CoreItems.LEAD_DUST.get());
+		generatedItem(CoreItems.BRONZE_DUST.get());
+		generatedItem(CoreItems.ELECTRUM_DUST.get());
+		generatedItem(CoreItems.INVAR_DUST.get());
+		generatedItem(CoreItems.STEEL_DUST.get());
 
 		generatedItem(CoreItems.RUBY.get());
 		generatedItem(CoreItems.AMETHYST.get());

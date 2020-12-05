@@ -53,6 +53,21 @@ public class CoreLootProvider extends LootTableProvider {
 			this.registerDropSelfLootTable(CoreBlocks.NICKEL_ORE.get());
 			this.registerDropSelfLootTable(CoreBlocks.PLATINUM_ORE.get());
 			this.registerDropSelfLootTable(CoreBlocks.LEAD_ORE.get());
+			this.registerDropSelfLootTable(CoreBlocks.TIN_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.COPPER_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.SILVER_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.ALUMINUM_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.NICKEL_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.PLATINUM_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.LEAD_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.RUBY_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.AMETHYST_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.SAPPHIRE_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.TOPAZ_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.BRONZE_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.ELECTRUM_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.INVAR_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.STEEL_BLOCK.get());
 
 			this.registerLootTable(CoreBlocks.RUBY_ORE.get(), (ruby) -> {
 				return droppingItemWithFortune(ruby, CoreItems.RUBY.get());

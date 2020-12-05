@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "assortedcore:ruby",
+    "assortedcore:amethyst",
+    "assortedcore:sapphire",
+    "assortedcore:topaz"
+  ]
+}

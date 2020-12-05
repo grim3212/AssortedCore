@@ -35,5 +35,20 @@ public class CoreBlockstateProvider extends BlockStateProvider {
 		simpleBlock(CoreBlocks.AMETHYST_ORE.get());
 		simpleBlock(CoreBlocks.SAPPHIRE_ORE.get());
 		simpleBlock(CoreBlocks.TOPAZ_ORE.get());
+		simpleBlock(CoreBlocks.TIN_BLOCK.get());
+		simpleBlock(CoreBlocks.COPPER_BLOCK.get());
+		simpleBlock(CoreBlocks.SILVER_BLOCK.get());
+		simpleBlock(CoreBlocks.ALUMINUM_BLOCK.get());
+		simpleBlock(CoreBlocks.NICKEL_BLOCK.get());
+		simpleBlock(CoreBlocks.PLATINUM_BLOCK.get());
+		simpleBlock(CoreBlocks.LEAD_BLOCK.get());
+		simpleBlock(CoreBlocks.RUBY_BLOCK.get());
+		simpleBlock(CoreBlocks.AMETHYST_BLOCK.get());
+		simpleBlock(CoreBlocks.SAPPHIRE_BLOCK.get());
+		simpleBlock(CoreBlocks.TOPAZ_BLOCK.get());
+		simpleBlock(CoreBlocks.BRONZE_BLOCK.get());
+		simpleBlock(CoreBlocks.ELECTRUM_BLOCK.get());
+		simpleBlock(CoreBlocks.INVAR_BLOCK.get());
+		simpleBlock(CoreBlocks.STEEL_BLOCK.get());
 	}
 }

@@ -39,6 +39,38 @@ public class CoreBlockTagProvider extends BlockTagsProvider {
 		this.getOrCreateBuilder(CoreTags.Blocks.ORES_AMETHYST).add(CoreBlocks.AMETHYST_ORE.get());
 		this.getOrCreateBuilder(CoreTags.Blocks.ORES_SAPPHIRE).add(CoreBlocks.SAPPHIRE_ORE.get());
 		this.getOrCreateBuilder(CoreTags.Blocks.ORES_TOPAZ).add(CoreBlocks.TOPAZ_ORE.get());
+
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.TIN_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.COPPER_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.SILVER_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.ALUMINUM_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.NICKEL_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.PLATINUM_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.LEAD_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.RUBY_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.AMETHYST_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.SAPPHIRE_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.TOPAZ_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.BRONZE_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.ELECTRUM_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.INVAR_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.STEEL_BLOCK.get());
+
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_TIN).add(CoreBlocks.TIN_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_COPPER).add(CoreBlocks.COPPER_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_SILVER).add(CoreBlocks.SILVER_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_ALUMINUM).add(CoreBlocks.ALUMINUM_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_NICKEL).add(CoreBlocks.NICKEL_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_PLATINUM).add(CoreBlocks.PLATINUM_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_LEAD).add(CoreBlocks.LEAD_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_RUBY).add(CoreBlocks.RUBY_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_AMETHYST).add(CoreBlocks.AMETHYST_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_SAPPHIRE).add(CoreBlocks.SAPPHIRE_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_TOPAZ).add(CoreBlocks.TOPAZ_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_BRONZE).add(CoreBlocks.BRONZE_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_ELECTRUM).add(CoreBlocks.ELECTRUM_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_INVAR).add(CoreBlocks.INVAR_BLOCK.get());
+		this.getOrCreateBuilder(CoreTags.Blocks.STORAGE_BLOCKS_STEEL).add(CoreBlocks.STEEL_BLOCK.get());
 	}
 
 	@Override

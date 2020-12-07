@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "assortedcore:sapphire"
+    },
+    {
+      "item": "assortedcore:sapphire"
+    },
+    {
+      "item": "assortedcore:sapphire"
+    },
+    {
+      "item": "assortedcore:sapphire"
+    },
+    {
+      "item": "assortedcore:sapphire"
+    },
+    {
+      "item": "assortedcore:sapphire"
+    },
+    {
+      "item": "assortedcore:sapphire"
+    },
+    {
+      "item": "assortedcore:sapphire"
+    },
+    {
+      "item": "assortedcore:sapphire"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:sapphire_block"
+  }
+}

@@ -55,7 +55,7 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.getOrCreateBuilder(CoreTags.Items.GEMS_AMETHYST).add(CoreItems.AMETHYST.get());
 		this.getOrCreateBuilder(CoreTags.Items.GEMS_SAPPHIRE).add(CoreItems.SAPPHIRE.get());
 		this.getOrCreateBuilder(CoreTags.Items.GEMS_TOPAZ).add(CoreItems.TOPAZ.get());
-		
+
 		this.getOrCreateBuilder(CoreTags.Items.INGOTS).add(CoreItems.TIN_INGOT.get());
 		this.getOrCreateBuilder(CoreTags.Items.INGOTS).add(CoreItems.COPPER_INGOT.get());
 		this.getOrCreateBuilder(CoreTags.Items.INGOTS).add(CoreItems.SILVER_INGOT.get());
@@ -78,7 +78,7 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.getOrCreateBuilder(CoreTags.Items.INGOTS_ELECTRUM).add(CoreItems.ELECTRUM_INGOT.get());
 		this.getOrCreateBuilder(CoreTags.Items.INGOTS_INVAR).add(CoreItems.INVAR_INGOT.get());
 		this.getOrCreateBuilder(CoreTags.Items.INGOTS_STEEL).add(CoreItems.STEEL_INGOT.get());
-		
+
 		this.getOrCreateBuilder(CoreTags.Items.NUGGETS).add(CoreItems.TIN_NUGGET.get());
 		this.getOrCreateBuilder(CoreTags.Items.NUGGETS).add(CoreItems.COPPER_NUGGET.get());
 		this.getOrCreateBuilder(CoreTags.Items.NUGGETS).add(CoreItems.SILVER_NUGGET.get());
@@ -101,7 +101,7 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.getOrCreateBuilder(CoreTags.Items.NUGGETS_ELECTRUM).add(CoreItems.ELECTRUM_NUGGET.get());
 		this.getOrCreateBuilder(CoreTags.Items.NUGGETS_INVAR).add(CoreItems.INVAR_NUGGET.get());
 		this.getOrCreateBuilder(CoreTags.Items.NUGGETS_STEEL).add(CoreItems.STEEL_NUGGET.get());
-		
+
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS).add(CoreItems.TIN_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS).add(CoreItems.COPPER_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS).add(CoreItems.SILVER_DUST.get());
@@ -113,6 +113,8 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS).add(CoreItems.ELECTRUM_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS).add(CoreItems.INVAR_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS).add(CoreItems.STEEL_DUST.get());
+		this.getOrCreateBuilder(CoreTags.Items.DUSTS).add(CoreItems.IRON_DUST.get());
+		this.getOrCreateBuilder(CoreTags.Items.DUSTS).add(CoreItems.GOLD_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS_TIN).add(CoreItems.TIN_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS_COPPER).add(CoreItems.COPPER_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS_SILVER).add(CoreItems.SILVER_DUST.get());
@@ -124,6 +126,8 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS_ELECTRUM).add(CoreItems.ELECTRUM_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS_INVAR).add(CoreItems.INVAR_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS_STEEL).add(CoreItems.STEEL_DUST.get());
+		this.getOrCreateBuilder(CoreTags.Items.DUSTS_IRON).add(CoreItems.IRON_DUST.get());
+		this.getOrCreateBuilder(CoreTags.Items.DUSTS_GOLD).add(CoreItems.GOLD_DUST.get());
 	}
 
 	@Override

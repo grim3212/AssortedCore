@@ -68,6 +68,9 @@ public class CoreLootProvider extends LootTableProvider {
 			this.registerDropSelfLootTable(CoreBlocks.ELECTRUM_BLOCK.get());
 			this.registerDropSelfLootTable(CoreBlocks.INVAR_BLOCK.get());
 			this.registerDropSelfLootTable(CoreBlocks.STEEL_BLOCK.get());
+			this.registerDropSelfLootTable(CoreBlocks.BASIC_MACHINE_CORE.get());
+			this.registerDropSelfLootTable(CoreBlocks.BASIC_ALLOY_FORGE.get());
+			this.registerDropSelfLootTable(CoreBlocks.BASIC_GRINDING_MILL.get());
 
 			this.registerLootTable(CoreBlocks.RUBY_ORE.get(), (ruby) -> {
 				return droppingItemWithFortune(ruby, CoreItems.RUBY.get());

@@ -6,16 +6,22 @@ import org.apache.logging.log4j.Logger;
 import com.grim3212.assorted.core.client.data.CoreBlockstateProvider;
 import com.grim3212.assorted.core.client.data.CoreItemModelProvider;
 import com.grim3212.assorted.core.client.proxy.ClientProxy;
+import com.grim3212.assorted.core.client.screen.AlloyForgeScreen;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
+import com.grim3212.assorted.core.common.block.tileentity.CoreTileEntityTypes;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
 import com.grim3212.assorted.core.common.data.CoreBlockTagProvider;
 import com.grim3212.assorted.core.common.data.CoreItemTagProvider;
 import com.grim3212.assorted.core.common.data.CoreLootProvider;
+import com.grim3212.assorted.core.common.data.CoreRecipes;
 import com.grim3212.assorted.core.common.gen.CoreWorldGeneration;
 import com.grim3212.assorted.core.common.gen.feature.CoreConfiguredFeatures;
 import com.grim3212.assorted.core.common.handler.CoreConfig;
+import com.grim3212.assorted.core.common.inventory.CoreContainerTypes;
 import com.grim3212.assorted.core.common.item.CoreItems;
 import com.grim3212.assorted.core.common.proxy.IProxy;
 
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -28,6 +34,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig.Type;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -57,10 +64,14 @@ public class AssortedCore {
 		final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		modBus.addListener(this::setup);
+		modBus.addListener(this::setupClient);
 		modBus.addListener(this::gatherData);
 
 		CoreBlocks.BLOCKS.register(modBus);
 		CoreItems.ITEMS.register(modBus);
+		CoreTileEntityTypes.TILE_ENTITIES.register(modBus);
+		CoreContainerTypes.CONTAINER_TYPES.register(modBus);
+		CoreRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
 
 		ModLoadingContext.get().registerConfig(Type.COMMON, CoreConfig.COMMON_SPEC);
 
@@ -73,6 +84,10 @@ public class AssortedCore {
 		});
 	}
 
+	private void setupClient(final FMLClientSetupEvent event) {
+		ScreenManager.registerFactory(CoreContainerTypes.ALLOY_FORGE.get(), AlloyForgeScreen::new);
+	}
+
 	private void gatherData(GatherDataEvent event) {
 		DataGenerator datagenerator = event.getGenerator();
 		ExistingFileHelper fileHelper = event.getExistingFileHelper();
@@ -82,6 +97,7 @@ public class AssortedCore {
 			datagenerator.addProvider(blockTagProvider);
 			datagenerator.addProvider(new CoreItemTagProvider(datagenerator, blockTagProvider, fileHelper));
 			datagenerator.addProvider(new CoreLootProvider(datagenerator));
+			datagenerator.addProvider(new CoreRecipes(datagenerator));
 		}
 
 		if (event.includeClient()) {

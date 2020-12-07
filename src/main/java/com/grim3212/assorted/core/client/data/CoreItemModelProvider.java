@@ -52,7 +52,8 @@ public class CoreItemModelProvider extends ItemModelProvider {
 		genericBlock(CoreBlocks.ELECTRUM_BLOCK.get());
 		genericBlock(CoreBlocks.INVAR_BLOCK.get());
 		genericBlock(CoreBlocks.STEEL_BLOCK.get());
-		
+		genericBlock(CoreBlocks.BASIC_ALLOY_FORGE.get());
+
 		generatedItem(CoreItems.TIN_INGOT.get());
 		generatedItem(CoreItems.COPPER_INGOT.get());
 		generatedItem(CoreItems.SILVER_INGOT.get());
@@ -64,7 +65,7 @@ public class CoreItemModelProvider extends ItemModelProvider {
 		generatedItem(CoreItems.ELECTRUM_INGOT.get());
 		generatedItem(CoreItems.INVAR_INGOT.get());
 		generatedItem(CoreItems.STEEL_INGOT.get());
-		
+
 		generatedItem(CoreItems.TIN_NUGGET.get());
 		generatedItem(CoreItems.COPPER_NUGGET.get());
 		generatedItem(CoreItems.SILVER_NUGGET.get());
@@ -76,7 +77,7 @@ public class CoreItemModelProvider extends ItemModelProvider {
 		generatedItem(CoreItems.ELECTRUM_NUGGET.get());
 		generatedItem(CoreItems.INVAR_NUGGET.get());
 		generatedItem(CoreItems.STEEL_NUGGET.get());
-		
+
 		generatedItem(CoreItems.TIN_DUST.get());
 		generatedItem(CoreItems.COPPER_DUST.get());
 		generatedItem(CoreItems.SILVER_DUST.get());
@@ -88,6 +89,8 @@ public class CoreItemModelProvider extends ItemModelProvider {
 		generatedItem(CoreItems.ELECTRUM_DUST.get());
 		generatedItem(CoreItems.INVAR_DUST.get());
 		generatedItem(CoreItems.STEEL_DUST.get());
+		generatedItem(CoreItems.IRON_DUST.get());
+		generatedItem(CoreItems.GOLD_DUST.get());
 
 		generatedItem(CoreItems.RUBY.get());
 		generatedItem(CoreItems.AMETHYST.get());

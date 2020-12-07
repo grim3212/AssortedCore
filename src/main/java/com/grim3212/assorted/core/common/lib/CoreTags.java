@@ -126,6 +126,8 @@ public class CoreTags {
 		public static final IOptionalNamedTag<Item> DUSTS_ELECTRUM = forgeTag("dusts/electrum");
 		public static final IOptionalNamedTag<Item> DUSTS_INVAR = forgeTag("dusts/invar");
 		public static final IOptionalNamedTag<Item> DUSTS_STEEL = forgeTag("dusts/steel");
+		public static final IOptionalNamedTag<Item> DUSTS_IRON = forgeTag("dusts/iron");
+		public static final IOptionalNamedTag<Item> DUSTS_GOLD = forgeTag("dusts/gold");
 
 		public static final IOptionalNamedTag<Item> GEMS = forgeTag("gems");
 		public static final IOptionalNamedTag<Item> GEMS_RUBY = forgeTag("gems/ruby");

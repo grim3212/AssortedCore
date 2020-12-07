@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "assortedcore:nickel_nugget"
+    },
+    {
+      "item": "assortedcore:nickel_nugget"
+    },
+    {
+      "item": "assortedcore:nickel_nugget"
+    },
+    {
+      "item": "assortedcore:nickel_nugget"
+    },
+    {
+      "item": "assortedcore:nickel_nugget"
+    },
+    {
+      "item": "assortedcore:nickel_nugget"
+    },
+    {
+      "item": "assortedcore:nickel_nugget"
+    },
+    {
+      "item": "assortedcore:nickel_nugget"
+    },
+    {
+      "item": "assortedcore:nickel_nugget"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:nickel_ingot"
+  }
+}

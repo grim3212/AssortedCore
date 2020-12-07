@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "assortedcore:amethyst"
+    },
+    {
+      "item": "assortedcore:amethyst"
+    },
+    {
+      "item": "assortedcore:amethyst"
+    },
+    {
+      "item": "assortedcore:amethyst"
+    },
+    {
+      "item": "assortedcore:amethyst"
+    },
+    {
+      "item": "assortedcore:amethyst"
+    },
+    {
+      "item": "assortedcore:amethyst"
+    },
+    {
+      "item": "assortedcore:amethyst"
+    },
+    {
+      "item": "assortedcore:amethyst"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:amethyst_block"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "assortedcore:alloy_forge",
+  "ingredient1": {
+    "ingredient": {
+      "tag": "forge:dusts/silver"
+    },
+    "count": 1
+  },
+  "ingredient2": {
+    "ingredient": {
+      "tag": "forge:dusts/gold"
+    },
+    "count": 1
+  },
+  "result": "assortedcore:electrum_dust",
+  "experience": 0.8,
+  "cookingtime": 400
+}

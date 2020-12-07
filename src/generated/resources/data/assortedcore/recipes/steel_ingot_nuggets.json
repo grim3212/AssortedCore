@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "assortedcore:steel_nugget"
+    },
+    {
+      "item": "assortedcore:steel_nugget"
+    },
+    {
+      "item": "assortedcore:steel_nugget"
+    },
+    {
+      "item": "assortedcore:steel_nugget"
+    },
+    {
+      "item": "assortedcore:steel_nugget"
+    },
+    {
+      "item": "assortedcore:steel_nugget"
+    },
+    {
+      "item": "assortedcore:steel_nugget"
+    },
+    {
+      "item": "assortedcore:steel_nugget"
+    },
+    {
+      "item": "assortedcore:steel_nugget"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:steel_ingot"
+  }
+}

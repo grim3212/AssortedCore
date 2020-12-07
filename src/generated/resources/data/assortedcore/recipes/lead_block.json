@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "assortedcore:lead_ingot"
+    },
+    {
+      "item": "assortedcore:lead_ingot"
+    },
+    {
+      "item": "assortedcore:lead_ingot"
+    },
+    {
+      "item": "assortedcore:lead_ingot"
+    },
+    {
+      "item": "assortedcore:lead_ingot"
+    },
+    {
+      "item": "assortedcore:lead_ingot"
+    },
+    {
+      "item": "assortedcore:lead_ingot"
+    },
+    {
+      "item": "assortedcore:lead_ingot"
+    },
+    {
+      "item": "assortedcore:lead_ingot"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:lead_block"
+  }
+}

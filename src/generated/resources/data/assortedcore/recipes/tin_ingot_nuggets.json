@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "assortedcore:tin_nugget"
+    },
+    {
+      "item": "assortedcore:tin_nugget"
+    },
+    {
+      "item": "assortedcore:tin_nugget"
+    },
+    {
+      "item": "assortedcore:tin_nugget"
+    },
+    {
+      "item": "assortedcore:tin_nugget"
+    },
+    {
+      "item": "assortedcore:tin_nugget"
+    },
+    {
+      "item": "assortedcore:tin_nugget"
+    },
+    {
+      "item": "assortedcore:tin_nugget"
+    },
+    {
+      "item": "assortedcore:tin_nugget"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:tin_ingot"
+  }
+}

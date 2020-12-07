@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "VEV",
+    "EXE",
+    "VEV"
+  ],
+  "key": {
+    "X": {
+      "item": "assortedcore:intermediate_grinding_mill"
+    },
+    "E": {
+      "tag": "forge:ingots/electrum"
+    },
+    "V": {
+      "tag": "forge:ingots/invar"
+    }
+  },
+  "result": {
+    "item": "assortedcore:advanced_grinding_mill"
+  }
+}

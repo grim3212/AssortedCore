@@ -7,6 +7,7 @@ import com.grim3212.assorted.core.client.data.CoreBlockstateProvider;
 import com.grim3212.assorted.core.client.data.CoreItemModelProvider;
 import com.grim3212.assorted.core.client.proxy.ClientProxy;
 import com.grim3212.assorted.core.client.screen.AlloyForgeScreen;
+import com.grim3212.assorted.core.client.screen.GrindingMillScreen;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
 import com.grim3212.assorted.core.common.block.tileentity.CoreTileEntityTypes;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
@@ -86,6 +87,7 @@ public class AssortedCore {
 
 	private void setupClient(final FMLClientSetupEvent event) {
 		ScreenManager.registerFactory(CoreContainerTypes.ALLOY_FORGE.get(), AlloyForgeScreen::new);
+		ScreenManager.registerFactory(CoreContainerTypes.GRINDING_MILL.get(), GrindingMillScreen::new);
 	}
 
 	private void gatherData(GatherDataEvent event) {

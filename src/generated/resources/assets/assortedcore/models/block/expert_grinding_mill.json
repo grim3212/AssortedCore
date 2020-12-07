@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "side": "assortedcore:block/expert_machine_side",
+    "front": "assortedcore:block/expert_grinding_mill_front",
+    "top": "assortedcore:block/expert_machine_top"
+  }
+}

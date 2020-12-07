@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "BXB",
+    "III"
+  ],
+  "key": {
+    "X": {
+      "item": "assortedcore:machine_core"
+    },
+    "B": {
+      "item": "minecraft:blast_furnace"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "assortedcore:basic_alloy_forge"
+  }
+}

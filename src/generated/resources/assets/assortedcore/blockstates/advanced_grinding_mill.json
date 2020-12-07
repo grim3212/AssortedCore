@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,on=false": {
+      "model": "assortedcore:block/advanced_grinding_mill"
+    },
+    "facing=south,on=false": {
+      "model": "assortedcore:block/advanced_grinding_mill",
+      "y": 180
+    },
+    "facing=west,on=false": {
+      "model": "assortedcore:block/advanced_grinding_mill",
+      "y": 270
+    },
+    "facing=east,on=false": {
+      "model": "assortedcore:block/advanced_grinding_mill",
+      "y": 90
+    },
+    "facing=north,on=true": {
+      "model": "assortedcore:block/advanced_grinding_mill_on"
+    },
+    "facing=south,on=true": {
+      "model": "assortedcore:block/advanced_grinding_mill_on",
+      "y": 180
+    },
+    "facing=west,on=true": {
+      "model": "assortedcore:block/advanced_grinding_mill_on",
+      "y": 270
+    },
+    "facing=east,on=true": {
+      "model": "assortedcore:block/advanced_grinding_mill_on",
+      "y": 90
+    }
+  }
+}

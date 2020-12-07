@@ -28,19 +28,19 @@ public class AlloyForgeTileEntity extends BaseMachineTileEntity {
 	private static final int[] SLOTS_DOWN = new int[] { 3 };
 	private static final int[] SLOTS_HORIZONTAL = new int[] { 0, 1, 2 };
 
-	public static AlloyForgeTileEntity basicAlloyForgeTileEntity() {
+	public static AlloyForgeTileEntity basicTileEntity() {
 		return new AlloyForgeTileEntity(CoreTileEntityTypes.BASIC_ALLOY_FORGE.get(), MachineTier.BASIC);
 	}
 
-	public static AlloyForgeTileEntity intermediateAlloyForgeTileEntity() {
+	public static AlloyForgeTileEntity intermediateTileEntity() {
 		return new AlloyForgeTileEntity(CoreTileEntityTypes.INTERMEDIATE_ALLOY_FORGE.get(), MachineTier.INTERMEDIATE);
 	}
 
-	public static AlloyForgeTileEntity advancedAlloyForgeTileEntity() {
+	public static AlloyForgeTileEntity advancedTileEntity() {
 		return new AlloyForgeTileEntity(CoreTileEntityTypes.ADVANCED_ALLOY_FORGE.get(), MachineTier.ADVANCED);
 	}
 
-	public static AlloyForgeTileEntity expertAlloyForgeTileEntity() {
+	public static AlloyForgeTileEntity expertTileEntity() {
 		return new AlloyForgeTileEntity(CoreTileEntityTypes.EXPERT_ALLOY_FORGE.get(), MachineTier.EXPERT);
 	}
 

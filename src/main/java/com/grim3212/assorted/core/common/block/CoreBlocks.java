@@ -2,6 +2,7 @@ package com.grim3212.assorted.core.common.block;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 
 import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.common.item.CoreItems;
@@ -10,6 +11,7 @@ import com.grim3212.assorted.core.common.lib.MachineTier;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -55,11 +57,14 @@ public class CoreBlocks {
 	public static final RegistryObject<Block> STEEL_BLOCK = register("steel_block", () -> new Block(AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool()));
 
 	public static final RegistryObject<Block> MACHINE_CORE = register("machine_core", () -> new Block(AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
-	public static final RegistryObject<AlloyForgeBlock> BASIC_ALLOY_FORGE = register("basic_alloy_forge", () -> new AlloyForgeBlock(MachineTier.BASIC, AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
-	public static final RegistryObject<AlloyForgeBlock> INTERMEDIATE_ALLOY_FORGE = register("intermediate_alloy_forge", () -> new AlloyForgeBlock(MachineTier.INTERMEDIATE, AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
-	public static final RegistryObject<AlloyForgeBlock> ADVANCED_ALLOY_FORGE = register("advanced_alloy_forge", () -> new AlloyForgeBlock(MachineTier.ADVANCED, AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
-	public static final RegistryObject<AlloyForgeBlock> EXPERT_ALLOY_FORGE = register("expert_alloy_forge", () -> new AlloyForgeBlock(MachineTier.EXPERT, AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
-	public static final RegistryObject<GrindingMillBlock> BASIC_GRINDING_MILL = register("basic_grinding_mill", () -> new GrindingMillBlock(AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+	public static final RegistryObject<AlloyForgeBlock> BASIC_ALLOY_FORGE = register("basic_alloy_forge", () -> new AlloyForgeBlock(MachineTier.BASIC, AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool().setLightLevel(getLightValueOn(13))));
+	public static final RegistryObject<AlloyForgeBlock> INTERMEDIATE_ALLOY_FORGE = register("intermediate_alloy_forge", () -> new AlloyForgeBlock(MachineTier.INTERMEDIATE, AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 8.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool().setLightLevel(getLightValueOn(13))));
+	public static final RegistryObject<AlloyForgeBlock> ADVANCED_ALLOY_FORGE = register("advanced_alloy_forge", () -> new AlloyForgeBlock(MachineTier.ADVANCED, AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0F, 9.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool().setLightLevel(getLightValueOn(13))));
+	public static final RegistryObject<AlloyForgeBlock> EXPERT_ALLOY_FORGE = register("expert_alloy_forge", () -> new AlloyForgeBlock(MachineTier.EXPERT, AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(6.0F, 10.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool().setLightLevel(getLightValueOn(13))));
+	public static final RegistryObject<GrindingMillBlock> BASIC_GRINDING_MILL = register("basic_grinding_mill", () -> new GrindingMillBlock(MachineTier.BASIC, AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+	public static final RegistryObject<GrindingMillBlock> INTERMEDIATE_GRINDING_MILL = register("intermediate_grinding_mill", () -> new GrindingMillBlock(MachineTier.INTERMEDIATE, AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+	public static final RegistryObject<GrindingMillBlock> ADVANCED_GRINDING_MILL = register("advanced_grinding_mill", () -> new GrindingMillBlock(MachineTier.ADVANCED, AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+	public static final RegistryObject<GrindingMillBlock> EXPERT_GRINDING_MILL = register("expert_grinding_mill", () -> new GrindingMillBlock(MachineTier.EXPERT, AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
 
 	private static <T extends Block> RegistryObject<T> register(String name, Supplier<? extends T> sup) {
 		return register(name, sup, block -> item(block));
@@ -77,5 +82,11 @@ public class CoreBlocks {
 
 	private static Supplier<BlockItem> item(final RegistryObject<? extends Block> block) {
 		return () -> new BlockItem(block.get(), new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP));
+	}
+
+	private static ToIntFunction<BlockState> getLightValueOn(int lightValue) {
+		return (state) -> {
+			return state.get(BaseMachineBlock.ON) ? lightValue : 0;
+		};
 	}
 }

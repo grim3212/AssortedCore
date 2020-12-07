@@ -52,10 +52,16 @@ public class CoreItemModelProvider extends ItemModelProvider {
 		genericBlock(CoreBlocks.ELECTRUM_BLOCK.get());
 		genericBlock(CoreBlocks.INVAR_BLOCK.get());
 		genericBlock(CoreBlocks.STEEL_BLOCK.get());
+		
+		genericBlock(CoreBlocks.MACHINE_CORE.get());
 		genericBlock(CoreBlocks.BASIC_ALLOY_FORGE.get());
 		genericBlock(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get());
 		genericBlock(CoreBlocks.ADVANCED_ALLOY_FORGE.get());
 		genericBlock(CoreBlocks.EXPERT_ALLOY_FORGE.get());
+		genericBlock(CoreBlocks.BASIC_GRINDING_MILL.get());
+		genericBlock(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get());
+		genericBlock(CoreBlocks.ADVANCED_GRINDING_MILL.get());
+		genericBlock(CoreBlocks.EXPERT_GRINDING_MILL.get());
 
 		generatedItem(CoreItems.TIN_INGOT.get());
 		generatedItem(CoreItems.COPPER_INGOT.get());
@@ -94,6 +100,20 @@ public class CoreItemModelProvider extends ItemModelProvider {
 		generatedItem(CoreItems.STEEL_DUST.get());
 		generatedItem(CoreItems.IRON_DUST.get());
 		generatedItem(CoreItems.GOLD_DUST.get());
+
+		generatedItem(CoreItems.TIN_GEAR.get());
+		generatedItem(CoreItems.COPPER_GEAR.get());
+		generatedItem(CoreItems.SILVER_GEAR.get());
+		generatedItem(CoreItems.ALUMINUM_GEAR.get());
+		generatedItem(CoreItems.NICKEL_GEAR.get());
+		generatedItem(CoreItems.PLATINUM_GEAR.get());
+		generatedItem(CoreItems.LEAD_GEAR.get());
+		generatedItem(CoreItems.BRONZE_GEAR.get());
+		generatedItem(CoreItems.ELECTRUM_GEAR.get());
+		generatedItem(CoreItems.INVAR_GEAR.get());
+		generatedItem(CoreItems.STEEL_GEAR.get());
+		generatedItem(CoreItems.IRON_GEAR.get());
+		generatedItem(CoreItems.GOLD_GEAR.get());
 
 		generatedItem(CoreItems.RUBY.get());
 		generatedItem(CoreItems.AMETHYST.get());

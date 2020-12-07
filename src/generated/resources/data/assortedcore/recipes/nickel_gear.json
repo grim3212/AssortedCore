@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "MSM",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "tag": "forge:ingots/nickel"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "assortedcore:nickel_gear"
+  }
+}

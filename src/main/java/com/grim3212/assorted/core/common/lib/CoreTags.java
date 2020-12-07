@@ -122,6 +122,21 @@ public class CoreTags {
 		public static final IOptionalNamedTag<Item> GEMS_AMETHYST = forgeTag("gems/amethyst");
 		public static final IOptionalNamedTag<Item> GEMS_SAPPHIRE = forgeTag("gems/sapphire");
 		public static final IOptionalNamedTag<Item> GEMS_TOPAZ = forgeTag("gems/topaz");
+		
+		public static final IOptionalNamedTag<Item> GEARS = forgeTag("gear");
+		public static final IOptionalNamedTag<Item> GEARS_TIN = forgeTag("gear/tin");
+		public static final IOptionalNamedTag<Item> GEARS_COPPER = forgeTag("gear/copper");
+		public static final IOptionalNamedTag<Item> GEARS_SILVER = forgeTag("gear/silver");
+		public static final IOptionalNamedTag<Item> GEARS_ALUMINUM = forgeTag("gear/aluminum");
+		public static final IOptionalNamedTag<Item> GEARS_NICKEL = forgeTag("gear/nickel");
+		public static final IOptionalNamedTag<Item> GEARS_PLATINUM = forgeTag("gear/platinum");
+		public static final IOptionalNamedTag<Item> GEARS_LEAD = forgeTag("gear/lead");
+		public static final IOptionalNamedTag<Item> GEARS_BRONZE = forgeTag("gear/bronze");
+		public static final IOptionalNamedTag<Item> GEARS_ELECTRUM = forgeTag("gear/electrum");
+		public static final IOptionalNamedTag<Item> GEARS_INVAR = forgeTag("gear/invar");
+		public static final IOptionalNamedTag<Item> GEARS_STEEL = forgeTag("gear/steel");
+		public static final IOptionalNamedTag<Item> GEARS_IRON = forgeTag("gear/iron");
+		public static final IOptionalNamedTag<Item> GEARS_GOLD = forgeTag("gear/gold");
 
 		private static IOptionalNamedTag<Item> forgeTag(String name) {
 			return ItemTags.createOptional(new ResourceLocation("forge", name));

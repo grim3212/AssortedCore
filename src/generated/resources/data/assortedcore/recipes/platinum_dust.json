@@ -1,0 +1,15 @@
+{
+  "type": "assortedcore:grinding_mill",
+  "ingredient": {
+    "ingredient": {
+      "tag": "forge:ores/platinum"
+    },
+    "count": 1
+  },
+  "result": {
+    "item": "assortedcore:platinum_dust",
+    "count": 2
+  },
+  "experience": 0.5,
+  "cookingtime": 600
+}

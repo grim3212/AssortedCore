@@ -57,11 +57,17 @@ public class CoreBlockstateProvider extends BlockStateProvider {
 		simpleBlock(CoreBlocks.ELECTRUM_BLOCK.get());
 		simpleBlock(CoreBlocks.INVAR_BLOCK.get());
 		simpleBlock(CoreBlocks.STEEL_BLOCK.get());
+		simpleBlock(CoreBlocks.MACHINE_CORE.get());
 
 		machine(CoreBlocks.BASIC_ALLOY_FORGE.get(), MachineTier.BASIC);
 		machine(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get(), MachineTier.INTERMEDIATE);
 		machine(CoreBlocks.ADVANCED_ALLOY_FORGE.get(), MachineTier.ADVANCED);
 		machine(CoreBlocks.EXPERT_ALLOY_FORGE.get(), MachineTier.EXPERT);
+
+		machine(CoreBlocks.BASIC_GRINDING_MILL.get(), MachineTier.BASIC);
+		machine(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get(), MachineTier.INTERMEDIATE);
+		machine(CoreBlocks.ADVANCED_GRINDING_MILL.get(), MachineTier.ADVANCED);
+		machine(CoreBlocks.EXPERT_GRINDING_MILL.get(), MachineTier.EXPERT);
 	}
 
 	private void machine(Block b, MachineTier tier) {

@@ -1,0 +1,21 @@
+{
+  "type": "assortedcore:alloy_forge",
+  "ingredient1": {
+    "ingredient": {
+      "tag": "minecraft:coals"
+    },
+    "count": 4
+  },
+  "ingredient2": {
+    "ingredient": {
+      "tag": "forge:dusts/iron"
+    },
+    "count": 1
+  },
+  "result": {
+    "item": "assortedcore:steel_ingot",
+    "count": 1
+  },
+  "experience": 0.5,
+  "cookingtime": 800
+}

@@ -5,23 +5,28 @@ import java.util.function.Consumer;
 import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
 import com.grim3212.assorted.core.common.crafting.MachineIngredient;
+import com.grim3212.assorted.core.common.data.builders.AlloyForgeRecipeBuilder;
+import com.grim3212.assorted.core.common.data.builders.GrindingMillRecipeBuilder;
 import com.grim3212.assorted.core.common.item.CoreItems;
 import com.grim3212.assorted.core.common.lib.CoreTags;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.data.CookingRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
+import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.ITag.INamedTag;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
 
 public class CoreRecipes extends RecipeProvider {
 
@@ -74,10 +79,59 @@ public class CoreRecipes extends RecipeProvider {
 		ingotDust(CoreTags.Items.DUSTS_IRON, Items.IRON_INGOT, consumer);
 		ingotDust(CoreTags.Items.DUSTS_GOLD, Items.GOLD_INGOT, consumer);
 
+		gear(CoreTags.Items.INGOTS_TIN, CoreItems.TIN_GEAR.get(), consumer);
+		gear(CoreTags.Items.INGOTS_COPPER, CoreItems.COPPER_GEAR.get(), consumer);
+		gear(CoreTags.Items.INGOTS_SILVER, CoreItems.SILVER_GEAR.get(), consumer);
+		gear(CoreTags.Items.INGOTS_ALUMINUM, CoreItems.ALUMINUM_GEAR.get(), consumer);
+		gear(CoreTags.Items.INGOTS_NICKEL, CoreItems.NICKEL_GEAR.get(), consumer);
+		gear(CoreTags.Items.INGOTS_PLATINUM, CoreItems.PLATINUM_GEAR.get(), consumer);
+		gear(CoreTags.Items.INGOTS_LEAD, CoreItems.LEAD_GEAR.get(), consumer);
+		gear(CoreTags.Items.INGOTS_BRONZE, CoreItems.BRONZE_GEAR.get(), consumer);
+		gear(CoreTags.Items.INGOTS_ELECTRUM, CoreItems.ELECTRUM_GEAR.get(), consumer);
+		gear(CoreTags.Items.INGOTS_INVAR, CoreItems.INVAR_GEAR.get(), consumer);
+		gear(CoreTags.Items.INGOTS_STEEL, CoreItems.STEEL_GEAR.get(), consumer);
+		gear(Tags.Items.INGOTS_IRON, CoreItems.IRON_GEAR.get(), consumer);
+		gear(Tags.Items.INGOTS_GOLD, CoreItems.GOLD_GEAR.get(), consumer);
+
 		alloy(ItemTags.COALS, 4, CoreTags.Items.DUSTS_IRON, 1, new ItemStack(CoreItems.STEEL_INGOT.get(), 1), 0.5F, 800, consumer);
 		alloy(CoreTags.Items.DUSTS_COPPER, 3, CoreTags.Items.DUSTS_TIN, 1, new ItemStack(CoreItems.BRONZE_INGOT.get(), 4), 0.5F, consumer);
 		alloy(CoreTags.Items.DUSTS_IRON, 2, CoreTags.Items.DUSTS_NICKEL, 1, new ItemStack(CoreItems.INVAR_INGOT.get(), 3), 0.7F, 500, consumer);
 		alloy(CoreTags.Items.DUSTS_SILVER, CoreTags.Items.DUSTS_GOLD, new ItemStack(CoreItems.ELECTRUM_DUST.get(), 2), 0.7F, consumer);
+
+		grinding(CoreTags.Items.ORES_TIN, new ItemStack(CoreItems.TIN_DUST.get(), 2), 0.2F, 600, consumer);
+		grinding(CoreTags.Items.ORES_COPPER, new ItemStack(CoreItems.COPPER_DUST.get(), 2), 0.2F, 600, consumer);
+		grinding(CoreTags.Items.ORES_SILVER, new ItemStack(CoreItems.SILVER_DUST.get(), 2), 0.4F, 600, consumer);
+		grinding(CoreTags.Items.ORES_ALUMINUM, new ItemStack(CoreItems.ALUMINUM_DUST.get(), 2), 0.2F, 600, consumer);
+		grinding(CoreTags.Items.ORES_NICKEL, new ItemStack(CoreItems.NICKEL_DUST.get(), 2), 0.2F, 600, consumer);
+		grinding(CoreTags.Items.ORES_PLATINUM, new ItemStack(CoreItems.PLATINUM_DUST.get(), 2), 0.5F, 600, consumer);
+		grinding(CoreTags.Items.ORES_LEAD, new ItemStack(CoreItems.LEAD_DUST.get(), 2), 0.2F, 600, consumer);
+		grinding(CoreTags.Items.ORES_RUBY, new ItemStack(CoreItems.RUBY.get(), 2), 0.3F, 600, consumer);
+		grinding(CoreTags.Items.ORES_AMETHYST, new ItemStack(CoreItems.AMETHYST.get(), 2), 0.3F, 600, consumer);
+		grinding(CoreTags.Items.ORES_SAPPHIRE, new ItemStack(CoreItems.SAPPHIRE.get(), 2), 0.3F, 600, consumer);
+		grinding(CoreTags.Items.ORES_TOPAZ, new ItemStack(CoreItems.TOPAZ.get(), 2), 0.3F, 600, consumer);
+		
+		grindingDustFromIngot(CoreTags.Items.INGOTS_TIN, new ItemStack(CoreItems.TIN_DUST.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_COPPER, new ItemStack(CoreItems.COPPER_DUST.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_SILVER, new ItemStack(CoreItems.SILVER_DUST.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_ALUMINUM, new ItemStack(CoreItems.ALUMINUM_DUST.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_NICKEL, new ItemStack(CoreItems.NICKEL_DUST.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_PLATINUM, new ItemStack(CoreItems.PLATINUM_DUST.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_LEAD, new ItemStack(CoreItems.LEAD_DUST.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_BRONZE, new ItemStack(CoreItems.BRONZE_DUST.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_ELECTRUM, new ItemStack(CoreItems.ELECTRUM_DUST.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_STEEL, new ItemStack(CoreItems.STEEL_INGOT.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_INVAR, new ItemStack(CoreItems.INVAR_DUST.get(), 1), 0.0F, 300, consumer);
+		
+		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.MACHINE_CORE.get()).key('A', CoreTags.Items.INGOTS_ALUMINUM).key('C', CoreTags.Items.GEARS_COPPER).key('I', Tags.Items.INGOTS_IRON).patternLine("IAI").patternLine("ACA").patternLine("IAI").addCriterion("has_iron", hasItem(Tags.Items.INGOTS_IRON)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.BASIC_ALLOY_FORGE.get()).key('X', CoreBlocks.MACHINE_CORE.get()).key('B', Blocks.BLAST_FURNACE).key('I', Tags.Items.INGOTS_IRON).patternLine("III").patternLine("BXB").patternLine("III").addCriterion("has_iron", hasItem(Tags.Items.INGOTS_IRON)).addCriterion("has_blast_furnace", hasItem(Blocks.BLAST_FURNACE)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get()).key('X', CoreBlocks.BASIC_ALLOY_FORGE.get()).key('S', CoreTags.Items.INGOTS_STEEL).patternLine("SSS").patternLine("SXS").patternLine("SSS").addCriterion("has_steel", hasItem(CoreTags.Items.INGOTS_STEEL)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.ADVANCED_ALLOY_FORGE.get()).key('X', CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get()).key('E', CoreTags.Items.INGOTS_ELECTRUM).key('V', CoreTags.Items.INGOTS_INVAR).patternLine("VEV").patternLine("EXE").patternLine("VEV").addCriterion("has_electrum", hasItem(CoreTags.Items.INGOTS_ELECTRUM)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.EXPERT_ALLOY_FORGE.get()).key('X', CoreBlocks.ADVANCED_ALLOY_FORGE.get()).key('P', CoreTags.Items.INGOTS_PLATINUM).patternLine(" P ").patternLine("PXP").patternLine(" P ").addCriterion("has_platinum", hasItem(CoreTags.Items.INGOTS_PLATINUM)).build(consumer);
+	
+		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.BASIC_GRINDING_MILL.get()).key('X', CoreBlocks.MACHINE_CORE.get()).key('F', Blocks.FURNACE).key('I', Tags.Items.INGOTS_IRON).key('P', Items.IRON_PICKAXE).key('G', CoreTags.Items.GEARS_IRON).patternLine("IPI").patternLine("GXG").patternLine("IFI").addCriterion("has_iron_pickaxe", hasItem(Items.IRON_PICKAXE)).addCriterion("has_furnace", hasItem(Blocks.FURNACE)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get()).key('X', CoreBlocks.BASIC_GRINDING_MILL.get()).key('S', CoreTags.Items.INGOTS_STEEL).patternLine("SSS").patternLine("SXS").patternLine("SSS").addCriterion("has_steel", hasItem(CoreTags.Items.INGOTS_STEEL)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.ADVANCED_GRINDING_MILL.get()).key('X', CoreBlocks.INTERMEDIATE_GRINDING_MILL.get()).key('E', CoreTags.Items.INGOTS_ELECTRUM).key('V', CoreTags.Items.INGOTS_INVAR).patternLine("VEV").patternLine("EXE").patternLine("VEV").addCriterion("has_electrum", hasItem(CoreTags.Items.INGOTS_ELECTRUM)).build(consumer);
+		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.EXPERT_GRINDING_MILL.get()).key('X', CoreBlocks.ADVANCED_GRINDING_MILL.get()).key('P', CoreTags.Items.INGOTS_PLATINUM).patternLine(" P ").patternLine("PXP").patternLine(" P ").addCriterion("has_platinum", hasItem(CoreTags.Items.INGOTS_PLATINUM)).build(consumer);
 	}
 
 	private void alloy(INamedTag<Item> ingredient1, int ingredient1Count, INamedTag<Item> ingredient2, int ingredient2Count, ItemStack result, float experience, Consumer<IFinishedRecipe> consumer) {
@@ -94,6 +148,22 @@ public class CoreRecipes extends RecipeProvider {
 
 	private void alloy(INamedTag<Item> ingredient1, int ingredient1Count, INamedTag<Item> ingredient2, int ingredient2Count, ItemStack result, float experience, int cookTime, Consumer<IFinishedRecipe> consumer) {
 		AlloyForgeRecipeBuilder.recipe(new MachineIngredient(Ingredient.fromTag(ingredient1), ingredient1Count), new MachineIngredient(Ingredient.fromTag(ingredient2), ingredient2Count), result, experience, cookTime).addCriterion("has_ingredient1", hasItem(ingredient1)).addCriterion("has_ingredient2", hasItem(ingredient2)).build(consumer);
+	}
+	
+	private void grindingDustFromIngot(INamedTag<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<IFinishedRecipe> consumer) {
+		grinding(ingredient, result, experience, cookTime, consumer, "dust_from_ingot");
+	}
+	
+	private void grinding(INamedTag<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<IFinishedRecipe> consumer) {
+		grinding(ingredient, result, experience, cookTime, consumer, "");
+	}
+	
+	private void grinding(INamedTag<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<IFinishedRecipe> consumer, String name) {
+		GrindingMillRecipeBuilder.recipe(new MachineIngredient(Ingredient.fromTag(ingredient)), result, experience, cookTime).addCriterion("has_ingredient", hasItem(ingredient)).build(consumer, new ResourceLocation(AssortedCore.MODID, result.getItem().getRegistryName().getPath() + name));
+	}
+
+	private void gear(INamedTag<Item> material, IItemProvider gear, Consumer<IFinishedRecipe> consumer) {
+		ShapedRecipeBuilder.shapedRecipe(gear).key('M', material).key('S', Tags.Items.RODS_WOODEN).patternLine(" M ").patternLine("MSM").patternLine(" M ").addCriterion("has_material", hasItem(material)).build(consumer);
 	}
 
 	private void ingotDust(INamedTag<Item> dust, IItemProvider ingot, Consumer<IFinishedRecipe> consumer) {

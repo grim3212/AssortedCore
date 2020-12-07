@@ -11,4 +11,5 @@ public class CoreRecipeSerializers {
 	public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, AssortedCore.MODID);
 	
 	public static final RegistryObject<IRecipeSerializer<?>> ALLOY_FORGE = RECIPE_SERIALIZERS.register("alloy_forge", AlloyForgeRecipeSerializer::new);
+	public static final RegistryObject<IRecipeSerializer<?>> GRINDING_MILL = RECIPE_SERIALIZERS.register("grinding_mill", GrindingMillRecipeSerializer::new);
 }

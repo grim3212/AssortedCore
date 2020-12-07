@@ -1,11 +1,33 @@
 package com.grim3212.assorted.core.common.block;
 
-import net.minecraft.block.Block;
+import com.grim3212.assorted.core.common.block.tileentity.GrindingMillTileEntity;
+import com.grim3212.assorted.core.common.lib.MachineTier;
 
-public class GrindingMillBlock extends Block {
+import net.minecraft.block.BlockState;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockReader;
 
-	public GrindingMillBlock(Properties properties) {
+public class GrindingMillBlock extends BaseMachineBlock {
+
+	private final MachineTier tier;
+
+	public GrindingMillBlock(MachineTier tier, Properties properties) {
 		super(properties);
+		this.tier = tier;
 	}
 
+	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		switch (this.tier) {
+		case INTERMEDIATE:
+			return GrindingMillTileEntity.intermediateTileEntity();
+		case ADVANCED:
+			return GrindingMillTileEntity.advancedTileEntity();
+		case EXPERT:
+			return GrindingMillTileEntity.expertTileEntity();
+		case BASIC:
+		default:
+			return GrindingMillTileEntity.basicTileEntity();
+		}
+	}
 }

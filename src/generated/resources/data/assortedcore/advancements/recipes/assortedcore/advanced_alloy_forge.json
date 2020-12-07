@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "assortedcore:advanced_alloy_forge"
+    ]
+  },
+  "criteria": {
+    "has_electrum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/electrum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "assortedcore:advanced_alloy_forge"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_electrum",
+      "has_the_recipe"
+    ]
+  ]
+}

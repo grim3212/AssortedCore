@@ -56,6 +56,20 @@ public class CoreItems {
 	public static final RegistryObject<Item> IRON_DUST = register("iron_dust", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 	public static final RegistryObject<Item> GOLD_DUST = register("gold_dust", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 
+	public static final RegistryObject<Item> TIN_GEAR = register("tin_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> COPPER_GEAR = register("copper_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> SILVER_GEAR = register("silver_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> ALUMINUM_GEAR = register("aluminum_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> NICKEL_GEAR = register("nickel_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> PLATINUM_GEAR = register("platinum_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> LEAD_GEAR = register("lead_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> BRONZE_GEAR = register("bronze_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> ELECTRUM_GEAR = register("electrum_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> INVAR_GEAR = register("invar_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> STEEL_GEAR = register("steel_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> IRON_GEAR = register("iron_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> GOLD_GEAR = register("gold_gear", () -> new Item(new Item.Properties().group(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+
 	private static <T extends Item> RegistryObject<T> register(final String name, final Supplier<T> sup) {
 		return ITEMS.register(name, sup);
 	}

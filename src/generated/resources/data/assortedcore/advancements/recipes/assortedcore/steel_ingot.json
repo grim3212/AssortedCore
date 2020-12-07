@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "assortedcore:steel_ingot"
+    ]
+  },
+  "criteria": {
+    "has_ingredient1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:coals"
+          }
+        ]
+      }
+    },
+    "has_ingredient2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/iron"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "assortedcore:steel_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingredient1",
+      "has_ingredient2",
+      "has_the_recipe"
+    ]
+  ]
+}

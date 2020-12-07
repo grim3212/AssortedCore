@@ -11,6 +11,8 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 
 public class AlloyForgeContainer extends BaseMachineContainer {
@@ -86,5 +88,23 @@ public class AlloyForgeContainer extends BaseMachineContainer {
 
 		return itemstack;
 	}
+	
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public int getCookProgressionScaled() {
+		int i = this.machineData.get(2);
+		int j = this.machineData.get(3);
+		return j != 0 && i != 0 ? i * 24 / j : 0;
+	}
 
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public int getBurnLeftScaled() {
+		int i = this.machineData.get(1);
+		if (i == 0) {
+			i = 200;
+		}
+
+		return this.machineData.get(0) * 13 / i;
+	}
 }

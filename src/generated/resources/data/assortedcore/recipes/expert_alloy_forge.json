@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " P ",
+    "PXP",
+    " P "
+  ],
+  "key": {
+    "X": {
+      "item": "assortedcore:advanced_alloy_forge"
+    },
+    "P": {
+      "tag": "forge:ingots/platinum"
+    }
+  },
+  "result": {
+    "item": "assortedcore:expert_alloy_forge"
+  }
+}

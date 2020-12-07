@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public abstract class BaseMachineContainer extends Container {
 
 	private final IInventory machineInventory;
-	private final IIntArray machineData;
+	protected final IIntArray machineData;
 	protected final World world;
 	protected final IRecipeType<? extends BaseMachineRecipe> recipeType;
 
@@ -46,21 +46,10 @@ public abstract class BaseMachineContainer extends Container {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public int getCookProgressionScaled() {
-		int i = this.machineData.get(2);
-		int j = this.machineData.get(3);
-		return j != 0 && i != 0 ? i * 24 / j : 0;
-	}
+	public abstract int getCookProgressionScaled();
 
 	@OnlyIn(Dist.CLIENT)
-	public int getBurnLeftScaled() {
-		int i = this.machineData.get(1);
-		if (i == 0) {
-			i = 200;
-		}
-
-		return this.machineData.get(0) * 13 / i;
-	}
+	public abstract int getBurnLeftScaled();
 
 	@OnlyIn(Dist.CLIENT)
 	public boolean isBurning() {

@@ -1,0 +1,15 @@
+{
+  "type": "assortedcore:grinding_mill",
+  "ingredient": {
+    "ingredient": {
+      "tag": "forge:ores/sapphire"
+    },
+    "count": 1
+  },
+  "result": {
+    "item": "assortedcore:sapphire",
+    "count": 2
+  },
+  "experience": 0.3,
+  "cookingtime": 600
+}

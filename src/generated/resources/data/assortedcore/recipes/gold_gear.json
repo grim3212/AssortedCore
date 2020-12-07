@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "MSM",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "tag": "forge:ingots/gold"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "assortedcore:gold_gear"
+  }
+}

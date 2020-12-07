@@ -128,6 +128,33 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS_STEEL).add(CoreItems.STEEL_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS_IRON).add(CoreItems.IRON_DUST.get());
 		this.getOrCreateBuilder(CoreTags.Items.DUSTS_GOLD).add(CoreItems.GOLD_DUST.get());
+		
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.TIN_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.COPPER_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.SILVER_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.ALUMINUM_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.NICKEL_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.PLATINUM_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.LEAD_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.BRONZE_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.ELECTRUM_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.INVAR_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.STEEL_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.IRON_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS).add(CoreItems.GOLD_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_TIN).add(CoreItems.TIN_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_COPPER).add(CoreItems.COPPER_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_SILVER).add(CoreItems.SILVER_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_ALUMINUM).add(CoreItems.ALUMINUM_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_NICKEL).add(CoreItems.NICKEL_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_PLATINUM).add(CoreItems.PLATINUM_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_LEAD).add(CoreItems.LEAD_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_BRONZE).add(CoreItems.BRONZE_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_ELECTRUM).add(CoreItems.ELECTRUM_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_INVAR).add(CoreItems.INVAR_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_STEEL).add(CoreItems.STEEL_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_IRON).add(CoreItems.IRON_GEAR.get());
+		this.getOrCreateBuilder(CoreTags.Items.GEARS_GOLD).add(CoreItems.GOLD_GEAR.get());
 	}
 
 	@Override

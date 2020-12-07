@@ -2,6 +2,7 @@
 	"itemGroup.assortedcore": "Assorted Core",
 	
 	"assortedcore.container.alloy_forge": "Alloy Forge",
+	"assortedcore.container.grinding_mill": "Grinding Mill",
 	
 	"block.assortedcore.tin_ore": "Tin Ore",
 	"block.assortedcore.copper_ore": "Copper Ore",
@@ -31,12 +32,15 @@
 	"block.assortedcore.invar_block": "Block of Invar",
 	"block.assortedcore.steel_block": "Block of Steel",
 	
+	"block.assortedcore.machine_core": "Machine Core",
 	"block.assortedcore.basic_alloy_forge": "Basic Alloy Forge",
 	"block.assortedcore.intermediate_alloy_forge": "Intermediate Alloy Forge",
 	"block.assortedcore.advanced_alloy_forge": "Advanced Alloy Forge",
 	"block.assortedcore.expert_alloy_forge": "Expert Alloy Forge",
-	"block.assortedcore.machine_core": "Machine Core",
 	"block.assortedcore.basic_grinding_mill": "Basic Grinding Mill",
+	"block.assortedcore.intermediate_grinding_mill": "Intermediate Grinding Mill",
+	"block.assortedcore.advanced_grinding_mill": "Advanced Grinding Mill",
+	"block.assortedcore.expert_grinding_mill": "Expert Grinding Mill",
 	
 	"item.assortedcore.ruby": "Ruby",
 	"item.assortedcore.amethyst": "Amethyst",
@@ -79,5 +83,19 @@
 	"item.assortedcore.invar_dust": "Invar Dust",
 	"item.assortedcore.steel_dust": "Steel Dust",
 	"item.assortedcore.iron_dust": "Iron Dust",
-	"item.assortedcore.gold_dust": "Gold Dust"
+	"item.assortedcore.gold_dust": "Gold Dust",
+	
+	"item.assortedcore.tin_gear": "Tin Gear",
+	"item.assortedcore.copper_gear": "Copper Gear",
+	"item.assortedcore.silver_gear": "Silver Gear",
+	"item.assortedcore.aluminum_gear": "Aluminum Gear",
+	"item.assortedcore.lead_gear": "Lead Gear",
+	"item.assortedcore.nickel_gear": "Nickel Gear",
+	"item.assortedcore.platinum_gear": "Platinum Gear",
+	"item.assortedcore.bronze_gear": "Bronze Gear",
+	"item.assortedcore.electrum_gear": "Electrum Gear",
+	"item.assortedcore.invar_gear": "Invar Gear",
+	"item.assortedcore.steel_gear": "Steel Gear",
+	"item.assortedcore.iron_gear": "Iron Gear",
+	"item.assortedcore.gold_gear": "Gold Gear"
 }

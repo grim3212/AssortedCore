@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "MSM",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "tag": "forge:ingots/tin"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "assortedcore:tin_gear"
+  }
+}

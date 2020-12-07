@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "assortedcore:copper_ore"
+            "tag": "forge:ores/copper"
           }
         ]
       }

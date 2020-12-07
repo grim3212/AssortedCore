@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class AlloyForgeScreen extends ContainerScreen<AlloyForgeContainer> {
 
-	private static final ResourceLocation ALLOY_FORGE_GUI_TEXTURE = new ResourceLocation(AssortedCore.MODID, "textures/gui/container/basic_alloy_forge.png");
+	private static final ResourceLocation ALLOY_FORGE_GUI_TEXTURE = new ResourceLocation(AssortedCore.MODID, "textures/gui/container/alloy_forge.png");
 
 	public AlloyForgeScreen(AlloyForgeContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
 		super(screenContainer, inv, titleIn);

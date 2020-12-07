@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "assortedcore:bronze_ingot"
+            "tag": "forge:ingots/bronze"
           }
         ]
       }

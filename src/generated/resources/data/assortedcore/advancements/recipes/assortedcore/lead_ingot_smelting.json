@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "assortedcore:lead_ore"
+            "tag": "forge:ores/lead"
           }
         ]
       }

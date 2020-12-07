@@ -5,16 +5,16 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
-import com.grim3212.assorted.core.common.block.AlloyForgeBlock;
-import com.grim3212.assorted.core.common.crafting.AlloyForgeRecipe;
+import com.grim3212.assorted.core.common.block.BaseMachineBlock;
+import com.grim3212.assorted.core.common.crafting.BaseMachineRecipe;
+import com.grim3212.assorted.core.common.lib.MachineTier;
 
-import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IRecipeHelperPopulator;
 import net.minecraft.inventory.IRecipeHolder;
 import net.minecraft.inventory.ISidedInventory;
@@ -46,22 +46,64 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 public abstract class BaseMachineTileEntity extends TileEntity implements ISidedInventory, INamedContainerProvider, INameable, ITickableTileEntity, IRecipeHolder, IRecipeHelperPopulator {
-	
+
 	protected NonNullList<ItemStack> items;
 	private ITextComponent customName;
-	
+
 	protected int burnTime;
 	protected int recipesUsed;
 	protected int cookTime;
 	protected int cookTimeTotal;
-	
-	protected final Object2IntOpenHashMap<ResourceLocation> recipes = new Object2IntOpenHashMap<>();
-	protected final IRecipeType<? extends IRecipe<IInventory>> recipeType;
+	protected int defaultCookTime;
 
-	public BaseMachineTileEntity(TileEntityType<?> type, int slots, IRecipeType<? extends IRecipe<IInventory>> recipeTypeIn) {
+	protected final IIntArray machineData = new IIntArray() {
+		public int get(int index) {
+			switch (index) {
+			case 0:
+				return BaseMachineTileEntity.this.burnTime;
+			case 1:
+				return BaseMachineTileEntity.this.recipesUsed;
+			case 2:
+				return BaseMachineTileEntity.this.cookTime;
+			case 3:
+				return BaseMachineTileEntity.this.cookTimeTotal;
+			default:
+				return 0;
+			}
+		}
+
+		public void set(int index, int value) {
+			switch (index) {
+			case 0:
+				BaseMachineTileEntity.this.burnTime = value;
+				break;
+			case 1:
+				BaseMachineTileEntity.this.recipesUsed = value;
+				break;
+			case 2:
+				BaseMachineTileEntity.this.cookTime = value;
+				break;
+			case 3:
+				BaseMachineTileEntity.this.cookTimeTotal = value;
+			}
+
+		}
+
+		public int size() {
+			return 4;
+		}
+	};
+
+	protected final Object2IntOpenHashMap<ResourceLocation> recipes = new Object2IntOpenHashMap<>();
+	protected final IRecipeType<? extends BaseMachineRecipe> recipeType;
+	protected final MachineTier tier;
+
+	public BaseMachineTileEntity(TileEntityType<?> type, MachineTier tier, int slots, int defaultCookTime, IRecipeType<? extends BaseMachineRecipe> recipeTypeIn) {
 		super(type);
+		this.tier = tier;
 		this.items = NonNullList.withSize(slots, ItemStack.EMPTY);
 		this.recipeType = recipeTypeIn;
+		this.defaultCookTime = defaultCookTime;
 	}
 
 	@Override
@@ -94,8 +136,12 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	public ItemStack removeStackFromSlot(int index) {
 		return ItemStackHelper.getAndRemove(this.items, index);
 	}
-	
+
 	protected abstract List<Integer> inputSlots();
+
+	protected abstract int fuelSlot();
+
+	protected abstract int outputSlot();
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
@@ -122,6 +168,10 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 		}
 	}
 
+	protected boolean inputsWithItems() {
+		return this.inputSlots().stream().allMatch((slot) -> !this.items.get(slot).isEmpty());
+	}
+
 	@Override
 	public void tick() {
 		boolean flag = this.isBurning();
@@ -131,20 +181,21 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 		}
 
 		if (!this.world.isRemote) {
-			ItemStack fuelSlot = this.items.get(2);
-			if (this.isBurning() || !fuelSlot.isEmpty() && !this.items.get(0).isEmpty() && !this.items.get(1).isEmpty()) {
-				IRecipe<?> irecipe = this.world.getRecipeManager().getRecipe(this.recipeType, this, this.world).orElse(null);
+			ItemStack fuelSlot = this.items.get(this.fuelSlot());
+			if (this.isBurning() || !fuelSlot.isEmpty() && this.inputsWithItems()) {
+				IRecipe<? extends BaseMachineRecipe> irecipe = (IRecipe<? extends BaseMachineRecipe>) this.world.getRecipeManager().getRecipe((IRecipeType<BaseMachineRecipe>) this.recipeType, this, this.world).orElse(null);
+
 				if (!this.isBurning() && this.canCombine(irecipe)) {
 					this.burnTime = this.getBurnTime(fuelSlot);
 					this.recipesUsed = this.burnTime;
 					if (this.isBurning()) {
 						flag1 = true;
 						if (fuelSlot.hasContainerItem())
-							this.items.set(1, fuelSlot.getContainerItem());
+							this.items.set(this.fuelSlot(), fuelSlot.getContainerItem());
 						else if (!fuelSlot.isEmpty()) {
 							fuelSlot.shrink(1);
 							if (fuelSlot.isEmpty()) {
-								this.items.set(2, fuelSlot.getContainerItem());
+								this.items.set(this.fuelSlot(), fuelSlot.getContainerItem());
 							}
 						}
 					}
@@ -167,7 +218,7 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 
 			if (flag != this.isBurning()) {
 				flag1 = true;
-				this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(AlloyForgeBlock.ON, this.isBurning()), 3);
+				this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(BaseMachineBlock.ON, this.isBurning()), 3);
 			}
 		}
 
@@ -180,48 +231,9 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 		return this.burnTime > 0;
 	}
 
-	protected boolean canCombine(@Nullable IRecipe<?> recipeIn) {
-		if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
-			ItemStack itemstack = recipeIn.getRecipeOutput();
-			if (itemstack.isEmpty()) {
-				return false;
-			} else {
-				ItemStack outputSlot = this.items.get(3);
-				if (outputSlot.isEmpty()) {
-					return true;
-				} else if (!outputSlot.isItemEqual(itemstack)) {
-					return false;
-				} else if (outputSlot.getCount() + itemstack.getCount() <= this.getInventoryStackLimit() && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
-					return true;
-				} else {
-					return outputSlot.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize();
-				}
-			}
-		} else {
-			return false;
-		}
-	}
+	protected abstract boolean canCombine(@Nullable IRecipe<? extends BaseMachineRecipe> recipeIn);
 
-	protected void combine(@Nullable IRecipe<?> recipe) {
-		if (recipe != null && this.canCombine(recipe)) {
-			ItemStack ingredient1 = this.items.get(0);
-			ItemStack ingredient2 = this.items.get(1);
-			ItemStack itemstack1 = recipe.getRecipeOutput();
-			ItemStack outputSlot = this.items.get(3);
-			if (outputSlot.isEmpty()) {
-				this.items.set(3, itemstack1.copy());
-			} else if (outputSlot.getItem() == itemstack1.getItem()) {
-				outputSlot.grow(itemstack1.getCount());
-			}
-
-			if (!this.world.isRemote) {
-				this.setRecipeUsed(recipe);
-			}
-
-			ingredient1.shrink(1);
-			ingredient2.shrink(1);
-		}
-	}
+	protected abstract void combine(@Nullable IRecipe<? extends BaseMachineRecipe> recipe);
 
 	protected int getBurnTime(ItemStack fuel) {
 		if (fuel.isEmpty()) {
@@ -232,7 +244,7 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	}
 
 	protected int getCookTime() {
-		return this.world.getRecipeManager().getRecipe(this.recipeType, this, this.world).map(AlloyForgeRecipe::getCookTime).orElse(400);
+		return (int) ((this.world.getRecipeManager().getRecipe((IRecipeType<BaseMachineRecipe>) this.recipeType, this, this.world).map(BaseMachineRecipe::getCookTime).orElse(this.defaultCookTime)) * this.tier.getSpeedModifier());
 	}
 
 	@Override
@@ -265,15 +277,6 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	protected abstract ITextComponent getDefaultName();
 
 	@Override
-	public int[] getSlotsForFace(Direction side) {
-		if (side == Direction.DOWN) {
-			return SLOTS_DOWN;
-		} else {
-			return side == Direction.UP ? SLOTS_UP : SLOTS_HORIZONTAL;
-		}
-	}
-
-	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn, Direction direction) {
 		return this.isItemValidForSlot(index, itemStackIn);
 	}
@@ -285,9 +288,9 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		if (index == 3) {
+		if (index == this.outputSlot()) {
 			return false;
-		} else if (index != 2) {
+		} else if (index != this.fuelSlot()) {
 			return true;
 		} else {
 			return getBurnTime(stack) > 0;
@@ -323,7 +326,7 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 		for (Entry<ResourceLocation> entry : this.recipes.object2IntEntrySet()) {
 			world.getRecipeManager().getRecipe(entry.getKey()).ifPresent((recipe) -> {
 				list.add(recipe);
-				splitAndSpawnExperience(world, pos, entry.getIntValue(), ((AlloyForgeRecipe) recipe).getExperience());
+				splitAndSpawnExperience(world, pos, entry.getIntValue(), ((BaseMachineRecipe) recipe).getExperience());
 			});
 		}
 
@@ -397,7 +400,7 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 		return write(new CompoundNBT());
 	}
 
-	LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
+	LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST);
 
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
@@ -406,8 +409,14 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 				return handlers[0].cast();
 			else if (facing == Direction.DOWN)
 				return handlers[1].cast();
-			else
+			else if (facing == Direction.NORTH)
 				return handlers[2].cast();
+			else if (facing == Direction.SOUTH)
+				return handlers[3].cast();
+			else if (facing == Direction.WEST)
+				return handlers[4].cast();
+			else if (facing == Direction.EAST)
+				return handlers[5].cast();
 		}
 		return super.getCapability(capability, facing);
 	}

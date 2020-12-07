@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "assortedcore:invar_ingot"
+    ]
+  },
+  "criteria": {
+    "has_ingredient1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/iron"
+          }
+        ]
+      }
+    },
+    "has_ingredient2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/nickel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "assortedcore:invar_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingredient1",
+      "has_ingredient2",
+      "has_the_recipe"
+    ]
+  ]
+}

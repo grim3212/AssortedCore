@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "assortedcore:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "assortedcore:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "assortedcore:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "assortedcore:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "assortedcore:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "assortedcore:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "assortedcore:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "assortedcore:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "assortedcore:lead_nugget"
+      "tag": "forge:nuggets/lead"
     }
   ],
   "result": {

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "assortedcore:copper_ore"
+    "tag": "forge:ores/copper"
   },
   "result": "assortedcore:copper_ingot",
   "experience": 0.5,

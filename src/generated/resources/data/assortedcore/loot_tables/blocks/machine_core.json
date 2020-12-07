@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "assortedcore:basic_machine_core"
+          "name": "assortedcore:machine_core"
         }
       ],
       "conditions": [

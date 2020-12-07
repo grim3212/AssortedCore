@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "assortedcore:topaz"
+      "tag": "forge:gems/topaz"
     },
     {
-      "item": "assortedcore:topaz"
+      "tag": "forge:gems/topaz"
     },
     {
-      "item": "assortedcore:topaz"
+      "tag": "forge:gems/topaz"
     },
     {
-      "item": "assortedcore:topaz"
+      "tag": "forge:gems/topaz"
     },
     {
-      "item": "assortedcore:topaz"
+      "tag": "forge:gems/topaz"
     },
     {
-      "item": "assortedcore:topaz"
+      "tag": "forge:gems/topaz"
     },
     {
-      "item": "assortedcore:topaz"
+      "tag": "forge:gems/topaz"
     },
     {
-      "item": "assortedcore:topaz"
+      "tag": "forge:gems/topaz"
     },
     {
-      "item": "assortedcore:topaz"
+      "tag": "forge:gems/topaz"
     }
   ],
   "result": {

@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "assortedcore:aluminum_ore"
+            "tag": "forge:ores/aluminum"
           }
         ]
       }

@@ -5,9 +5,9 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeHooks;
 
-public class BurnableFuelSlot extends Slot {
+public class MachineFuelSlot extends Slot {
 
-	public BurnableFuelSlot(IInventory forgeInventory, int id, int x, int y) {
+	public MachineFuelSlot(IInventory forgeInventory, int id, int x, int y) {
 		super(forgeInventory, id, x, y);
 	}
 

@@ -84,10 +84,6 @@ public class CoreTags {
 		public static final IOptionalNamedTag<Item> INGOTS_NICKEL = forgeTag("ingots/nickel");
 		public static final IOptionalNamedTag<Item> INGOTS_PLATINUM = forgeTag("ingots/platinum");
 		public static final IOptionalNamedTag<Item> INGOTS_LEAD = forgeTag("ingots/lead");
-		public static final IOptionalNamedTag<Item> INGOTS_RUBY = forgeTag("ingots/ruby");
-		public static final IOptionalNamedTag<Item> INGOTS_AMETHYST = forgeTag("ingots/amethyst");
-		public static final IOptionalNamedTag<Item> INGOTS_SAPPHIRE = forgeTag("ingots/sapphire");
-		public static final IOptionalNamedTag<Item> INGOTS_TOPAZ = forgeTag("ingots/topaz");
 		public static final IOptionalNamedTag<Item> INGOTS_BRONZE = forgeTag("ingots/bronze");
 		public static final IOptionalNamedTag<Item> INGOTS_ELECTRUM = forgeTag("ingots/electrum");
 		public static final IOptionalNamedTag<Item> INGOTS_INVAR = forgeTag("ingots/invar");
@@ -101,10 +97,6 @@ public class CoreTags {
 		public static final IOptionalNamedTag<Item> NUGGETS_NICKEL = forgeTag("nuggets/nickel");
 		public static final IOptionalNamedTag<Item> NUGGETS_PLATINUM = forgeTag("nuggets/platinum");
 		public static final IOptionalNamedTag<Item> NUGGETS_LEAD = forgeTag("nuggets/lead");
-		public static final IOptionalNamedTag<Item> NUGGETS_RUBY = forgeTag("nuggets/ruby");
-		public static final IOptionalNamedTag<Item> NUGGETS_AMETHYST = forgeTag("nuggets/amethyst");
-		public static final IOptionalNamedTag<Item> NUGGETS_SAPPHIRE = forgeTag("nuggets/sapphire");
-		public static final IOptionalNamedTag<Item> NUGGETS_TOPAZ = forgeTag("nuggets/topaz");
 		public static final IOptionalNamedTag<Item> NUGGETS_BRONZE = forgeTag("nuggets/bronze");
 		public static final IOptionalNamedTag<Item> NUGGETS_ELECTRUM = forgeTag("nuggets/electrum");
 		public static final IOptionalNamedTag<Item> NUGGETS_INVAR = forgeTag("nuggets/invar");
@@ -118,10 +110,6 @@ public class CoreTags {
 		public static final IOptionalNamedTag<Item> DUSTS_NICKEL = forgeTag("dusts/nickel");
 		public static final IOptionalNamedTag<Item> DUSTS_PLATINUM = forgeTag("dusts/platinum");
 		public static final IOptionalNamedTag<Item> DUSTS_LEAD = forgeTag("dusts/lead");
-		public static final IOptionalNamedTag<Item> DUSTS_RUBY = forgeTag("dusts/ruby");
-		public static final IOptionalNamedTag<Item> DUSTS_AMETHYST = forgeTag("dusts/amethyst");
-		public static final IOptionalNamedTag<Item> DUSTS_SAPPHIRE = forgeTag("dusts/sapphire");
-		public static final IOptionalNamedTag<Item> DUSTS_TOPAZ = forgeTag("dusts/topaz");
 		public static final IOptionalNamedTag<Item> DUSTS_BRONZE = forgeTag("dusts/bronze");
 		public static final IOptionalNamedTag<Item> DUSTS_ELECTRUM = forgeTag("dusts/electrum");
 		public static final IOptionalNamedTag<Item> DUSTS_INVAR = forgeTag("dusts/invar");

@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 
 import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.common.item.CoreItems;
+import com.grim3212.assorted.core.common.lib.MachineTier;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBlock.Properties;
@@ -53,8 +54,11 @@ public class CoreBlocks {
 	public static final RegistryObject<Block> INVAR_BLOCK = register("invar_block", () -> new Block(AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool()));
 	public static final RegistryObject<Block> STEEL_BLOCK = register("steel_block", () -> new Block(AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(5.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool()));
 
-	public static final RegistryObject<Block> BASIC_MACHINE_CORE = register("basic_machine_core", () -> new Block(AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
-	public static final RegistryObject<AlloyForgeBlock> BASIC_ALLOY_FORGE = register("basic_alloy_forge", () -> new AlloyForgeBlock(AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+	public static final RegistryObject<Block> MACHINE_CORE = register("machine_core", () -> new Block(AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+	public static final RegistryObject<AlloyForgeBlock> BASIC_ALLOY_FORGE = register("basic_alloy_forge", () -> new AlloyForgeBlock(MachineTier.BASIC, AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+	public static final RegistryObject<AlloyForgeBlock> INTERMEDIATE_ALLOY_FORGE = register("intermediate_alloy_forge", () -> new AlloyForgeBlock(MachineTier.INTERMEDIATE, AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+	public static final RegistryObject<AlloyForgeBlock> ADVANCED_ALLOY_FORGE = register("advanced_alloy_forge", () -> new AlloyForgeBlock(MachineTier.ADVANCED, AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+	public static final RegistryObject<AlloyForgeBlock> EXPERT_ALLOY_FORGE = register("expert_alloy_forge", () -> new AlloyForgeBlock(MachineTier.EXPERT, AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
 	public static final RegistryObject<GrindingMillBlock> BASIC_GRINDING_MILL = register("basic_grinding_mill", () -> new GrindingMillBlock(AbstractBlock.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
 
 	private static <T extends Block> RegistryObject<T> register(String name, Supplier<? extends T> sup) {

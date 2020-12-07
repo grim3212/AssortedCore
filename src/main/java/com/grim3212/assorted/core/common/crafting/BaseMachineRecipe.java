@@ -53,6 +53,11 @@ public abstract class BaseMachineRecipe implements IRecipe<IInventory> {
 	public ResourceLocation getId() {
 		return this.id;
 	}
+	
+	@Override
+	public boolean isDynamic() {
+		return true;
+	}
 
 	public abstract boolean validInput(ItemStack stack);
 }

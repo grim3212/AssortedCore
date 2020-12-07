@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "assortedcore:tin_ore"
+            "tag": "forge:ores/tin"
           }
         ]
       }

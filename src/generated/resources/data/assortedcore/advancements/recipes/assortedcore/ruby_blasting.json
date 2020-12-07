@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "assortedcore:ruby_ore"
+            "tag": "forge:ores/ruby"
           }
         ]
       }

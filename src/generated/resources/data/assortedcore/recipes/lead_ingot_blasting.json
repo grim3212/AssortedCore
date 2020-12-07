@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "assortedcore:lead_ore"
+    "tag": "forge:ores/lead"
   },
   "result": "assortedcore:lead_ingot",
   "experience": 1.0,

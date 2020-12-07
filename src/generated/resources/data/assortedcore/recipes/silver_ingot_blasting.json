@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "assortedcore:silver_ore"
+    "tag": "forge:ores/silver"
   },
   "result": "assortedcore:silver_ingot",
   "experience": 1.0,

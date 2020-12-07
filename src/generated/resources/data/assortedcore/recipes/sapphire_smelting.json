@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "assortedcore:sapphire_ore"
+    "tag": "forge:ores/sapphire"
   },
   "result": "assortedcore:sapphire",
   "experience": 1.0,

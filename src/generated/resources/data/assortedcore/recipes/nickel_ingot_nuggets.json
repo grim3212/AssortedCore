@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "assortedcore:nickel_nugget"
+      "tag": "forge:nuggets/nickel"
     },
     {
-      "item": "assortedcore:nickel_nugget"
+      "tag": "forge:nuggets/nickel"
     },
     {
-      "item": "assortedcore:nickel_nugget"
+      "tag": "forge:nuggets/nickel"
     },
     {
-      "item": "assortedcore:nickel_nugget"
+      "tag": "forge:nuggets/nickel"
     },
     {
-      "item": "assortedcore:nickel_nugget"
+      "tag": "forge:nuggets/nickel"
     },
     {
-      "item": "assortedcore:nickel_nugget"
+      "tag": "forge:nuggets/nickel"
     },
     {
-      "item": "assortedcore:nickel_nugget"
+      "tag": "forge:nuggets/nickel"
     },
     {
-      "item": "assortedcore:nickel_nugget"
+      "tag": "forge:nuggets/nickel"
     },
     {
-      "item": "assortedcore:nickel_nugget"
+      "tag": "forge:nuggets/nickel"
     }
   ],
   "result": {

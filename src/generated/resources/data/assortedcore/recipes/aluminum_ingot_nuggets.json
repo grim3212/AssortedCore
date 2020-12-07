@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "assortedcore:aluminum_nugget"
+      "tag": "forge:nuggets/aluminum"
     },
     {
-      "item": "assortedcore:aluminum_nugget"
+      "tag": "forge:nuggets/aluminum"
     },
     {
-      "item": "assortedcore:aluminum_nugget"
+      "tag": "forge:nuggets/aluminum"
     },
     {
-      "item": "assortedcore:aluminum_nugget"
+      "tag": "forge:nuggets/aluminum"
     },
     {
-      "item": "assortedcore:aluminum_nugget"
+      "tag": "forge:nuggets/aluminum"
     },
     {
-      "item": "assortedcore:aluminum_nugget"
+      "tag": "forge:nuggets/aluminum"
     },
     {
-      "item": "assortedcore:aluminum_nugget"
+      "tag": "forge:nuggets/aluminum"
     },
     {
-      "item": "assortedcore:aluminum_nugget"
+      "tag": "forge:nuggets/aluminum"
     },
     {
-      "item": "assortedcore:aluminum_nugget"
+      "tag": "forge:nuggets/aluminum"
     }
   ],
   "result": {

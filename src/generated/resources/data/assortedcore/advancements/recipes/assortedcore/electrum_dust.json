@@ -6,22 +6,22 @@
     ]
   },
   "criteria": {
-    "has_gold_dust": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:dusts/gold"
-          }
-        ]
-      }
-    },
-    "has_silver_dust": {
+    "has_ingredient1": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "tag": "forge:dusts/silver"
+          }
+        ]
+      }
+    },
+    "has_ingredient2": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/gold"
           }
         ]
       }
@@ -35,8 +35,8 @@
   },
   "requirements": [
     [
-      "has_gold_dust",
-      "has_silver_dust",
+      "has_ingredient1",
+      "has_ingredient2",
       "has_the_recipe"
     ]
   ]

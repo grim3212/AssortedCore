@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "assortedcore:silver_ingot"
+      "tag": "forge:ingots/silver"
     },
     {
-      "item": "assortedcore:silver_ingot"
+      "tag": "forge:ingots/silver"
     },
     {
-      "item": "assortedcore:silver_ingot"
+      "tag": "forge:ingots/silver"
     },
     {
-      "item": "assortedcore:silver_ingot"
+      "tag": "forge:ingots/silver"
     },
     {
-      "item": "assortedcore:silver_ingot"
+      "tag": "forge:ingots/silver"
     },
     {
-      "item": "assortedcore:silver_ingot"
+      "tag": "forge:ingots/silver"
     },
     {
-      "item": "assortedcore:silver_ingot"
+      "tag": "forge:ingots/silver"
     },
     {
-      "item": "assortedcore:silver_ingot"
+      "tag": "forge:ingots/silver"
     },
     {
-      "item": "assortedcore:silver_ingot"
+      "tag": "forge:ingots/silver"
     }
   ],
   "result": {

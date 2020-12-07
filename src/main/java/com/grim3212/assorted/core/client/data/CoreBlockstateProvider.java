@@ -1,8 +1,9 @@
 package com.grim3212.assorted.core.client.data;
 
 import com.grim3212.assorted.core.AssortedCore;
-import com.grim3212.assorted.core.common.block.AlloyForgeBlock;
+import com.grim3212.assorted.core.common.block.BaseMachineBlock;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
+import com.grim3212.assorted.core.common.lib.MachineTier;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
@@ -57,16 +58,19 @@ public class CoreBlockstateProvider extends BlockStateProvider {
 		simpleBlock(CoreBlocks.INVAR_BLOCK.get());
 		simpleBlock(CoreBlocks.STEEL_BLOCK.get());
 
-		basicMachine(CoreBlocks.BASIC_ALLOY_FORGE.get());
+		machine(CoreBlocks.BASIC_ALLOY_FORGE.get(), MachineTier.BASIC);
+		machine(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get(), MachineTier.INTERMEDIATE);
+		machine(CoreBlocks.ADVANCED_ALLOY_FORGE.get(), MachineTier.ADVANCED);
+		machine(CoreBlocks.EXPERT_ALLOY_FORGE.get(), MachineTier.EXPERT);
 	}
 
-	private void basicMachine(Block b) {
+	private void machine(Block b, MachineTier tier) {
 		String name = name(b);
 
-		ModelFile machineOff = models().orientable(name, loc("block/basic_machine_side"), loc("block/" + name + "_front"), loc("block/basic_machine_top"));
-		ModelFile machineOn = models().orientable(name + "_on", loc("block/basic_machine_side"), loc("block/" + name + "_front_on"), loc("block/basic_machine_top"));
+		ModelFile machineOff = models().orientable(name, loc("block/" + tier.getName() + "_machine_side"), loc("block/" + name + "_front"), loc("block/" + tier.getName() + "_machine_top"));
+		ModelFile machineOn = models().orientable(name + "_on", loc("block/" + tier.getName() + "_machine_side"), loc("block/" + name + "_front_on"), loc("block/" + tier.getName() + "_machine_top"));
 
-		getVariantBuilder(b).forAllStates(state -> ConfiguredModel.builder().modelFile(state.get(AlloyForgeBlock.ON) ? machineOn : machineOff).rotationY((int) state.get(AlloyForgeBlock.FACING).getOpposite().getHorizontalAngle()).build());
+		getVariantBuilder(b).forAllStates(state -> ConfiguredModel.builder().modelFile(state.get(BaseMachineBlock.ON) ? machineOn : machineOff).rotationY((int) state.get(BaseMachineBlock.FACING).getOpposite().getHorizontalAngle()).build());
 	}
 
 	private ResourceLocation loc(String name) {

@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "assortedcore:steel_ingot"
+      "tag": "forge:ingots/steel"
     },
     {
-      "item": "assortedcore:steel_ingot"
+      "tag": "forge:ingots/steel"
     },
     {
-      "item": "assortedcore:steel_ingot"
+      "tag": "forge:ingots/steel"
     },
     {
-      "item": "assortedcore:steel_ingot"
+      "tag": "forge:ingots/steel"
     },
     {
-      "item": "assortedcore:steel_ingot"
+      "tag": "forge:ingots/steel"
     },
     {
-      "item": "assortedcore:steel_ingot"
+      "tag": "forge:ingots/steel"
     },
     {
-      "item": "assortedcore:steel_ingot"
+      "tag": "forge:ingots/steel"
     },
     {
-      "item": "assortedcore:steel_ingot"
+      "tag": "forge:ingots/steel"
     },
     {
-      "item": "assortedcore:steel_ingot"
+      "tag": "forge:ingots/steel"
     }
   ],
   "result": {

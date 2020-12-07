@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "assortedcore:electrum_ingot"
+      "tag": "forge:ingots/electrum"
     },
     {
-      "item": "assortedcore:electrum_ingot"
+      "tag": "forge:ingots/electrum"
     },
     {
-      "item": "assortedcore:electrum_ingot"
+      "tag": "forge:ingots/electrum"
     },
     {
-      "item": "assortedcore:electrum_ingot"
+      "tag": "forge:ingots/electrum"
     },
     {
-      "item": "assortedcore:electrum_ingot"
+      "tag": "forge:ingots/electrum"
     },
     {
-      "item": "assortedcore:electrum_ingot"
+      "tag": "forge:ingots/electrum"
     },
     {
-      "item": "assortedcore:electrum_ingot"
+      "tag": "forge:ingots/electrum"
     },
     {
-      "item": "assortedcore:electrum_ingot"
+      "tag": "forge:ingots/electrum"
     },
     {
-      "item": "assortedcore:electrum_ingot"
+      "tag": "forge:ingots/electrum"
     }
   ],
   "result": {

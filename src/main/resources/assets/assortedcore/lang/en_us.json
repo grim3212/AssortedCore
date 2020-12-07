@@ -1,6 +1,8 @@
 {
 	"itemGroup.assortedcore": "Assorted Core",
 	
+	"assortedcore.container.alloy_forge": "Alloy Forge",
+	
 	"block.assortedcore.tin_ore": "Tin Ore",
 	"block.assortedcore.copper_ore": "Copper Ore",
 	"block.assortedcore.silver_ore": "Silver Ore",
@@ -28,6 +30,13 @@
 	"block.assortedcore.electrum_block": "Block of Electrum",
 	"block.assortedcore.invar_block": "Block of Invar",
 	"block.assortedcore.steel_block": "Block of Steel",
+	
+	"block.assortedcore.basic_alloy_forge": "Basic Alloy Forge",
+	"block.assortedcore.intermediate_alloy_forge": "Intermediate Alloy Forge",
+	"block.assortedcore.advanced_alloy_forge": "Advanced Alloy Forge",
+	"block.assortedcore.expert_alloy_forge": "Expert Alloy Forge",
+	"block.assortedcore.machine_core": "Machine Core",
+	"block.assortedcore.basic_grinding_mill": "Basic Grinding Mill",
 	
 	"item.assortedcore.ruby": "Ruby",
 	"item.assortedcore.amethyst": "Amethyst",
@@ -68,5 +77,7 @@
 	"item.assortedcore.bronze_dust": "Bronze Dust",
 	"item.assortedcore.electrum_dust": "Electrum Dust",
 	"item.assortedcore.invar_dust": "Invar Dust",
-	"item.assortedcore.steel_dust": "Steel Dust"
+	"item.assortedcore.steel_dust": "Steel Dust",
+	"item.assortedcore.iron_dust": "Iron Dust",
+	"item.assortedcore.gold_dust": "Gold Dust"
 }

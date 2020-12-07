@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "assortedcore:topaz_ore"
+    "tag": "forge:ores/topaz"
   },
   "result": "assortedcore:topaz",
   "experience": 1.0,

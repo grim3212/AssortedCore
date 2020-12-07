@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "assortedcore:amethyst"
+      "tag": "forge:gems/amethyst"
     },
     {
-      "item": "assortedcore:amethyst"
+      "tag": "forge:gems/amethyst"
     },
     {
-      "item": "assortedcore:amethyst"
+      "tag": "forge:gems/amethyst"
     },
     {
-      "item": "assortedcore:amethyst"
+      "tag": "forge:gems/amethyst"
     },
     {
-      "item": "assortedcore:amethyst"
+      "tag": "forge:gems/amethyst"
     },
     {
-      "item": "assortedcore:amethyst"
+      "tag": "forge:gems/amethyst"
     },
     {
-      "item": "assortedcore:amethyst"
+      "tag": "forge:gems/amethyst"
     },
     {
-      "item": "assortedcore:amethyst"
+      "tag": "forge:gems/amethyst"
     },
     {
-      "item": "assortedcore:amethyst"
+      "tag": "forge:gems/amethyst"
     }
   ],
   "result": {

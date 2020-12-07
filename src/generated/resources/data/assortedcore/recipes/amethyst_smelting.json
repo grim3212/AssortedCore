@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "assortedcore:amethyst_ore"
+    "tag": "forge:ores/amethyst"
   },
   "result": "assortedcore:amethyst",
   "experience": 1.0,

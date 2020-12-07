@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "assortedcore:sapphire_ore"
+            "tag": "forge:ores/sapphire"
           }
         ]
       }

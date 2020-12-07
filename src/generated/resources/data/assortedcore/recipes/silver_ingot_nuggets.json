@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "assortedcore:silver_nugget"
+      "tag": "forge:nuggets/silver"
     },
     {
-      "item": "assortedcore:silver_nugget"
+      "tag": "forge:nuggets/silver"
     },
     {
-      "item": "assortedcore:silver_nugget"
+      "tag": "forge:nuggets/silver"
     },
     {
-      "item": "assortedcore:silver_nugget"
+      "tag": "forge:nuggets/silver"
     },
     {
-      "item": "assortedcore:silver_nugget"
+      "tag": "forge:nuggets/silver"
     },
     {
-      "item": "assortedcore:silver_nugget"
+      "tag": "forge:nuggets/silver"
     },
     {
-      "item": "assortedcore:silver_nugget"
+      "tag": "forge:nuggets/silver"
     },
     {
-      "item": "assortedcore:silver_nugget"
+      "tag": "forge:nuggets/silver"
     },
     {
-      "item": "assortedcore:silver_nugget"
+      "tag": "forge:nuggets/silver"
     }
   ],
   "result": {

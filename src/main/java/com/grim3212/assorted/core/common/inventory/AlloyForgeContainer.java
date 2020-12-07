@@ -1,42 +1,31 @@
 package com.grim3212.assorted.core.common.inventory;
 
+import com.grim3212.assorted.core.common.crafting.BaseMachineContainer;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 
-public class AlloyForgeContainer extends Container {
-
-	private final IInventory alloyForgeInventory;
-	private final IIntArray alloyForgeData;
-	protected final World world;
+public class AlloyForgeContainer extends BaseMachineContainer {
 
 	protected AlloyForgeContainer(int id, PlayerInventory playerInventory) {
 		this(id, playerInventory, new Inventory(4), new IntArray(4));
 	}
 
 	public AlloyForgeContainer(int id, PlayerInventory playerInventory, IInventory alloyForgeInventory, IIntArray alloyForgeData) {
-		super(CoreContainerTypes.ALLOY_FORGE.get(), id);
-		assertInventorySize(alloyForgeInventory, 4);
-		assertIntArraySize(alloyForgeData, 4);
-		this.alloyForgeInventory = alloyForgeInventory;
-		this.alloyForgeData = alloyForgeData;
-		this.world = playerInventory.player.world;
+		super(CoreContainerTypes.ALLOY_FORGE.get(), CoreRecipeTypes.ALLOY_FORGE, id, playerInventory, 4, alloyForgeInventory, alloyForgeData);
+
 		this.addSlot(new Slot(alloyForgeInventory, 0, 32, 27));
 		this.addSlot(new Slot(alloyForgeInventory, 1, 56, 27));
-		this.addSlot(new BurnableFuelSlot(alloyForgeInventory, 2, 80, 62));
-		this.addSlot(new AlloyForgeResultSlot(playerInventory.player, alloyForgeInventory, 3, 115, 27));
+		this.addSlot(new MachineFuelSlot(alloyForgeInventory, 2, 80, 62));
+		this.addSlot(new MachineResultSlot(playerInventory.player, alloyForgeInventory, 3, 115, 27));
 
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
@@ -47,13 +36,6 @@ public class AlloyForgeContainer extends Container {
 		for (int k = 0; k < 9; ++k) {
 			this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
 		}
-
-		this.trackIntArray(alloyForgeData);
-	}
-
-	@Override
-	public boolean canInteractWith(PlayerEntity playerIn) {
-		return this.alloyForgeInventory.isUsableByPlayer(playerIn);
 	}
 
 	@Override
@@ -103,34 +85,6 @@ public class AlloyForgeContainer extends Container {
 		}
 
 		return itemstack;
-	}
-
-	protected boolean hasRecipe(ItemStack stack) {
-		return this.world.getRecipeManager().getRecipesForType(CoreRecipeTypes.ALLOY_FORGE).stream().anyMatch((recipe) -> {
-			return recipe.validInput(stack);
-		});
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public int getCookProgressionScaled() {
-		int i = this.alloyForgeData.get(2);
-		int j = this.alloyForgeData.get(3);
-		return j != 0 && i != 0 ? i * 24 / j : 0;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public int getBurnLeftScaled() {
-		int i = this.alloyForgeData.get(1);
-		if (i == 0) {
-			i = 200;
-		}
-
-		return this.alloyForgeData.get(0) * 13 / i;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public boolean isBurning() {
-		return this.alloyForgeData.get(0) > 0;
 	}
 
 }

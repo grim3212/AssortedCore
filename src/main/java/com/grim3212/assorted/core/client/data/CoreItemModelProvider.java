@@ -53,6 +53,9 @@ public class CoreItemModelProvider extends ItemModelProvider {
 		genericBlock(CoreBlocks.INVAR_BLOCK.get());
 		genericBlock(CoreBlocks.STEEL_BLOCK.get());
 		genericBlock(CoreBlocks.BASIC_ALLOY_FORGE.get());
+		genericBlock(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get());
+		genericBlock(CoreBlocks.ADVANCED_ALLOY_FORGE.get());
+		genericBlock(CoreBlocks.EXPERT_ALLOY_FORGE.get());
 
 		generatedItem(CoreItems.TIN_INGOT.get());
 		generatedItem(CoreItems.COPPER_INGOT.get());

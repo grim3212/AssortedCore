@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "assortedcore:invar_ingot"
+      "tag": "forge:ingots/invar"
     },
     {
-      "item": "assortedcore:invar_ingot"
+      "tag": "forge:ingots/invar"
     },
     {
-      "item": "assortedcore:invar_ingot"
+      "tag": "forge:ingots/invar"
     },
     {
-      "item": "assortedcore:invar_ingot"
+      "tag": "forge:ingots/invar"
     },
     {
-      "item": "assortedcore:invar_ingot"
+      "tag": "forge:ingots/invar"
     },
     {
-      "item": "assortedcore:invar_ingot"
+      "tag": "forge:ingots/invar"
     },
     {
-      "item": "assortedcore:invar_ingot"
+      "tag": "forge:ingots/invar"
     },
     {
-      "item": "assortedcore:invar_ingot"
+      "tag": "forge:ingots/invar"
     },
     {
-      "item": "assortedcore:invar_ingot"
+      "tag": "forge:ingots/invar"
     }
   ],
   "result": {

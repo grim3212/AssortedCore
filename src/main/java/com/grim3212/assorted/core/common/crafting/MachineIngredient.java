@@ -25,6 +25,10 @@ public class MachineIngredient implements Predicate<ItemStack> {
 		this.ingredient = ingredient;
 		this.count = count;
 	}
+	
+	public int getCount() {
+		return count;
+	}
 
 	@Override
 	public boolean test(ItemStack t) {

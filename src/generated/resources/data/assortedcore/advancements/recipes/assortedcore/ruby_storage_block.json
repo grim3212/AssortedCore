@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "assortedcore:ruby"
+            "tag": "forge:storage_blocks/ruby"
           }
         ]
       }

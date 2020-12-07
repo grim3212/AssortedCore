@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "assortedcore:amethyst"
+            "tag": "forge:gems/amethyst"
           }
         ]
       }

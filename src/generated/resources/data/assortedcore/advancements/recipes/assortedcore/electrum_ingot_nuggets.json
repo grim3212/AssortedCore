@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "assortedcore:electrum_ingot"
+            "tag": "forge:ingots/electrum"
           }
         ]
       }

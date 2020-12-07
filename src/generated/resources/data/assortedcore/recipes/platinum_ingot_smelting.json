@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "assortedcore:platinum_ore"
+    "tag": "forge:ores/platinum"
   },
   "result": "assortedcore:platinum_ingot",
   "experience": 1.5,

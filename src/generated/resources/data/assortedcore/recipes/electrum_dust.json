@@ -12,7 +12,10 @@
     },
     "count": 1
   },
-  "result": "assortedcore:electrum_dust",
+  "result": {
+    "item": "assortedcore:electrum_dust",
+    "count": 2
+  },
   "experience": 0.8,
   "cookingtime": 400
 }

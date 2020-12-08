@@ -1,0 +1,15 @@
+{
+  "type": "assortedcore:grinding_mill",
+  "ingredient": {
+    "ingredient": {
+      "tag": "forge:ores/gold"
+    },
+    "count": 1
+  },
+  "result": {
+    "item": "assortedcore:gold_dust",
+    "count": 2
+  },
+  "experience": 0.2,
+  "cookingtime": 600
+}

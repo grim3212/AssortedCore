@@ -1,0 +1,15 @@
+{
+  "type": "assortedcore:grinding_mill",
+  "ingredient": {
+    "ingredient": {
+      "tag": "forge:ores/coal"
+    },
+    "count": 1
+  },
+  "result": {
+    "item": "minecraft:coal",
+    "count": 3
+  },
+  "experience": 0.1,
+  "cookingtime": 600
+}

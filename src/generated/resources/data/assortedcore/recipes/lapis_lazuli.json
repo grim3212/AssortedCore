@@ -1,0 +1,15 @@
+{
+  "type": "assortedcore:grinding_mill",
+  "ingredient": {
+    "ingredient": {
+      "tag": "forge:ores/lapis"
+    },
+    "count": 1
+  },
+  "result": {
+    "item": "minecraft:lapis_lazuli",
+    "count": 5
+  },
+  "experience": 0.2,
+  "cookingtime": 600
+}

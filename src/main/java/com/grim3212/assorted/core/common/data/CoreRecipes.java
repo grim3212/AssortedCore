@@ -110,6 +110,18 @@ public class CoreRecipes extends RecipeProvider {
 		grinding(CoreTags.Items.ORES_SAPPHIRE, new ItemStack(CoreItems.SAPPHIRE.get(), 2), 0.3F, 600, consumer);
 		grinding(CoreTags.Items.ORES_TOPAZ, new ItemStack(CoreItems.TOPAZ.get(), 2), 0.3F, 600, consumer);
 		
+		grinding(Tags.Items.ORES_GOLD, new ItemStack(CoreItems.GOLD_DUST.get(), 2), 0.2F, 600, consumer);
+		grinding(Tags.Items.ORES_IRON, new ItemStack(CoreItems.IRON_DUST.get(), 2), 0.2F, 600, consumer);
+		grinding(Tags.Items.ORES_DIAMOND, new ItemStack(Items.DIAMOND, 2), 0.3F, 600, consumer);
+		grinding(Tags.Items.ORES_EMERALD, new ItemStack(Items.EMERALD, 2), 0.3F, 600, consumer);
+		grinding(Tags.Items.ORES_COAL, new ItemStack(Items.COAL, 3), 0.1F, 600, consumer);
+		grinding(Tags.Items.ORES_REDSTONE, new ItemStack(Items.REDSTONE, 5), 0.2F, 600, consumer);
+		grinding(Tags.Items.ORES_LAPIS, new ItemStack(Items.LAPIS_LAZULI, 5), 0.2F, 600, consumer);
+		grinding(Tags.Items.ORES_QUARTZ, new ItemStack(Items.QUARTZ, 2), 0.2F, 600, consumer);
+		
+		grindingDustFromIngot(Tags.Items.INGOTS_GOLD, new ItemStack(CoreItems.GOLD_DUST.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(Tags.Items.INGOTS_IRON, new ItemStack(CoreItems.IRON_DUST.get(), 1), 0.0F, 300, consumer);
+		
 		grindingDustFromIngot(CoreTags.Items.INGOTS_TIN, new ItemStack(CoreItems.TIN_DUST.get(), 1), 0.0F, 300, consumer);
 		grindingDustFromIngot(CoreTags.Items.INGOTS_COPPER, new ItemStack(CoreItems.COPPER_DUST.get(), 1), 0.0F, 300, consumer);
 		grindingDustFromIngot(CoreTags.Items.INGOTS_SILVER, new ItemStack(CoreItems.SILVER_DUST.get(), 1), 0.0F, 300, consumer);

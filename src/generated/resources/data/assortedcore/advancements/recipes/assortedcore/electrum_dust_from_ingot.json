@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "assortedcore:aluminum_dustdust_from_ingot"
+      "assortedcore:electrum_dust_from_ingot"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/aluminum"
+            "tag": "forge:ingots/electrum"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "assortedcore:aluminum_dustdust_from_ingot"
+        "recipe": "assortedcore:electrum_dust_from_ingot"
       }
     }
   },

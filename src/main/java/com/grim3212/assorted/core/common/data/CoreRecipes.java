@@ -96,7 +96,7 @@ public class CoreRecipes extends RecipeProvider {
 		alloy(ItemTags.COALS, 4, CoreTags.Items.DUSTS_IRON, 1, new ItemStack(CoreItems.STEEL_INGOT.get(), 1), 0.5F, 800, consumer);
 		alloy(CoreTags.Items.DUSTS_COPPER, 3, CoreTags.Items.DUSTS_TIN, 1, new ItemStack(CoreItems.BRONZE_INGOT.get(), 4), 0.5F, consumer);
 		alloy(CoreTags.Items.DUSTS_IRON, 2, CoreTags.Items.DUSTS_NICKEL, 1, new ItemStack(CoreItems.INVAR_INGOT.get(), 3), 0.7F, 500, consumer);
-		alloy(CoreTags.Items.DUSTS_SILVER, CoreTags.Items.DUSTS_GOLD, new ItemStack(CoreItems.ELECTRUM_DUST.get(), 2), 0.7F, consumer);
+		alloy(CoreTags.Items.DUSTS_SILVER, CoreTags.Items.DUSTS_GOLD, new ItemStack(CoreItems.ELECTRUM_INGOT.get(), 2), 0.7F, consumer);
 
 		grinding(CoreTags.Items.ORES_TIN, new ItemStack(CoreItems.TIN_DUST.get(), 2), 0.2F, 600, consumer);
 		grinding(CoreTags.Items.ORES_COPPER, new ItemStack(CoreItems.COPPER_DUST.get(), 2), 0.2F, 600, consumer);
@@ -119,7 +119,7 @@ public class CoreRecipes extends RecipeProvider {
 		grindingDustFromIngot(CoreTags.Items.INGOTS_LEAD, new ItemStack(CoreItems.LEAD_DUST.get(), 1), 0.0F, 300, consumer);
 		grindingDustFromIngot(CoreTags.Items.INGOTS_BRONZE, new ItemStack(CoreItems.BRONZE_DUST.get(), 1), 0.0F, 300, consumer);
 		grindingDustFromIngot(CoreTags.Items.INGOTS_ELECTRUM, new ItemStack(CoreItems.ELECTRUM_DUST.get(), 1), 0.0F, 300, consumer);
-		grindingDustFromIngot(CoreTags.Items.INGOTS_STEEL, new ItemStack(CoreItems.STEEL_INGOT.get(), 1), 0.0F, 300, consumer);
+		grindingDustFromIngot(CoreTags.Items.INGOTS_STEEL, new ItemStack(CoreItems.STEEL_DUST.get(), 1), 0.0F, 300, consumer);
 		grindingDustFromIngot(CoreTags.Items.INGOTS_INVAR, new ItemStack(CoreItems.INVAR_DUST.get(), 1), 0.0F, 300, consumer);
 		
 		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.MACHINE_CORE.get()).key('A', CoreTags.Items.INGOTS_ALUMINUM).key('C', CoreTags.Items.GEARS_COPPER).key('I', Tags.Items.INGOTS_IRON).patternLine("IAI").patternLine("ACA").patternLine("IAI").addCriterion("has_iron", hasItem(Tags.Items.INGOTS_IRON)).build(consumer);
@@ -151,7 +151,7 @@ public class CoreRecipes extends RecipeProvider {
 	}
 	
 	private void grindingDustFromIngot(INamedTag<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<IFinishedRecipe> consumer) {
-		grinding(ingredient, result, experience, cookTime, consumer, "dust_from_ingot");
+		grinding(ingredient, result, experience, cookTime, consumer, "_from_ingot");
 	}
 	
 	private void grinding(INamedTag<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<IFinishedRecipe> consumer) {

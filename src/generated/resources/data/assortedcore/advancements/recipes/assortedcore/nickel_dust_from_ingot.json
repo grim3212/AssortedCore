@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "assortedcore:nickel_dustdust_from_ingot"
+      "assortedcore:nickel_dust_from_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "assortedcore:nickel_dustdust_from_ingot"
+        "recipe": "assortedcore:nickel_dust_from_ingot"
       }
     }
   },

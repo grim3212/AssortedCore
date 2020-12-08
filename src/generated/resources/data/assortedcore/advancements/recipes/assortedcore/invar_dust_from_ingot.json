@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "assortedcore:tin_dustdust_from_ingot"
+      "assortedcore:invar_dust_from_ingot"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/tin"
+            "tag": "forge:ingots/invar"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "assortedcore:tin_dustdust_from_ingot"
+        "recipe": "assortedcore:invar_dust_from_ingot"
       }
     }
   },

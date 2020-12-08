@@ -53,12 +53,12 @@ public class AlloyForgeContainer extends BaseMachineContainer {
 
 				slot.onSlotChange(itemstack1, itemstack);
 			} else if (index != 2 && index != 1 && index != 0) {
-				if (this.hasRecipe(itemstack1)) {
-					if (!this.mergeItemStack(itemstack1, 0, 2, false)) {
+				if (ForgeHooks.getBurnTime(itemstack1) > 0) {
+					if (!this.mergeItemStack(itemstack1, 2, 3, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (ForgeHooks.getBurnTime(itemstack1) > 0) {
-					if (!this.mergeItemStack(itemstack1, 2, 3, false)) {
+				} else if (this.hasRecipe(itemstack1)) {
+					if (!this.mergeItemStack(itemstack1, 0, 2, false)) {
 						return ItemStack.EMPTY;
 					}
 				} else if (index >= 4 && index < 31) {
@@ -87,7 +87,7 @@ public class AlloyForgeContainer extends BaseMachineContainer {
 
 		return itemstack;
 	}
-	
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public int getCookProgressionScaled() {

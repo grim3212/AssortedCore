@@ -9,6 +9,7 @@ import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
+import com.grim3212.assorted.core.common.handler.CoreConfig;
 import com.grim3212.assorted.core.common.inventory.GrindingMillContainer;
 
 import net.minecraft.block.Block;
@@ -19,7 +20,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
@@ -54,7 +54,7 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 	}
 
 	@Override
-	protected boolean canCombine(@Nullable IRecipe<? extends BaseMachineRecipe> recipeIn) {
+	protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
 		if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
 			ItemStack itemstack = recipeIn.getRecipeOutput();
 			if (itemstack.isEmpty()) {
@@ -77,7 +77,7 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 	}
 
 	@Override
-	protected void combine(@Nullable IRecipe<? extends BaseMachineRecipe> recipe) {
+	protected void combine(@Nullable BaseMachineRecipe recipe) {
 		if (recipe != null && this.canCombine(recipe)) {
 			GrindingMillRecipe millRecipe = (GrindingMillRecipe) recipe;
 			ItemStack ingredient = this.items.get(0);
@@ -100,10 +100,12 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 				this.items.set(1, ItemStack.EMPTY);
 			}
 
-			Block b = Block.getBlockFromItem(ingredient.getItem());
-			if (b != null && b != Blocks.AIR) {
-				SoundType soundtype = b.getSoundType(b.getDefaultState());
-				this.getWorld().playSound((PlayerEntity) null, this.getPos(), soundtype.getBreakSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+			if (CoreConfig.COMMON.grindingMillBreakSound.get()) {
+				Block b = Block.getBlockFromItem(ingredient.getItem());
+				if (b != null && b != Blocks.AIR) {
+					SoundType soundtype = b.getSoundType(b.getDefaultState());
+					this.getWorld().playSound((PlayerEntity) null, this.getPos(), soundtype.getBreakSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+				}
 			}
 		}
 	}

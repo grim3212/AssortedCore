@@ -18,10 +18,10 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import mezz.jei.util.Translator;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -52,7 +52,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 		this.background = guiHelper.createDrawable(GUI, 31, 22, 105, 57);
 		Block alloyForge = CoreBlocks.BASIC_ALLOY_FORGE.get();
 		this.icon = guiHelper.createDrawableIngredient(new ItemStack(alloyForge));
-		this.localizedName = Translator.translateToLocal(alloyForge.getTranslationKey());
+		this.localizedName = I18n.format(alloyForge.getTranslationKey());
 		this.cachedArrows = CacheBuilder.newBuilder().maximumSize(25).build(new CacheLoader<Integer, IDrawableAnimated>() {
 			@Override
 			public IDrawableAnimated load(Integer cookTime) {

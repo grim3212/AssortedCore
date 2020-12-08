@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "assortedcore:electrum_dust"
+      "assortedcore:electrum_ingot"
     ]
   },
   "criteria": {
@@ -29,7 +29,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "assortedcore:electrum_dust"
+        "recipe": "assortedcore:electrum_ingot"
       }
     }
   },

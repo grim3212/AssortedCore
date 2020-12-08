@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "assortedcore:invar_dustdust_from_ingot"
+      "assortedcore:steel_dust_from_ingot"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/invar"
+            "tag": "forge:ingots/steel"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "assortedcore:invar_dustdust_from_ingot"
+        "recipe": "assortedcore:steel_dust_from_ingot"
       }
     }
   },

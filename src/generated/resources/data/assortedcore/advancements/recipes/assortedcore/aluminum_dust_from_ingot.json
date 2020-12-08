@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "assortedcore:copper_dustdust_from_ingot"
+      "assortedcore:aluminum_dust_from_ingot"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/copper"
+            "tag": "forge:ingots/aluminum"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "assortedcore:copper_dustdust_from_ingot"
+        "recipe": "assortedcore:aluminum_dust_from_ingot"
       }
     }
   },

@@ -15,7 +15,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
@@ -49,7 +48,7 @@ public class AlloyForgeTileEntity extends BaseMachineTileEntity {
 	}
 
 	@Override
-	protected boolean canCombine(@Nullable IRecipe<? extends BaseMachineRecipe> recipeIn) {
+	protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
 		if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
 			ItemStack itemstack = recipeIn.getRecipeOutput();
 			if (itemstack.isEmpty()) {
@@ -72,7 +71,7 @@ public class AlloyForgeTileEntity extends BaseMachineTileEntity {
 	}
 
 	@Override
-	protected void combine(@Nullable IRecipe<? extends BaseMachineRecipe> recipe) {
+	protected void combine(@Nullable BaseMachineRecipe recipe) {
 		if (recipe != null && this.canCombine(recipe)) {
 			AlloyForgeRecipe forgeRecipe = (AlloyForgeRecipe) recipe;
 			ItemStack ingredient1 = this.items.get(0);

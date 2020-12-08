@@ -183,7 +183,7 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 		if (!this.world.isRemote) {
 			ItemStack fuelSlot = this.items.get(this.fuelSlot());
 			if (this.isBurning() || !fuelSlot.isEmpty() && this.inputsWithItems()) {
-				IRecipe<? extends BaseMachineRecipe> irecipe = (IRecipe<? extends BaseMachineRecipe>) this.world.getRecipeManager().getRecipe((IRecipeType<BaseMachineRecipe>) this.recipeType, this, this.world).orElse(null);
+				BaseMachineRecipe irecipe = this.world.getRecipeManager().getRecipe((IRecipeType<BaseMachineRecipe>) this.recipeType, this, this.world).orElse(null);
 
 				if (!this.isBurning() && this.canCombine(irecipe)) {
 					this.burnTime = this.getBurnTime(fuelSlot);
@@ -231,9 +231,9 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 		return this.burnTime > 0;
 	}
 
-	protected abstract boolean canCombine(@Nullable IRecipe<? extends BaseMachineRecipe> recipeIn);
+	protected abstract boolean canCombine(@Nullable BaseMachineRecipe recipeIn);
 
-	protected abstract void combine(@Nullable IRecipe<? extends BaseMachineRecipe> recipe);
+	protected abstract void combine(@Nullable BaseMachineRecipe recipe);
 
 	protected int getBurnTime(ItemStack fuel) {
 		if (fuel.isEmpty()) {

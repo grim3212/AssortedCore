@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "assortedcore:lead_dustdust_from_ingot"
+      "assortedcore:platinum_dust_from_ingot"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:ingots/lead"
+            "tag": "forge:ingots/platinum"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "assortedcore:lead_dustdust_from_ingot"
+        "recipe": "assortedcore:platinum_dust_from_ingot"
       }
     }
   },

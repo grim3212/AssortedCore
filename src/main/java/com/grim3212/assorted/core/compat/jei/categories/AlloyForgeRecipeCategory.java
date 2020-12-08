@@ -1,6 +1,4 @@
-package com.grim3212.assorted.core.compat.jei.recipes.alloyforge;
-
-import java.util.Arrays;
+package com.grim3212.assorted.core.compat.jei.categories;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -20,7 +18,6 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import mezz.jei.config.Constants;
 import mezz.jei.util.Translator;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -31,7 +28,8 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecipe> {
 
-	private static final ResourceLocation UID = new ResourceLocation(AssortedCore.MODID, "alloy_forge");
+	public static final ResourceLocation UID = new ResourceLocation(AssortedCore.MODID, "alloy_forge");
+	private static final ResourceLocation GUI = new ResourceLocation(AssortedCore.MODID, "textures/gui/container/alloy_forge.png");
 
 	protected static final int inputSlot1 = 0;
 	protected static final int inputSlot2 = 1;
@@ -48,17 +46,17 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 	private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
 
 	public AlloyForgeRecipeCategory(IGuiHelper guiHelper) {
-		this.staticFlame = guiHelper.createDrawable(Constants.RECIPE_GUI_VANILLA, 82, 114, 14, 14);
+		this.staticFlame = guiHelper.createDrawable(GUI, 176, 0, 14, 14);
 		this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
 
-		this.background = guiHelper.createDrawable(Constants.RECIPE_GUI_VANILLA, 0, 114, 82, 54);
+		this.background = guiHelper.createDrawable(GUI, 31, 22, 105, 57);
 		Block alloyForge = CoreBlocks.BASIC_ALLOY_FORGE.get();
 		this.icon = guiHelper.createDrawableIngredient(new ItemStack(alloyForge));
 		this.localizedName = Translator.translateToLocal(alloyForge.getTranslationKey());
 		this.cachedArrows = CacheBuilder.newBuilder().maximumSize(25).build(new CacheLoader<Integer, IDrawableAnimated>() {
 			@Override
 			public IDrawableAnimated load(Integer cookTime) {
-				return guiHelper.drawableBuilder(Constants.RECIPE_GUI_VANILLA, 82, 128, 24, 17).buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
+				return guiHelper.drawableBuilder(GUI, 176, 14, 24, 17).buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
 			}
 		});
 
@@ -105,12 +103,12 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 
 	@Override
 	public void draw(AlloyForgeRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-		animatedFlame.draw(matrixStack, 1, 20);
+		animatedFlame.draw(matrixStack, 49, 23);
 
 		IDrawableAnimated arrow = getArrow(recipe);
-		arrow.draw(matrixStack, 24, 18);
+		arrow.draw(matrixStack, 47, 6);
 
-		drawExperience(recipe, matrixStack, 0);
+		drawExperience(recipe, matrixStack, 45);
 		drawCookTime(recipe, matrixStack, 45);
 	}
 
@@ -120,8 +118,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 			TranslationTextComponent experienceString = new TranslationTextComponent("gui.jei.category.smelting.experience", experience);
 			Minecraft minecraft = Minecraft.getInstance();
 			FontRenderer fontRenderer = minecraft.fontRenderer;
-			int stringWidth = fontRenderer.getStringPropertyWidth(experienceString);
-			fontRenderer.func_243248_b(matrixStack, experienceString, background.getWidth() - stringWidth, y, 0xFF808080);
+			fontRenderer.func_243248_b(matrixStack, experienceString, 0, y, 0xFF808080);
 		}
 	}
 
@@ -141,13 +138,9 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 	public void setRecipe(IRecipeLayout recipeLayout, AlloyForgeRecipe recipe, IIngredients ingredients) {
 		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-		guiItemStacks.init(inputSlot1, true, 0, 0);
-		guiItemStacks.set(inputSlot1, Arrays.asList(recipe.getIngredient1().getMatchingStacks()));
-
-		guiItemStacks.init(inputSlot2, true, 30, 0);
-		guiItemStacks.set(inputSlot2, Arrays.asList(recipe.getIngredient2().getMatchingStacks()));
-
-		guiItemStacks.init(outputSlot, false, 60, 18);
+		guiItemStacks.init(inputSlot1, true, 0, 4);
+		guiItemStacks.init(inputSlot2, true, 24, 4);
+		guiItemStacks.init(outputSlot, false, 83, 4);
 
 		guiItemStacks.set(ingredients);
 	}

@@ -5,8 +5,8 @@ import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
 import com.grim3212.assorted.core.AssortedCore;
+import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.item.CoreItems;
-import com.grim3212.assorted.core.common.lib.MachineTier;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.AbstractBlock.Properties;

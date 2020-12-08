@@ -5,9 +5,9 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
+import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
+import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.block.BaseMachineBlock;
-import com.grim3212.assorted.core.common.crafting.BaseMachineRecipe;
-import com.grim3212.assorted.core.common.lib.MachineTier;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;

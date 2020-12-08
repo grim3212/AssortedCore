@@ -1,4 +1,7 @@
-package com.grim3212.assorted.core.common.crafting;
+package com.grim3212.assorted.core.api.crafting;
+
+import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

@@ -1,8 +1,8 @@
 package com.grim3212.assorted.core.common.data;
 
 import com.grim3212.assorted.core.AssortedCore;
+import com.grim3212.assorted.core.api.CoreTags;
 import com.grim3212.assorted.core.common.item.CoreItems;
-import com.grim3212.assorted.core.common.lib.CoreTags;
 
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;

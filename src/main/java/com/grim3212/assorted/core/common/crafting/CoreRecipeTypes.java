@@ -1,6 +1,8 @@
 package com.grim3212.assorted.core.common.crafting;
 
 import com.grim3212.assorted.core.AssortedCore;
+import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
+import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 
 import net.minecraft.item.crafting.IRecipeType;
 

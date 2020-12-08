@@ -1,7 +1,7 @@
 package com.grim3212.assorted.core.common.block;
 
+import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.block.tileentity.GrindingMillTileEntity;
-import com.grim3212.assorted.core.common.lib.MachineTier;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;

@@ -1,4 +1,4 @@
-package com.grim3212.assorted.core.common.crafting;
+package com.grim3212.assorted.core.api.crafting;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,13 +13,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class GrindingMillRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<GrindingMillRecipe> {
+public class AlloyForgeRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<AlloyForgeRecipe> {
 
 	@Override
-	public GrindingMillRecipe read(ResourceLocation recipeId, JsonObject json) {
+	public AlloyForgeRecipe read(ResourceLocation recipeId, JsonObject json) {
 		String s = JSONUtils.getString(json, "group", "");
-		JsonElement jsonelementIngredient = (JsonElement) (JSONUtils.isJsonArray(json, "ingredient") ? JSONUtils.getJsonArray(json, "ingredient") : JSONUtils.getJsonObject(json, "ingredient"));
-		MachineIngredient ingredient = MachineIngredient.deserialize(jsonelementIngredient);
+		JsonElement jsonelementIngredient1 = (JsonElement) (JSONUtils.isJsonArray(json, "ingredient1") ? JSONUtils.getJsonArray(json, "ingredient1") : JSONUtils.getJsonObject(json, "ingredient1"));
+		MachineIngredient ingredient1 = MachineIngredient.deserialize(jsonelementIngredient1);
+		JsonElement jsonelementIngredient2 = (JsonElement) (JSONUtils.isJsonArray(json, "ingredient2") ? JSONUtils.getJsonArray(json, "ingredient2") : JSONUtils.getJsonObject(json, "ingredient2"));
+		MachineIngredient ingredient2 = MachineIngredient.deserialize(jsonelementIngredient2);
 		if (!json.has("result")) {
 			throw new JsonSyntaxException("Missing result, expected to find a string or object");
 		}
@@ -35,23 +37,25 @@ public class GrindingMillRecipeSerializer extends ForgeRegistryEntry<IRecipeSeri
 		}
 		float f = JSONUtils.getFloat(json, "experience", 0.0F);
 		int i = JSONUtils.getInt(json, "cookingtime", 400);
-		return new GrindingMillRecipe(recipeId, s, ingredient, itemstack, f, i);
+		return new AlloyForgeRecipe(recipeId, s, ingredient1, ingredient2, itemstack, f, i);
 	}
 
 	@Override
-	public GrindingMillRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+	public AlloyForgeRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
 		String s = buffer.readString(32767);
-		MachineIngredient ingredient = MachineIngredient.read(buffer);
+		MachineIngredient ingredient1 = MachineIngredient.read(buffer);
+		MachineIngredient ingredient2 = MachineIngredient.read(buffer);
 		ItemStack itemstack = buffer.readItemStack();
 		float f = buffer.readFloat();
 		int i = buffer.readVarInt();
-		return new GrindingMillRecipe(recipeId, s, ingredient, itemstack, f, i);
+		return new AlloyForgeRecipe(recipeId, s, ingredient1, ingredient2, itemstack, f, i);
 	}
 
 	@Override
-	public void write(PacketBuffer buffer, GrindingMillRecipe recipe) {
+	public void write(PacketBuffer buffer, AlloyForgeRecipe recipe) {
 		buffer.writeString(recipe.group);
-		recipe.ingredient.write(buffer);
+		recipe.ingredient1.write(buffer);
+		recipe.ingredient2.write(buffer);
 		buffer.writeItemStack(recipe.result);
 		buffer.writeFloat(recipe.experience);
 		buffer.writeVarInt(recipe.cookTime);

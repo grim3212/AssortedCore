@@ -1,12 +1,12 @@
-package com.grim3212.assorted.core.common.data.builders;
+package com.grim3212.assorted.core.api.crafting.builders;
 
 import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
+import com.grim3212.assorted.core.api.crafting.MachineIngredient;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
-import com.grim3212.assorted.core.common.crafting.MachineIngredient;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;

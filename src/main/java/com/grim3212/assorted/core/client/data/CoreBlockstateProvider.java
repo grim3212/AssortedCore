@@ -1,9 +1,9 @@
 package com.grim3212.assorted.core.client.data;
 
 import com.grim3212.assorted.core.AssortedCore;
+import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.block.BaseMachineBlock;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
-import com.grim3212.assorted.core.common.lib.MachineTier;
 
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;

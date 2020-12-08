@@ -2,8 +2,8 @@ package com.grim3212.assorted.core.common.block;
 
 import java.util.Random;
 
+import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.block.tileentity.AlloyForgeTileEntity;
-import com.grim3212.assorted.core.common.lib.MachineTier;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.particles.ParticleTypes;

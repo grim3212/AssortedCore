@@ -1,4 +1,6 @@
-package com.grim3212.assorted.core.common.crafting;
+package com.grim3212.assorted.core.common.inventory;
+
+import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

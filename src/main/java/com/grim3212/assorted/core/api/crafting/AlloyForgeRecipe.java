@@ -1,4 +1,10 @@
-package com.grim3212.assorted.core.common.crafting;
+package com.grim3212.assorted.core.api.crafting;
+
+import java.util.Collections;
+import java.util.Map;
+
+import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -44,5 +50,14 @@ public class AlloyForgeRecipe extends BaseMachineRecipe {
 
 	public MachineIngredient getIngredient2() {
 		return ingredient2;
+	}
+
+	public static Map<ResourceLocation, AlloyForgeRecipe> recipes = Collections.emptyMap();
+
+	public static AlloyForgeRecipe findRecipe(ItemStack in1, ItemStack in2) {
+		for (AlloyForgeRecipe recipe : recipes.values())
+			if ((recipe.ingredient1.test(in1) && recipe.ingredient2.test(in2)) || (recipe.ingredient1.test(in2) && recipe.ingredient2.test(in1)))
+				return recipe;
+		return null;
 	}
 }

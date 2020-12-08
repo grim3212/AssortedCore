@@ -1,4 +1,4 @@
-package com.grim3212.assorted.core.common.lib;
+package com.grim3212.assorted.core.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

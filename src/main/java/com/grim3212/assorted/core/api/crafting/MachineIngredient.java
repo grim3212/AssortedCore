@@ -1,6 +1,8 @@
-package com.grim3212.assorted.core.common.crafting;
+package com.grim3212.assorted.core.api.crafting;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -25,7 +27,7 @@ public class MachineIngredient implements Predicate<ItemStack> {
 		this.ingredient = ingredient;
 		this.count = count;
 	}
-	
+
 	public int getCount() {
 		return count;
 	}
@@ -60,5 +62,13 @@ public class MachineIngredient implements Predicate<ItemStack> {
 		} else {
 			throw new JsonSyntaxException("Item cannot be null");
 		}
+	}
+
+	public ItemStack[] getMatchingStacks() {
+		return Arrays.stream(this.ingredient.getMatchingStacks()).collect(Collectors.toList()).stream().map((stack) -> {
+			ItemStack clone = stack.copy();
+			clone.setCount(this.count);
+			return clone;
+		}).toArray(ItemStack[]::new);
 	}
 }

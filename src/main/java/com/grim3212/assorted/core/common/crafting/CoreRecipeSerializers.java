@@ -1,6 +1,8 @@
 package com.grim3212.assorted.core.common.crafting;
 
 import com.grim3212.assorted.core.AssortedCore;
+import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipeSerializer;
+import com.grim3212.assorted.core.api.crafting.GrindingMillRecipeSerializer;
 
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.fml.RegistryObject;

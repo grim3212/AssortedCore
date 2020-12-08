@@ -1,4 +1,4 @@
-package com.grim3212.assorted.core.common.lib;
+package com.grim3212.assorted.core.api.machines;
 
 public enum MachineTier {
 	BASIC("basic", 1.0F),

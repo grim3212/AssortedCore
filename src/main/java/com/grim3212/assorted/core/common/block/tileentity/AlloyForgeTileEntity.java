@@ -5,11 +5,11 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.grim3212.assorted.core.AssortedCore;
-import com.grim3212.assorted.core.common.crafting.AlloyForgeRecipe;
-import com.grim3212.assorted.core.common.crafting.BaseMachineRecipe;
+import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
+import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
+import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.common.inventory.AlloyForgeContainer;
-import com.grim3212.assorted.core.common.lib.MachineTier;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

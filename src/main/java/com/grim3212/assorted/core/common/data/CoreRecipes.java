@@ -3,12 +3,12 @@ package com.grim3212.assorted.core.common.data;
 import java.util.function.Consumer;
 
 import com.grim3212.assorted.core.AssortedCore;
+import com.grim3212.assorted.core.api.CoreTags;
+import com.grim3212.assorted.core.api.crafting.MachineIngredient;
+import com.grim3212.assorted.core.api.crafting.builders.AlloyForgeRecipeBuilder;
+import com.grim3212.assorted.core.api.crafting.builders.GrindingMillRecipeBuilder;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
-import com.grim3212.assorted.core.common.crafting.MachineIngredient;
-import com.grim3212.assorted.core.common.data.builders.AlloyForgeRecipeBuilder;
-import com.grim3212.assorted.core.common.data.builders.GrindingMillRecipeBuilder;
 import com.grim3212.assorted.core.common.item.CoreItems;
-import com.grim3212.assorted.core.common.lib.CoreTags;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.data.CookingRecipeBuilder;

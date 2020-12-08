@@ -1,9 +1,10 @@
 package com.grim3212.assorted.core.common.inventory;
 
+import com.grim3212.assorted.core.api.AssortedCoreAPI;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ToolType;
 
 public class GrindingMillToolSlot extends Slot {
 
@@ -13,10 +14,7 @@ public class GrindingMillToolSlot extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		return validTool(stack);
+		return AssortedCoreAPI.allowedInGrindingMill(stack);
 	}
 
-	public static boolean validTool(ItemStack stack) {
-		return stack.getItem().getToolTypes(stack).stream().anyMatch((tooltype) -> tooltype == ToolType.PICKAXE) && stack.getHarvestLevel(ToolType.PICKAXE, null, null) >= 2;
-	}
 }

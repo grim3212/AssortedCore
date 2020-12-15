@@ -66,6 +66,9 @@ public class CoreBlocks {
 	public static final RegistryObject<GrindingMillBlock> ADVANCED_GRINDING_MILL = register("advanced_grinding_mill", () -> new GrindingMillBlock(MachineTier.ADVANCED, AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
 	public static final RegistryObject<GrindingMillBlock> EXPERT_GRINDING_MILL = register("expert_grinding_mill", () -> new GrindingMillBlock(MachineTier.EXPERT, AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
 
+	public static final RegistryObject<BurningGeneratorBlock> BURNING_GENERATOR = register("burning_generator", () -> new BurningGeneratorBlock(AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+	public static final RegistryObject<EnergyCellBlock> ENERGY_CELL = register("energy_cell", () -> new EnergyCellBlock(AbstractBlock.Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(4.0F, 6.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1).setRequiresTool()));
+
 	private static <T extends Block> RegistryObject<T> register(String name, Supplier<? extends T> sup) {
 		return register(name, sup, block -> item(block));
 	}

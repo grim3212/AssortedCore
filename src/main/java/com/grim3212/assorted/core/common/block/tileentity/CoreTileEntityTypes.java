@@ -22,4 +22,8 @@ public class CoreTileEntityTypes {
 	public static final RegistryObject<TileEntityType<GrindingMillTileEntity>> INTERMEDIATE_GRINDING_MILL = TILE_ENTITIES.register("intermediate_grinding_mill", () -> new TileEntityType<>(GrindingMillTileEntity::intermediateTileEntity, Sets.newHashSet(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get()), null));
 	public static final RegistryObject<TileEntityType<GrindingMillTileEntity>> ADVANCED_GRINDING_MILL = TILE_ENTITIES.register("advanced_grinding_mill", () -> new TileEntityType<>(GrindingMillTileEntity::advancedTileEntity, Sets.newHashSet(CoreBlocks.ADVANCED_GRINDING_MILL.get()), null));
 	public static final RegistryObject<TileEntityType<GrindingMillTileEntity>> EXPERT_GRINDING_MILL = TILE_ENTITIES.register("expert_grinding_mill", () -> new TileEntityType<>(GrindingMillTileEntity::expertTileEntity, Sets.newHashSet(CoreBlocks.EXPERT_GRINDING_MILL.get()), null));
+
+	public static final RegistryObject<TileEntityType<BurningGeneratorTileEntity>> BURNING_GENERATOR = TILE_ENTITIES.register("burning_generator", () -> new TileEntityType<>(BurningGeneratorTileEntity::new, Sets.newHashSet(CoreBlocks.BURNING_GENERATOR.get()), null));
+
+	public static final RegistryObject<TileEntityType<EnergyCellTileEntity>> ENERGY_CELL = TILE_ENTITIES.register("energy_cell", () -> new TileEntityType<>(EnergyCellTileEntity::new, Sets.newHashSet(CoreBlocks.ENERGY_CELL.get()), null));
 }

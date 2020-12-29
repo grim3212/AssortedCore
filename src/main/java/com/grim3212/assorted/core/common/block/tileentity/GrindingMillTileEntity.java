@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.grim3212.assorted.core.AssortedCore;
+import com.grim3212.assorted.core.api.AssortedCoreAPI;
 import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 import com.grim3212.assorted.core.api.machines.MachineTier;
@@ -57,7 +58,7 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 	protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
 		if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
 			ItemStack itemstack = recipeIn.getRecipeOutput();
-			if (itemstack.isEmpty()) {
+			if (itemstack.isEmpty() || !AssortedCoreAPI.allowedInGrindingMill(this.items.get(1))) {
 				return false;
 			} else {
 				ItemStack outputSlot = this.items.get(this.outputSlot());
@@ -142,5 +143,20 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 	@Override
 	protected int outputSlot() {
 		return 3;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int index, ItemStack stack) {
+		if (index == this.outputSlot()) {
+			return false;
+		} else if (index != this.fuelSlot()) {
+			if (index == 1) {
+				return AssortedCoreAPI.allowedInGrindingMill(stack);
+			} else {
+				return getBurnTime(stack) <= 0;
+			}
+		} else {
+			return getBurnTime(stack) > 0;
+		}
 	}
 }

@@ -153,7 +153,7 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 			if (index == 1) {
 				return AssortedCoreAPI.allowedInGrindingMillToolSlot(stack);
 			} else {
-				return AssortedCoreAPI.isValidGrindingMillInput(stack);
+				return AssortedCoreAPI.isValidGrindingMillInput(this.world.getRecipeManager(), stack);
 			}
 		} else {
 			return getBurnTime(stack) > 0;

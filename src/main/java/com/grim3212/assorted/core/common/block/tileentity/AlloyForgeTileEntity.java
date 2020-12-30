@@ -139,7 +139,7 @@ public class AlloyForgeTileEntity extends BaseMachineTileEntity {
 		if (index == this.outputSlot()) {
 			return false;
 		} else if (index != this.fuelSlot()) {
-			return getBurnTime(stack) <= 0;
+			return AssortedCoreAPI.isValidAlloyForgeInput(stack);
 		} else {
 			return getBurnTime(stack) > 0;
 		}

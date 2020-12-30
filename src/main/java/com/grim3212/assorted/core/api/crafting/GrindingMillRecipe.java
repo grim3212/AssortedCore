@@ -1,5 +1,7 @@
 package com.grim3212.assorted.core.api.crafting;
 
+import java.util.List;
+
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
@@ -7,6 +9,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -38,8 +41,14 @@ public class GrindingMillRecipe extends BaseMachineRecipe {
 	public boolean validInput(ItemStack stack) {
 		return this.ingredient.test(stack);
 	}
+	
+	public boolean validItem(ItemStack stack) {
+		return this.ingredient.getBaseIngredient().test(stack);
+	}
 
 	public MachineIngredient getIngredient() {
 		return ingredient;
 	}
+
+	public static List<GrindingMillRecipe> recipes = NonNullList.create();
 }

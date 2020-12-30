@@ -62,7 +62,7 @@ public class GrindingMillContainer extends BaseMachineContainer {
 					if (!this.mergeItemStack(itemstack1, 2, 3, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (AssortedCoreAPI.allowedInGrindingMill(itemstack1)) {
+				} else if (AssortedCoreAPI.allowedInGrindingMillToolSlot(itemstack1)) {
 					if (!this.mergeItemStack(itemstack1, 1, 2, false)) {
 						return ItemStack.EMPTY;
 					}

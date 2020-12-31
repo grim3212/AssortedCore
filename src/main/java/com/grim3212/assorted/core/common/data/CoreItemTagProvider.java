@@ -7,6 +7,7 @@ import com.grim3212.assorted.core.common.item.CoreItems;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
+import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class CoreItemTagProvider extends ItemTagsProvider {
@@ -155,6 +156,8 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.getOrCreateBuilder(CoreTags.Items.GEARS_STEEL).add(CoreItems.STEEL_GEAR.get());
 		this.getOrCreateBuilder(CoreTags.Items.GEARS_IRON).add(CoreItems.IRON_GEAR.get());
 		this.getOrCreateBuilder(CoreTags.Items.GEARS_GOLD).add(CoreItems.GOLD_GEAR.get());
+		
+		this.getOrCreateBuilder(ItemTags.PIGLIN_LOVED).add(CoreItems.GOLD_DUST.get(), CoreItems.GOLD_GEAR.get());
 	}
 
 	@Override

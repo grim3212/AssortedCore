@@ -133,13 +133,13 @@ public class AlloyForgeTileEntity extends BaseMachineTileEntity {
 	protected int outputSlot() {
 		return 3;
 	}
-	
+
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		if (index == this.outputSlot()) {
 			return false;
 		} else if (index != this.fuelSlot()) {
-			return getBurnTime(stack) <= 0;
+			return AssortedCoreAPI.isValidAlloyForgeInput(this.world.getRecipeManager(), stack);
 		} else {
 			return getBurnTime(stack) > 0;
 		}

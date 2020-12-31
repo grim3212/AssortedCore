@@ -39,6 +39,10 @@ public class GrindingMillRecipe extends BaseMachineRecipe {
 		return this.ingredient.test(stack);
 	}
 
+	public boolean validItem(ItemStack stack) {
+		return this.ingredient.getBaseIngredient().test(stack);
+	}
+
 	public MachineIngredient getIngredient() {
 		return ingredient;
 	}

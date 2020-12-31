@@ -16,7 +16,7 @@ public class JEIHelpers {
 	public static List<ItemStack> grindingMillAcceptedTools = Lists.newArrayList();
 
 	public static void hydrateLists() {
-		grindingMillAcceptedTools = Registry.ITEM.stream().filter((item) -> AssortedCoreAPI.allowedInGrindingMill(new ItemStack(item))).map((item) -> new ItemStack(item)).collect(Collectors.toList());
+		grindingMillAcceptedTools = Registry.ITEM.stream().filter((item) -> AssortedCoreAPI.allowedInGrindingMillToolSlot(new ItemStack(item))).map((item) -> new ItemStack(item)).collect(Collectors.toList());
 	}
 
 	public static List<List<ItemStack>> getMachineIngredientStacks(MachineIngredient... machineIngredients) {

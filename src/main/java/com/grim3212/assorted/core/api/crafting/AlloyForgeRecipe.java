@@ -41,6 +41,10 @@ public class AlloyForgeRecipe extends BaseMachineRecipe {
 		return this.ingredient1.test(stack) || this.ingredient2.test(stack);
 	}
 
+	public boolean validItem(ItemStack stack) {
+		return this.ingredient1.getBaseIngredient().test(stack) || this.ingredient2.getBaseIngredient().test(stack);
+	}
+
 	public MachineIngredient getIngredient1() {
 		return ingredient1;
 	}

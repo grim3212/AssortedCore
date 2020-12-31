@@ -58,7 +58,7 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 	protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
 		if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
 			ItemStack itemstack = recipeIn.getRecipeOutput();
-			if (itemstack.isEmpty() || !AssortedCoreAPI.allowedInGrindingMill(this.items.get(1))) {
+			if (itemstack.isEmpty() || !AssortedCoreAPI.allowedInGrindingMillToolSlot(this.items.get(1))) {
 				return false;
 			} else {
 				ItemStack outputSlot = this.items.get(this.outputSlot());
@@ -151,9 +151,9 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 			return false;
 		} else if (index != this.fuelSlot()) {
 			if (index == 1) {
-				return AssortedCoreAPI.allowedInGrindingMill(stack);
+				return AssortedCoreAPI.allowedInGrindingMillToolSlot(stack);
 			} else {
-				return getBurnTime(stack) <= 0;
+				return AssortedCoreAPI.isValidGrindingMillInput(this.world.getRecipeManager(), stack);
 			}
 		} else {
 			return getBurnTime(stack) > 0;

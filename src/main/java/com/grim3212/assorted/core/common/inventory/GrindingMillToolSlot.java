@@ -14,7 +14,7 @@ public class GrindingMillToolSlot extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		return AssortedCoreAPI.allowedInGrindingMill(stack);
+		return AssortedCoreAPI.allowedInGrindingMillToolSlot(stack);
 	}
 
 }

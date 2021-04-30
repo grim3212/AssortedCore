@@ -118,7 +118,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 			TranslationTextComponent experienceString = new TranslationTextComponent("gui.jei.category.smelting.experience", experience);
 			Minecraft minecraft = Minecraft.getInstance();
 			FontRenderer fontRenderer = minecraft.fontRenderer;
-			fontRenderer.func_243248_b(matrixStack, experienceString, 0, y, 0xFF808080);
+			fontRenderer.drawText(matrixStack, experienceString, 0, y, 0xFF808080);
 		}
 	}
 
@@ -130,7 +130,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 			Minecraft minecraft = Minecraft.getInstance();
 			FontRenderer fontRenderer = minecraft.fontRenderer;
 			int stringWidth = fontRenderer.getStringPropertyWidth(timeString);
-			fontRenderer.func_243248_b(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
+			fontRenderer.drawText(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
 		}
 	}
 

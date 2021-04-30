@@ -86,7 +86,7 @@ public abstract class BaseMachineBlock extends Block {
 
 	@Override
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.isIn(newState.getBlock())) {
+		if (!state.matchesBlock(newState.getBlock())) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 			if (tileentity instanceof BaseMachineTileEntity) {
 				InventoryHelper.dropInventoryItems(worldIn, pos, (BaseMachineTileEntity) tileentity);

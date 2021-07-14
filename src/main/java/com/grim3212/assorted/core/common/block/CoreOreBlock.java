@@ -5,8 +5,6 @@ import java.util.Random;
 import net.minecraft.block.OreBlock;
 import net.minecraft.util.math.MathHelper;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class CoreOreBlock extends OreBlock {
 
 	public CoreOreBlock(Properties properties) {

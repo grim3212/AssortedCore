@@ -44,17 +44,17 @@ public class MachineIngredient implements Predicate<ItemStack> {
 	}
 
 	public static MachineIngredient read(PacketBuffer buffer) {
-		return new MachineIngredient(Ingredient.read(buffer), buffer.readInt());
+		return new MachineIngredient(Ingredient.fromNetwork(buffer), buffer.readInt());
 	}
 
 	public void write(PacketBuffer buffer) {
-		this.ingredient.write(buffer);
+		this.ingredient.toNetwork(buffer);
 		buffer.writeInt(this.count);
 	}
 
 	public JsonElement serialize() {
 		JsonObject obj = new JsonObject();
-		obj.add("ingredient", this.ingredient.serialize());
+		obj.add("ingredient", this.ingredient.toJson());
 		obj.addProperty("count", this.count);
 		return obj;
 	}
@@ -62,14 +62,14 @@ public class MachineIngredient implements Predicate<ItemStack> {
 	public static MachineIngredient deserialize(@Nullable JsonElement json) {
 		if (json != null && !json.isJsonNull() && json.isJsonObject()) {
 			JsonObject obj = json.getAsJsonObject();
-			return new MachineIngredient(Ingredient.deserialize(obj.get("ingredient")), obj.get("count").getAsInt());
+			return new MachineIngredient(Ingredient.fromJson(obj.get("ingredient")), obj.get("count").getAsInt());
 		} else {
 			throw new JsonSyntaxException("Item cannot be null");
 		}
 	}
 
 	public ItemStack[] getMatchingStacks() {
-		return Arrays.stream(this.ingredient.getMatchingStacks()).collect(Collectors.toList()).stream().map((stack) -> {
+		return Arrays.stream(this.ingredient.getItems()).collect(Collectors.toList()).stream().map((stack) -> {
 			ItemStack clone = stack.copy();
 			clone.setCount(this.count);
 			return clone;

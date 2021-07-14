@@ -35,7 +35,7 @@ public class CoreRecipes extends RecipeProvider {
 	}
 
 	@Override
-	protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+	protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
 		storageIngotNugget(CoreTags.Items.STORAGE_BLOCKS_TIN, CoreTags.Items.INGOTS_TIN, CoreTags.Items.NUGGETS_TIN, CoreBlocks.TIN_BLOCK.get(), CoreItems.TIN_INGOT.get(), CoreItems.TIN_NUGGET.get(), consumer);
 		storageIngotNugget(CoreTags.Items.STORAGE_BLOCKS_COPPER, CoreTags.Items.INGOTS_COPPER, CoreTags.Items.NUGGETS_COPPER, CoreBlocks.COPPER_BLOCK.get(), CoreItems.COPPER_INGOT.get(), CoreItems.COPPER_NUGGET.get(), consumer);
 		storageIngotNugget(CoreTags.Items.STORAGE_BLOCKS_SILVER, CoreTags.Items.INGOTS_SILVER, CoreTags.Items.NUGGETS_SILVER, CoreBlocks.SILVER_BLOCK.get(), CoreItems.SILVER_INGOT.get(), CoreItems.SILVER_NUGGET.get(), consumer);
@@ -134,16 +134,16 @@ public class CoreRecipes extends RecipeProvider {
 		grindingDustFromIngot(CoreTags.Items.INGOTS_STEEL, new ItemStack(CoreItems.STEEL_DUST.get(), 1), 0.0F, 300, consumer);
 		grindingDustFromIngot(CoreTags.Items.INGOTS_INVAR, new ItemStack(CoreItems.INVAR_DUST.get(), 1), 0.0F, 300, consumer);
 		
-		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.MACHINE_CORE.get()).key('A', CoreTags.Items.INGOTS_ALUMINUM).key('C', CoreTags.Items.GEARS_COPPER).key('I', Tags.Items.INGOTS_IRON).patternLine("IAI").patternLine("ACA").patternLine("IAI").addCriterion("has_iron", hasItem(Tags.Items.INGOTS_IRON)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.BASIC_ALLOY_FORGE.get()).key('X', CoreBlocks.MACHINE_CORE.get()).key('B', Blocks.BLAST_FURNACE).key('I', Tags.Items.INGOTS_IRON).patternLine("III").patternLine("BXB").patternLine("III").addCriterion("has_iron", hasItem(Tags.Items.INGOTS_IRON)).addCriterion("has_blast_furnace", hasItem(Blocks.BLAST_FURNACE)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get()).key('X', CoreBlocks.BASIC_ALLOY_FORGE.get()).key('S', CoreTags.Items.INGOTS_STEEL).patternLine("SSS").patternLine("SXS").patternLine("SSS").addCriterion("has_steel", hasItem(CoreTags.Items.INGOTS_STEEL)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.ADVANCED_ALLOY_FORGE.get()).key('X', CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get()).key('E', CoreTags.Items.INGOTS_ELECTRUM).key('V', CoreTags.Items.INGOTS_INVAR).patternLine("VEV").patternLine("EXE").patternLine("VEV").addCriterion("has_electrum", hasItem(CoreTags.Items.INGOTS_ELECTRUM)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.EXPERT_ALLOY_FORGE.get()).key('X', CoreBlocks.ADVANCED_ALLOY_FORGE.get()).key('P', CoreTags.Items.INGOTS_PLATINUM).patternLine(" P ").patternLine("PXP").patternLine(" P ").addCriterion("has_platinum", hasItem(CoreTags.Items.INGOTS_PLATINUM)).build(consumer);
+		ShapedRecipeBuilder.shaped(CoreBlocks.MACHINE_CORE.get()).define('A', CoreTags.Items.INGOTS_ALUMINUM).define('C', CoreTags.Items.GEARS_COPPER).define('I', Tags.Items.INGOTS_IRON).pattern("IAI").pattern("ACA").pattern("IAI").unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON)).save(consumer);
+		ShapedRecipeBuilder.shaped(CoreBlocks.BASIC_ALLOY_FORGE.get()).define('X', CoreBlocks.MACHINE_CORE.get()).define('B', Blocks.BLAST_FURNACE).define('I', Tags.Items.INGOTS_IRON).pattern("III").pattern("BXB").pattern("III").unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON)).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(consumer);
+		ShapedRecipeBuilder.shaped(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get()).define('X', CoreBlocks.BASIC_ALLOY_FORGE.get()).define('S', CoreTags.Items.INGOTS_STEEL).pattern("SSS").pattern("SXS").pattern("SSS").unlockedBy("has_steel", has(CoreTags.Items.INGOTS_STEEL)).save(consumer);
+		ShapedRecipeBuilder.shaped(CoreBlocks.ADVANCED_ALLOY_FORGE.get()).define('X', CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get()).define('E', CoreTags.Items.INGOTS_ELECTRUM).define('V', CoreTags.Items.INGOTS_INVAR).pattern("VEV").pattern("EXE").pattern("VEV").unlockedBy("has_electrum", has(CoreTags.Items.INGOTS_ELECTRUM)).save(consumer);
+		ShapedRecipeBuilder.shaped(CoreBlocks.EXPERT_ALLOY_FORGE.get()).define('X', CoreBlocks.ADVANCED_ALLOY_FORGE.get()).define('P', CoreTags.Items.INGOTS_PLATINUM).pattern(" P ").pattern("PXP").pattern(" P ").unlockedBy("has_platinum", has(CoreTags.Items.INGOTS_PLATINUM)).save(consumer);
 	
-		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.BASIC_GRINDING_MILL.get()).key('X', CoreBlocks.MACHINE_CORE.get()).key('F', Blocks.FURNACE).key('I', Tags.Items.INGOTS_IRON).key('P', Items.IRON_PICKAXE).key('G', CoreTags.Items.GEARS_IRON).patternLine("IPI").patternLine("GXG").patternLine("IFI").addCriterion("has_iron_pickaxe", hasItem(Items.IRON_PICKAXE)).addCriterion("has_furnace", hasItem(Blocks.FURNACE)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get()).key('X', CoreBlocks.BASIC_GRINDING_MILL.get()).key('S', CoreTags.Items.INGOTS_STEEL).patternLine("SSS").patternLine("SXS").patternLine("SSS").addCriterion("has_steel", hasItem(CoreTags.Items.INGOTS_STEEL)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.ADVANCED_GRINDING_MILL.get()).key('X', CoreBlocks.INTERMEDIATE_GRINDING_MILL.get()).key('E', CoreTags.Items.INGOTS_ELECTRUM).key('V', CoreTags.Items.INGOTS_INVAR).patternLine("VEV").patternLine("EXE").patternLine("VEV").addCriterion("has_electrum", hasItem(CoreTags.Items.INGOTS_ELECTRUM)).build(consumer);
-		ShapedRecipeBuilder.shapedRecipe(CoreBlocks.EXPERT_GRINDING_MILL.get()).key('X', CoreBlocks.ADVANCED_GRINDING_MILL.get()).key('P', CoreTags.Items.INGOTS_PLATINUM).patternLine(" P ").patternLine("PXP").patternLine(" P ").addCriterion("has_platinum", hasItem(CoreTags.Items.INGOTS_PLATINUM)).build(consumer);
+		ShapedRecipeBuilder.shaped(CoreBlocks.BASIC_GRINDING_MILL.get()).define('X', CoreBlocks.MACHINE_CORE.get()).define('F', Blocks.FURNACE).define('I', Tags.Items.INGOTS_IRON).define('P', Items.IRON_PICKAXE).define('G', CoreTags.Items.GEARS_IRON).pattern("IPI").pattern("GXG").pattern("IFI").unlockedBy("has_iron_pickaxe", has(Items.IRON_PICKAXE)).unlockedBy("has_furnace", has(Blocks.FURNACE)).save(consumer);
+		ShapedRecipeBuilder.shaped(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get()).define('X', CoreBlocks.BASIC_GRINDING_MILL.get()).define('S', CoreTags.Items.INGOTS_STEEL).pattern("SSS").pattern("SXS").pattern("SSS").unlockedBy("has_steel", has(CoreTags.Items.INGOTS_STEEL)).save(consumer);
+		ShapedRecipeBuilder.shaped(CoreBlocks.ADVANCED_GRINDING_MILL.get()).define('X', CoreBlocks.INTERMEDIATE_GRINDING_MILL.get()).define('E', CoreTags.Items.INGOTS_ELECTRUM).define('V', CoreTags.Items.INGOTS_INVAR).pattern("VEV").pattern("EXE").pattern("VEV").unlockedBy("has_electrum", has(CoreTags.Items.INGOTS_ELECTRUM)).save(consumer);
+		ShapedRecipeBuilder.shaped(CoreBlocks.EXPERT_GRINDING_MILL.get()).define('X', CoreBlocks.ADVANCED_GRINDING_MILL.get()).define('P', CoreTags.Items.INGOTS_PLATINUM).pattern(" P ").pattern("PXP").pattern(" P ").unlockedBy("has_platinum", has(CoreTags.Items.INGOTS_PLATINUM)).save(consumer);
 	}
 
 	private void alloy(INamedTag<Item> ingredient1, int ingredient1Count, INamedTag<Item> ingredient2, int ingredient2Count, ItemStack result, float experience, Consumer<IFinishedRecipe> consumer) {
@@ -159,7 +159,7 @@ public class CoreRecipes extends RecipeProvider {
 	}
 
 	private void alloy(INamedTag<Item> ingredient1, int ingredient1Count, INamedTag<Item> ingredient2, int ingredient2Count, ItemStack result, float experience, int cookTime, Consumer<IFinishedRecipe> consumer) {
-		AlloyForgeRecipeBuilder.recipe(new MachineIngredient(Ingredient.fromTag(ingredient1), ingredient1Count), new MachineIngredient(Ingredient.fromTag(ingredient2), ingredient2Count), result, experience, cookTime).addCriterion("has_ingredient1", hasItem(ingredient1)).addCriterion("has_ingredient2", hasItem(ingredient2)).build(consumer);
+		AlloyForgeRecipeBuilder.recipe(new MachineIngredient(Ingredient.of(ingredient1), ingredient1Count), new MachineIngredient(Ingredient.of(ingredient2), ingredient2Count), result, experience, cookTime).addCriterion("has_ingredient1", has(ingredient1)).addCriterion("has_ingredient2", has(ingredient2)).build(consumer);
 	}
 	
 	private void grindingDustFromIngot(INamedTag<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<IFinishedRecipe> consumer) {
@@ -171,32 +171,32 @@ public class CoreRecipes extends RecipeProvider {
 	}
 	
 	private void grinding(INamedTag<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<IFinishedRecipe> consumer, String name) {
-		GrindingMillRecipeBuilder.recipe(new MachineIngredient(Ingredient.fromTag(ingredient)), result, experience, cookTime).addCriterion("has_ingredient", hasItem(ingredient)).build(consumer, new ResourceLocation(AssortedCore.MODID, result.getItem().getRegistryName().getPath() + name));
+		GrindingMillRecipeBuilder.recipe(new MachineIngredient(Ingredient.of(ingredient)), result, experience, cookTime).addCriterion("has_ingredient", has(ingredient)).build(consumer, new ResourceLocation(AssortedCore.MODID, result.getItem().getRegistryName().getPath() + name));
 	}
 
 	private void gear(INamedTag<Item> material, IItemProvider gear, Consumer<IFinishedRecipe> consumer) {
-		ShapedRecipeBuilder.shapedRecipe(gear).key('M', material).key('S', Tags.Items.RODS_WOODEN).patternLine(" M ").patternLine("MSM").patternLine(" M ").addCriterion("has_material", hasItem(material)).build(consumer);
+		ShapedRecipeBuilder.shaped(gear).define('M', material).define('S', Tags.Items.RODS_WOODEN).pattern(" M ").pattern("MSM").pattern(" M ").unlockedBy("has_material", has(material)).save(consumer);
 	}
 
 	private void ingotDust(INamedTag<Item> dust, IItemProvider ingot, Consumer<IFinishedRecipe> consumer) {
-		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromTag(dust), ingot, 0.1F, 100).addCriterion("has_dust", hasItem(dust)).build(consumer, new ResourceLocation(AssortedCore.MODID, dust.getName().getPath() + "_smelting"));
+		CookingRecipeBuilder.smelting(Ingredient.of(dust), ingot, 0.1F, 100).unlockedBy("has_dust", has(dust)).save(consumer, new ResourceLocation(AssortedCore.MODID, dust.getName().getPath() + "_smelting"));
 	}
 
 	private void blastingSmelting(ITag<Item> ore, IItemProvider output, float experience, Consumer<IFinishedRecipe> consumer) {
-		CookingRecipeBuilder.blastingRecipe(Ingredient.fromTag(ore), output, experience, 100).addCriterion("has_ore", hasItem(ore)).build(consumer, new ResourceLocation(AssortedCore.MODID, output.asItem().getRegistryName().getPath() + "_blasting"));
-		CookingRecipeBuilder.smeltingRecipe(Ingredient.fromTag(ore), output, experience, 200).addCriterion("has_ore", hasItem(ore)).build(consumer, new ResourceLocation(AssortedCore.MODID, output.asItem().getRegistryName().getPath() + "_smelting"));
+		CookingRecipeBuilder.blasting(Ingredient.of(ore), output, experience, 100).unlockedBy("has_ore", has(ore)).save(consumer, new ResourceLocation(AssortedCore.MODID, output.asItem().getRegistryName().getPath() + "_blasting"));
+		CookingRecipeBuilder.smelting(Ingredient.of(ore), output, experience, 200).unlockedBy("has_ore", has(ore)).save(consumer, new ResourceLocation(AssortedCore.MODID, output.asItem().getRegistryName().getPath() + "_smelting"));
 	}
 
 	private void gemStorage(ITag<Item> storageBlockTag, ITag<Item> gemTag, IItemProvider storageBlock, IItemProvider gem, Consumer<IFinishedRecipe> consumer) {
-		ShapelessRecipeBuilder.shapelessRecipe(gem, 9).addIngredient(Ingredient.fromTag(storageBlockTag)).addCriterion("has_gem", hasItem(storageBlockTag)).build(consumer, new ResourceLocation(AssortedCore.MODID, gem.asItem().getRegistryName().getPath() + "_storage_block"));
-		ShapelessRecipeBuilder.shapelessRecipe(storageBlock, 1).addIngredient(Ingredient.fromTag(gemTag), 9).addCriterion("has_gem", hasItem(gemTag)).build(consumer);
+		ShapelessRecipeBuilder.shapeless(gem, 9).requires(Ingredient.of(storageBlockTag)).unlockedBy("has_gem", has(storageBlockTag)).save(consumer, new ResourceLocation(AssortedCore.MODID, gem.asItem().getRegistryName().getPath() + "_storage_block"));
+		ShapelessRecipeBuilder.shapeless(storageBlock, 1).requires(Ingredient.of(gemTag), 9).unlockedBy("has_gem", has(gemTag)).save(consumer);
 	}
 
 	private void storageIngotNugget(ITag<Item> storageBlockTag, ITag<Item> ingotTag, ITag<Item> nuggetTag, IItemProvider storageBlock, IItemProvider ingot, IItemProvider nugget, Consumer<IFinishedRecipe> consumer) {
-		ShapelessRecipeBuilder.shapelessRecipe(ingot, 9).addIngredient(Ingredient.fromTag(storageBlockTag)).addCriterion("has_ingot", hasItem(ingotTag)).build(consumer, new ResourceLocation(AssortedCore.MODID, ingot.asItem().getRegistryName().getPath() + "_block"));
-		ShapelessRecipeBuilder.shapelessRecipe(storageBlock, 1).addIngredient(Ingredient.fromTag(ingotTag), 9).addCriterion("has_ingot", hasItem(ingotTag)).build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(nugget, 9).addIngredient(Ingredient.fromTag(ingotTag)).addCriterion("has_ingot", hasItem(ingotTag)).build(consumer);
-		ShapelessRecipeBuilder.shapelessRecipe(ingot, 1).addIngredient(Ingredient.fromTag(nuggetTag), 9).addCriterion("has_ingot", hasItem(ingotTag)).build(consumer, new ResourceLocation(AssortedCore.MODID, ingot.asItem().getRegistryName().getPath() + "_nuggets"));
+		ShapelessRecipeBuilder.shapeless(ingot, 9).requires(Ingredient.of(storageBlockTag)).unlockedBy("has_ingot", has(ingotTag)).save(consumer, new ResourceLocation(AssortedCore.MODID, ingot.asItem().getRegistryName().getPath() + "_block"));
+		ShapelessRecipeBuilder.shapeless(storageBlock, 1).requires(Ingredient.of(ingotTag), 9).unlockedBy("has_ingot", has(ingotTag)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(nugget, 9).requires(Ingredient.of(ingotTag)).unlockedBy("has_ingot", has(ingotTag)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(ingot, 1).requires(Ingredient.of(nuggetTag), 9).unlockedBy("has_ingot", has(ingotTag)).save(consumer, new ResourceLocation(AssortedCore.MODID, ingot.asItem().getRegistryName().getPath() + "_nuggets"));
 	}
 
 	@Override

@@ -31,20 +31,22 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public abstract class BaseMachineBlock extends Block {
 
-	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+	public static final DirectionProperty FACING = HorizontalBlock.FACING;
 	public static final BooleanProperty ON = BooleanProperty.create("on");
 
 	public BaseMachineBlock(Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(ON, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(ON, false));
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (!worldIn.isRemote) {
-			INamedContainerProvider inamedcontainerprovider = this.getContainer(state, worldIn, pos);
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (!worldIn.isClientSide) {
+			INamedContainerProvider inamedcontainerprovider = this.getMenuProvider(state, worldIn, pos);
 			if (inamedcontainerprovider != null) {
 				NetworkHooks.openGui((ServerPlayerEntity) player, inamedcontainerprovider, pos);
 			}
@@ -55,8 +57,8 @@ public abstract class BaseMachineBlock extends Block {
 
 	@Override
 	@Nullable
-	public INamedContainerProvider getContainer(BlockState state, World world, BlockPos pos) {
-		TileEntity tileentity = world.getTileEntity(pos);
+	public INamedContainerProvider getMenuProvider(BlockState state, World world, BlockPos pos) {
+		TileEntity tileentity = world.getBlockEntity(pos);
 		return tileentity instanceof INamedContainerProvider ? (INamedContainerProvider) tileentity : null;
 	}
 
@@ -70,56 +72,56 @@ public abstract class BaseMachineBlock extends Block {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-		if (stack.hasDisplayName()) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
+	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		if (stack.hasCustomHoverName()) {
+			TileEntity tileentity = worldIn.getBlockEntity(pos);
 			if (tileentity instanceof BaseMachineTileEntity) {
-				((BaseMachineTileEntity) tileentity).setCustomName(stack.getDisplayName());
+				((BaseMachineTileEntity) tileentity).setCustomName(stack.getHoverName());
 			}
 		}
 
 	}
 
 	@Override
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (!state.matchesBlock(newState.getBlock())) {
-			TileEntity tileentity = worldIn.getTileEntity(pos);
+	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (!state.is(newState.getBlock())) {
+			TileEntity tileentity = worldIn.getBlockEntity(pos);
 			if (tileentity instanceof BaseMachineTileEntity) {
-				InventoryHelper.dropInventoryItems(worldIn, pos, (BaseMachineTileEntity) tileentity);
-				((BaseMachineTileEntity) tileentity).grantStoredRecipeExperience(worldIn, Vector3d.copyCentered(pos));
-				worldIn.updateComparatorOutputLevel(pos, this);
+				InventoryHelper.dropContents(worldIn, pos, (BaseMachineTileEntity) tileentity);
+				((BaseMachineTileEntity) tileentity).grantStoredRecipeExperience(worldIn, Vector3d.atCenterOf(pos));
+				worldIn.updateNeighbourForOutputSignal(pos, this);
 			}
 
-			super.onReplaced(state, worldIn, pos, newState, isMoving);
+			super.onRemove(state, worldIn, pos, newState, isMoving);
 		}
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride(BlockState state) {
+	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-		return Container.calcRedstone(worldIn.getTileEntity(pos));
+	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
+		return Container.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
 	}
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(FACING, rot.rotate(state.get(FACING)));
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING, ON);
 	}
 }

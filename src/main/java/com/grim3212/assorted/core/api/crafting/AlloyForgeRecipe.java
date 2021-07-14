@@ -23,7 +23,7 @@ public class AlloyForgeRecipe extends BaseMachineRecipe {
 
 	@Override
 	public boolean matches(IInventory inv, World worldIn) {
-		return (this.ingredient1.test(inv.getStackInSlot(0)) && this.ingredient2.test(inv.getStackInSlot(1))) || (this.ingredient1.test(inv.getStackInSlot(1)) && this.ingredient2.test(inv.getStackInSlot(0)));
+		return (this.ingredient1.test(inv.getItem(0)) && this.ingredient2.test(inv.getItem(1))) || (this.ingredient1.test(inv.getItem(1)) && this.ingredient2.test(inv.getItem(0)));
 	}
 
 	@Override

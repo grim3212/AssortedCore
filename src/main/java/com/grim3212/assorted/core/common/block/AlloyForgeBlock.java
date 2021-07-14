@@ -17,6 +17,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class AlloyForgeBlock extends BaseMachineBlock {
 
 	private final MachineTier tier;
@@ -44,21 +46,21 @@ public class AlloyForgeBlock extends BaseMachineBlock {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (stateIn.get(ON)) {
+		if (stateIn.getValue(ON)) {
 			double d0 = (double) pos.getX() + 0.5D;
 			double d1 = (double) pos.getY();
 			double d2 = (double) pos.getZ() + 0.5D;
 			if (rand.nextDouble() < 0.1D) {
-				worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+				worldIn.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
 			}
 
-			Direction direction = stateIn.get(FACING);
+			Direction direction = stateIn.getValue(FACING);
 			Direction.Axis direction$axis = direction.getAxis();
 			double d3 = 0.52D;
 			double d4 = rand.nextDouble() * 0.6D - 0.3D;
-			double d5 = direction$axis == Direction.Axis.X ? (double) direction.getXOffset() * d3 : d4;
+			double d5 = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * d3 : d4;
 			double d6 = rand.nextDouble() * 6.0D / 16.0D;
-			double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getZOffset() * d3 : d4;
+			double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * d3 : d4;
 			worldIn.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
 			worldIn.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
 		}

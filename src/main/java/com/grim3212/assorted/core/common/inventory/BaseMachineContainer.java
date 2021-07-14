@@ -23,26 +23,26 @@ public abstract class BaseMachineContainer extends Container {
 
 	public BaseMachineContainer(ContainerType<? extends BaseMachineContainer> containerType, IRecipeType<? extends BaseMachineRecipe> recipeType, int id, PlayerInventory playerInventory, int slots, IInventory machineInventory, IIntArray machineData) {
 		super(containerType, id);
-		assertInventorySize(machineInventory, slots);
-		assertIntArraySize(machineData, 4);
+		checkContainerSize(machineInventory, slots);
+		checkContainerDataCount(machineData, 4);
 		this.recipeType = recipeType;
 		this.machineInventory = machineInventory;
 		this.machineData = machineData;
-		this.world = playerInventory.player.world;
+		this.world = playerInventory.player.level;
 
-		this.trackIntArray(machineData);
+		this.addDataSlots(machineData);
 	}
 
 	@Override
-	public abstract ItemStack transferStackInSlot(PlayerEntity playerIn, int index);
+	public abstract ItemStack quickMoveStack(PlayerEntity playerIn, int index);
 
 	@Override
-	public boolean canInteractWith(PlayerEntity playerIn) {
-		return this.machineInventory.isUsableByPlayer(playerIn);
+	public boolean stillValid(PlayerEntity playerIn) {
+		return this.machineInventory.stillValid(playerIn);
 	}
 
 	protected boolean hasRecipe(ItemStack stack) {
-		return this.world.getRecipeManager().getRecipesForType((IRecipeType<BaseMachineRecipe>) this.recipeType).stream().anyMatch((recipe) -> {
+		return this.world.getRecipeManager().getAllRecipesFor((IRecipeType<BaseMachineRecipe>) this.recipeType).stream().anyMatch((recipe) -> {
 			return recipe.validInput(stack);
 		});
 	}

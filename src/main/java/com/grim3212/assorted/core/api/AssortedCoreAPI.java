@@ -13,10 +13,10 @@ public class AssortedCoreAPI {
 	}
 
 	public static boolean isValidAlloyForgeInput(RecipeManager manager, ItemStack stack) {
-		return manager == null ? false : manager.getRecipesForType(CoreRecipeTypes.ALLOY_FORGE).stream().anyMatch((recipe) -> recipe.validItem(stack));
+		return manager == null ? false : manager.getAllRecipesFor(CoreRecipeTypes.ALLOY_FORGE).stream().anyMatch((recipe) -> recipe.validItem(stack));
 	}
 
 	public static boolean isValidGrindingMillInput(RecipeManager manager, ItemStack stack) {
-		return manager == null ? false : manager.getRecipesForType(CoreRecipeTypes.GRINDING_MILL).stream().anyMatch((recipe) -> recipe.validItem(stack));
+		return manager == null ? false : manager.getAllRecipesFor(CoreRecipeTypes.GRINDING_MILL).stream().anyMatch((recipe) -> recipe.validItem(stack));
 	}
 }

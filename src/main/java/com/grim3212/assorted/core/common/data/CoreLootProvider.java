@@ -46,52 +46,52 @@ public class CoreLootProvider extends LootTableProvider {
 	public static class BlockTables extends BlockLootTables {
 		@Override
 		protected void addTables() {
-			this.registerDropSelfLootTable(CoreBlocks.TIN_ORE.get());
-			this.registerDropSelfLootTable(CoreBlocks.COPPER_ORE.get());
-			this.registerDropSelfLootTable(CoreBlocks.SILVER_ORE.get());
-			this.registerDropSelfLootTable(CoreBlocks.ALUMINUM_ORE.get());
-			this.registerDropSelfLootTable(CoreBlocks.NICKEL_ORE.get());
-			this.registerDropSelfLootTable(CoreBlocks.PLATINUM_ORE.get());
-			this.registerDropSelfLootTable(CoreBlocks.LEAD_ORE.get());
-			this.registerDropSelfLootTable(CoreBlocks.TIN_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.COPPER_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.SILVER_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.ALUMINUM_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.NICKEL_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.PLATINUM_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.LEAD_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.RUBY_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.AMETHYST_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.SAPPHIRE_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.TOPAZ_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.BRONZE_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.ELECTRUM_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.INVAR_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.STEEL_BLOCK.get());
-			this.registerDropSelfLootTable(CoreBlocks.MACHINE_CORE.get());
-			this.registerDropSelfLootTable(CoreBlocks.BASIC_ALLOY_FORGE.get());
-			this.registerDropSelfLootTable(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get());
-			this.registerDropSelfLootTable(CoreBlocks.ADVANCED_ALLOY_FORGE.get());
-			this.registerDropSelfLootTable(CoreBlocks.EXPERT_ALLOY_FORGE.get());
-			this.registerDropSelfLootTable(CoreBlocks.BASIC_GRINDING_MILL.get());
-			this.registerDropSelfLootTable(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get());
-			this.registerDropSelfLootTable(CoreBlocks.ADVANCED_GRINDING_MILL.get());
-			this.registerDropSelfLootTable(CoreBlocks.EXPERT_GRINDING_MILL.get());
+			this.dropSelf(CoreBlocks.TIN_ORE.get());
+			this.dropSelf(CoreBlocks.COPPER_ORE.get());
+			this.dropSelf(CoreBlocks.SILVER_ORE.get());
+			this.dropSelf(CoreBlocks.ALUMINUM_ORE.get());
+			this.dropSelf(CoreBlocks.NICKEL_ORE.get());
+			this.dropSelf(CoreBlocks.PLATINUM_ORE.get());
+			this.dropSelf(CoreBlocks.LEAD_ORE.get());
+			this.dropSelf(CoreBlocks.TIN_BLOCK.get());
+			this.dropSelf(CoreBlocks.COPPER_BLOCK.get());
+			this.dropSelf(CoreBlocks.SILVER_BLOCK.get());
+			this.dropSelf(CoreBlocks.ALUMINUM_BLOCK.get());
+			this.dropSelf(CoreBlocks.NICKEL_BLOCK.get());
+			this.dropSelf(CoreBlocks.PLATINUM_BLOCK.get());
+			this.dropSelf(CoreBlocks.LEAD_BLOCK.get());
+			this.dropSelf(CoreBlocks.RUBY_BLOCK.get());
+			this.dropSelf(CoreBlocks.AMETHYST_BLOCK.get());
+			this.dropSelf(CoreBlocks.SAPPHIRE_BLOCK.get());
+			this.dropSelf(CoreBlocks.TOPAZ_BLOCK.get());
+			this.dropSelf(CoreBlocks.BRONZE_BLOCK.get());
+			this.dropSelf(CoreBlocks.ELECTRUM_BLOCK.get());
+			this.dropSelf(CoreBlocks.INVAR_BLOCK.get());
+			this.dropSelf(CoreBlocks.STEEL_BLOCK.get());
+			this.dropSelf(CoreBlocks.MACHINE_CORE.get());
+			this.dropSelf(CoreBlocks.BASIC_ALLOY_FORGE.get());
+			this.dropSelf(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get());
+			this.dropSelf(CoreBlocks.ADVANCED_ALLOY_FORGE.get());
+			this.dropSelf(CoreBlocks.EXPERT_ALLOY_FORGE.get());
+			this.dropSelf(CoreBlocks.BASIC_GRINDING_MILL.get());
+			this.dropSelf(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get());
+			this.dropSelf(CoreBlocks.ADVANCED_GRINDING_MILL.get());
+			this.dropSelf(CoreBlocks.EXPERT_GRINDING_MILL.get());
 
-			this.registerLootTable(CoreBlocks.RUBY_ORE.get(), (ruby) -> {
-				return droppingItemWithFortune(ruby, CoreItems.RUBY.get());
+			this.add(CoreBlocks.RUBY_ORE.get(), (ruby) -> {
+				return createOreDrop(ruby, CoreItems.RUBY.get());
 			});
 
-			this.registerLootTable(CoreBlocks.AMETHYST_ORE.get(), (amethyst) -> {
-				return droppingItemWithFortune(amethyst, CoreItems.AMETHYST.get());
+			this.add(CoreBlocks.AMETHYST_ORE.get(), (amethyst) -> {
+				return createOreDrop(amethyst, CoreItems.AMETHYST.get());
 			});
 
-			this.registerLootTable(CoreBlocks.SAPPHIRE_ORE.get(), (sapphire) -> {
-				return droppingItemWithFortune(sapphire, CoreItems.SAPPHIRE.get());
+			this.add(CoreBlocks.SAPPHIRE_ORE.get(), (sapphire) -> {
+				return createOreDrop(sapphire, CoreItems.SAPPHIRE.get());
 			});
 
-			this.registerLootTable(CoreBlocks.TOPAZ_ORE.get(), (topaz) -> {
-				return droppingItemWithFortune(topaz, CoreItems.TOPAZ.get());
+			this.add(CoreBlocks.TOPAZ_ORE.get(), (topaz) -> {
+				return createOreDrop(topaz, CoreItems.TOPAZ.get());
 			});
 		}
 

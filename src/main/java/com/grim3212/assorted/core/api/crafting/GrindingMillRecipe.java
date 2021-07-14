@@ -21,7 +21,7 @@ public class GrindingMillRecipe extends BaseMachineRecipe {
 
 	@Override
 	public boolean matches(IInventory inv, World worldIn) {
-		return this.ingredient.test(inv.getStackInSlot(0));
+		return this.ingredient.test(inv.getItem(0));
 	}
 
 	@Override

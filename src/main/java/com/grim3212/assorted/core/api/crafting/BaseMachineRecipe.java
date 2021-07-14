@@ -22,12 +22,12 @@ public abstract class BaseMachineRecipe implements IRecipe<IInventory> {
 	}
 
 	@Override
-	public ItemStack getCraftingResult(IInventory inv) {
+	public ItemStack assemble(IInventory inv) {
 		return this.result.copy();
 	}
 
 	@Override
-	public boolean canFit(int width, int height) {
+	public boolean canCraftInDimensions(int width, int height) {
 		return true;
 	}
 
@@ -36,7 +36,7 @@ public abstract class BaseMachineRecipe implements IRecipe<IInventory> {
 	}
 
 	@Override
-	public ItemStack getRecipeOutput() {
+	public ItemStack getResultItem() {
 		return this.result;
 	}
 
@@ -55,7 +55,7 @@ public abstract class BaseMachineRecipe implements IRecipe<IInventory> {
 	}
 	
 	@Override
-	public boolean isDynamic() {
+	public boolean isSpecial() {
 		return true;
 	}
 

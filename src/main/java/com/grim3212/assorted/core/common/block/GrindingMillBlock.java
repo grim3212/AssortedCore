@@ -7,6 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class GrindingMillBlock extends BaseMachineBlock {
 
 	private final MachineTier tier;

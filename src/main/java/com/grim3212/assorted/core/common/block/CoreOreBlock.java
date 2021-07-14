@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.block.OreBlock;
 import net.minecraft.util.math.MathHelper;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class CoreOreBlock extends OreBlock {
 
 	public CoreOreBlock(Properties properties) {
@@ -12,7 +14,7 @@ public class CoreOreBlock extends OreBlock {
 	}
 
 	@Override
-	protected int getExperience(Random rand) {
+	protected int xpOnDrop(Random rand) {
 		if (this == CoreBlocks.RUBY_ORE.get()) {
 			return MathHelper.nextInt(rand, 3, 7);
 		} else if (this == CoreBlocks.AMETHYST_ORE.get()) {

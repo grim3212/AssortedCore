@@ -52,7 +52,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 		this.background = guiHelper.createDrawable(GUI, 31, 22, 105, 57);
 		Block alloyForge = CoreBlocks.BASIC_ALLOY_FORGE.get();
 		this.icon = guiHelper.createDrawableIngredient(new ItemStack(alloyForge));
-		this.localizedName = I18n.format(alloyForge.getTranslationKey());
+		this.localizedName = I18n.get(alloyForge.getDescriptionId());
 		this.cachedArrows = CacheBuilder.newBuilder().maximumSize(25).build(new CacheLoader<Integer, IDrawableAnimated>() {
 			@Override
 			public IDrawableAnimated load(Integer cookTime) {
@@ -98,7 +98,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 	@Override
 	public void setIngredients(AlloyForgeRecipe recipe, IIngredients ingredients) {
 		ingredients.setInputLists(VanillaTypes.ITEM, JEIHelpers.getMachineIngredientStacks(recipe.getIngredient1(), recipe.getIngredient2()));
-		ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
+		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
 	}
 
 	@Override
@@ -117,8 +117,8 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 		if (experience > 0) {
 			TranslationTextComponent experienceString = new TranslationTextComponent("gui.jei.category.smelting.experience", experience);
 			Minecraft minecraft = Minecraft.getInstance();
-			FontRenderer fontRenderer = minecraft.fontRenderer;
-			fontRenderer.drawText(matrixStack, experienceString, 0, y, 0xFF808080);
+			FontRenderer fontRenderer = minecraft.font;
+			fontRenderer.draw(matrixStack, experienceString, 0, y, 0xFF808080);
 		}
 	}
 
@@ -128,9 +128,9 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 			int cookTimeSeconds = cookTime / 20;
 			TranslationTextComponent timeString = new TranslationTextComponent("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
 			Minecraft minecraft = Minecraft.getInstance();
-			FontRenderer fontRenderer = minecraft.fontRenderer;
-			int stringWidth = fontRenderer.getStringPropertyWidth(timeString);
-			fontRenderer.drawText(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
+			FontRenderer fontRenderer = minecraft.font;
+			int stringWidth = fontRenderer.width(timeString);
+			fontRenderer.draw(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
 		}
 	}
 

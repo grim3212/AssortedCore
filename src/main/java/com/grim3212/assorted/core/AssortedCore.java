@@ -53,7 +53,7 @@ public class AssortedCore {
 	public static final ItemGroup ASSORTED_CORE_ITEM_GROUP = (new ItemGroup(AssortedCore.MODID) {
 		@Override
 		@OnlyIn(Dist.CLIENT)
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(CoreBlocks.PLATINUM_ORE.get());
 		}
 	});
@@ -86,8 +86,8 @@ public class AssortedCore {
 	}
 
 	private void setupClient(final FMLClientSetupEvent event) {
-		ScreenManager.registerFactory(CoreContainerTypes.ALLOY_FORGE.get(), AlloyForgeScreen::new);
-		ScreenManager.registerFactory(CoreContainerTypes.GRINDING_MILL.get(), GrindingMillScreen::new);
+		ScreenManager.register(CoreContainerTypes.ALLOY_FORGE.get(), AlloyForgeScreen::new);
+		ScreenManager.register(CoreContainerTypes.GRINDING_MILL.get(), GrindingMillScreen::new);
 	}
 
 	private void gatherData(GatherDataEvent event) {

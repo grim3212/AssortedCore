@@ -76,7 +76,7 @@ public class CoreBlockstateProvider extends BlockStateProvider {
 		ModelFile machineOff = models().orientable(name, loc("block/" + tier.getName() + "_machine_side"), loc("block/" + name + "_front"), loc("block/" + tier.getName() + "_machine_top"));
 		ModelFile machineOn = models().orientable(name + "_on", loc("block/" + tier.getName() + "_machine_side"), loc("block/" + name + "_front_on"), loc("block/" + tier.getName() + "_machine_top"));
 
-		getVariantBuilder(b).forAllStates(state -> ConfiguredModel.builder().modelFile(state.get(BaseMachineBlock.ON) ? machineOn : machineOff).rotationY((int) state.get(BaseMachineBlock.FACING).getOpposite().getHorizontalAngle()).build());
+		getVariantBuilder(b).forAllStates(state -> ConfiguredModel.builder().modelFile(state.getValue(BaseMachineBlock.ON) ? machineOn : machineOff).rotationY((int) state.getValue(BaseMachineBlock.FACING).getOpposite().toYRot()).build());
 	}
 
 	private ResourceLocation loc(String name) {

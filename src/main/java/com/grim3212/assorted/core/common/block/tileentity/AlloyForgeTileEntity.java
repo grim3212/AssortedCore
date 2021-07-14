@@ -51,16 +51,16 @@ public class AlloyForgeTileEntity extends BaseMachineTileEntity {
 	@Override
 	protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
 		if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
-			ItemStack itemstack = recipeIn.getRecipeOutput();
+			ItemStack itemstack = recipeIn.getResultItem();
 			if (itemstack.isEmpty()) {
 				return false;
 			} else {
 				ItemStack outputSlot = this.items.get(3);
 				if (outputSlot.isEmpty()) {
 					return true;
-				} else if (!outputSlot.isItemEqual(itemstack)) {
+				} else if (!outputSlot.sameItem(itemstack)) {
 					return false;
-				} else if (outputSlot.getCount() + itemstack.getCount() <= this.getInventoryStackLimit() && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
+				} else if (outputSlot.getCount() + itemstack.getCount() <= this.getMaxStackSize() && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
 					return true;
 				} else {
 					return outputSlot.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize();
@@ -77,7 +77,7 @@ public class AlloyForgeTileEntity extends BaseMachineTileEntity {
 			AlloyForgeRecipe forgeRecipe = (AlloyForgeRecipe) recipe;
 			ItemStack ingredient1 = this.items.get(0);
 			ItemStack ingredient2 = this.items.get(1);
-			ItemStack itemstack1 = recipe.getRecipeOutput();
+			ItemStack itemstack1 = recipe.getResultItem();
 			ItemStack outputSlot = this.items.get(3);
 			if (outputSlot.isEmpty()) {
 				this.items.set(3, itemstack1.copy());
@@ -85,7 +85,7 @@ public class AlloyForgeTileEntity extends BaseMachineTileEntity {
 				outputSlot.grow(itemstack1.getCount());
 			}
 
-			if (!this.world.isRemote) {
+			if (!this.level.isClientSide) {
 				this.setRecipeUsed(recipe);
 			}
 
@@ -121,7 +121,7 @@ public class AlloyForgeTileEntity extends BaseMachineTileEntity {
 
 	@Override
 	protected List<Integer> inputSlots() {
-		return NonNullList.from(0, 0, 1);
+		return NonNullList.of(0, 0, 1);
 	}
 
 	@Override
@@ -135,11 +135,11 @@ public class AlloyForgeTileEntity extends BaseMachineTileEntity {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
+	public boolean canPlaceItem(int index, ItemStack stack) {
 		if (index == this.outputSlot()) {
 			return false;
 		} else if (index != this.fuelSlot()) {
-			return AssortedCoreAPI.isValidAlloyForgeInput(this.world.getRecipeManager(), stack);
+			return AssortedCoreAPI.isValidAlloyForgeInput(this.level.getRecipeManager(), stack);
 		} else {
 			return getBurnTime(stack) > 0;
 		}

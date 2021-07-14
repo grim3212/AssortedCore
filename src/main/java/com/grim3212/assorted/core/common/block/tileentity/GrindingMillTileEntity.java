@@ -57,16 +57,16 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 	@Override
 	protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
 		if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
-			ItemStack itemstack = recipeIn.getRecipeOutput();
+			ItemStack itemstack = recipeIn.getResultItem();
 			if (itemstack.isEmpty() || !AssortedCoreAPI.allowedInGrindingMillToolSlot(this.items.get(1))) {
 				return false;
 			} else {
 				ItemStack outputSlot = this.items.get(this.outputSlot());
 				if (outputSlot.isEmpty()) {
 					return true;
-				} else if (!outputSlot.isItemEqual(itemstack)) {
+				} else if (!outputSlot.sameItem(itemstack)) {
 					return false;
-				} else if (outputSlot.getCount() + itemstack.getCount() <= this.getInventoryStackLimit() && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
+				} else if (outputSlot.getCount() + itemstack.getCount() <= this.getMaxStackSize() && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
 					return true;
 				} else {
 					return outputSlot.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize();
@@ -83,7 +83,7 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 			GrindingMillRecipe millRecipe = (GrindingMillRecipe) recipe;
 			ItemStack ingredient = this.items.get(0);
 			ItemStack toolSlot = this.items.get(1);
-			ItemStack itemstack1 = recipe.getRecipeOutput();
+			ItemStack itemstack1 = recipe.getResultItem();
 			ItemStack outputSlot = this.items.get(this.outputSlot());
 			if (outputSlot.isEmpty()) {
 				this.items.set(this.outputSlot(), itemstack1.copy());
@@ -91,21 +91,21 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 				outputSlot.grow(itemstack1.getCount());
 			}
 
-			if (!this.world.isRemote) {
+			if (!this.level.isClientSide) {
 				this.setRecipeUsed(recipe);
 			}
 
 			ingredient.shrink(millRecipe.getIngredient().getCount());
 
-			if (toolSlot.attemptDamageItem(1, this.getWorld().rand, (ServerPlayerEntity) null)) {
+			if (toolSlot.hurt(1, this.getLevel().random, (ServerPlayerEntity) null)) {
 				this.items.set(1, ItemStack.EMPTY);
 			}
 
 			if (CoreConfig.COMMON.grindingMillBreakSound.get()) {
-				Block b = Block.getBlockFromItem(ingredient.getItem());
+				Block b = Block.byItem(ingredient.getItem());
 				if (b != null && b != Blocks.AIR) {
-					SoundType soundtype = b.getSoundType(b.getDefaultState());
-					this.getWorld().playSound((PlayerEntity) null, this.getPos(), soundtype.getBreakSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+					SoundType soundtype = b.getSoundType(b.defaultBlockState());
+					this.getLevel().playSound((PlayerEntity) null, this.getBlockPos(), soundtype.getBreakSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 				}
 			}
 		}
@@ -132,7 +132,7 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 
 	@Override
 	protected List<Integer> inputSlots() {
-		return NonNullList.from(0, 0, 1);
+		return NonNullList.of(0, 0, 1);
 	}
 
 	@Override
@@ -146,14 +146,14 @@ public class GrindingMillTileEntity extends BaseMachineTileEntity {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
+	public boolean canPlaceItem(int index, ItemStack stack) {
 		if (index == this.outputSlot()) {
 			return false;
 		} else if (index != this.fuelSlot()) {
 			if (index == 1) {
 				return AssortedCoreAPI.allowedInGrindingMillToolSlot(stack);
 			} else {
-				return AssortedCoreAPI.isValidGrindingMillInput(this.world.getRecipeManager(), stack);
+				return AssortedCoreAPI.isValidGrindingMillInput(this.level.getRecipeManager(), stack);
 			}
 		} else {
 			return getBurnTime(stack) > 0;

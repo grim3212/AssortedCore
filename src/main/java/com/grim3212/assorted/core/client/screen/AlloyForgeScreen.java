@@ -25,21 +25,21 @@ public class AlloyForgeScreen extends ContainerScreen<AlloyForgeContainer> {
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(matrixStack);
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
-		this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+		this.renderTooltip(matrixStack, mouseX, mouseY);
 	}
 
-	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
+	protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y) {
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.minecraft.getTextureManager().bindTexture(ALLOY_FORGE_GUI_TEXTURE);
-		int i = this.guiLeft;
-		int j = this.guiTop;
-		this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
-		if (this.container.isBurning()) {
-			int k = this.container.getBurnLeftScaled();
+		this.minecraft.getTextureManager().bind(ALLOY_FORGE_GUI_TEXTURE);
+		int i = this.leftPos;
+		int j = this.topPos;
+		this.blit(matrixStack, i, j, 0, 0, this.imageWidth, this.imageHeight);
+		if (this.menu.isBurning()) {
+			int k = this.menu.getBurnLeftScaled();
 			this.blit(matrixStack, i + 81, j + 46 + 12 - k, 176, 12 - k, 14, k + 1);
 		}
 
-		int l = this.container.getCookProgressionScaled();
+		int l = this.menu.getCookProgressionScaled();
 		this.blit(matrixStack, i + 77, j + 28, 176, 14, l + 1, 16);
 	}
 }

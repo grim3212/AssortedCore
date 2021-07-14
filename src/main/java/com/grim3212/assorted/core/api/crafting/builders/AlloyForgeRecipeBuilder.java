@@ -27,7 +27,7 @@ public class AlloyForgeRecipeBuilder {
 	private final MachineIngredient ingredient2;
 	private final float experience;
 	private final int cookingTime;
-	private final Advancement.Builder advancementBuilder = Advancement.Builder.builder();
+	private final Advancement.Builder advancementBuilder = Advancement.Builder.advancement();
 	private String group;
 
 	private AlloyForgeRecipeBuilder(ItemStack resultIn, MachineIngredient ingredient1In, MachineIngredient ingredient2In, float experienceIn, int cookingTimeIn) {
@@ -47,7 +47,7 @@ public class AlloyForgeRecipeBuilder {
 	}
 
 	public AlloyForgeRecipeBuilder addCriterion(String name, ICriterionInstance criterionIn) {
-		this.advancementBuilder.withCriterion(name, criterionIn);
+		this.advancementBuilder.addCriterion(name, criterionIn);
 		return this;
 	}
 
@@ -67,8 +67,8 @@ public class AlloyForgeRecipeBuilder {
 
 	public void build(Consumer<IFinishedRecipe> consumerIn, ResourceLocation id) {
 		this.validate(id);
-		this.advancementBuilder.withParentId(new ResourceLocation("recipes/root")).withCriterion("has_the_recipe", RecipeUnlockedTrigger.create(id)).withRewards(AdvancementRewards.Builder.recipe(id)).withRequirementsStrategy(IRequirementsStrategy.OR);
-		consumerIn.accept(new AlloyForgeRecipeBuilder.Result(id, this.group == null ? "" : this.group, this.ingredient1, this.ingredient2, this.result, this.experience, this.cookingTime, this.advancementBuilder, new ResourceLocation(id.getNamespace(), "recipes/" + this.result.getItem().getGroup().getPath() + "/" + id.getPath())));
+		this.advancementBuilder.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(IRequirementsStrategy.OR);
+		consumerIn.accept(new AlloyForgeRecipeBuilder.Result(id, this.group == null ? "" : this.group, this.ingredient1, this.ingredient2, this.result, this.experience, this.cookingTime, this.advancementBuilder, new ResourceLocation(id.getNamespace(), "recipes/" + this.result.getItem().getItemCategory().getRecipeFolderName() + "/" + id.getPath())));
 	}
 
 	private void validate(ResourceLocation id) {
@@ -101,7 +101,7 @@ public class AlloyForgeRecipeBuilder {
 		}
 
 		@Override
-		public void serialize(JsonObject json) {
+		public void serializeRecipeData(JsonObject json) {
 			if (!this.group.isEmpty()) {
 				json.addProperty("group", this.group);
 			}
@@ -117,24 +117,24 @@ public class AlloyForgeRecipeBuilder {
 		}
 
 		@Override
-		public IRecipeSerializer<?> getSerializer() {
+		public IRecipeSerializer<?> getType() {
 			return CoreRecipeSerializers.ALLOY_FORGE.get();
 		}
 
 		@Override
-		public ResourceLocation getID() {
+		public ResourceLocation getId() {
 			return this.id;
 		}
 
 		@Override
 		@Nullable
-		public JsonObject getAdvancementJson() {
-			return this.advancementBuilder.serialize();
+		public JsonObject serializeAdvancement() {
+			return this.advancementBuilder.serializeToJson();
 		}
 
 		@Override
 		@Nullable
-		public ResourceLocation getAdvancementID() {
+		public ResourceLocation getAdvancementId() {
 			return this.advancementId;
 		}
 	}

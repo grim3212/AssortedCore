@@ -89,7 +89,7 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 
 		}
 
-		public int size() {
+		public int getCount() {
 			return 4;
 		}
 	};
@@ -107,7 +107,7 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	}
 
 	@Override
-	public int getSizeInventory() {
+	public int getContainerSize() {
 		return this.items.size();
 	}
 
@@ -123,18 +123,18 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int index) {
+	public ItemStack getItem(int index) {
 		return this.items.get(index);
 	}
 
 	@Override
-	public ItemStack decrStackSize(int index, int count) {
-		return ItemStackHelper.getAndSplit(this.items, index, count);
+	public ItemStack removeItem(int index, int count) {
+		return ItemStackHelper.removeItem(this.items, index, count);
 	}
 
 	@Override
-	public ItemStack removeStackFromSlot(int index) {
-		return ItemStackHelper.getAndRemove(this.items, index);
+	public ItemStack removeItemNoUpdate(int index) {
+		return ItemStackHelper.takeItem(this.items, index);
 	}
 
 	protected abstract List<Integer> inputSlots();
@@ -144,27 +144,27 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	protected abstract int outputSlot();
 
 	@Override
-	public void setInventorySlotContents(int index, ItemStack stack) {
+	public void setItem(int index, ItemStack stack) {
 		ItemStack itemstack = this.items.get(index);
-		boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
+		boolean flag = !stack.isEmpty() && stack.sameItem(itemstack) && ItemStack.tagMatches(stack, itemstack);
 		this.items.set(index, stack);
-		if (stack.getCount() > this.getInventoryStackLimit()) {
-			stack.setCount(this.getInventoryStackLimit());
+		if (stack.getCount() > this.getMaxStackSize()) {
+			stack.setCount(this.getMaxStackSize());
 		}
 
 		if (inputSlots().stream().anyMatch((slot) -> slot == index) && !flag) {
 			this.cookTimeTotal = this.getCookTime();
 			this.cookTime = 0;
-			this.markDirty();
+			this.setChanged();
 		}
 	}
 
 	@Override
-	public boolean isUsableByPlayer(PlayerEntity player) {
-		if (this.world.getTileEntity(this.pos) != this) {
+	public boolean stillValid(PlayerEntity player) {
+		if (this.level.getBlockEntity(this.worldPosition) != this) {
 			return false;
 		} else {
-			return player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+			return player.distanceToSqr((double) this.worldPosition.getX() + 0.5D, (double) this.worldPosition.getY() + 0.5D, (double) this.worldPosition.getZ() + 0.5D) <= 64.0D;
 		}
 	}
 
@@ -180,10 +180,10 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 			--this.burnTime;
 		}
 
-		if (!this.world.isRemote) {
+		if (!this.level.isClientSide) {
 			ItemStack fuelSlot = this.items.get(this.fuelSlot());
 			if (this.isBurning() || !fuelSlot.isEmpty() && this.inputsWithItems()) {
-				BaseMachineRecipe irecipe = this.world.getRecipeManager().getRecipe((IRecipeType<BaseMachineRecipe>) this.recipeType, this, this.world).orElse(null);
+				BaseMachineRecipe irecipe = this.level.getRecipeManager().getRecipeFor((IRecipeType<BaseMachineRecipe>) this.recipeType, this, this.level).orElse(null);
 
 				if (!this.isBurning() && this.canCombine(irecipe)) {
 					this.burnTime = this.getBurnTime(fuelSlot);
@@ -218,12 +218,12 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 
 			if (flag != this.isBurning()) {
 				flag1 = true;
-				this.world.setBlockState(this.pos, this.world.getBlockState(this.pos).with(BaseMachineBlock.ON, this.isBurning()), 3);
+				this.level.setBlock(this.worldPosition, this.level.getBlockState(this.worldPosition).setValue(BaseMachineBlock.ON, this.isBurning()), 3);
 			}
 		}
 
 		if (flag1) {
-			this.markDirty();
+			this.setChanged();
 		}
 	}
 
@@ -244,11 +244,11 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	}
 
 	protected int getCookTime() {
-		return (int) ((this.world.getRecipeManager().getRecipe((IRecipeType<BaseMachineRecipe>) this.recipeType, this, this.world).map(BaseMachineRecipe::getCookTime).orElse(this.defaultCookTime)) * this.tier.getSpeedModifier());
+		return (int) ((this.level.getRecipeManager().getRecipeFor((IRecipeType<BaseMachineRecipe>) this.recipeType, this, this.level).map(BaseMachineRecipe::getCookTime).orElse(this.defaultCookTime)) * this.tier.getSpeedModifier());
 	}
 
 	@Override
-	public void clear() {
+	public void clearContent() {
 		this.items.clear();
 	}
 
@@ -277,17 +277,17 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	protected abstract ITextComponent getDefaultName();
 
 	@Override
-	public boolean canInsertItem(int index, ItemStack itemStackIn, Direction direction) {
-		return this.isItemValidForSlot(index, itemStackIn);
+	public boolean canPlaceItemThroughFace(int index, ItemStack itemStackIn, Direction direction) {
+		return this.canPlaceItem(index, itemStackIn);
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
 		return true;
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
+	public boolean canPlaceItem(int index, ItemStack stack) {
 		if (index == this.outputSlot()) {
 			return false;
 		} else if (index != this.fuelSlot()) {
@@ -311,12 +311,12 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	}
 
 	@Override
-	public void onCrafting(PlayerEntity player) {
+	public void awardUsedRecipes(PlayerEntity player) {
 	}
 
 	public void unlockRecipes(PlayerEntity player) {
-		List<IRecipe<?>> list = this.grantStoredRecipeExperience(player.world, player.getPositionVec());
-		player.unlockRecipes(list);
+		List<IRecipe<?>> list = this.grantStoredRecipeExperience(player.level, player.position());
+		player.awardRecipes(list);
 		this.recipes.clear();
 	}
 
@@ -324,7 +324,7 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 		List<IRecipe<?>> list = Lists.newArrayList();
 
 		for (Entry<ResourceLocation> entry : this.recipes.object2IntEntrySet()) {
-			world.getRecipeManager().getRecipe(entry.getKey()).ifPresent((recipe) -> {
+			world.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> {
 				list.add(recipe);
 				splitAndSpawnExperience(world, pos, entry.getIntValue(), ((BaseMachineRecipe) recipe).getExperience());
 			});
@@ -341,9 +341,9 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 		}
 
 		while (i > 0) {
-			int j = ExperienceOrbEntity.getXPSplit(i);
+			int j = ExperienceOrbEntity.getExperienceValue(i);
 			i -= j;
-			world.addEntity(new ExperienceOrbEntity(world, pos.x, pos.y, pos.z, j));
+			world.addFreshEntity(new ExperienceOrbEntity(world, pos.x, pos.y, pos.z, j));
 		}
 
 	}
@@ -356,9 +356,9 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	}
 
 	@Override
-	public void read(BlockState state, CompoundNBT nbt) {
-		super.read(state, nbt);
-		this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+	public void load(BlockState state, CompoundNBT nbt) {
+		super.load(state, nbt);
+		this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(nbt, this.items);
 		this.burnTime = nbt.getInt("BurnTime");
 		this.cookTime = nbt.getInt("CookTime");
@@ -366,18 +366,18 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 		this.recipesUsed = this.getBurnTime(this.items.get(1));
 		CompoundNBT compoundnbt = nbt.getCompound("RecipesUsed");
 
-		for (String s : compoundnbt.keySet()) {
+		for (String s : compoundnbt.getAllKeys()) {
 			this.recipes.put(new ResourceLocation(s), compoundnbt.getInt(s));
 		}
 
 		if (nbt.contains("CustomName", 8)) {
-			this.customName = ITextComponent.Serializer.getComponentFromJson(nbt.getString("CustomName"));
+			this.customName = ITextComponent.Serializer.fromJson(nbt.getString("CustomName"));
 		}
 	}
 
 	@Override
-	public CompoundNBT write(CompoundNBT compound) {
-		super.write(compound);
+	public CompoundNBT save(CompoundNBT compound) {
+		super.save(compound);
 		compound.putInt("BurnTime", this.burnTime);
 		compound.putInt("CookTime", this.cookTime);
 		compound.putInt("CookTimeTotal", this.cookTimeTotal);
@@ -397,14 +397,14 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 
 	@Override
 	public CompoundNBT getUpdateTag() {
-		return write(new CompoundNBT());
+		return save(new CompoundNBT());
 	}
 
 	LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST);
 
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-		if (!this.removed && facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+		if (!this.remove && facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			if (facing == Direction.UP)
 				return handlers[0].cast();
 			else if (facing == Direction.DOWN)
@@ -422,8 +422,8 @@ public abstract class BaseMachineTileEntity extends TileEntity implements ISided
 	}
 
 	@Override
-	public void remove() {
-		super.remove();
+	public void setRemoved() {
+		super.setRemoved();
 		for (int x = 0; x < handlers.length; x++)
 			handlers[x].invalidate();
 	}

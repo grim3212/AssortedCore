@@ -18,18 +18,18 @@ public class CoreWorldGeneration {
 		BiomeGenerationSettingsBuilder builder = evt.getGeneration();
 
 		if (category != Biome.Category.NETHER && category != Biome.Category.THEEND) {
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_ALUMINUM);
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_COPPER);
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_TIN);
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_NICKEL);
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_LEAD);
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_SILVER);
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_PLATINUM);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_ALUMINUM);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_COPPER);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_TIN);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_NICKEL);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_LEAD);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_SILVER);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_PLATINUM);
 
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_RUBY);
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_SAPPHIRE);
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_AMETHYST);
-			builder.withFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_TOPAZ);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_RUBY);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_SAPPHIRE);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_AMETHYST);
+			builder.addFeature(Decoration.UNDERGROUND_ORES, CoreConfiguredFeatures.ORE_TOPAZ);
 		}
 	}
 }

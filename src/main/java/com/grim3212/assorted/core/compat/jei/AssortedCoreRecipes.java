@@ -22,7 +22,7 @@ public final class AssortedCoreRecipes {
 	private final RecipeManager recipeManager;
 
 	public AssortedCoreRecipes() {
-		ClientWorld world = Minecraft.getInstance().world;
+		ClientWorld world = Minecraft.getInstance().level;
 		if (world == null)
 			throw new NullPointerException("Minecraft world was null when grabbing Assorted Core Recipes for JEI");
 		this.recipeManager = world.getRecipeManager();
@@ -38,7 +38,7 @@ public final class AssortedCoreRecipes {
 
 	@SuppressWarnings("unchecked")
 	private static <C extends IInventory, T extends IRecipe<C>> List<T> getRecipes(RecipeManager recipeManager, IRecipeType<T> recipeType) {
-		Map<ResourceLocation, IRecipe<C>> recipes = recipeManager.getRecipes(recipeType);
+		Map<ResourceLocation, IRecipe<C>> recipes = recipeManager.byType(recipeType);
 		AssortedCore.LOGGER.info("Found " + recipes.size() + " for recipe type " + recipeType.toString());
 		return (List<T>) recipes.values().stream().collect(Collectors.toList());
 	}

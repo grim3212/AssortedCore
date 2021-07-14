@@ -17,37 +17,37 @@ public class MachineResultSlot extends Slot {
 	}
 
 	@Override
-	public boolean isItemValid(ItemStack stack) {
+	public boolean mayPlace(ItemStack stack) {
 		return false;
 	}
 
 	@Override
-	public ItemStack decrStackSize(int amount) {
-		if (this.getHasStack()) {
-			this.removeCount += Math.min(amount, this.getStack().getCount());
+	public ItemStack remove(int amount) {
+		if (this.hasItem()) {
+			this.removeCount += Math.min(amount, this.getItem().getCount());
 		}
 
-		return super.decrStackSize(amount);
+		return super.remove(amount);
 	}
 
 	@Override
 	public ItemStack onTake(PlayerEntity thePlayer, ItemStack stack) {
-		this.onCrafting(stack);
+		this.checkTakeAchievements(stack);
 		super.onTake(thePlayer, stack);
 		return stack;
 	}
 
 	@Override
-	protected void onCrafting(ItemStack stack, int amount) {
+	protected void onQuickCraft(ItemStack stack, int amount) {
 		this.removeCount += amount;
-		this.onCrafting(stack);
+		this.checkTakeAchievements(stack);
 	}
 
 	@Override
-	protected void onCrafting(ItemStack stack) {
-		stack.onCrafting(this.player.world, this.player, this.removeCount);
-		if (!this.player.world.isRemote && this.inventory instanceof BaseMachineTileEntity) {
-			((BaseMachineTileEntity) this.inventory).unlockRecipes(this.player);
+	protected void checkTakeAchievements(ItemStack stack) {
+		stack.onCraftedBy(this.player.level, this.player, this.removeCount);
+		if (!this.player.level.isClientSide && this.container instanceof BaseMachineTileEntity) {
+			((BaseMachineTileEntity) this.container).unlockRecipes(this.player);
 		}
 
 		this.removeCount = 0;

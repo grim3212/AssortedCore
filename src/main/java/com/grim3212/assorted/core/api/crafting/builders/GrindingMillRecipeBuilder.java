@@ -26,7 +26,7 @@ public class GrindingMillRecipeBuilder {
 	private final MachineIngredient ingredient;
 	private final float experience;
 	private final int cookingTime;
-	private final Advancement.Builder advancementBuilder = Advancement.Builder.builder();
+	private final Advancement.Builder advancementBuilder = Advancement.Builder.advancement();
 	private String group;
 
 	private GrindingMillRecipeBuilder(ItemStack resultIn, MachineIngredient ingredientIn, float experienceIn, int cookingTimeIn) {
@@ -45,7 +45,7 @@ public class GrindingMillRecipeBuilder {
 	}
 
 	public GrindingMillRecipeBuilder addCriterion(String name, ICriterionInstance criterionIn) {
-		this.advancementBuilder.withCriterion(name, criterionIn);
+		this.advancementBuilder.addCriterion(name, criterionIn);
 		return this;
 	}
 
@@ -65,8 +65,8 @@ public class GrindingMillRecipeBuilder {
 
 	public void build(Consumer<IFinishedRecipe> consumerIn, ResourceLocation id) {
 		this.validate(id);
-		this.advancementBuilder.withParentId(new ResourceLocation("recipes/root")).withCriterion("has_the_recipe", RecipeUnlockedTrigger.create(id)).withRewards(AdvancementRewards.Builder.recipe(id)).withRequirementsStrategy(IRequirementsStrategy.OR);
-		consumerIn.accept(new GrindingMillRecipeBuilder.Result(id, this.group == null ? "" : this.group, this.ingredient, this.result, this.experience, this.cookingTime, this.advancementBuilder, new ResourceLocation(id.getNamespace(), "recipes/" + this.result.getItem().getGroup().getPath() + "/" + id.getPath())));
+		this.advancementBuilder.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(IRequirementsStrategy.OR);
+		consumerIn.accept(new GrindingMillRecipeBuilder.Result(id, this.group == null ? "" : this.group, this.ingredient, this.result, this.experience, this.cookingTime, this.advancementBuilder, new ResourceLocation(id.getNamespace(), "recipes/" + this.result.getItem().getItemCategory().getRecipeFolderName() + "/" + id.getPath())));
 	}
 
 	private void validate(ResourceLocation id) {
@@ -97,7 +97,7 @@ public class GrindingMillRecipeBuilder {
 		}
 
 		@Override
-		public void serialize(JsonObject json) {
+		public void serializeRecipeData(JsonObject json) {
 			if (!this.group.isEmpty()) {
 				json.addProperty("group", this.group);
 			}
@@ -112,24 +112,24 @@ public class GrindingMillRecipeBuilder {
 		}
 
 		@Override
-		public IRecipeSerializer<?> getSerializer() {
+		public IRecipeSerializer<?> getType() {
 			return CoreRecipeSerializers.GRINDING_MILL.get();
 		}
 
 		@Override
-		public ResourceLocation getID() {
+		public ResourceLocation getId() {
 			return this.id;
 		}
 
 		@Override
 		@Nullable
-		public JsonObject getAdvancementJson() {
-			return this.advancementBuilder.serialize();
+		public JsonObject serializeAdvancement() {
+			return this.advancementBuilder.serializeToJson();
 		}
 
 		@Override
 		@Nullable
-		public ResourceLocation getAdvancementID() {
+		public ResourceLocation getAdvancementId() {
 			return this.advancementId;
 		}
 	}

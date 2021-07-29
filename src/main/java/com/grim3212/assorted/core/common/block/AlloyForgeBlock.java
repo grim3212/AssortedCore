@@ -3,17 +3,16 @@ package com.grim3212.assorted.core.common.block;
 import java.util.Random;
 
 import com.grim3212.assorted.core.api.machines.MachineTier;
-import com.grim3212.assorted.core.common.block.tileentity.AlloyForgeTileEntity;
+import com.grim3212.assorted.core.common.block.blockentity.AlloyForgeBlockEntity;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -27,29 +26,14 @@ public class AlloyForgeBlock extends BaseMachineBlock {
 	}
 
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		switch (this.tier) {
-		case INTERMEDIATE:
-			return AlloyForgeTileEntity.intermediateTileEntity();
-		case ADVANCED:
-			return AlloyForgeTileEntity.advancedTileEntity();
-		case EXPERT:
-			return AlloyForgeTileEntity.expertTileEntity();
-		case BASIC:
-		default:
-			return AlloyForgeTileEntity.basicTileEntity();
-		}
-	}
-
-	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
 		if (stateIn.getValue(ON)) {
 			double d0 = (double) pos.getX() + 0.5D;
 			double d1 = (double) pos.getY();
 			double d2 = (double) pos.getZ() + 0.5D;
 			if (rand.nextDouble() < 0.1D) {
-				worldIn.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+				worldIn.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
 			}
 
 			Direction direction = stateIn.getValue(FACING);
@@ -61,6 +45,21 @@ public class AlloyForgeBlock extends BaseMachineBlock {
 			double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * d3 : d4;
 			worldIn.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
 			worldIn.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+		}
+	}
+
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		switch (this.tier) {
+			case INTERMEDIATE:
+				return AlloyForgeBlockEntity.intermediateBlockEntity(pos, state);
+			case ADVANCED:
+				return AlloyForgeBlockEntity.advancedBlockEntity(pos, state);
+			case EXPERT:
+				return AlloyForgeBlockEntity.expertBlockEntity(pos, state);
+			case BASIC:
+			default:
+				return AlloyForgeBlockEntity.basicBlockEntity(pos, state);
 		}
 	}
 }

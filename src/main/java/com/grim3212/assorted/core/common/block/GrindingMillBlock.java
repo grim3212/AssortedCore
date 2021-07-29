@@ -1,11 +1,11 @@
 package com.grim3212.assorted.core.common.block;
 
 import com.grim3212.assorted.core.api.machines.MachineTier;
-import com.grim3212.assorted.core.common.block.tileentity.GrindingMillTileEntity;
+import com.grim3212.assorted.core.common.block.blockentity.GrindingMillBlockEntity;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class GrindingMillBlock extends BaseMachineBlock {
 
@@ -17,17 +17,17 @@ public class GrindingMillBlock extends BaseMachineBlock {
 	}
 
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		switch (this.tier) {
-		case INTERMEDIATE:
-			return GrindingMillTileEntity.intermediateTileEntity();
-		case ADVANCED:
-			return GrindingMillTileEntity.advancedTileEntity();
-		case EXPERT:
-			return GrindingMillTileEntity.expertTileEntity();
-		case BASIC:
-		default:
-			return GrindingMillTileEntity.basicTileEntity();
+			case INTERMEDIATE:
+				return GrindingMillBlockEntity.intermediateBlockEntity(pos, state);
+			case ADVANCED:
+				return GrindingMillBlockEntity.advancedBlockEntity(pos, state);
+			case EXPERT:
+				return GrindingMillBlockEntity.expertBlockEntity(pos, state);
+			case BASIC:
+			default:
+				return GrindingMillBlockEntity.basicBlockEntity(pos, state);
 		}
 	}
 }

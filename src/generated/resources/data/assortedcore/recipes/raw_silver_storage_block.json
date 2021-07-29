@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:raw_storage_blocks/silver"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:raw_silver",
+    "count": 9
+  }
+}

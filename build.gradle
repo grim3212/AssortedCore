@@ -1,11 +1,11 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net' }
-		mavenCentral()
         jcenter()
+		mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -13,24 +13,25 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-repositories {
-  maven {
+//repositories {
+//  maven {
     // location of the maven that hosts JEI files
-    name = "Progwml6 maven"
-    url = "https://dvs1.progwml6.com/files/maven/"
-  }
-  maven {
+//    name = "Progwml6 maven"
+//    url = "https://dvs1.progwml6.com/files/maven/"
+//  }
+//  maven {
     // location of a maven mirror for JEI files, as a fallback
-    name = "ModMaven"
-    url = "https://modmaven.k-4u.nl"
-  }
-}
+//    name = "ModMaven"
+//    url = "https://modmaven.k-4u.nl"
+//  }
+//}
 
 version = minecraft_version + "-" + mod_version
 group = mod_group
 archivesBaseName = mod_archives_base_name
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+// Mojang ships Java 16 to end users in 1.17+ instead of Java 8 in 1.16 or lower, so your mod should target Java 16.
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
@@ -98,9 +99,9 @@ dependencies {
     minecraft 'net.minecraftforge:forge:' + minecraft_version + '-' + forge_version
     
     // compile against the JEI API but do not include it at runtime
-  	compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+//  	compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
   	// at runtime, use the full JEI jar
-  	runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+//  	runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 }
 
 jar {

@@ -10,15 +10,15 @@ import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.ICriterionInstance;
-import net.minecraft.advancements.IRequirementsStrategy;
-import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.advancements.CriterionTriggerInstance;
+import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
 
 public class GrindingMillRecipeBuilder {
 
@@ -44,16 +44,16 @@ public class GrindingMillRecipeBuilder {
 		return new GrindingMillRecipeBuilder(resultIn, new MachineIngredient(ingredientIn), experienceIn, cookingTimeIn);
 	}
 
-	public GrindingMillRecipeBuilder addCriterion(String name, ICriterionInstance criterionIn) {
+	public GrindingMillRecipeBuilder addCriterion(String name, CriterionTriggerInstance criterionIn) {
 		this.advancementBuilder.addCriterion(name, criterionIn);
 		return this;
 	}
 
-	public void build(Consumer<IFinishedRecipe> consumerIn) {
+	public void build(Consumer<FinishedRecipe> consumerIn) {
 		this.build(consumerIn, Registry.ITEM.getKey(this.result.getItem()));
 	}
 
-	public void build(Consumer<IFinishedRecipe> consumerIn, String save) {
+	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
 		ResourceLocation resourcelocation = Registry.ITEM.getKey(this.result.getItem());
 		ResourceLocation resourcelocation1 = new ResourceLocation(save);
 		if (resourcelocation1.equals(resourcelocation)) {
@@ -63,9 +63,9 @@ public class GrindingMillRecipeBuilder {
 		}
 	}
 
-	public void build(Consumer<IFinishedRecipe> consumerIn, ResourceLocation id) {
+	public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
 		this.validate(id);
-		this.advancementBuilder.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(IRequirementsStrategy.OR);
+		this.advancementBuilder.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
 		consumerIn.accept(new GrindingMillRecipeBuilder.Result(id, this.group == null ? "" : this.group, this.ingredient, this.result, this.experience, this.cookingTime, this.advancementBuilder, new ResourceLocation(id.getNamespace(), "recipes/" + this.result.getItem().getItemCategory().getRecipeFolderName() + "/" + id.getPath())));
 	}
 
@@ -75,7 +75,7 @@ public class GrindingMillRecipeBuilder {
 		}
 	}
 
-	public static class Result implements IFinishedRecipe {
+	public static class Result implements FinishedRecipe {
 		private final ResourceLocation id;
 		private final String group;
 		private final MachineIngredient ingredient;
@@ -112,7 +112,7 @@ public class GrindingMillRecipeBuilder {
 		}
 
 		@Override
-		public IRecipeSerializer<?> getType() {
+		public RecipeSerializer<?> getType() {
 			return CoreRecipeSerializers.GRINDING_MILL.get();
 		}
 

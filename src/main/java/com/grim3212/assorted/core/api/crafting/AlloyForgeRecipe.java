@@ -3,12 +3,12 @@ package com.grim3212.assorted.core.api.crafting;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 
 public class AlloyForgeRecipe extends BaseMachineRecipe {
 
@@ -22,17 +22,17 @@ public class AlloyForgeRecipe extends BaseMachineRecipe {
 	}
 
 	@Override
-	public boolean matches(IInventory inv, World worldIn) {
+	public boolean matches(Container inv, Level worldIn) {
 		return (this.ingredient1.test(inv.getItem(0)) && this.ingredient2.test(inv.getItem(1))) || (this.ingredient1.test(inv.getItem(1)) && this.ingredient2.test(inv.getItem(0)));
 	}
 
 	@Override
-	public IRecipeSerializer<?> getSerializer() {
+	public RecipeSerializer<?> getSerializer() {
 		return CoreRecipeSerializers.ALLOY_FORGE.get();
 	}
 
 	@Override
-	public IRecipeType<?> getType() {
+	public RecipeType<?> getType() {
 		return CoreRecipeTypes.ALLOY_FORGE;
 	}
 

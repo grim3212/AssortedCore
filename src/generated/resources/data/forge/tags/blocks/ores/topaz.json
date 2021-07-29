@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "assortedcore:topaz_ore"
+    "assortedcore:topaz_ore",
+    "assortedcore:deepslate_topaz_ore"
   ]
 }

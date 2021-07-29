@@ -4,8 +4,8 @@ import java.util.function.Supplier;
 
 import com.grim3212.assorted.core.AssortedCore;
 
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -14,12 +14,11 @@ public class CoreItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AssortedCore.MODID);
 
 	public static final RegistryObject<Item> RUBY = register("ruby", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
-	public static final RegistryObject<Item> AMETHYST = register("amethyst", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> PERIDOT = register("peridot", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 	public static final RegistryObject<Item> SAPPHIRE = register("sapphire", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 	public static final RegistryObject<Item> TOPAZ = register("topaz", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 
 	public static final RegistryObject<Item> TIN_INGOT = register("tin_ingot", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
-	public static final RegistryObject<Item> COPPER_INGOT = register("copper_ingot", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 	public static final RegistryObject<Item> SILVER_INGOT = register("silver_ingot", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 	public static final RegistryObject<Item> ALUMINUM_INGOT = register("aluminum_ingot", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 	public static final RegistryObject<Item> NICKEL_INGOT = register("nickel_ingot", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
@@ -69,6 +68,13 @@ public class CoreItems {
 	public static final RegistryObject<Item> STEEL_GEAR = register("steel_gear", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 	public static final RegistryObject<Item> IRON_GEAR = register("iron_gear", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 	public static final RegistryObject<Item> GOLD_GEAR = register("gold_gear", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+
+	public static final RegistryObject<Item> RAW_TIN = register("raw_tin", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> RAW_SILVER = register("raw_silver", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> RAW_ALUMINUM = register("raw_aluminum", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> RAW_NICKEL = register("raw_nickel", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> RAW_PLATINUM = register("raw_platinum", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
+	public static final RegistryObject<Item> RAW_LEAD = register("raw_lead", () -> new Item(new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP)));
 
 	private static <T extends Item> RegistryObject<T> register(final String name, final Supplier<T> sup) {
 		return ITEMS.register(name, sup);

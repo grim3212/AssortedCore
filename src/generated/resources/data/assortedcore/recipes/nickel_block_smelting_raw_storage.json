@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:raw_storage_blocks/nickel"
+  },
+  "result": "assortedcore:nickel_block",
+  "experience": 1.4,
+  "cookingtime": 200
+}

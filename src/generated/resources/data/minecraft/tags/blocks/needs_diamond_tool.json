@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "assortedcore:platinum_ore",
+    "assortedcore:platinum_block",
+    "assortedcore:deepslate_platinum_ore",
+    "assortedcore:raw_platinum_block"
+  ]
+}

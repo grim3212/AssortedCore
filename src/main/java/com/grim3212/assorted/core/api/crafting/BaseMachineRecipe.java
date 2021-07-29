@@ -1,11 +1,11 @@
 package com.grim3212.assorted.core.api.crafting;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.resources.ResourceLocation;
 
-public abstract class BaseMachineRecipe implements IRecipe<IInventory> {
+public abstract class BaseMachineRecipe implements Recipe<Container> {
 
 	protected final ResourceLocation id;
 	protected final String group;
@@ -22,7 +22,7 @@ public abstract class BaseMachineRecipe implements IRecipe<IInventory> {
 	}
 
 	@Override
-	public ItemStack assemble(IInventory inv) {
+	public ItemStack assemble(Container inv) {
 		return this.result.copy();
 	}
 

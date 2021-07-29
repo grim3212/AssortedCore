@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:raw_ores/platinum"
+    },
+    {
+      "tag": "forge:raw_ores/platinum"
+    },
+    {
+      "tag": "forge:raw_ores/platinum"
+    },
+    {
+      "tag": "forge:raw_ores/platinum"
+    },
+    {
+      "tag": "forge:raw_ores/platinum"
+    },
+    {
+      "tag": "forge:raw_ores/platinum"
+    },
+    {
+      "tag": "forge:raw_ores/platinum"
+    },
+    {
+      "tag": "forge:raw_ores/platinum"
+    },
+    {
+      "tag": "forge:raw_ores/platinum"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:raw_platinum_block"
+  }
+}

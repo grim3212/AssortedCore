@@ -4,44 +4,44 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class AlloyForgeRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<AlloyForgeRecipe> {
+public class AlloyForgeRecipeSerializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<AlloyForgeRecipe> {
 
 	@Override
 	public AlloyForgeRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-		String s = JSONUtils.getAsString(json, "group", "");
-		JsonElement jsonelementIngredient1 = (JsonElement) (JSONUtils.isArrayNode(json, "ingredient1") ? JSONUtils.getAsJsonArray(json, "ingredient1") : JSONUtils.getAsJsonObject(json, "ingredient1"));
+		String s = GsonHelper.getAsString(json, "group", "");
+		JsonElement jsonelementIngredient1 = (JsonElement) (GsonHelper.isArrayNode(json, "ingredient1") ? GsonHelper.getAsJsonArray(json, "ingredient1") : GsonHelper.getAsJsonObject(json, "ingredient1"));
 		MachineIngredient ingredient1 = MachineIngredient.deserialize(jsonelementIngredient1);
-		JsonElement jsonelementIngredient2 = (JsonElement) (JSONUtils.isArrayNode(json, "ingredient2") ? JSONUtils.getAsJsonArray(json, "ingredient2") : JSONUtils.getAsJsonObject(json, "ingredient2"));
+		JsonElement jsonelementIngredient2 = (JsonElement) (GsonHelper.isArrayNode(json, "ingredient2") ? GsonHelper.getAsJsonArray(json, "ingredient2") : GsonHelper.getAsJsonObject(json, "ingredient2"));
 		MachineIngredient ingredient2 = MachineIngredient.deserialize(jsonelementIngredient2);
 		if (!json.has("result")) {
 			throw new JsonSyntaxException("Missing result, expected to find a string or object");
 		}
 		ItemStack itemstack;
 		if (json.get("result").isJsonObject()) {
-			itemstack = ShapedRecipe.itemFromJson(JSONUtils.getAsJsonObject(json, "result"));
+			itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 		} else {
-			String s1 = JSONUtils.getAsString(json, "result");
+			String s1 = GsonHelper.getAsString(json, "result");
 			ResourceLocation resourcelocation = new ResourceLocation(s1);
 			itemstack = new ItemStack(Registry.ITEM.getOptional(resourcelocation).orElseThrow(() -> {
 				return new IllegalStateException("Item: " + s1 + " does not exist");
 			}));
 		}
-		float f = JSONUtils.getAsFloat(json, "experience", 0.0F);
-		int i = JSONUtils.getAsInt(json, "cookingtime", 400);
+		float f = GsonHelper.getAsFloat(json, "experience", 0.0F);
+		int i = GsonHelper.getAsInt(json, "cookingtime", 400);
 		return new AlloyForgeRecipe(recipeId, s, ingredient1, ingredient2, itemstack, f, i);
 	}
 
 	@Override
-	public AlloyForgeRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+	public AlloyForgeRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
 		String s = buffer.readUtf(32767);
 		MachineIngredient ingredient1 = MachineIngredient.read(buffer);
 		MachineIngredient ingredient2 = MachineIngredient.read(buffer);
@@ -52,7 +52,7 @@ public class AlloyForgeRecipeSerializer extends ForgeRegistryEntry<IRecipeSerial
 	}
 
 	@Override
-	public void toNetwork(PacketBuffer buffer, AlloyForgeRecipe recipe) {
+	public void toNetwork(FriendlyByteBuf buffer, AlloyForgeRecipe recipe) {
 		buffer.writeUtf(recipe.group);
 		recipe.ingredient1.write(buffer);
 		recipe.ingredient2.write(buffer);

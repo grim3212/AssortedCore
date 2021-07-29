@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:raw_storage_blocks/platinum"
+  },
+  "result": "assortedcore:platinum_block",
+  "experience": 3.0,
+  "cookingtime": 200
+}

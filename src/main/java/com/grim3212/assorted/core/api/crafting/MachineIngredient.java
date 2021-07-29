@@ -10,9 +10,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.network.FriendlyByteBuf;
 
 public class MachineIngredient implements Predicate<ItemStack> {
 
@@ -43,11 +43,11 @@ public class MachineIngredient implements Predicate<ItemStack> {
 		return ingredient.test(t) && t.getCount() >= this.count;
 	}
 
-	public static MachineIngredient read(PacketBuffer buffer) {
+	public static MachineIngredient read(FriendlyByteBuf buffer) {
 		return new MachineIngredient(Ingredient.fromNetwork(buffer), buffer.readInt());
 	}
 
-	public void write(PacketBuffer buffer) {
+	public void write(FriendlyByteBuf buffer) {
 		this.ingredient.toNetwork(buffer);
 		buffer.writeInt(this.count);
 	}

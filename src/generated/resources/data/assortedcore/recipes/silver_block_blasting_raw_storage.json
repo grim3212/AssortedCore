@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "forge:raw_storage_blocks/silver"
+  },
+  "result": "assortedcore:silver_block",
+  "experience": 2.0,
+  "cookingtime": 100
+}

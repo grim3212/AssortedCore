@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:raw_storage_blocks/tin"
+  },
+  "result": "assortedcore:tin_block",
+  "experience": 1.0,
+  "cookingtime": 200
+}

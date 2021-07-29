@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     "assortedcore:tin_ingot",
-    "assortedcore:copper_ingot",
+    "minecraft:copper_ingot",
     "assortedcore:silver_ingot",
     "assortedcore:aluminum_ingot",
     "assortedcore:nickel_ingot",

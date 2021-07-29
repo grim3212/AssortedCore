@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:raw_ores/silver"
+    },
+    {
+      "tag": "forge:raw_ores/silver"
+    },
+    {
+      "tag": "forge:raw_ores/silver"
+    },
+    {
+      "tag": "forge:raw_ores/silver"
+    },
+    {
+      "tag": "forge:raw_ores/silver"
+    },
+    {
+      "tag": "forge:raw_ores/silver"
+    },
+    {
+      "tag": "forge:raw_ores/silver"
+    },
+    {
+      "tag": "forge:raw_ores/silver"
+    },
+    {
+      "tag": "forge:raw_ores/silver"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:raw_silver_block"
+  }
+}

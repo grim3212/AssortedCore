@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:raw_storage_blocks/nickel"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:raw_nickel",
+    "count": 9
+  }
+}

@@ -4,10 +4,11 @@ import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.api.CoreTags;
 import com.grim3212.assorted.core.common.item.CoreItems;
 
-import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.ItemTagsProvider;
+import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class CoreItemTagProvider extends ItemTagsProvider {
@@ -18,6 +19,8 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 
 	@Override
 	protected void addTags() {
+		this.tag(CoreTags.Items.GRINDING_MILL_ALLOWED_TOOLS).add(Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, Items.NETHERITE_PICKAXE);
+
 		this.copy(CoreTags.Blocks.ORES, CoreTags.Items.ORES);
 		this.copy(CoreTags.Blocks.ORES_TIN, CoreTags.Items.ORES_TIN);
 		this.copy(CoreTags.Blocks.ORES_COPPER, CoreTags.Items.ORES_COPPER);
@@ -27,7 +30,7 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.copy(CoreTags.Blocks.ORES_PLATINUM, CoreTags.Items.ORES_PLATINUM);
 		this.copy(CoreTags.Blocks.ORES_LEAD, CoreTags.Items.ORES_LEAD);
 		this.copy(CoreTags.Blocks.ORES_RUBY, CoreTags.Items.ORES_RUBY);
-		this.copy(CoreTags.Blocks.ORES_AMETHYST, CoreTags.Items.ORES_AMETHYST);
+		this.copy(CoreTags.Blocks.ORES_PERIDOT, CoreTags.Items.ORES_PERIDOT);
 		this.copy(CoreTags.Blocks.ORES_SAPPHIRE, CoreTags.Items.ORES_SAPPHIRE);
 		this.copy(CoreTags.Blocks.ORES_TOPAZ, CoreTags.Items.ORES_TOPAZ);
 
@@ -40,25 +43,53 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_PLATINUM, CoreTags.Items.STORAGE_BLOCKS_PLATINUM);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_LEAD, CoreTags.Items.STORAGE_BLOCKS_LEAD);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_RUBY, CoreTags.Items.STORAGE_BLOCKS_RUBY);
-		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_AMETHYST, CoreTags.Items.STORAGE_BLOCKS_AMETHYST);
+		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_PERIDOT, CoreTags.Items.STORAGE_BLOCKS_PERIDOT);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_SAPPHIRE, CoreTags.Items.STORAGE_BLOCKS_SAPPHIRE);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_TOPAZ, CoreTags.Items.STORAGE_BLOCKS_TOPAZ);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_BRONZE, CoreTags.Items.STORAGE_BLOCKS_BRONZE);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_ELECTRUM, CoreTags.Items.STORAGE_BLOCKS_ELECTRUM);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_INVAR, CoreTags.Items.STORAGE_BLOCKS_INVAR);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_STEEL, CoreTags.Items.STORAGE_BLOCKS_STEEL);
+		
+		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS, CoreTags.Items.RAW_STORAGE_BLOCKS);
+		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_TIN, CoreTags.Items.RAW_STORAGE_BLOCKS_TIN);
+		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_COPPER, CoreTags.Items.RAW_STORAGE_BLOCKS_COPPER);
+		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_SILVER, CoreTags.Items.RAW_STORAGE_BLOCKS_SILVER);
+		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_ALUMINUM, CoreTags.Items.RAW_STORAGE_BLOCKS_ALUMINUM);
+		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_NICKEL, CoreTags.Items.RAW_STORAGE_BLOCKS_NICKEL);
+		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_PLATINUM, CoreTags.Items.RAW_STORAGE_BLOCKS_PLATINUM);
+		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_LEAD, CoreTags.Items.RAW_STORAGE_BLOCKS_LEAD);
 
 		this.tag(CoreTags.Items.GEMS).add(CoreItems.RUBY.get());
-		this.tag(CoreTags.Items.GEMS).add(CoreItems.AMETHYST.get());
+		this.tag(CoreTags.Items.GEMS).add(CoreItems.PERIDOT.get());
 		this.tag(CoreTags.Items.GEMS).add(CoreItems.SAPPHIRE.get());
 		this.tag(CoreTags.Items.GEMS).add(CoreItems.TOPAZ.get());
 		this.tag(CoreTags.Items.GEMS_RUBY).add(CoreItems.RUBY.get());
-		this.tag(CoreTags.Items.GEMS_AMETHYST).add(CoreItems.AMETHYST.get());
+		this.tag(CoreTags.Items.GEMS_PERIDOT).add(CoreItems.PERIDOT.get());
 		this.tag(CoreTags.Items.GEMS_SAPPHIRE).add(CoreItems.SAPPHIRE.get());
 		this.tag(CoreTags.Items.GEMS_TOPAZ).add(CoreItems.TOPAZ.get());
+		
+		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_ALUMINUM.get());
+		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_LEAD.get());
+		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_NICKEL.get());
+		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_PLATINUM.get());
+		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_SILVER.get());
+		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_TIN.get());
+		this.tag(CoreTags.Items.RAW_ORES).add(Items.RAW_IRON);
+		this.tag(CoreTags.Items.RAW_ORES).add(Items.RAW_GOLD);
+		this.tag(CoreTags.Items.RAW_ORES).add(Items.RAW_COPPER);
+		this.tag(CoreTags.Items.RAW_ORES_ALUMINUM).add(CoreItems.RAW_ALUMINUM.get());
+		this.tag(CoreTags.Items.RAW_ORES_LEAD).add(CoreItems.RAW_LEAD.get());
+		this.tag(CoreTags.Items.RAW_ORES_NICKEL).add(CoreItems.RAW_NICKEL.get());
+		this.tag(CoreTags.Items.RAW_ORES_PLATINUM).add(CoreItems.RAW_PLATINUM.get());
+		this.tag(CoreTags.Items.RAW_ORES_SILVER).add(CoreItems.RAW_SILVER.get());
+		this.tag(CoreTags.Items.RAW_ORES_TIN).add(CoreItems.RAW_TIN.get());
+		this.tag(CoreTags.Items.RAW_ORES_IRON).add(Items.RAW_IRON);
+		this.tag(CoreTags.Items.RAW_ORES_GOLD).add(Items.RAW_GOLD);
+		this.tag(CoreTags.Items.RAW_ORES_COPPER).add(Items.RAW_COPPER);
 
 		this.tag(CoreTags.Items.INGOTS).add(CoreItems.TIN_INGOT.get());
-		this.tag(CoreTags.Items.INGOTS).add(CoreItems.COPPER_INGOT.get());
+		this.tag(CoreTags.Items.INGOTS).add(Items.COPPER_INGOT);
 		this.tag(CoreTags.Items.INGOTS).add(CoreItems.SILVER_INGOT.get());
 		this.tag(CoreTags.Items.INGOTS).add(CoreItems.ALUMINUM_INGOT.get());
 		this.tag(CoreTags.Items.INGOTS).add(CoreItems.NICKEL_INGOT.get());
@@ -69,7 +100,7 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.tag(CoreTags.Items.INGOTS).add(CoreItems.INVAR_INGOT.get());
 		this.tag(CoreTags.Items.INGOTS).add(CoreItems.STEEL_INGOT.get());
 		this.tag(CoreTags.Items.INGOTS_TIN).add(CoreItems.TIN_INGOT.get());
-		this.tag(CoreTags.Items.INGOTS_COPPER).add(CoreItems.COPPER_INGOT.get());
+		this.tag(CoreTags.Items.INGOTS_COPPER).add(Items.COPPER_INGOT);
 		this.tag(CoreTags.Items.INGOTS_SILVER).add(CoreItems.SILVER_INGOT.get());
 		this.tag(CoreTags.Items.INGOTS_ALUMINUM).add(CoreItems.ALUMINUM_INGOT.get());
 		this.tag(CoreTags.Items.INGOTS_NICKEL).add(CoreItems.NICKEL_INGOT.get());
@@ -129,7 +160,7 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.tag(CoreTags.Items.DUSTS_STEEL).add(CoreItems.STEEL_DUST.get());
 		this.tag(CoreTags.Items.DUSTS_IRON).add(CoreItems.IRON_DUST.get());
 		this.tag(CoreTags.Items.DUSTS_GOLD).add(CoreItems.GOLD_DUST.get());
-		
+
 		this.tag(CoreTags.Items.GEARS).add(CoreItems.TIN_GEAR.get());
 		this.tag(CoreTags.Items.GEARS).add(CoreItems.COPPER_GEAR.get());
 		this.tag(CoreTags.Items.GEARS).add(CoreItems.SILVER_GEAR.get());
@@ -156,7 +187,7 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.tag(CoreTags.Items.GEARS_STEEL).add(CoreItems.STEEL_GEAR.get());
 		this.tag(CoreTags.Items.GEARS_IRON).add(CoreItems.IRON_GEAR.get());
 		this.tag(CoreTags.Items.GEARS_GOLD).add(CoreItems.GOLD_GEAR.get());
-		
+
 		this.tag(ItemTags.PIGLIN_LOVED).add(CoreItems.GOLD_DUST.get(), CoreItems.GOLD_GEAR.get());
 	}
 

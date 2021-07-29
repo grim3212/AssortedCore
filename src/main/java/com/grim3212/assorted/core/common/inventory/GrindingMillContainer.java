@@ -3,25 +3,25 @@ package com.grim3212.assorted.core.common.inventory;
 import com.grim3212.assorted.core.api.AssortedCoreAPI;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 
 public class GrindingMillContainer extends BaseMachineContainer {
 
-	protected GrindingMillContainer(int id, PlayerInventory playerInventory) {
-		this(id, playerInventory, new Inventory(4), new IntArray(4));
+	protected GrindingMillContainer(int id, Inventory playerInventory) {
+		this(id, playerInventory, new SimpleContainer(4), new SimpleContainerData(4));
 	}
 
-	public GrindingMillContainer(int id, PlayerInventory playerInventory, IInventory grindingMillInventory, IIntArray grindingMillData) {
+	public GrindingMillContainer(int id, Inventory playerInventory, Container grindingMillInventory, ContainerData grindingMillData) {
 		super(CoreContainerTypes.GRINDING_MILL.get(), CoreRecipeTypes.GRINDING_MILL, id, playerInventory, 4, grindingMillInventory, grindingMillData);
 
 		this.addSlot(new Slot(grindingMillInventory, 0, 51, 27));
@@ -41,7 +41,7 @@ public class GrindingMillContainer extends BaseMachineContainer {
 	}
 
 	@Override
-	public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+	public ItemStack quickMoveStack(Player playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
 		if (slot != null && slot.hasItem()) {
@@ -58,7 +58,7 @@ public class GrindingMillContainer extends BaseMachineContainer {
 					if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (ForgeHooks.getBurnTime(itemstack1) > 0) {
+				} else if (ForgeHooks.getBurnTime(itemstack1, null) > 0) {
 					if (!this.moveItemStackTo(itemstack1, 2, 3, false)) {
 						return ItemStack.EMPTY;
 					}

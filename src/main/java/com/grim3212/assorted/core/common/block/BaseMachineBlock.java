@@ -2,38 +2,40 @@ package com.grim3212.assorted.core.common.block;
 
 import javax.annotation.Nullable;
 
-import com.grim3212.assorted.core.common.block.tileentity.BaseMachineTileEntity;
+import com.grim3212.assorted.core.common.block.blockentity.BaseMachineBlockEntity;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
-public abstract class BaseMachineBlock extends Block {
+public abstract class BaseMachineBlock extends Block implements EntityBlock {
 
-	public static final DirectionProperty FACING = HorizontalBlock.FACING;
+	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	public static final BooleanProperty ON = BooleanProperty.create("on");
 
 	public BaseMachineBlock(Properties properties) {
@@ -42,55 +44,59 @@ public abstract class BaseMachineBlock extends Block {
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
 		if (!worldIn.isClientSide) {
-			INamedContainerProvider inamedcontainerprovider = this.getMenuProvider(state, worldIn, pos);
+			MenuProvider inamedcontainerprovider = this.getMenuProvider(state, worldIn, pos);
 			if (inamedcontainerprovider != null) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, inamedcontainerprovider, pos);
+				NetworkHooks.openGui((ServerPlayer) player, inamedcontainerprovider, pos);
 			}
 		}
 
-		return ActionResultType.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
 	@Nullable
-	public INamedContainerProvider getMenuProvider(BlockState state, World world, BlockPos pos) {
-		TileEntity tileentity = world.getBlockEntity(pos);
-		return tileentity instanceof INamedContainerProvider ? (INamedContainerProvider) tileentity : null;
+	public MenuProvider getMenuProvider(BlockState state, Level world, BlockPos pos) {
+		BlockEntity tileentity = world.getBlockEntity(pos);
+		return tileentity instanceof MenuProvider ? (MenuProvider) tileentity : null;
 	}
 
 	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
+	public abstract BlockEntity newBlockEntity(BlockPos pos, BlockState state);
+
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+		return (level1, blockPos, blockState, t) -> {
+			if (t instanceof BaseMachineBlockEntity machine) {
+				machine.tick();
+			}
+		};
 	}
 
 	@Override
-	public abstract TileEntity createTileEntity(BlockState state, IBlockReader world);
-
-	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
-	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		if (stack.hasCustomHoverName()) {
-			TileEntity tileentity = worldIn.getBlockEntity(pos);
-			if (tileentity instanceof BaseMachineTileEntity) {
-				((BaseMachineTileEntity) tileentity).setCustomName(stack.getHoverName());
+			BlockEntity tileentity = worldIn.getBlockEntity(pos);
+			if (tileentity instanceof BaseMachineBlockEntity) {
+				((BaseMachineBlockEntity) tileentity).setCustomName(stack.getHoverName());
 			}
 		}
 
 	}
 
 	@Override
-	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!state.is(newState.getBlock())) {
-			TileEntity tileentity = worldIn.getBlockEntity(pos);
-			if (tileentity instanceof BaseMachineTileEntity) {
-				InventoryHelper.dropContents(worldIn, pos, (BaseMachineTileEntity) tileentity);
-				((BaseMachineTileEntity) tileentity).grantStoredRecipeExperience(worldIn, Vector3d.atCenterOf(pos));
+			BlockEntity tileentity = worldIn.getBlockEntity(pos);
+			if (tileentity instanceof BaseMachineBlockEntity) {
+				Containers.dropContents(worldIn, pos, (BaseMachineBlockEntity) tileentity);
+				((BaseMachineBlockEntity) tileentity).grantStoredRecipeExperience(worldIn, Vec3.atCenterOf(pos));
 				worldIn.updateNeighbourForOutputSignal(pos, this);
 			}
 
@@ -104,8 +110,8 @@ public abstract class BaseMachineBlock extends Block {
 	}
 
 	@Override
-	public int getAnalogOutputSignal(BlockState blockState, World worldIn, BlockPos pos) {
-		return Container.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
+	public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
+		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
 	}
 
 	@Override
@@ -119,7 +125,7 @@ public abstract class BaseMachineBlock extends Block {
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, ON);
 	}
 }

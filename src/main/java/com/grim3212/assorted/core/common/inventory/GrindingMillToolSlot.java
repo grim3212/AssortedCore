@@ -2,13 +2,13 @@ package com.grim3212.assorted.core.common.inventory;
 
 import com.grim3212.assorted.core.api.AssortedCoreAPI;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class GrindingMillToolSlot extends Slot {
 
-	public GrindingMillToolSlot(IInventory forgeInventory, int id, int x, int y) {
+	public GrindingMillToolSlot(Container forgeInventory, int id, int x, int y) {
 		super(forgeInventory, id, x, y);
 	}
 

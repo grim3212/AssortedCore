@@ -2,25 +2,25 @@ package com.grim3212.assorted.core.common.inventory;
 
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 
 public class AlloyForgeContainer extends BaseMachineContainer {
 
-	protected AlloyForgeContainer(int id, PlayerInventory playerInventory) {
-		this(id, playerInventory, new Inventory(4), new IntArray(4));
+	protected AlloyForgeContainer(int id, Inventory playerInventory) {
+		this(id, playerInventory, new SimpleContainer(4), new SimpleContainerData(4));
 	}
 
-	public AlloyForgeContainer(int id, PlayerInventory playerInventory, IInventory alloyForgeInventory, IIntArray alloyForgeData) {
+	public AlloyForgeContainer(int id, Inventory playerInventory, Container alloyForgeInventory, ContainerData alloyForgeData) {
 		super(CoreContainerTypes.ALLOY_FORGE.get(), CoreRecipeTypes.ALLOY_FORGE, id, playerInventory, 4, alloyForgeInventory, alloyForgeData);
 
 		this.addSlot(new Slot(alloyForgeInventory, 0, 32, 27));
@@ -40,7 +40,7 @@ public class AlloyForgeContainer extends BaseMachineContainer {
 	}
 
 	@Override
-	public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+	public ItemStack quickMoveStack(Player playerIn, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
 		if (slot != null && slot.hasItem()) {
@@ -53,7 +53,7 @@ public class AlloyForgeContainer extends BaseMachineContainer {
 
 				slot.onQuickCraft(itemstack1, itemstack);
 			} else if (index != 2 && index != 1 && index != 0) {
-				if (ForgeHooks.getBurnTime(itemstack1) > 0) {
+				if (ForgeHooks.getBurnTime(itemstack1, null) > 0) {
 					if (!this.moveItemStackTo(itemstack1, 2, 3, false)) {
 						return ItemStack.EMPTY;
 					}

@@ -5,10 +5,10 @@ import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.block.BaseMachineBlock;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
 
-import net.minecraft.block.Block;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -32,25 +32,23 @@ public class CoreBlockstateProvider extends BlockStateProvider {
 	@Override
 	protected void registerStatesAndModels() {
 		simpleBlock(CoreBlocks.TIN_ORE.get());
-		simpleBlock(CoreBlocks.COPPER_ORE.get());
 		simpleBlock(CoreBlocks.SILVER_ORE.get());
 		simpleBlock(CoreBlocks.ALUMINUM_ORE.get());
 		simpleBlock(CoreBlocks.NICKEL_ORE.get());
 		simpleBlock(CoreBlocks.PLATINUM_ORE.get());
 		simpleBlock(CoreBlocks.LEAD_ORE.get());
 		simpleBlock(CoreBlocks.RUBY_ORE.get());
-		simpleBlock(CoreBlocks.AMETHYST_ORE.get());
+		simpleBlock(CoreBlocks.PERIDOT_ORE.get());
 		simpleBlock(CoreBlocks.SAPPHIRE_ORE.get());
 		simpleBlock(CoreBlocks.TOPAZ_ORE.get());
 		simpleBlock(CoreBlocks.TIN_BLOCK.get());
-		simpleBlock(CoreBlocks.COPPER_BLOCK.get());
 		simpleBlock(CoreBlocks.SILVER_BLOCK.get());
 		simpleBlock(CoreBlocks.ALUMINUM_BLOCK.get());
 		simpleBlock(CoreBlocks.NICKEL_BLOCK.get());
 		simpleBlock(CoreBlocks.PLATINUM_BLOCK.get());
 		simpleBlock(CoreBlocks.LEAD_BLOCK.get());
 		simpleBlock(CoreBlocks.RUBY_BLOCK.get());
-		simpleBlock(CoreBlocks.AMETHYST_BLOCK.get());
+		simpleBlock(CoreBlocks.PERIDOT_BLOCK.get());
 		simpleBlock(CoreBlocks.SAPPHIRE_BLOCK.get());
 		simpleBlock(CoreBlocks.TOPAZ_BLOCK.get());
 		simpleBlock(CoreBlocks.BRONZE_BLOCK.get());
@@ -58,6 +56,24 @@ public class CoreBlockstateProvider extends BlockStateProvider {
 		simpleBlock(CoreBlocks.INVAR_BLOCK.get());
 		simpleBlock(CoreBlocks.STEEL_BLOCK.get());
 		simpleBlock(CoreBlocks.MACHINE_CORE.get());
+
+		simpleBlock(CoreBlocks.DEEPSLATE_TIN_ORE.get());
+		simpleBlock(CoreBlocks.DEEPSLATE_SILVER_ORE.get());
+		simpleBlock(CoreBlocks.DEEPSLATE_ALUMINUM_ORE.get());
+		simpleBlock(CoreBlocks.DEEPSLATE_NICKEL_ORE.get());
+		simpleBlock(CoreBlocks.DEEPSLATE_PLATINUM_ORE.get());
+		simpleBlock(CoreBlocks.DEEPSLATE_LEAD_ORE.get());
+		simpleBlock(CoreBlocks.DEEPSLATE_RUBY_ORE.get());
+		simpleBlock(CoreBlocks.DEEPSLATE_PERIDOT_ORE.get());
+		simpleBlock(CoreBlocks.DEEPSLATE_SAPPHIRE_ORE.get());
+		simpleBlock(CoreBlocks.DEEPSLATE_TOPAZ_ORE.get());
+
+		simpleBlock(CoreBlocks.RAW_TIN_BLOCK.get());
+		simpleBlock(CoreBlocks.RAW_SILVER_BLOCK.get());
+		simpleBlock(CoreBlocks.RAW_ALUMINUM_BLOCK.get());
+		simpleBlock(CoreBlocks.RAW_NICKEL_BLOCK.get());
+		simpleBlock(CoreBlocks.RAW_PLATINUM_BLOCK.get());
+		simpleBlock(CoreBlocks.RAW_LEAD_BLOCK.get());
 
 		machine(CoreBlocks.BASIC_ALLOY_FORGE.get(), MachineTier.BASIC);
 		machine(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get(), MachineTier.INTERMEDIATE);

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "assortedcore:aluminum_ingot_storage_block"
+    ]
+  },
+  "criteria": {
+    "has_storage_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/aluminum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "assortedcore:aluminum_ingot_storage_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_storage_item",
+      "has_the_recipe"
+    ]
+  ]
+}

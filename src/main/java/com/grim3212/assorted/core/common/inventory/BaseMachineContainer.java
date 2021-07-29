@@ -2,26 +2,26 @@ package com.grim3212.assorted.core.common.inventory;
 
 import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.IIntArray;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public abstract class BaseMachineContainer extends Container {
+public abstract class BaseMachineContainer extends AbstractContainerMenu {
 
-	private final IInventory machineInventory;
-	protected final IIntArray machineData;
-	protected final World world;
-	protected final IRecipeType<? extends BaseMachineRecipe> recipeType;
+	private final Container machineInventory;
+	protected final ContainerData machineData;
+	protected final Level world;
+	protected final RecipeType<? extends BaseMachineRecipe> recipeType;
 
-	public BaseMachineContainer(ContainerType<? extends BaseMachineContainer> containerType, IRecipeType<? extends BaseMachineRecipe> recipeType, int id, PlayerInventory playerInventory, int slots, IInventory machineInventory, IIntArray machineData) {
+	public BaseMachineContainer(MenuType<? extends BaseMachineContainer> containerType, RecipeType<? extends BaseMachineRecipe> recipeType, int id, Inventory playerInventory, int slots, Container machineInventory, ContainerData machineData) {
 		super(containerType, id);
 		checkContainerSize(machineInventory, slots);
 		checkContainerDataCount(machineData, 4);
@@ -34,15 +34,15 @@ public abstract class BaseMachineContainer extends Container {
 	}
 
 	@Override
-	public abstract ItemStack quickMoveStack(PlayerEntity playerIn, int index);
+	public abstract ItemStack quickMoveStack(Player playerIn, int index);
 
 	@Override
-	public boolean stillValid(PlayerEntity playerIn) {
+	public boolean stillValid(Player playerIn) {
 		return this.machineInventory.stillValid(playerIn);
 	}
 
 	protected boolean hasRecipe(ItemStack stack) {
-		return this.world.getRecipeManager().getAllRecipesFor((IRecipeType<BaseMachineRecipe>) this.recipeType).stream().anyMatch((recipe) -> {
+		return this.world.getRecipeManager().getAllRecipesFor((RecipeType<BaseMachineRecipe>) this.recipeType).stream().anyMatch((recipe) -> {
 			return recipe.validInput(stack);
 		});
 	}

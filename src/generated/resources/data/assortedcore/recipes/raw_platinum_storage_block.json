@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:raw_storage_blocks/platinum"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:raw_platinum",
+    "count": 9
+  }
+}

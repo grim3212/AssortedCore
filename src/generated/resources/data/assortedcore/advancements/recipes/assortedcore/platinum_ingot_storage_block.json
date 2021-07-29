@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "assortedcore:platinum_ingot_storage_block"
+    ]
+  },
+  "criteria": {
+    "has_storage_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/platinum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "assortedcore:platinum_ingot_storage_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_storage_item",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "forge:raw_ores/platinum"
+  },
+  "result": "assortedcore:platinum_ingot",
+  "experience": 1.5,
+  "cookingtime": 100
+}

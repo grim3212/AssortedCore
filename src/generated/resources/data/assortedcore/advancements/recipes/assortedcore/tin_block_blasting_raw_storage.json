@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "assortedcore:tin_block_blasting_raw_storage"
+    ]
+  },
+  "criteria": {
+    "has_storage": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_storage_blocks/tin"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "assortedcore:tin_block_blasting_raw_storage"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_storage",
+      "has_the_recipe"
+    ]
+  ]
+}

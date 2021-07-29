@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:raw_storage_blocks/aluminum"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:raw_aluminum",
+    "count": 9
+  }
+}

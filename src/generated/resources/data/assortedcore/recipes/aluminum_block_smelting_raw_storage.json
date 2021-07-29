@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:raw_storage_blocks/aluminum"
+  },
+  "result": "assortedcore:aluminum_block",
+  "experience": 1.4,
+  "cookingtime": 200
+}

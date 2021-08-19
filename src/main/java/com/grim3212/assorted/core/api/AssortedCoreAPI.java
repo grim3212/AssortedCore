@@ -3,13 +3,30 @@ package com.grim3212.assorted.core.api;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraftforge.common.ToolType;
+import net.minecraftforge.common.TierSortingRegistry;
+import net.minecraftforge.common.ToolActions;
 
 public class AssortedCoreAPI {
 
 	public static boolean allowedInGrindingMillToolSlot(ItemStack stack) {
-		return stack.is(CoreTags.Items.GRINDING_MILL_ALLOWED_TOOLS) || (stack.getItem().getToolTypes(stack).stream().anyMatch((tooltype) -> tooltype == ToolType.PICKAXE) && stack.getHarvestLevel(ToolType.PICKAXE, null, null) >= 2);
+		if (stack.is(CoreTags.Items.GRINDING_MILL_ALLOWED_TOOLS))
+			return true;
+
+		if (stack.getItem()instanceof TieredItem itemTier) {
+			if (stack.getItem().canPerformAction(stack, ToolActions.PICKAXE_DIG)) {
+				if (TierSortingRegistry.isTierSorted(itemTier.getTier())) {
+					// Iron is our benchmark so the tools should be greater than iron at least
+					return TierSortingRegistry.getTiersLowerThan(itemTier.getTier()).contains(Tiers.IRON);
+				} else {
+					// Fallback to old method of determining if a pick is the correct level
+					return itemTier.getTier().getLevel() >= 2;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static boolean isValidAlloyForgeInput(RecipeManager manager, ItemStack stack) {

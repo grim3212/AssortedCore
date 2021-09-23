@@ -134,7 +134,7 @@ public final class CoreConfig {
 			veinSizeRuby = builder.comment("Set to the max vein size you a Ruby cluster could generate with.").defineInRange("veinSizeRuby", 8, 0, 64);
 			botOffsetRuby = builder.comment("Set to the number of blocks above the world bottom that Ruby should try and generate.").defineInRange("botOffsetRuby", 0, 0, 256);
 			maxSpawnLevelRuby = builder.comment("Set to the max level that Ruby could generate in the world.").defineInRange("maxSpawnLevelRuby", 16, 0, 256);
-			spawnRateRuby = builder.comment("Set to the number of attempts that Ruby will try to generate in a chunk.").defineInRange("spawnRateRuby", 6, 0, 64);
+			spawnRateRuby = builder.comment("Set to the number of attempts that Ruby will try to generate in a chunk.").defineInRange("spawnRateRuby", 4, 0, 64);
 			builder.pop();
 			builder.pop();
 
@@ -143,7 +143,7 @@ public final class CoreConfig {
 			veinSizeSapphire = builder.comment("Set to the max vein size you a Sapphire cluster could generate with.").defineInRange("veinSizeSapphire", 8, 0, 64);
 			botOffsetSapphire = builder.comment("Set to the number of blocks above the world bottom that Sapphire should try and generate.").defineInRange("botOffsetSapphire", 12, 0, 256);
 			maxSpawnLevelSapphire = builder.comment("Set to the max level that Sapphire could generate in the world.").defineInRange("maxSpawnLevelSapphire", 40, 0, 256);
-			spawnRateSapphire = builder.comment("Set to the number of attempts that Sapphire will try to generate in a chunk.").defineInRange("spawnRateSapphire", 8, 0, 64);
+			spawnRateSapphire = builder.comment("Set to the number of attempts that Sapphire will try to generate in a chunk.").defineInRange("spawnRateSapphire", 6, 0, 64);
 			builder.pop();
 			builder.pop();
 
@@ -152,7 +152,7 @@ public final class CoreConfig {
 			veinSizeTopaz = builder.comment("Set to the max vein size you a Topaz cluster could generate with.").defineInRange("veinSizeTopaz", 8, 0, 64);
 			botOffsetTopaz = builder.comment("Set to the number of blocks above the world bottom that Topaz should try and generate.").defineInRange("botOffsetTopaz", 32, 0, 256);
 			maxSpawnLevelTopaz = builder.comment("Set to the max level that Topaz could generate in the world.").defineInRange("maxSpawnLevelTopaz", 52, 0, 256);
-			spawnRateTopaz = builder.comment("Set to the number of attempts that Topaz will try to generate in a chunk.").defineInRange("spawnRateTopaz", 8, 0, 64);
+			spawnRateTopaz = builder.comment("Set to the number of attempts that Topaz will try to generate in a chunk.").defineInRange("spawnRateTopaz", 6, 0, 64);
 			builder.pop();
 			builder.pop();
 
@@ -161,7 +161,7 @@ public final class CoreConfig {
 			veinSizePeridot = builder.comment("Set to the max vein size you a Peridot cluster could generate with.").defineInRange("veinSizePeridot", 8, 0, 64);
 			botOffsetPeridot = builder.comment("Set to the number of blocks above the world bottom that Peridot should try and generate.").defineInRange("botOffsetPeridot", 48, 0, 256);
 			maxSpawnLevelPeridot = builder.comment("Set to the max level that Peridot could generate in the world.").defineInRange("maxSpawnLevelPeridot", 68, 0, 256);
-			spawnRatePeridot = builder.comment("Set to the number of attempts that Peridot will try to generate in a chunk.").defineInRange("spawnRatePeridot", 10, 0, 64);
+			spawnRatePeridot = builder.comment("Set to the number of attempts that Peridot will try to generate in a chunk.").defineInRange("spawnRatePeridot", 6, 0, 64);
 			builder.pop();
 			builder.pop();
 			builder.pop();

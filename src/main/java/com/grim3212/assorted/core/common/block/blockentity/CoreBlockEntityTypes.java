@@ -5,9 +5,9 @@ import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class CoreBlockEntityTypes {
 

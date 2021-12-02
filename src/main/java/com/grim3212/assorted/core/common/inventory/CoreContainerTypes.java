@@ -3,9 +3,9 @@ package com.grim3212.assorted.core.common.inventory;
 import com.grim3212.assorted.core.AssortedCore;
 
 import net.minecraft.world.inventory.MenuType;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class CoreContainerTypes {
 	public static final DeferredRegister<MenuType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, AssortedCore.MODID);

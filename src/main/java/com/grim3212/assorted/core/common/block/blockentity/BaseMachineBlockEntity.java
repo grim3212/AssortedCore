@@ -16,6 +16,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
@@ -373,10 +374,11 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Worl
 			this.customName = Component.Serializer.fromJson(nbt.getString("CustomName"));
 		}
 	}
-
+	
 	@Override
-	public CompoundTag save(CompoundTag compound) {
-		super.save(compound);
+	protected void saveAdditional(CompoundTag compound) {
+		super.saveAdditional(compound);
+		
 		compound.putInt("BurnTime", this.burnTime);
 		compound.putInt("CookTime", this.cookTime);
 		compound.putInt("CookTimeTotal", this.cookTimeTotal);
@@ -390,13 +392,16 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Worl
 		if (this.customName != null) {
 			compound.putString("CustomName", Component.Serializer.toJson(this.customName));
 		}
-
-		return compound;
 	}
 
 	@Override
 	public CompoundTag getUpdateTag() {
-		return save(new CompoundTag());
+		return this.saveWithoutMetadata();
+	}
+
+	@Override
+	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST);

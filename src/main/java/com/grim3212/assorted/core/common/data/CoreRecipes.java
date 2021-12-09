@@ -213,7 +213,8 @@ public class CoreRecipes extends RecipeProvider {
 	}
 
 	private void ingotDust(Named<Item> dust, ItemLike ingot, Consumer<FinishedRecipe> consumer) {
-		SimpleCookingRecipeBuilder.smelting(Ingredient.of(dust), ingot, 0.1F, 100).unlockedBy("has_dust", has(dust)).save(consumer, new ResourceLocation(AssortedCore.MODID, dust.getName().getPath() + "_smelting"));
+		SimpleCookingRecipeBuilder.blasting(Ingredient.of(dust), ingot, 0.1F, 100).unlockedBy("has_dust", has(dust)).save(consumer, new ResourceLocation(AssortedCore.MODID, dust.getName().getPath() + "_blasting"));
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(dust), ingot, 0.1F, 200).unlockedBy("has_dust", has(dust)).save(consumer, new ResourceLocation(AssortedCore.MODID, dust.getName().getPath() + "_smelting"));
 	}
 
 	private void rawStorageBlastingSmelting(Tag<Item> rawStorage, ItemLike output, float experience, Consumer<FinishedRecipe> consumer) {

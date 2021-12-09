@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "tag": "forge:dusts/platinum"
+  },
+  "result": "assortedcore:platinum_ingot",
+  "experience": 0.1,
+  "cookingtime": 100
+}

@@ -13,18 +13,18 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-//repositories {
-//  maven {
-//    // location of the maven that hosts JEI files
-//    name = "Progwml6 maven"
-//    url = "https://dvs1.progwml6.com/files/maven/"
-//  }
-//  maven {
-//    // location of a maven mirror for JEI files, as a fallback
-//    name = "ModMaven"
-//    url = "https://modmaven.k-4u.nl"
-//  }
-//}
+repositories {
+  maven {
+    // location of the maven that hosts JEI files
+    name = "Progwml6 maven"
+    url = "https://dvs1.progwml6.com/files/maven/"
+  }
+  maven {
+    // location of a maven mirror for JEI files, as a fallback
+    name = "ModMaven"
+    url = "https://modmaven.k-4u.nl"
+  }
+}
 
 version = minecraft_version + "-" + mod_version
 group = mod_group
@@ -98,11 +98,10 @@ sourceSets.main.resources {
 dependencies {
     minecraft 'net.minecraftforge:forge:' + minecraft_version + '-' + forge_version
     
-	// WAITING FOR 1.18 Version of JEI
     // compile against the JEI API but do not include it at runtime
-  	// compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+  	compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
   	// at runtime, use the full JEI jar
-  	// runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+  	runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 }
 
 jar {

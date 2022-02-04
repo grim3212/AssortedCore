@@ -15,6 +15,13 @@
     "assortedcore:bronze_block",
     "assortedcore:electrum_block",
     "assortedcore:invar_block",
-    "assortedcore:steel_block"
+    "assortedcore:steel_block",
+    "minecraft:raw_copper_block",
+    "assortedcore:raw_tin_block",
+    "assortedcore:raw_silver_block",
+    "assortedcore:raw_aluminum_block",
+    "assortedcore:raw_nickel_block",
+    "assortedcore:raw_platinum_block",
+    "assortedcore:raw_lead_block"
   ]
 }

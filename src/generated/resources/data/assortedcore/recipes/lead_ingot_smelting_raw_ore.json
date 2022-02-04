@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "tag": "forge:raw_ores/lead"
+    "tag": "forge:raw_materials/lead"
   },
   "result": "assortedcore:lead_ingot",
   "experience": 1.0,

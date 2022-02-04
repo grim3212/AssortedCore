@@ -2,7 +2,7 @@
   "type": "assortedcore:grinding_mill",
   "ingredient": {
     "ingredient": {
-      "tag": "forge:raw_ores/copper"
+      "tag": "forge:raw_materials/copper"
     },
     "count": 1
   },

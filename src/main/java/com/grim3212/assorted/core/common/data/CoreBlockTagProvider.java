@@ -87,7 +87,7 @@ public class CoreBlockTagProvider extends BlockTagsProvider {
 		this.tag(CoreTags.Blocks.STORAGE_BLOCKS_INVAR).add(CoreBlocks.INVAR_BLOCK.get());
 		this.tag(CoreTags.Blocks.STORAGE_BLOCKS_STEEL).add(CoreBlocks.STEEL_BLOCK.get());
 
-		this.tag(CoreTags.Blocks.RAW_STORAGE_BLOCKS).add(Blocks.RAW_COPPER_BLOCK, CoreBlocks.RAW_TIN_BLOCK.get(), CoreBlocks.RAW_SILVER_BLOCK.get(), CoreBlocks.RAW_ALUMINUM_BLOCK.get(), CoreBlocks.RAW_NICKEL_BLOCK.get(), CoreBlocks.RAW_PLATINUM_BLOCK.get(), CoreBlocks.RAW_LEAD_BLOCK.get());
+		this.tag(CoreTags.Blocks.STORAGE_BLOCKS).add(Blocks.RAW_COPPER_BLOCK, CoreBlocks.RAW_TIN_BLOCK.get(), CoreBlocks.RAW_SILVER_BLOCK.get(), CoreBlocks.RAW_ALUMINUM_BLOCK.get(), CoreBlocks.RAW_NICKEL_BLOCK.get(), CoreBlocks.RAW_PLATINUM_BLOCK.get(), CoreBlocks.RAW_LEAD_BLOCK.get());
 		this.tag(CoreTags.Blocks.RAW_STORAGE_BLOCKS_TIN).add(CoreBlocks.RAW_TIN_BLOCK.get());
 		this.tag(CoreTags.Blocks.RAW_STORAGE_BLOCKS_COPPER).add(Blocks.RAW_COPPER_BLOCK);
 		this.tag(CoreTags.Blocks.RAW_STORAGE_BLOCKS_SILVER).add(CoreBlocks.RAW_SILVER_BLOCK.get());

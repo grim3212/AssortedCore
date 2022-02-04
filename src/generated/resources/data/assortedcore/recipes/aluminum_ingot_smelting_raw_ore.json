@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "tag": "forge:raw_ores/aluminum"
+    "tag": "forge:raw_materials/aluminum"
   },
   "result": "assortedcore:aluminum_ingot",
   "experience": 0.7,

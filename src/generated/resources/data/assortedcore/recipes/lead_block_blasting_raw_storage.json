@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "tag": "forge:raw_storage_blocks/lead"
+    "tag": "forge:storage_blocks/raw_lead"
   },
   "result": "assortedcore:lead_block",
   "experience": 1.0,

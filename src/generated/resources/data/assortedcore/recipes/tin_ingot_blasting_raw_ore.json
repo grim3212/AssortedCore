@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "tag": "forge:raw_ores/tin"
+    "tag": "forge:raw_materials/tin"
   },
   "result": "assortedcore:tin_ingot",
   "experience": 0.5,

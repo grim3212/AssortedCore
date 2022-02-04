@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:raw_ores/tin"
+            "tag": "forge:raw_materials/tin"
           }
         ]
       }

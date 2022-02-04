@@ -51,7 +51,6 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_INVAR, CoreTags.Items.STORAGE_BLOCKS_INVAR);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_STEEL, CoreTags.Items.STORAGE_BLOCKS_STEEL);
 		
-		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS, CoreTags.Items.RAW_STORAGE_BLOCKS);
 		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_TIN, CoreTags.Items.RAW_STORAGE_BLOCKS_TIN);
 		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_COPPER, CoreTags.Items.RAW_STORAGE_BLOCKS_COPPER);
 		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_SILVER, CoreTags.Items.RAW_STORAGE_BLOCKS_SILVER);
@@ -69,24 +68,24 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.tag(CoreTags.Items.GEMS_SAPPHIRE).add(CoreItems.SAPPHIRE.get());
 		this.tag(CoreTags.Items.GEMS_TOPAZ).add(CoreItems.TOPAZ.get());
 		
-		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_ALUMINUM.get());
-		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_LEAD.get());
-		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_NICKEL.get());
-		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_PLATINUM.get());
-		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_SILVER.get());
-		this.tag(CoreTags.Items.RAW_ORES).add(CoreItems.RAW_TIN.get());
-		this.tag(CoreTags.Items.RAW_ORES).add(Items.RAW_IRON);
-		this.tag(CoreTags.Items.RAW_ORES).add(Items.RAW_GOLD);
-		this.tag(CoreTags.Items.RAW_ORES).add(Items.RAW_COPPER);
-		this.tag(CoreTags.Items.RAW_ORES_ALUMINUM).add(CoreItems.RAW_ALUMINUM.get());
-		this.tag(CoreTags.Items.RAW_ORES_LEAD).add(CoreItems.RAW_LEAD.get());
-		this.tag(CoreTags.Items.RAW_ORES_NICKEL).add(CoreItems.RAW_NICKEL.get());
-		this.tag(CoreTags.Items.RAW_ORES_PLATINUM).add(CoreItems.RAW_PLATINUM.get());
-		this.tag(CoreTags.Items.RAW_ORES_SILVER).add(CoreItems.RAW_SILVER.get());
-		this.tag(CoreTags.Items.RAW_ORES_TIN).add(CoreItems.RAW_TIN.get());
-		this.tag(CoreTags.Items.RAW_ORES_IRON).add(Items.RAW_IRON);
-		this.tag(CoreTags.Items.RAW_ORES_GOLD).add(Items.RAW_GOLD);
-		this.tag(CoreTags.Items.RAW_ORES_COPPER).add(Items.RAW_COPPER);
+		this.tag(CoreTags.Items.RAW_MATERIALS).add(CoreItems.RAW_ALUMINUM.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS).add(CoreItems.RAW_LEAD.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS).add(CoreItems.RAW_NICKEL.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS).add(CoreItems.RAW_PLATINUM.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS).add(CoreItems.RAW_SILVER.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS).add(CoreItems.RAW_TIN.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS).add(Items.RAW_IRON);
+		this.tag(CoreTags.Items.RAW_MATERIALS).add(Items.RAW_GOLD);
+		this.tag(CoreTags.Items.RAW_MATERIALS).add(Items.RAW_COPPER);
+		this.tag(CoreTags.Items.RAW_MATERIALS_ALUMINUM).add(CoreItems.RAW_ALUMINUM.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS_LEAD).add(CoreItems.RAW_LEAD.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS_NICKEL).add(CoreItems.RAW_NICKEL.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS_PLATINUM).add(CoreItems.RAW_PLATINUM.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS_SILVER).add(CoreItems.RAW_SILVER.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS_TIN).add(CoreItems.RAW_TIN.get());
+		this.tag(CoreTags.Items.RAW_MATERIALS_IRON).add(Items.RAW_IRON);
+		this.tag(CoreTags.Items.RAW_MATERIALS_GOLD).add(Items.RAW_GOLD);
+		this.tag(CoreTags.Items.RAW_MATERIALS_COPPER).add(Items.RAW_COPPER);
 
 		this.tag(CoreTags.Items.INGOTS).add(CoreItems.TIN_INGOT.get());
 		this.tag(CoreTags.Items.INGOTS).add(Items.COPPER_INGOT);

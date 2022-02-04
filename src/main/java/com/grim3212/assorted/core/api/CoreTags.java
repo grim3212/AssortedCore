@@ -42,14 +42,13 @@ public class CoreTags {
 		public static final IOptionalNamedTag<Block> STORAGE_BLOCKS_INVAR = forgeTag("storage_blocks/invar");
 		public static final IOptionalNamedTag<Block> STORAGE_BLOCKS_STEEL = forgeTag("storage_blocks/steel");
 
-		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS = forgeTag("raw_storage_blocks");
-		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_TIN = forgeTag("raw_storage_blocks/tin");
-		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_COPPER = forgeTag("raw_storage_blocks/copper");
-		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_SILVER = forgeTag("raw_storage_blocks/silver");
-		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_ALUMINUM = forgeTag("raw_storage_blocks/aluminum");
-		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_NICKEL = forgeTag("raw_storage_blocks/nickel");
-		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_PLATINUM = forgeTag("raw_storage_blocks/platinum");
-		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_LEAD = forgeTag("raw_storage_blocks/lead");
+		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_TIN = forgeTag("storage_blocks/raw_tin");
+		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_COPPER = forgeTag("storage_blocks/raw_copper");
+		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_SILVER = forgeTag("storage_blocks/raw_silver");
+		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_ALUMINUM = forgeTag("storage_blocks/raw_aluminum");
+		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_NICKEL = forgeTag("storage_blocks/raw_nickel");
+		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_PLATINUM = forgeTag("storage_blocks/raw_platinum");
+		public static final IOptionalNamedTag<Block> RAW_STORAGE_BLOCKS_LEAD = forgeTag("storage_blocks/raw_lead");
 
 		private static IOptionalNamedTag<Block> forgeTag(String name) {
 			return BlockTags.createOptional(new ResourceLocation("forge", name));
@@ -89,14 +88,13 @@ public class CoreTags {
 		public static final IOptionalNamedTag<Item> STORAGE_BLOCKS_INVAR = forgeTag("storage_blocks/invar");
 		public static final IOptionalNamedTag<Item> STORAGE_BLOCKS_STEEL = forgeTag("storage_blocks/steel");
 
-		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS = forgeTag("raw_storage_blocks");
-		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_TIN = forgeTag("raw_storage_blocks/tin");
-		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_COPPER = forgeTag("raw_storage_blocks/copper");
-		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_SILVER = forgeTag("raw_storage_blocks/silver");
-		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_ALUMINUM = forgeTag("raw_storage_blocks/aluminum");
-		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_NICKEL = forgeTag("raw_storage_blocks/nickel");
-		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_PLATINUM = forgeTag("raw_storage_blocks/platinum");
-		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_LEAD = forgeTag("raw_storage_blocks/lead");
+		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_TIN = forgeTag("storage_blocks/raw_tin");
+		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_COPPER = forgeTag("storage_blocks/raw_copper");
+		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_SILVER = forgeTag("storage_blocks/raw_silver");
+		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_ALUMINUM = forgeTag("storage_blocks/raw_aluminum");
+		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_NICKEL = forgeTag("storage_blocks/raw_nickel");
+		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_PLATINUM = forgeTag("storage_blocks/raw_platinum");
+		public static final IOptionalNamedTag<Item> RAW_STORAGE_BLOCKS_LEAD = forgeTag("storage_blocks/raw_lead");
 
 		public static final IOptionalNamedTag<Item> INGOTS = forgeTag("ingots");
 		public static final IOptionalNamedTag<Item> INGOTS_TIN = forgeTag("ingots/tin");
@@ -160,16 +158,16 @@ public class CoreTags {
 		public static final IOptionalNamedTag<Item> GEARS_IRON = forgeTag("gear/iron");
 		public static final IOptionalNamedTag<Item> GEARS_GOLD = forgeTag("gear/gold");
 		
-		public static final IOptionalNamedTag<Item> RAW_ORES = forgeTag("raw_ores");
-		public static final IOptionalNamedTag<Item> RAW_ORES_TIN = forgeTag("raw_ores/tin");
-		public static final IOptionalNamedTag<Item> RAW_ORES_SILVER = forgeTag("raw_ores/silver");
-		public static final IOptionalNamedTag<Item> RAW_ORES_ALUMINUM = forgeTag("raw_ores/aluminum");
-		public static final IOptionalNamedTag<Item> RAW_ORES_NICKEL = forgeTag("raw_ores/nickel");
-		public static final IOptionalNamedTag<Item> RAW_ORES_PLATINUM = forgeTag("raw_ores/platinum");
-		public static final IOptionalNamedTag<Item> RAW_ORES_LEAD = forgeTag("raw_ores/lead");
-		public static final IOptionalNamedTag<Item> RAW_ORES_IRON = forgeTag("raw_ores/iron");
-		public static final IOptionalNamedTag<Item> RAW_ORES_GOLD = forgeTag("raw_ores/gold");
-		public static final IOptionalNamedTag<Item> RAW_ORES_COPPER = forgeTag("raw_ores/copper");
+		public static final IOptionalNamedTag<Item> RAW_MATERIALS = forgeTag("raw_materials");
+		public static final IOptionalNamedTag<Item> RAW_MATERIALS_TIN = forgeTag("raw_materials/tin");
+		public static final IOptionalNamedTag<Item> RAW_MATERIALS_SILVER = forgeTag("raw_materials/silver");
+		public static final IOptionalNamedTag<Item> RAW_MATERIALS_ALUMINUM = forgeTag("raw_materials/aluminum");
+		public static final IOptionalNamedTag<Item> RAW_MATERIALS_NICKEL = forgeTag("raw_materials/nickel");
+		public static final IOptionalNamedTag<Item> RAW_MATERIALS_PLATINUM = forgeTag("raw_materials/platinum");
+		public static final IOptionalNamedTag<Item> RAW_MATERIALS_LEAD = forgeTag("raw_materials/lead");
+		public static final IOptionalNamedTag<Item> RAW_MATERIALS_IRON = forgeTag("raw_materials/iron");
+		public static final IOptionalNamedTag<Item> RAW_MATERIALS_GOLD = forgeTag("raw_materials/gold");
+		public static final IOptionalNamedTag<Item> RAW_MATERIALS_COPPER = forgeTag("raw_materials/copper");
 
 		private static IOptionalNamedTag<Item> forgeTag(String name) {
 			return ItemTags.createOptional(new ResourceLocation("forge", name));

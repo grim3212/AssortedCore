@@ -48,12 +48,12 @@ public class CoreRecipes extends RecipeProvider {
 		storageIngotNugget(CoreTags.Items.STORAGE_BLOCKS_INVAR, CoreTags.Items.INGOTS_INVAR, CoreTags.Items.NUGGETS_INVAR, CoreBlocks.INVAR_BLOCK.get(), CoreItems.INVAR_INGOT.get(), CoreItems.INVAR_NUGGET.get(), consumer);
 		storageIngotNugget(CoreTags.Items.STORAGE_BLOCKS_STEEL, CoreTags.Items.INGOTS_STEEL, CoreTags.Items.NUGGETS_STEEL, CoreBlocks.STEEL_BLOCK.get(), CoreItems.STEEL_INGOT.get(), CoreItems.STEEL_NUGGET.get(), consumer);
 
-		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_ALUMINUM, CoreTags.Items.RAW_ORES_ALUMINUM, CoreBlocks.RAW_ALUMINUM_BLOCK.get(), CoreItems.RAW_ALUMINUM.get(), consumer);
-		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_LEAD, CoreTags.Items.RAW_ORES_LEAD, CoreBlocks.RAW_LEAD_BLOCK.get(), CoreItems.RAW_LEAD.get(), consumer);
-		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_NICKEL, CoreTags.Items.RAW_ORES_NICKEL, CoreBlocks.RAW_NICKEL_BLOCK.get(), CoreItems.RAW_NICKEL.get(), consumer);
-		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_PLATINUM, CoreTags.Items.RAW_ORES_PLATINUM, CoreBlocks.RAW_PLATINUM_BLOCK.get(), CoreItems.RAW_PLATINUM.get(), consumer);
-		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_SILVER, CoreTags.Items.RAW_ORES_SILVER, CoreBlocks.RAW_SILVER_BLOCK.get(), CoreItems.RAW_SILVER.get(), consumer);
-		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_TIN, CoreTags.Items.RAW_ORES_TIN, CoreBlocks.RAW_TIN_BLOCK.get(), CoreItems.RAW_TIN.get(), consumer);
+		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_ALUMINUM, CoreTags.Items.RAW_MATERIALS_ALUMINUM, CoreBlocks.RAW_ALUMINUM_BLOCK.get(), CoreItems.RAW_ALUMINUM.get(), consumer);
+		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_LEAD, CoreTags.Items.RAW_MATERIALS_LEAD, CoreBlocks.RAW_LEAD_BLOCK.get(), CoreItems.RAW_LEAD.get(), consumer);
+		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_NICKEL, CoreTags.Items.RAW_MATERIALS_NICKEL, CoreBlocks.RAW_NICKEL_BLOCK.get(), CoreItems.RAW_NICKEL.get(), consumer);
+		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_PLATINUM, CoreTags.Items.RAW_MATERIALS_PLATINUM, CoreBlocks.RAW_PLATINUM_BLOCK.get(), CoreItems.RAW_PLATINUM.get(), consumer);
+		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_SILVER, CoreTags.Items.RAW_MATERIALS_SILVER, CoreBlocks.RAW_SILVER_BLOCK.get(), CoreItems.RAW_SILVER.get(), consumer);
+		storage(CoreTags.Items.RAW_STORAGE_BLOCKS_TIN, CoreTags.Items.RAW_MATERIALS_TIN, CoreBlocks.RAW_TIN_BLOCK.get(), CoreItems.RAW_TIN.get(), consumer);
 
 		gemStorage(CoreTags.Items.STORAGE_BLOCKS_RUBY, CoreTags.Items.GEMS_RUBY, CoreBlocks.RUBY_BLOCK.get(), CoreItems.RUBY.get(), consumer);
 		gemStorage(CoreTags.Items.STORAGE_BLOCKS_PERIDOT, CoreTags.Items.GEMS_PERIDOT, CoreBlocks.PERIDOT_BLOCK.get(), CoreItems.PERIDOT.get(), consumer);
@@ -71,12 +71,12 @@ public class CoreRecipes extends RecipeProvider {
 		blastingSmelting(CoreTags.Items.ORES_SAPPHIRE, CoreItems.SAPPHIRE.get(), 1.0f, consumer);
 		blastingSmelting(CoreTags.Items.ORES_TOPAZ, CoreItems.TOPAZ.get(), 1.0f, consumer);
 
-		rawOreBlastingSmelting(CoreTags.Items.RAW_ORES_TIN, CoreItems.TIN_INGOT.get(), 0.5f, consumer);
-		rawOreBlastingSmelting(CoreTags.Items.RAW_ORES_SILVER, CoreItems.SILVER_INGOT.get(), 1.0f, consumer);
-		rawOreBlastingSmelting(CoreTags.Items.RAW_ORES_ALUMINUM, CoreItems.ALUMINUM_INGOT.get(), 0.7f, consumer);
-		rawOreBlastingSmelting(CoreTags.Items.RAW_ORES_NICKEL, CoreItems.NICKEL_INGOT.get(), 0.7f, consumer);
-		rawOreBlastingSmelting(CoreTags.Items.RAW_ORES_PLATINUM, CoreItems.PLATINUM_INGOT.get(), 1.5f, consumer);
-		rawOreBlastingSmelting(CoreTags.Items.RAW_ORES_LEAD, CoreItems.LEAD_INGOT.get(), 1.0f, consumer);
+		rawOreBlastingSmelting(CoreTags.Items.RAW_MATERIALS_TIN, CoreItems.TIN_INGOT.get(), 0.5f, consumer);
+		rawOreBlastingSmelting(CoreTags.Items.RAW_MATERIALS_SILVER, CoreItems.SILVER_INGOT.get(), 1.0f, consumer);
+		rawOreBlastingSmelting(CoreTags.Items.RAW_MATERIALS_ALUMINUM, CoreItems.ALUMINUM_INGOT.get(), 0.7f, consumer);
+		rawOreBlastingSmelting(CoreTags.Items.RAW_MATERIALS_NICKEL, CoreItems.NICKEL_INGOT.get(), 0.7f, consumer);
+		rawOreBlastingSmelting(CoreTags.Items.RAW_MATERIALS_PLATINUM, CoreItems.PLATINUM_INGOT.get(), 1.5f, consumer);
+		rawOreBlastingSmelting(CoreTags.Items.RAW_MATERIALS_LEAD, CoreItems.LEAD_INGOT.get(), 1.0f, consumer);
 
 		rawStorageBlastingSmelting(CoreTags.Items.RAW_STORAGE_BLOCKS_TIN, CoreBlocks.TIN_BLOCK.get(), 1.0f, consumer);
 		rawStorageBlastingSmelting(CoreTags.Items.RAW_STORAGE_BLOCKS_SILVER, CoreBlocks.SILVER_BLOCK.get(), 2.0f, consumer);
@@ -154,15 +154,15 @@ public class CoreRecipes extends RecipeProvider {
 		grindingDustFromIngot(CoreTags.Items.INGOTS_STEEL, new ItemStack(CoreItems.STEEL_DUST.get(), 1), 0.0F, 300, consumer);
 		grindingDustFromIngot(CoreTags.Items.INGOTS_INVAR, new ItemStack(CoreItems.INVAR_DUST.get(), 1), 0.0F, 300, consumer);
 
-		grindingDustFromRawOre(CoreTags.Items.RAW_ORES_GOLD, new ItemStack(CoreItems.GOLD_DUST.get(), 2), 0.0F, 300, consumer);
-		grindingDustFromRawOre(CoreTags.Items.RAW_ORES_IRON, new ItemStack(CoreItems.IRON_DUST.get(), 2), 0.0F, 300, consumer);
-		grindingDustFromRawOre(CoreTags.Items.RAW_ORES_TIN, new ItemStack(CoreItems.TIN_DUST.get(), 2), 0.0F, 300, consumer);
-		grindingDustFromRawOre(CoreTags.Items.RAW_ORES_COPPER, new ItemStack(CoreItems.COPPER_DUST.get(), 2), 0.0F, 300, consumer);
-		grindingDustFromRawOre(CoreTags.Items.RAW_ORES_SILVER, new ItemStack(CoreItems.SILVER_DUST.get(), 2), 0.0F, 300, consumer);
-		grindingDustFromRawOre(CoreTags.Items.RAW_ORES_ALUMINUM, new ItemStack(CoreItems.ALUMINUM_DUST.get(), 2), 0.0F, 300, consumer);
-		grindingDustFromRawOre(CoreTags.Items.RAW_ORES_NICKEL, new ItemStack(CoreItems.NICKEL_DUST.get(), 2), 0.0F, 300, consumer);
-		grindingDustFromRawOre(CoreTags.Items.RAW_ORES_PLATINUM, new ItemStack(CoreItems.PLATINUM_DUST.get(), 2), 0.0F, 300, consumer);
-		grindingDustFromRawOre(CoreTags.Items.RAW_ORES_LEAD, new ItemStack(CoreItems.LEAD_DUST.get(), 2), 0.0F, 300, consumer);
+		grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_GOLD, new ItemStack(CoreItems.GOLD_DUST.get(), 2), 0.0F, 300, consumer);
+		grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_IRON, new ItemStack(CoreItems.IRON_DUST.get(), 2), 0.0F, 300, consumer);
+		grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_TIN, new ItemStack(CoreItems.TIN_DUST.get(), 2), 0.0F, 300, consumer);
+		grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_COPPER, new ItemStack(CoreItems.COPPER_DUST.get(), 2), 0.0F, 300, consumer);
+		grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_SILVER, new ItemStack(CoreItems.SILVER_DUST.get(), 2), 0.0F, 300, consumer);
+		grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_ALUMINUM, new ItemStack(CoreItems.ALUMINUM_DUST.get(), 2), 0.0F, 300, consumer);
+		grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_NICKEL, new ItemStack(CoreItems.NICKEL_DUST.get(), 2), 0.0F, 300, consumer);
+		grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_PLATINUM, new ItemStack(CoreItems.PLATINUM_DUST.get(), 2), 0.0F, 300, consumer);
+		grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_LEAD, new ItemStack(CoreItems.LEAD_DUST.get(), 2), 0.0F, 300, consumer);
 
 		ShapedRecipeBuilder.shaped(CoreBlocks.MACHINE_CORE.get()).define('A', CoreTags.Items.INGOTS_ALUMINUM).define('C', CoreTags.Items.GEARS_COPPER).define('I', Tags.Items.INGOTS_IRON).pattern("IAI").pattern("ACA").pattern("IAI").unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON)).save(consumer);
 		ShapedRecipeBuilder.shaped(CoreBlocks.BASIC_ALLOY_FORGE.get()).define('X', CoreBlocks.MACHINE_CORE.get()).define('B', Blocks.BLAST_FURNACE).define('I', Tags.Items.INGOTS_IRON).pattern("III").pattern("BXB").pattern("III").unlockedBy("has_iron", has(Tags.Items.INGOTS_IRON)).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(consumer);

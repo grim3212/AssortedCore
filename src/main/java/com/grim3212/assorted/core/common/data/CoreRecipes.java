@@ -18,8 +18,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
-import net.minecraft.tags.Tag.Named;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -176,78 +175,78 @@ public class CoreRecipes extends RecipeProvider {
 		ShapedRecipeBuilder.shaped(CoreBlocks.EXPERT_GRINDING_MILL.get()).define('X', CoreBlocks.ADVANCED_GRINDING_MILL.get()).define('P', CoreTags.Items.INGOTS_PLATINUM).pattern(" P ").pattern("PXP").pattern(" P ").unlockedBy("has_platinum", has(CoreTags.Items.INGOTS_PLATINUM)).save(consumer);
 	}
 
-	private void alloy(Named<Item> ingredient1, int ingredient1Count, Named<Item> ingredient2, int ingredient2Count, ItemStack result, float experience, Consumer<FinishedRecipe> consumer) {
+	private void alloy(TagKey<Item> ingredient1, int ingredient1Count, TagKey<Item> ingredient2, int ingredient2Count, ItemStack result, float experience, Consumer<FinishedRecipe> consumer) {
 		alloy(ingredient1, ingredient1Count, ingredient2, ingredient2Count, result, experience, 400, consumer);
 	}
 
-	private void alloy(Named<Item> ingredient1, Named<Item> ingredient2, ItemStack result, float experience, Consumer<FinishedRecipe> consumer) {
+	private void alloy(TagKey<Item> ingredient1, TagKey<Item> ingredient2, ItemStack result, float experience, Consumer<FinishedRecipe> consumer) {
 		alloy(ingredient1, ingredient2, result, experience, 400, consumer);
 	}
 
-	private void alloy(Named<Item> ingredient1, Named<Item> ingredient2, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer) {
+	private void alloy(TagKey<Item> ingredient1, TagKey<Item> ingredient2, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer) {
 		alloy(ingredient1, 1, ingredient2, 1, result, experience, cookTime, consumer);
 	}
 
-	private void alloy(Named<Item> ingredient1, int ingredient1Count, Named<Item> ingredient2, int ingredient2Count, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer) {
+	private void alloy(TagKey<Item> ingredient1, int ingredient1Count, TagKey<Item> ingredient2, int ingredient2Count, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer) {
 		AlloyForgeRecipeBuilder.recipe(new MachineIngredient(Ingredient.of(ingredient1), ingredient1Count), new MachineIngredient(Ingredient.of(ingredient2), ingredient2Count), result, experience, cookTime).addCriterion("has_ingredient1", has(ingredient1)).addCriterion("has_ingredient2", has(ingredient2)).build(consumer);
 	}
 
-	private void grindingDustFromRawOre(Named<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer) {
+	private void grindingDustFromRawOre(TagKey<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer) {
 		grinding(ingredient, result, experience, cookTime, consumer, "_from_raw_ore");
 	}
 
-	private void grindingDustFromIngot(Named<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer) {
+	private void grindingDustFromIngot(TagKey<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer) {
 		grinding(ingredient, result, experience, cookTime, consumer, "_from_ingot");
 	}
 
-	private void grinding(Named<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer) {
+	private void grinding(TagKey<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer) {
 		grinding(ingredient, result, experience, cookTime, consumer, "");
 	}
 
-	private void grinding(Named<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer, String name) {
+	private void grinding(TagKey<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer, String name) {
 		GrindingMillRecipeBuilder.recipe(new MachineIngredient(Ingredient.of(ingredient)), result, experience, cookTime).addCriterion("has_ingredient", has(ingredient)).build(consumer, new ResourceLocation(AssortedCore.MODID, result.getItem().getRegistryName().getPath() + name));
 	}
 
-	private void gear(Named<Item> material, ItemLike gear, Consumer<FinishedRecipe> consumer) {
+	private void gear(TagKey<Item> material, ItemLike gear, Consumer<FinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shaped(gear).define('M', material).define('S', Tags.Items.RODS_WOODEN).pattern(" M ").pattern("MSM").pattern(" M ").unlockedBy("has_material", has(material)).save(consumer);
 	}
 
-	private void ingotDust(Named<Item> dust, ItemLike ingot, Consumer<FinishedRecipe> consumer) {
-		SimpleCookingRecipeBuilder.blasting(Ingredient.of(dust), ingot, 0.1F, 100).unlockedBy("has_dust", has(dust)).save(consumer, new ResourceLocation(AssortedCore.MODID, dust.getName().getPath() + "_blasting"));
-		SimpleCookingRecipeBuilder.smelting(Ingredient.of(dust), ingot, 0.1F, 200).unlockedBy("has_dust", has(dust)).save(consumer, new ResourceLocation(AssortedCore.MODID, dust.getName().getPath() + "_smelting"));
+	private void ingotDust(TagKey<Item> dust, ItemLike ingot, Consumer<FinishedRecipe> consumer) {
+		SimpleCookingRecipeBuilder.blasting(Ingredient.of(dust), ingot, 0.1F, 100).unlockedBy("has_dust", has(dust)).save(consumer, new ResourceLocation(AssortedCore.MODID, dust.location().getPath() + "_blasting"));
+		SimpleCookingRecipeBuilder.smelting(Ingredient.of(dust), ingot, 0.1F, 200).unlockedBy("has_dust", has(dust)).save(consumer, new ResourceLocation(AssortedCore.MODID, dust.location().getPath() + "_smelting"));
 	}
 
-	private void rawStorageBlastingSmelting(Tag<Item> rawStorage, ItemLike output, float experience, Consumer<FinishedRecipe> consumer) {
+	private void rawStorageBlastingSmelting(TagKey<Item> rawStorage, ItemLike output, float experience, Consumer<FinishedRecipe> consumer) {
 		SimpleCookingRecipeBuilder.blasting(Ingredient.of(rawStorage), output, experience, 100).unlockedBy("has_storage", has(rawStorage)).save(consumer, new ResourceLocation(AssortedCore.MODID, output.asItem().getRegistryName().getPath() + "_blasting_raw_storage"));
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(rawStorage), output, experience, 200).unlockedBy("has_storage", has(rawStorage)).save(consumer, new ResourceLocation(AssortedCore.MODID, output.asItem().getRegistryName().getPath() + "_smelting_raw_storage"));
 	}
 
-	private void rawOreBlastingSmelting(Tag<Item> ore, ItemLike output, float experience, Consumer<FinishedRecipe> consumer) {
+	private void rawOreBlastingSmelting(TagKey<Item> ore, ItemLike output, float experience, Consumer<FinishedRecipe> consumer) {
 		SimpleCookingRecipeBuilder.blasting(Ingredient.of(ore), output, experience, 100).unlockedBy("has_ore", has(ore)).save(consumer, new ResourceLocation(AssortedCore.MODID, output.asItem().getRegistryName().getPath() + "_blasting_raw_ore"));
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ore), output, experience, 200).unlockedBy("has_ore", has(ore)).save(consumer, new ResourceLocation(AssortedCore.MODID, output.asItem().getRegistryName().getPath() + "_smelting_raw_ore"));
 	}
 
-	private void blastingSmelting(Tag<Item> ore, ItemLike output, float experience, Consumer<FinishedRecipe> consumer) {
+	private void blastingSmelting(TagKey<Item> ore, ItemLike output, float experience, Consumer<FinishedRecipe> consumer) {
 		SimpleCookingRecipeBuilder.blasting(Ingredient.of(ore), output, experience, 100).unlockedBy("has_ore", has(ore)).save(consumer, new ResourceLocation(AssortedCore.MODID, output.asItem().getRegistryName().getPath() + "_blasting"));
 		SimpleCookingRecipeBuilder.smelting(Ingredient.of(ore), output, experience, 200).unlockedBy("has_ore", has(ore)).save(consumer, new ResourceLocation(AssortedCore.MODID, output.asItem().getRegistryName().getPath() + "_smelting"));
 	}
 
-	private void gemStorage(Tag<Item> storageBlockTag, Tag<Item> gemTag, ItemLike storageBlock, ItemLike gem, Consumer<FinishedRecipe> consumer) {
+	private void gemStorage(TagKey<Item> storageBlockTag, TagKey<Item> gemTag, ItemLike storageBlock, ItemLike gem, Consumer<FinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapeless(gem, 9).requires(Ingredient.of(storageBlockTag)).unlockedBy("has_gem", has(storageBlockTag)).save(consumer, new ResourceLocation(AssortedCore.MODID, gem.asItem().getRegistryName().getPath() + "_storage_block"));
 		ShapelessRecipeBuilder.shapeless(storageBlock, 1).requires(Ingredient.of(gemTag), 9).unlockedBy("has_gem", has(gemTag)).save(consumer);
 	}
 
-	private void storage(Tag<Item> storageBlockTag, Tag<Item> nonStoreTag, ItemLike storageBlock, ItemLike nonStore, Consumer<FinishedRecipe> consumer) {
+	private void storage(TagKey<Item> storageBlockTag, TagKey<Item> nonStoreTag, ItemLike storageBlock, ItemLike nonStore, Consumer<FinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapeless(nonStore, 9).requires(Ingredient.of(storageBlockTag)).unlockedBy("has_storage_item", has(nonStoreTag)).save(consumer, new ResourceLocation(AssortedCore.MODID, nonStore.asItem().getRegistryName().getPath() + "_storage_block"));
 		ShapelessRecipeBuilder.shapeless(storageBlock, 1).requires(Ingredient.of(nonStoreTag), 9).unlockedBy("has_storage_item", has(nonStoreTag)).save(consumer);
 	}
 
-	private void storageIngotNugget(Tag<Item> storageBlockTag, Tag<Item> ingotTag, Tag<Item> nuggetTag, ItemLike storageBlock, ItemLike ingot, ItemLike nugget, Consumer<FinishedRecipe> consumer) {
+	private void storageIngotNugget(TagKey<Item> storageBlockTag, TagKey<Item> ingotTag, TagKey<Item> nuggetTag, ItemLike storageBlock, ItemLike ingot, ItemLike nugget, Consumer<FinishedRecipe> consumer) {
 		storage(storageBlockTag, ingotTag, storageBlock, ingot, consumer);
 		ingotNugget(ingotTag, nuggetTag, ingot, nugget, consumer);
 	}
 
-	private void ingotNugget(Tag<Item> ingotTag, Tag<Item> nuggetTag, ItemLike ingot, ItemLike nugget, Consumer<FinishedRecipe> consumer) {
+	private void ingotNugget(TagKey<Item> ingotTag, TagKey<Item> nuggetTag, ItemLike ingot, ItemLike nugget, Consumer<FinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapeless(nugget, 9).requires(Ingredient.of(ingotTag)).unlockedBy("has_ingot", has(ingotTag)).save(consumer);
 		ShapelessRecipeBuilder.shapeless(ingot, 1).requires(Ingredient.of(nuggetTag), 9).unlockedBy("has_ingot", has(ingotTag)).save(consumer, new ResourceLocation(AssortedCore.MODID, ingot.asItem().getRegistryName().getPath() + "_nuggets"));
 	}

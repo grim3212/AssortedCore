@@ -11,12 +11,12 @@ import com.grim3212.assorted.core.client.screen.GrindingMillScreen;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
 import com.grim3212.assorted.core.common.block.blockentity.CoreBlockEntityTypes;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.common.data.CoreBlockTagProvider;
 import com.grim3212.assorted.core.common.data.CoreItemTagProvider;
 import com.grim3212.assorted.core.common.data.CoreLootProvider;
 import com.grim3212.assorted.core.common.data.CoreRecipes;
 import com.grim3212.assorted.core.common.gen.CoreWorldGeneration;
-import com.grim3212.assorted.core.common.gen.feature.CoreConfiguredFeatures;
 import com.grim3212.assorted.core.common.handler.CoreConfig;
 import com.grim3212.assorted.core.common.inventory.CoreContainerTypes;
 import com.grim3212.assorted.core.common.item.CoreItems;
@@ -81,7 +81,7 @@ public class AssortedCore {
 
 	private void setup(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
-			CoreConfiguredFeatures.registerConfiguredFeatures();
+			CoreRecipeTypes.register();
 		});
 	}
 

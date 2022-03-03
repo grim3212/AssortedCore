@@ -8,8 +8,13 @@ import net.minecraft.world.item.crafting.RecipeType;
 
 public class CoreRecipeTypes {
 
-	public static RecipeType<AlloyForgeRecipe> ALLOY_FORGE = RecipeType.register(prefix("alloy_forge"));
-	public static RecipeType<GrindingMillRecipe> GRINDING_MILL = RecipeType.register(prefix("grinding_mill"));
+	public static RecipeType<AlloyForgeRecipe> ALLOY_FORGE;
+	public static RecipeType<GrindingMillRecipe> GRINDING_MILL;
+
+	public static void register() {
+		ALLOY_FORGE = RecipeType.register(prefix("alloy_forge"));
+		GRINDING_MILL = RecipeType.register(prefix("grinding_mill"));
+	}
 
 	private static String prefix(String s) {
 		return AssortedCore.MODID + ":" + s;

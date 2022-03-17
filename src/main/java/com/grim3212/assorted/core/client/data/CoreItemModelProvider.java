@@ -4,7 +4,6 @@ import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
 import com.grim3212.assorted.core.common.item.CoreItems;
 
-import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -12,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class CoreItemModelProvider extends ItemModelProvider {
 
@@ -157,11 +157,11 @@ public class CoreItemModelProvider extends ItemModelProvider {
 	}
 
 	private static String name(Item i) {
-		return Registry.ITEM.getKey(i).getPath();
+		return ForgeRegistries.ITEMS.getKey(i).getPath();
 	}
 
 	private static String name(Block i) {
-		return Registry.BLOCK.getKey(i).getPath();
+		return ForgeRegistries.BLOCKS.getKey(i).getPath();
 	}
 
 	private ResourceLocation prefix(String name) {

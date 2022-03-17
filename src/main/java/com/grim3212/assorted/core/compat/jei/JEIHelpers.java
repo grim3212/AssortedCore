@@ -8,15 +8,15 @@ import com.google.common.collect.Lists;
 import com.grim3212.assorted.core.api.AssortedCoreAPI;
 import com.grim3212.assorted.core.api.crafting.MachineIngredient;
 
-import net.minecraft.core.Registry;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class JEIHelpers {
 
 	public static List<ItemStack> grindingMillAcceptedTools = Lists.newArrayList();
 
 	public static void hydrateLists() {
-		grindingMillAcceptedTools = Registry.ITEM.stream().filter((item) -> AssortedCoreAPI.allowedInGrindingMillToolSlot(new ItemStack(item))).map((item) -> new ItemStack(item)).collect(Collectors.toList());
+		grindingMillAcceptedTools = ForgeRegistries.ITEMS.getEntries().stream().filter((item) -> AssortedCoreAPI.allowedInGrindingMillToolSlot(new ItemStack(item.getValue()))).map((item) -> new ItemStack(item.getValue())).collect(Collectors.toList());
 	}
 
 	public static List<List<ItemStack>> getMachineIngredientStacks(MachineIngredient... machineIngredients) {

@@ -14,11 +14,11 @@ import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.Registry;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class AlloyForgeRecipeBuilder {
 
@@ -52,11 +52,11 @@ public class AlloyForgeRecipeBuilder {
 	}
 
 	public void build(Consumer<FinishedRecipe> consumerIn) {
-		this.build(consumerIn, Registry.ITEM.getKey(this.result.getItem()));
+		this.build(consumerIn, ForgeRegistries.ITEMS.getKey(this.result.getItem()));
 	}
 
 	public void build(Consumer<FinishedRecipe> consumerIn, String save) {
-		ResourceLocation resourcelocation = Registry.ITEM.getKey(this.result.getItem());
+		ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.result.getItem());
 		ResourceLocation resourcelocation1 = new ResourceLocation(save);
 		if (resourcelocation1.equals(resourcelocation)) {
 			throw new IllegalStateException("Recipe " + resourcelocation1 + " should remove its 'save' argument");
@@ -109,7 +109,7 @@ public class AlloyForgeRecipeBuilder {
 			json.add("ingredient1", this.ingredient1.serialize());
 			json.add("ingredient2", this.ingredient2.serialize());
 			JsonObject itemstack = new JsonObject();
-			itemstack.addProperty("item", Registry.ITEM.getKey(this.result.getItem()).toString());
+			itemstack.addProperty("item", ForgeRegistries.ITEMS.getKey(this.result.getItem()).toString());
 			itemstack.addProperty("count", this.result.getCount());
 			json.add("result", itemstack);
 			json.addProperty("experience", this.experience);

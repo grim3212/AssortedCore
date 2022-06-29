@@ -22,7 +22,7 @@ public class GrindingMillContainer extends BaseMachineContainer {
 	}
 
 	public GrindingMillContainer(int id, Inventory playerInventory, Container grindingMillInventory, ContainerData grindingMillData) {
-		super(CoreContainerTypes.GRINDING_MILL.get(), CoreRecipeTypes.GRINDING_MILL, id, playerInventory, 4, grindingMillInventory, grindingMillData);
+		super(CoreContainerTypes.GRINDING_MILL.get(), CoreRecipeTypes.GRINDING_MILL.get(), id, playerInventory, 4, grindingMillInventory, grindingMillData);
 
 		this.addSlot(new Slot(grindingMillInventory, 0, 51, 27));
 		this.addSlot(new GrindingMillToolSlot(grindingMillInventory, 1, 80, 5));

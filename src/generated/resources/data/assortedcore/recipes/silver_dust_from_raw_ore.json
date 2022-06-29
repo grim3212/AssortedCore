@@ -1,15 +1,15 @@
 {
   "type": "assortedcore:grinding_mill",
+  "cookingtime": 300,
+  "experience": 0.0,
   "ingredient": {
+    "count": 1,
     "ingredient": {
       "tag": "forge:raw_materials/silver"
-    },
-    "count": 1
+    }
   },
   "result": {
-    "item": "assortedcore:silver_dust",
-    "count": 2
-  },
-  "experience": 0.0,
-  "cookingtime": 300
+    "count": 2,
+    "item": "assortedcore:silver_dust"
+  }
 }

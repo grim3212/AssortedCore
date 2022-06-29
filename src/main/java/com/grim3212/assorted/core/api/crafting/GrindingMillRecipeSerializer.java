@@ -11,9 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class GrindingMillRecipeSerializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<GrindingMillRecipe> {
+public class GrindingMillRecipeSerializer implements RecipeSerializer<GrindingMillRecipe> {
 
 	@Override
 	public GrindingMillRecipe fromJson(ResourceLocation recipeId, JsonObject json) {

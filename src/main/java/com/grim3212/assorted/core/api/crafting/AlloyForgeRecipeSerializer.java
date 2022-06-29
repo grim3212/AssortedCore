@@ -11,9 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class AlloyForgeRecipeSerializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<AlloyForgeRecipe> {
+public class AlloyForgeRecipeSerializer implements RecipeSerializer<AlloyForgeRecipe> {
 
 	@Override
 	public AlloyForgeRecipe fromJson(ResourceLocation recipeId, JsonObject json) {

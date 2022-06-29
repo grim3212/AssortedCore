@@ -1,15 +1,15 @@
 {
   "type": "assortedcore:grinding_mill",
+  "cookingtime": 600,
+  "experience": 0.3,
   "ingredient": {
+    "count": 1,
     "ingredient": {
       "tag": "forge:ores/diamond"
-    },
-    "count": 1
+    }
   },
   "result": {
-    "item": "minecraft:diamond",
-    "count": 2
-  },
-  "experience": 0.3,
-  "cookingtime": 600
+    "count": 2,
+    "item": "minecraft:diamond"
+  }
 }

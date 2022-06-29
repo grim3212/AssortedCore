@@ -21,7 +21,7 @@ public class AlloyForgeContainer extends BaseMachineContainer {
 	}
 
 	public AlloyForgeContainer(int id, Inventory playerInventory, Container alloyForgeInventory, ContainerData alloyForgeData) {
-		super(CoreContainerTypes.ALLOY_FORGE.get(), CoreRecipeTypes.ALLOY_FORGE, id, playerInventory, 4, alloyForgeInventory, alloyForgeData);
+		super(CoreContainerTypes.ALLOY_FORGE.get(), CoreRecipeTypes.ALLOY_FORGE.get(), id, playerInventory, 4, alloyForgeInventory, alloyForgeData);
 
 		this.addSlot(new Slot(alloyForgeInventory, 0, 32, 27));
 		this.addSlot(new Slot(alloyForgeInventory, 1, 56, 27));

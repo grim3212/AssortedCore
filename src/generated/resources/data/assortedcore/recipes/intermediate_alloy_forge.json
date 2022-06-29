@@ -1,18 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "tag": "forge:ingots/steel"
+    },
+    "X": {
+      "item": "assortedcore:basic_alloy_forge"
+    }
+  },
   "pattern": [
     "SSS",
     "SXS",
     "SSS"
   ],
-  "key": {
-    "X": {
-      "item": "assortedcore:basic_alloy_forge"
-    },
-    "S": {
-      "tag": "forge:ingots/steel"
-    }
-  },
   "result": {
     "item": "assortedcore:intermediate_alloy_forge"
   }

@@ -1,21 +1,21 @@
 {
   "type": "assortedcore:alloy_forge",
+  "cookingtime": 500,
+  "experience": 0.7,
   "ingredient1": {
+    "count": 2,
     "ingredient": {
       "tag": "forge:dusts/iron"
-    },
-    "count": 2
+    }
   },
   "ingredient2": {
+    "count": 1,
     "ingredient": {
       "tag": "forge:dusts/nickel"
-    },
-    "count": 1
+    }
   },
   "result": {
-    "item": "assortedcore:invar_ingot",
-    "count": 3
-  },
-  "experience": 0.7,
-  "cookingtime": 500
+    "count": 3,
+    "item": "assortedcore:invar_ingot"
+  }
 }

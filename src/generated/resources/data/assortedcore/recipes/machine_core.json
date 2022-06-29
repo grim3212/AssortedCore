@@ -1,10 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "IAI",
-    "ACA",
-    "IAI"
-  ],
   "key": {
     "A": {
       "tag": "forge:ingots/aluminum"
@@ -16,6 +11,11 @@
       "tag": "forge:ingots/iron"
     }
   },
+  "pattern": [
+    "IAI",
+    "ACA",
+    "IAI"
+  ],
   "result": {
     "item": "assortedcore:machine_core"
   }

@@ -15,7 +15,7 @@ public class AssortedCoreAPI {
 		if (stack.is(CoreTags.Items.GRINDING_MILL_ALLOWED_TOOLS))
 			return true;
 
-		if (stack.getItem()instanceof TieredItem itemTier) {
+		if (stack.getItem() instanceof TieredItem itemTier) {
 			if (stack.getItem().canPerformAction(stack, ToolActions.PICKAXE_DIG)) {
 				if (TierSortingRegistry.isTierSorted(itemTier.getTier())) {
 					// Iron is our benchmark so the tools should be greater than iron at least
@@ -30,10 +30,10 @@ public class AssortedCoreAPI {
 	}
 
 	public static boolean isValidAlloyForgeInput(RecipeManager manager, ItemStack stack) {
-		return manager == null ? false : manager.getAllRecipesFor(CoreRecipeTypes.ALLOY_FORGE).stream().anyMatch((recipe) -> recipe.validItem(stack));
+		return manager == null ? false : manager.getAllRecipesFor(CoreRecipeTypes.ALLOY_FORGE.get()).stream().anyMatch((recipe) -> recipe.validItem(stack));
 	}
 
 	public static boolean isValidGrindingMillInput(RecipeManager manager, ItemStack stack) {
-		return manager == null ? false : manager.getAllRecipesFor(CoreRecipeTypes.GRINDING_MILL).stream().anyMatch((recipe) -> recipe.validItem(stack));
+		return manager == null ? false : manager.getAllRecipesFor(CoreRecipeTypes.GRINDING_MILL.get()).stream().anyMatch((recipe) -> recipe.validItem(stack));
 	}
 }

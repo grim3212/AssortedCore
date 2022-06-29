@@ -3,11 +3,11 @@ package com.grim3212.assorted.core.api.crafting;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
 public class GrindingMillRecipe extends BaseMachineRecipe {
@@ -31,7 +31,7 @@ public class GrindingMillRecipe extends BaseMachineRecipe {
 
 	@Override
 	public RecipeType<?> getType() {
-		return CoreRecipeTypes.GRINDING_MILL;
+		return CoreRecipeTypes.GRINDING_MILL.get();
 	}
 
 	@Override

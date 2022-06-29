@@ -1,7 +1,5 @@
 package com.grim3212.assorted.core.common.block;
 
-import java.util.Random;
-
 import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.block.blockentity.AlloyForgeBlockEntity;
 
@@ -10,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,7 +26,7 @@ public class AlloyForgeBlock extends BaseMachineBlock {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
+	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
 		if (stateIn.getValue(ON)) {
 			double d0 = (double) pos.getX() + 0.5D;
 			double d1 = (double) pos.getY();
@@ -51,15 +50,15 @@ public class AlloyForgeBlock extends BaseMachineBlock {
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		switch (this.tier) {
-			case INTERMEDIATE:
-				return AlloyForgeBlockEntity.intermediateBlockEntity(pos, state);
-			case ADVANCED:
-				return AlloyForgeBlockEntity.advancedBlockEntity(pos, state);
-			case EXPERT:
-				return AlloyForgeBlockEntity.expertBlockEntity(pos, state);
-			case BASIC:
-			default:
-				return AlloyForgeBlockEntity.basicBlockEntity(pos, state);
+		case INTERMEDIATE:
+			return AlloyForgeBlockEntity.intermediateBlockEntity(pos, state);
+		case ADVANCED:
+			return AlloyForgeBlockEntity.advancedBlockEntity(pos, state);
+		case EXPERT:
+			return AlloyForgeBlockEntity.expertBlockEntity(pos, state);
+		case BASIC:
+		default:
+			return AlloyForgeBlockEntity.basicBlockEntity(pos, state);
 		}
 	}
 }

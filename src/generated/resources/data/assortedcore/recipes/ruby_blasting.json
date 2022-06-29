@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 1.0,
   "ingredient": {
     "tag": "forge:ores/ruby"
   },
-  "result": "assortedcore:ruby",
-  "experience": 1.0,
-  "cookingtime": 100
+  "result": "assortedcore:ruby"
 }

@@ -36,7 +36,6 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig.Type;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
@@ -64,7 +63,6 @@ public class AssortedCore {
 
 		final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		modBus.addListener(this::setup);
 		modBus.addListener(this::setupClient);
 		modBus.addListener(this::gatherData);
 
@@ -72,17 +70,12 @@ public class AssortedCore {
 		CoreItems.ITEMS.register(modBus);
 		CoreBlockEntityTypes.BLOCK_ENTITIES.register(modBus);
 		CoreContainerTypes.CONTAINER_TYPES.register(modBus);
+		CoreRecipeTypes.RECIPE_TYPES.register(modBus);
 		CoreRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
 
 		ModLoadingContext.get().registerConfig(Type.COMMON, CoreConfig.COMMON_SPEC);
 
 		MinecraftForge.EVENT_BUS.register(new CoreWorldGeneration());
-	}
-
-	private void setup(final FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-			CoreRecipeTypes.register();
-		});
 	}
 
 	private void setupClient(final FMLClientSetupEvent event) {
@@ -94,18 +87,14 @@ public class AssortedCore {
 		DataGenerator datagenerator = event.getGenerator();
 		ExistingFileHelper fileHelper = event.getExistingFileHelper();
 
-		if (event.includeServer()) {
-			CoreBlockTagProvider blockTagProvider = new CoreBlockTagProvider(datagenerator, fileHelper);
-			datagenerator.addProvider(blockTagProvider);
-			datagenerator.addProvider(new CoreItemTagProvider(datagenerator, blockTagProvider, fileHelper));
-			datagenerator.addProvider(new CoreLootProvider(datagenerator));
-			datagenerator.addProvider(new CoreRecipes(datagenerator));
-		}
+		CoreBlockTagProvider blockTagProvider = new CoreBlockTagProvider(datagenerator, fileHelper);
+		datagenerator.addProvider(event.includeServer(), blockTagProvider);
+		datagenerator.addProvider(event.includeServer(), new CoreItemTagProvider(datagenerator, blockTagProvider, fileHelper));
+		datagenerator.addProvider(event.includeServer(), new CoreLootProvider(datagenerator));
+		datagenerator.addProvider(event.includeServer(), new CoreRecipes(datagenerator));
 
-		if (event.includeClient()) {
-			CoreBlockstateProvider blockStatesProvider = new CoreBlockstateProvider(datagenerator, fileHelper);
-			datagenerator.addProvider(blockStatesProvider);
-			datagenerator.addProvider(new CoreItemModelProvider(datagenerator, blockStatesProvider.getExistingFileHelper()));
-		}
+		CoreBlockstateProvider blockStatesProvider = new CoreBlockstateProvider(datagenerator, fileHelper);
+		datagenerator.addProvider(event.includeClient(), blockStatesProvider);
+		datagenerator.addProvider(event.includeClient(), new CoreItemModelProvider(datagenerator, blockStatesProvider.getExistingFileHelper()));
 	}
 }

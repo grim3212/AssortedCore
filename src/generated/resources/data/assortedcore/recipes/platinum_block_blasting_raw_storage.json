@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 3.0,
   "ingredient": {
     "tag": "forge:storage_blocks/raw_platinum"
   },
-  "result": "assortedcore:platinum_block",
-  "experience": 3.0,
-  "cookingtime": 100
+  "result": "assortedcore:platinum_block"
 }

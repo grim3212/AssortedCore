@@ -17,7 +17,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
@@ -53,7 +52,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
 	}
 
 	public GrindingMillBlockEntity(BlockEntityType<GrindingMillBlockEntity> tileEntityType, BlockPos pos, BlockState state, MachineTier tier) {
-		super(tileEntityType, pos, state, tier, 4, 600, CoreRecipeTypes.GRINDING_MILL);
+		super(tileEntityType, pos, state, tier, 4, 600, CoreRecipeTypes.GRINDING_MILL.get());
 	}
 
 	@Override
@@ -120,7 +119,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
 
 	@Override
 	protected Component getDefaultName() {
-		return new TranslatableComponent(AssortedCore.MODID + ".container.grinding_mill");
+		return Component.translatable(AssortedCore.MODID + ".container.grinding_mill");
 	}
 
 	@Override

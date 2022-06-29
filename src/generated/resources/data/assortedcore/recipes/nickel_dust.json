@@ -1,15 +1,15 @@
 {
   "type": "assortedcore:grinding_mill",
+  "cookingtime": 600,
+  "experience": 0.2,
   "ingredient": {
+    "count": 1,
     "ingredient": {
       "tag": "forge:ores/nickel"
-    },
-    "count": 1
+    }
   },
   "result": {
-    "item": "assortedcore:nickel_dust",
-    "count": 2
-  },
-  "experience": 0.2,
-  "cookingtime": 600
+    "count": 2,
+    "item": "assortedcore:nickel_dust"
+  }
 }

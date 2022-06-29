@@ -1,21 +1,21 @@
 {
   "type": "assortedcore:alloy_forge",
+  "cookingtime": 400,
+  "experience": 0.7,
   "ingredient1": {
+    "count": 1,
     "ingredient": {
       "tag": "forge:dusts/silver"
-    },
-    "count": 1
+    }
   },
   "ingredient2": {
+    "count": 1,
     "ingredient": {
       "tag": "forge:dusts/gold"
-    },
-    "count": 1
+    }
   },
   "result": {
-    "item": "assortedcore:electrum_ingot",
-    "count": 2
-  },
-  "experience": 0.7,
-  "cookingtime": 400
+    "count": 2,
+    "item": "assortedcore:electrum_ingot"
+  }
 }

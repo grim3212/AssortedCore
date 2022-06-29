@@ -16,7 +16,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -47,7 +46,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
 	}
 
 	public AlloyForgeBlockEntity(BlockEntityType<AlloyForgeBlockEntity> tileEntityType, BlockPos pos, BlockState state, MachineTier tier) {
-		super(tileEntityType, pos, state, tier, 4, 400, CoreRecipeTypes.ALLOY_FORGE);
+		super(tileEntityType, pos, state, tier, 4, 400, CoreRecipeTypes.ALLOY_FORGE.get());
 	}
 
 	@Override
@@ -109,7 +108,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
 
 	@Override
 	protected Component getDefaultName() {
-		return new TranslatableComponent(AssortedCore.MODID + ".container.alloy_forge");
+		return Component.translatable(AssortedCore.MODID + ".container.alloy_forge");
 	}
 
 	@Override

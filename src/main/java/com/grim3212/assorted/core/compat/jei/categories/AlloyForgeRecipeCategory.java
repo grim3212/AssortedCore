@@ -1,27 +1,31 @@
 package com.grim3212.assorted.core.compat.jei.categories;
 
+import java.util.List;
+
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
+import com.grim3212.assorted.core.compat.jei.JEIAssortedCore;
 import com.grim3212.assorted.core.compat.jei.JEIHelpers;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
-import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -51,7 +55,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 
 		this.background = guiHelper.createDrawable(GUI, 31, 22, 105, 57);
 		Block alloyForge = CoreBlocks.BASIC_ALLOY_FORGE.get();
-		this.icon = guiHelper.createDrawableIngredient(new ItemStack(alloyForge));
+		this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(alloyForge));
 		this.localizedName = alloyForge.getName();
 		this.cachedArrows = CacheBuilder.newBuilder().maximumSize(25).build(new CacheLoader<Integer, IDrawableAnimated>() {
 			@Override
@@ -60,16 +64,6 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 			}
 		});
 
-	}
-
-	@Override
-	public ResourceLocation getUid() {
-		return UID;
-	}
-
-	@Override
-	public Class<? extends AlloyForgeRecipe> getRecipeClass() {
-		return AlloyForgeRecipe.class;
 	}
 
 	@Override
@@ -96,13 +90,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 	}
 
 	@Override
-	public void setIngredients(AlloyForgeRecipe recipe, IIngredients ingredients) {
-		ingredients.setInputLists(VanillaTypes.ITEM, JEIHelpers.getMachineIngredientStacks(recipe.getIngredient1(), recipe.getIngredient2()));
-		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
-	}
-
-	@Override
-	public void draw(AlloyForgeRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
+	public void draw(AlloyForgeRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
 		animatedFlame.draw(matrixStack, 49, 23);
 
 		IDrawableAnimated arrow = getArrow(recipe);
@@ -115,7 +103,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 	protected void drawExperience(AlloyForgeRecipe recipe, PoseStack matrixStack, int y) {
 		float experience = recipe.getExperience();
 		if (experience > 0) {
-			TranslatableComponent experienceString = new TranslatableComponent("gui.jei.category.smelting.experience", experience);
+			Component experienceString = Component.translatable("gui.jei.category.smelting.experience", experience);
 			Minecraft minecraft = Minecraft.getInstance();
 			Font fontRenderer = minecraft.font;
 			fontRenderer.draw(matrixStack, experienceString, 0, y, 0xFF808080);
@@ -126,7 +114,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 		int cookTime = recipe.getCookTime();
 		if (cookTime > 0) {
 			int cookTimeSeconds = cookTime / 20;
-			TranslatableComponent timeString = new TranslatableComponent("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
+			Component timeString = Component.translatable("gui.jei.category.smelting.time.seconds", cookTimeSeconds);
 			Minecraft minecraft = Minecraft.getInstance();
 			Font fontRenderer = minecraft.font;
 			int stringWidth = fontRenderer.width(timeString);
@@ -135,14 +123,17 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, AlloyForgeRecipe recipe, IIngredients ingredients) {
-		IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
+	public void setRecipe(IRecipeLayoutBuilder recipeLayout, AlloyForgeRecipe recipe, IFocusGroup focusGroup) {
+		List<List<ItemStack>> inputs = JEIHelpers.getMachineIngredientStacks(recipe.getIngredient1(), recipe.getIngredient2());
 
-		guiItemStacks.init(inputSlot1, true, 0, 4);
-		guiItemStacks.init(inputSlot2, true, 24, 4);
-		guiItemStacks.init(outputSlot, false, 83, 4);
+		recipeLayout.addSlot(RecipeIngredientRole.INPUT, 0, 4).addItemStacks(inputs.get(inputSlot1));
+		recipeLayout.addSlot(RecipeIngredientRole.INPUT, 24, 4).addItemStacks(inputs.get(inputSlot2));
+		recipeLayout.addSlot(RecipeIngredientRole.OUTPUT, 83, 4).addItemStack(recipe.getResultItem());
+	}
 
-		guiItemStacks.set(ingredients);
+	@Override
+	public RecipeType<AlloyForgeRecipe> getRecipeType() {
+		return JEIAssortedCore.ALLOY_FORGE;
 	}
 
 }

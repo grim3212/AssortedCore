@@ -1,15 +1,15 @@
 {
   "type": "assortedcore:grinding_mill",
+  "cookingtime": 300,
+  "experience": 0.0,
   "ingredient": {
+    "count": 1,
     "ingredient": {
       "tag": "forge:ingots/iron"
-    },
-    "count": 1
+    }
   },
   "result": {
-    "item": "assortedcore:iron_dust",
-    "count": 1
-  },
-  "experience": 0.0,
-  "cookingtime": 300
+    "count": 1,
+    "item": "assortedcore:iron_dust"
+  }
 }

@@ -1,17 +1,13 @@
 package com.grim3212.assorted.core.compat.jei;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -29,17 +25,14 @@ public final class AssortedCoreRecipes {
 	}
 
 	public List<AlloyForgeRecipe> getAlloyForgeRecipes() {
-		return getRecipes(recipeManager, CoreRecipeTypes.ALLOY_FORGE);
+		return getRecipes(recipeManager, CoreRecipeTypes.ALLOY_FORGE.get());
 	}
 
 	public List<GrindingMillRecipe> getGrindingMillRecipes() {
-		return getRecipes(recipeManager, CoreRecipeTypes.GRINDING_MILL);
+		return getRecipes(recipeManager, CoreRecipeTypes.GRINDING_MILL.get());
 	}
 
-	@SuppressWarnings("unchecked")
 	private static <C extends Container, T extends Recipe<C>> List<T> getRecipes(RecipeManager recipeManager, RecipeType<T> recipeType) {
-		Map<ResourceLocation, Recipe<C>> recipes = recipeManager.byType(recipeType);
-		AssortedCore.LOGGER.info("Found " + recipes.size() + " for recipe type " + recipeType.toString());
-		return (List<T>) recipes.values().stream().collect(Collectors.toList());
+		return recipeManager.getAllRecipesFor(recipeType).stream().toList();
 	}
 }

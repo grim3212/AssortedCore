@@ -1,21 +1,21 @@
 {
   "type": "assortedcore:alloy_forge",
+  "cookingtime": 400,
+  "experience": 0.5,
   "ingredient1": {
+    "count": 3,
     "ingredient": {
       "tag": "forge:dusts/copper"
-    },
-    "count": 3
+    }
   },
   "ingredient2": {
+    "count": 1,
     "ingredient": {
       "tag": "forge:dusts/tin"
-    },
-    "count": 1
+    }
   },
   "result": {
-    "item": "assortedcore:bronze_ingot",
-    "count": 4
-  },
-  "experience": 0.5,
-  "cookingtime": 400
+    "count": 4,
+    "item": "assortedcore:bronze_ingot"
+  }
 }

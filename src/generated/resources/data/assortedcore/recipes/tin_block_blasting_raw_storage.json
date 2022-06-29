@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 1.0,
   "ingredient": {
     "tag": "forge:storage_blocks/raw_tin"
   },
-  "result": "assortedcore:tin_block",
-  "experience": 1.0,
-  "cookingtime": 100
+  "result": "assortedcore:tin_block"
 }

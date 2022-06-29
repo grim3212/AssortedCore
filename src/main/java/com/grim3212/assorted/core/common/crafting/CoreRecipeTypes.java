@@ -4,20 +4,17 @@ import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class CoreRecipeTypes {
 
-	public static RecipeType<AlloyForgeRecipe> ALLOY_FORGE;
-	public static RecipeType<GrindingMillRecipe> GRINDING_MILL;
+	public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, AssortedCore.MODID);
 
-	public static void register() {
-		ALLOY_FORGE = RecipeType.register(prefix("alloy_forge"));
-		GRINDING_MILL = RecipeType.register(prefix("grinding_mill"));
-	}
-
-	private static String prefix(String s) {
-		return AssortedCore.MODID + ":" + s;
-	}
+	public static final RegistryObject<RecipeType<AlloyForgeRecipe>> ALLOY_FORGE = RECIPE_TYPES.register("alloy_forge", () -> RecipeType.simple(new ResourceLocation(AssortedCore.MODID, "alloy_forge")));
+	public static final RegistryObject<RecipeType<GrindingMillRecipe>> GRINDING_MILL = RECIPE_TYPES.register("grinding_mill", () -> RecipeType.simple(new ResourceLocation(AssortedCore.MODID, "grinding_mill")));
 
 }

@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 1.4,
   "ingredient": {
     "tag": "forge:storage_blocks/raw_aluminum"
   },
-  "result": "assortedcore:aluminum_block",
-  "experience": 1.4,
-  "cookingtime": 100
+  "result": "assortedcore:aluminum_block"
 }

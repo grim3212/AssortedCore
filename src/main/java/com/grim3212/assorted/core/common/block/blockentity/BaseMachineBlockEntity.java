@@ -60,32 +60,32 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Worl
 	protected final ContainerData machineData = new ContainerData() {
 		public int get(int index) {
 			switch (index) {
-				case 0:
-					return BaseMachineBlockEntity.this.burnTime;
-				case 1:
-					return BaseMachineBlockEntity.this.recipesUsed;
-				case 2:
-					return BaseMachineBlockEntity.this.cookTime;
-				case 3:
-					return BaseMachineBlockEntity.this.cookTimeTotal;
-				default:
-					return 0;
+			case 0:
+				return BaseMachineBlockEntity.this.burnTime;
+			case 1:
+				return BaseMachineBlockEntity.this.recipesUsed;
+			case 2:
+				return BaseMachineBlockEntity.this.cookTime;
+			case 3:
+				return BaseMachineBlockEntity.this.cookTimeTotal;
+			default:
+				return 0;
 			}
 		}
 
 		public void set(int index, int value) {
 			switch (index) {
-				case 0:
-					BaseMachineBlockEntity.this.burnTime = value;
-					break;
-				case 1:
-					BaseMachineBlockEntity.this.recipesUsed = value;
-					break;
-				case 2:
-					BaseMachineBlockEntity.this.cookTime = value;
-					break;
-				case 3:
-					BaseMachineBlockEntity.this.cookTimeTotal = value;
+			case 0:
+				BaseMachineBlockEntity.this.burnTime = value;
+				break;
+			case 1:
+				BaseMachineBlockEntity.this.recipesUsed = value;
+				break;
+			case 2:
+				BaseMachineBlockEntity.this.cookTime = value;
+				break;
+			case 3:
+				BaseMachineBlockEntity.this.cookTimeTotal = value;
 			}
 
 		}
@@ -190,12 +190,12 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Worl
 					this.recipesUsed = this.burnTime;
 					if (this.isBurning()) {
 						flag1 = true;
-						if (fuelSlot.hasContainerItem())
-							this.items.set(this.fuelSlot(), fuelSlot.getContainerItem());
+						if (fuelSlot.hasCraftingRemainingItem())
+							this.items.set(this.fuelSlot(), fuelSlot.getCraftingRemainingItem());
 						else if (!fuelSlot.isEmpty()) {
 							fuelSlot.shrink(1);
 							if (fuelSlot.isEmpty()) {
-								this.items.set(this.fuelSlot(), fuelSlot.getContainerItem());
+								this.items.set(this.fuelSlot(), fuelSlot.getCraftingRemainingItem());
 							}
 						}
 					}
@@ -374,11 +374,11 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Worl
 			this.customName = Component.Serializer.fromJson(nbt.getString("CustomName"));
 		}
 	}
-	
+
 	@Override
 	protected void saveAdditional(CompoundTag compound) {
 		super.saveAdditional(compound);
-		
+
 		compound.putInt("BurnTime", this.burnTime);
 		compound.putInt("CookTime", this.cookTime);
 		compound.putInt("CookTimeTotal", this.cookTimeTotal);

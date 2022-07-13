@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class CoreBlockEntityTypes {
 
-	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, AssortedCore.MODID);
+	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, AssortedCore.MODID);
 
 	public static final RegistryObject<BlockEntityType<AlloyForgeBlockEntity>> BASIC_ALLOY_FORGE = BLOCK_ENTITIES.register("basic_alloy_forge", () -> new BlockEntityType<>(AlloyForgeBlockEntity::basicBlockEntity, Sets.newHashSet(CoreBlocks.BASIC_ALLOY_FORGE.get()), null));
 	public static final RegistryObject<BlockEntityType<AlloyForgeBlockEntity>> INTERMEDIATE_ALLOY_FORGE = BLOCK_ENTITIES.register("intermediate_alloy_forge", () -> new BlockEntityType<>(AlloyForgeBlockEntity::intermediateBlockEntity, Sets.newHashSet(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get()), null));

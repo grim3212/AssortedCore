@@ -16,9 +16,8 @@ import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.common.data.CoreBlockTagProvider;
 import com.grim3212.assorted.core.common.data.CoreItemTagProvider;
 import com.grim3212.assorted.core.common.data.CoreLootProvider;
-import com.grim3212.assorted.core.common.data.CoreOreWorldGen;
+import com.grim3212.assorted.core.common.data.CoreFeatureProvider;
 import com.grim3212.assorted.core.common.data.CoreRecipes;
-import com.grim3212.assorted.core.common.gen.CoreWorldGeneration;
 import com.grim3212.assorted.core.common.handler.CoreConfig;
 import com.grim3212.assorted.core.common.inventory.CoreContainerTypes;
 import com.grim3212.assorted.core.common.item.CoreItems;
@@ -33,7 +32,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -77,12 +75,8 @@ public class AssortedCore {
 		CoreContainerTypes.CONTAINER_TYPES.register(modBus);
 		CoreRecipeTypes.RECIPE_TYPES.register(modBus);
 		CoreRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
-		CoreWorldGeneration.CONFIGURED_FEATURES.register(modBus);
-		CoreWorldGeneration.PLACED_FEATURES.register(modBus);
 
 		ModLoadingContext.get().registerConfig(Type.COMMON, CoreConfig.COMMON_SPEC);
-
-		MinecraftForge.EVENT_BUS.register(new CoreWorldGeneration());
 	}
 
 	private void setupClient(final FMLClientSetupEvent event) {
@@ -102,9 +96,9 @@ public class AssortedCore {
 
 		final RegistryAccess registries = RegistryAccess.builtinCopy();
 		final RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, registries);
-		datagenerator.addProvider(event.includeServer(), CoreOreWorldGen.getConfiguredFeatures(datagenerator, fileHelper, registries, ops));
-		datagenerator.addProvider(event.includeServer(), CoreOreWorldGen.getPlacedFeatures(datagenerator, fileHelper, registries, ops));
-		datagenerator.addProvider(event.includeServer(), CoreOreWorldGen.getPlacedFeaturesForBiome(datagenerator, fileHelper, registries, ops));
+		datagenerator.addProvider(event.includeServer(), CoreFeatureProvider.getConfiguredFeatures(datagenerator, fileHelper, registries, ops));
+		datagenerator.addProvider(event.includeServer(), CoreFeatureProvider.getPlacedFeatures(datagenerator, fileHelper, registries, ops));
+		datagenerator.addProvider(event.includeServer(), CoreFeatureProvider.getPlacedFeaturesForBiome(datagenerator, fileHelper, registries, ops));
 
 		CoreBlockstateProvider blockStatesProvider = new CoreBlockstateProvider(datagenerator, fileHelper);
 		datagenerator.addProvider(event.includeClient(), blockStatesProvider);

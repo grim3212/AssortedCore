@@ -41,8 +41,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
@@ -60,32 +60,32 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Worl
 	protected final ContainerData machineData = new ContainerData() {
 		public int get(int index) {
 			switch (index) {
-			case 0:
-				return BaseMachineBlockEntity.this.burnTime;
-			case 1:
-				return BaseMachineBlockEntity.this.recipesUsed;
-			case 2:
-				return BaseMachineBlockEntity.this.cookTime;
-			case 3:
-				return BaseMachineBlockEntity.this.cookTimeTotal;
-			default:
-				return 0;
+				case 0:
+					return BaseMachineBlockEntity.this.burnTime;
+				case 1:
+					return BaseMachineBlockEntity.this.recipesUsed;
+				case 2:
+					return BaseMachineBlockEntity.this.cookTime;
+				case 3:
+					return BaseMachineBlockEntity.this.cookTimeTotal;
+				default:
+					return 0;
 			}
 		}
 
 		public void set(int index, int value) {
 			switch (index) {
-			case 0:
-				BaseMachineBlockEntity.this.burnTime = value;
-				break;
-			case 1:
-				BaseMachineBlockEntity.this.recipesUsed = value;
-				break;
-			case 2:
-				BaseMachineBlockEntity.this.cookTime = value;
-				break;
-			case 3:
-				BaseMachineBlockEntity.this.cookTimeTotal = value;
+				case 0:
+					BaseMachineBlockEntity.this.burnTime = value;
+					break;
+				case 1:
+					BaseMachineBlockEntity.this.recipesUsed = value;
+					break;
+				case 2:
+					BaseMachineBlockEntity.this.cookTime = value;
+					break;
+				case 3:
+					BaseMachineBlockEntity.this.cookTimeTotal = value;
 			}
 
 		}
@@ -408,7 +408,7 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Worl
 
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-		if (!this.remove && facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+		if (!this.remove && facing != null && capability == ForgeCapabilities.ITEM_HANDLER) {
 			if (facing == Direction.UP)
 				return handlers[0].cast();
 			else if (facing == Direction.DOWN)

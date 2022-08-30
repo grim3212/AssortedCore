@@ -119,6 +119,17 @@ jar {
     }
 }
 
+task apiJar(type: Jar) {
+    classifier = "api"
+    from(sourceSets.main.output) {
+        include "com/grim3212/assorted/core/api/**"
+    }
+}
+
+artifacts {
+    archives apiJar
+}
+
 import groovy.json.JsonSlurper
 import groovy.json.JsonOutput
 processResources {

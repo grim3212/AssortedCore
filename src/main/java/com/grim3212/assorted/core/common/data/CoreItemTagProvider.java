@@ -1,24 +1,29 @@
 package com.grim3212.assorted.core.common.data;
 
+import java.util.concurrent.CompletableFuture;
+
 import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.api.CoreTags;
 import com.grim3212.assorted.core.common.item.CoreItems;
 
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class CoreItemTagProvider extends ItemTagsProvider {
 
-	public CoreItemTagProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagProvider, ExistingFileHelper existingFileHelper) {
-		super(dataGenerator, blockTagProvider, AssortedCore.MODID, existingFileHelper);
+	public CoreItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup, TagsProvider<Block> blockTags, ExistingFileHelper existingFileHelper) {
+		super(output, lookup, blockTags, AssortedCore.MODID, existingFileHelper);
 	}
 
 	@Override
-	protected void addTags() {
+	protected void addTags(Provider provider) {
 		this.tag(CoreTags.Items.GRINDING_MILL_ALLOWED_TOOLS).add(Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, Items.NETHERITE_PICKAXE);
 
 		this.copy(CoreTags.Blocks.ORES, CoreTags.Items.ORES);
@@ -50,7 +55,7 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_ELECTRUM, CoreTags.Items.STORAGE_BLOCKS_ELECTRUM);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_INVAR, CoreTags.Items.STORAGE_BLOCKS_INVAR);
 		this.copy(CoreTags.Blocks.STORAGE_BLOCKS_STEEL, CoreTags.Items.STORAGE_BLOCKS_STEEL);
-		
+
 		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_TIN, CoreTags.Items.RAW_STORAGE_BLOCKS_TIN);
 		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_COPPER, CoreTags.Items.RAW_STORAGE_BLOCKS_COPPER);
 		this.copy(CoreTags.Blocks.RAW_STORAGE_BLOCKS_SILVER, CoreTags.Items.RAW_STORAGE_BLOCKS_SILVER);
@@ -67,7 +72,7 @@ public class CoreItemTagProvider extends ItemTagsProvider {
 		this.tag(CoreTags.Items.GEMS_PERIDOT).add(CoreItems.PERIDOT.get());
 		this.tag(CoreTags.Items.GEMS_SAPPHIRE).add(CoreItems.SAPPHIRE.get());
 		this.tag(CoreTags.Items.GEMS_TOPAZ).add(CoreItems.TOPAZ.get());
-		
+
 		this.tag(CoreTags.Items.RAW_MATERIALS).add(CoreItems.RAW_ALUMINUM.get());
 		this.tag(CoreTags.Items.RAW_MATERIALS).add(CoreItems.RAW_LEAD.get());
 		this.tag(CoreTags.Items.RAW_MATERIALS).add(CoreItems.RAW_NICKEL.get());

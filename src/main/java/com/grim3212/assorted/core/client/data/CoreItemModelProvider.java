@@ -4,7 +4,7 @@ import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
 import com.grim3212.assorted.core.common.item.CoreItems;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -15,8 +15,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class CoreItemModelProvider extends ItemModelProvider {
 
-	public CoreItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, AssortedCore.MODID, existingFileHelper);
+	public CoreItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+		super(output, AssortedCore.MODID, existingFileHelper);
 	}
 
 	@Override

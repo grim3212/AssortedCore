@@ -68,7 +68,8 @@ public class AlloyForgeRecipeBuilder {
 	public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
 		this.validate(id);
 		this.advancementBuilder.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
-		consumerIn.accept(new AlloyForgeRecipeBuilder.Result(id, this.group == null ? "" : this.group, this.ingredient1, this.ingredient2, this.result, this.experience, this.cookingTime, this.advancementBuilder, new ResourceLocation(id.getNamespace(), "recipes/" + this.result.getItem().getItemCategory().getRecipeFolderName() + "/" + id.getPath())));
+		String folder = ""; // TODO: Get this somehow
+		consumerIn.accept(new AlloyForgeRecipeBuilder.Result(id, this.group == null ? "" : this.group, this.ingredient1, this.ingredient2, this.result, this.experience, this.cookingTime, this.advancementBuilder, new ResourceLocation(id.getNamespace(), "recipes/" + folder + "/" + id.getPath())));
 	}
 
 	private void validate(ResourceLocation id) {

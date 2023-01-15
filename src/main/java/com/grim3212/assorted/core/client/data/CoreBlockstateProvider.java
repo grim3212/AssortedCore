@@ -5,7 +5,7 @@ import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.block.BaseMachineBlock;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -16,8 +16,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class CoreBlockstateProvider extends BlockStateProvider {
 
-	public CoreBlockstateProvider(DataGenerator generator, ExistingFileHelper exFileHelper) {
-		super(generator, AssortedCore.MODID, exFileHelper);
+	public CoreBlockstateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+		super(output, AssortedCore.MODID, exFileHelper);
 	}
 
 	public ExistingFileHelper getExistingFileHelper() {

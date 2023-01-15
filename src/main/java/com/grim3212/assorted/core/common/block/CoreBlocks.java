@@ -56,7 +56,7 @@ public class CoreBlocks {
 	public static final RegistryObject<Block> PLATINUM_BLOCK = register("platinum_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F).requiresCorrectToolForDrops()));
 	public static final RegistryObject<Block> LEAD_BLOCK = register("lead_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL).sound(SoundType.METAL).strength(5.0F, 6.0F).requiresCorrectToolForDrops()));
 	public static final RegistryObject<Block> RUBY_BLOCK = register("ruby_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_RED).sound(SoundType.METAL).strength(5.0F, 6.0F).requiresCorrectToolForDrops()));
-	public static final RegistryObject<Block> PERIDOT_BLOCK = register("peridot_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_PURPLE).sound(SoundType.METAL).strength(5.0F, 6.0F).requiresCorrectToolForDrops()));
+	public static final RegistryObject<Block> PERIDOT_BLOCK = register("peridot_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_GREEN).sound(SoundType.METAL).strength(5.0F, 6.0F).requiresCorrectToolForDrops()));
 	public static final RegistryObject<Block> SAPPHIRE_BLOCK = register("sapphire_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_BLUE).sound(SoundType.METAL).strength(5.0F, 6.0F).requiresCorrectToolForDrops()));
 	public static final RegistryObject<Block> TOPAZ_BLOCK = register("topaz_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_YELLOW).sound(SoundType.METAL).strength(5.0F, 6.0F).requiresCorrectToolForDrops()));
 
@@ -97,7 +97,7 @@ public class CoreBlocks {
 	}
 
 	private static Supplier<BlockItem> item(final RegistryObject<? extends Block> block) {
-		return () -> new BlockItem(block.get(), new Item.Properties().tab(AssortedCore.ASSORTED_CORE_ITEM_GROUP));
+		return () -> new BlockItem(block.get(), new Item.Properties());
 	}
 
 	private static ToIntFunction<BlockState> getLightValueOn(int lightValue) {

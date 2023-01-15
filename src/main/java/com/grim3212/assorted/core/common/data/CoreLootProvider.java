@@ -2,50 +2,39 @@ package com.grim3212.assorted.core.common.data;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
+import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.ImmutableList;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
 import com.grim3212.assorted.core.common.item.CoreItems;
-import com.mojang.datafixers.util.Pair;
 
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
+import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTable.Builder;
+import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 public class CoreLootProvider extends LootTableProvider {
 
-	public CoreLootProvider(DataGenerator generator) {
-		super(generator);
-	}
-
-	@Override
-	protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootContextParamSet>> getTables() {
-		return ImmutableList.of(Pair.of(BlockTables::new, LootContextParamSets.BLOCK));
+	public CoreLootProvider(PackOutput output, Set<ResourceLocation> requiredTables, List<LootTableProvider.SubProviderEntry> subProviders) {
+		super(output, requiredTables, subProviders);
 	}
 
 	@Override
 	protected void validate(Map<ResourceLocation, LootTable> map, ValidationContext validationtracker) {
+		map.forEach((location, lootTable) -> {
+			LootTables.validate(validationtracker, location, lootTable);
+		});
 	}
 
-	@Override
-	public String getName() {
-		return "Assorted Core loot tables";
-	}
+	public static class BlockTables extends VanillaBlockLoot {
 
-	public static class BlockTables extends BlockLoot {
 		@Override
-		protected void addTables() {
+		protected void generate() {
 			this.dropSelf(CoreBlocks.TIN_BLOCK.get());
 			this.dropSelf(CoreBlocks.SILVER_BLOCK.get());
 			this.dropSelf(CoreBlocks.ALUMINUM_BLOCK.get());

@@ -1,23 +1,27 @@
 package com.grim3212.assorted.core.common.data;
 
+import java.util.concurrent.CompletableFuture;
+
 import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.api.CoreTags;
 import com.grim3212.assorted.core.common.block.CoreBlocks;
 
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class CoreBlockTagProvider extends BlockTagsProvider {
 
-	public CoreBlockTagProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
-		super(generatorIn, AssortedCore.MODID, existingFileHelper);
+	public CoreBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
+		super(output, lookupProvider, AssortedCore.MODID, existingFileHelper);
 	}
 
 	@Override
-	protected void addTags() {
+	protected void addTags(Provider provider) {
 		this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(CoreBlocks.TIN_ORE.get(), CoreBlocks.SILVER_ORE.get(), CoreBlocks.ALUMINUM_ORE.get(), CoreBlocks.NICKEL_ORE.get(), CoreBlocks.PLATINUM_ORE.get(), CoreBlocks.LEAD_ORE.get(), CoreBlocks.RUBY_ORE.get(), CoreBlocks.PERIDOT_ORE.get(), CoreBlocks.SAPPHIRE_ORE.get(), CoreBlocks.TOPAZ_ORE.get());
 		this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(CoreBlocks.DEEPSLATE_TIN_ORE.get(), CoreBlocks.DEEPSLATE_SILVER_ORE.get(), CoreBlocks.DEEPSLATE_ALUMINUM_ORE.get(), CoreBlocks.DEEPSLATE_NICKEL_ORE.get(), CoreBlocks.DEEPSLATE_PLATINUM_ORE.get(), CoreBlocks.DEEPSLATE_LEAD_ORE.get(), CoreBlocks.DEEPSLATE_RUBY_ORE.get(), CoreBlocks.PERIDOT_ORE.get(), CoreBlocks.DEEPSLATE_SAPPHIRE_ORE.get(), CoreBlocks.DEEPSLATE_TOPAZ_ORE.get());
 		this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(CoreBlocks.TIN_BLOCK.get(), CoreBlocks.SILVER_BLOCK.get(), CoreBlocks.ALUMINUM_BLOCK.get(), CoreBlocks.NICKEL_BLOCK.get(), CoreBlocks.PLATINUM_BLOCK.get(), CoreBlocks.LEAD_BLOCK.get(), CoreBlocks.RUBY_BLOCK.get(), CoreBlocks.PERIDOT_BLOCK.get(), CoreBlocks.SAPPHIRE_BLOCK.get(), CoreBlocks.TOPAZ_BLOCK.get());

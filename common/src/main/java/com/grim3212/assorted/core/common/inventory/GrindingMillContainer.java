@@ -1,7 +1,8 @@
 package com.grim3212.assorted.core.common.inventory;
 
+import com.grim3212.assorted.core.CoreServices;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
-import com.grim3212.assorted.core.platform.Services;
+import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -54,11 +55,11 @@ public class GrindingMillContainer extends BaseMachineContainer {
                     if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (Services.PLATFORM.getFuelTime(itemstack1, null) > 0) {
+                } else if (CoreServices.MACHINES.getFuelTime(itemstack1) > 0) {
                     if (!this.moveItemStackTo(itemstack1, 2, 3, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (Services.MACHINES.allowedInGrindingMillToolSlot(itemstack1)) {
+                } else if (CoreServices.MACHINES.allowedInGrindingMillToolSlot(itemstack1)) {
                     if (!this.moveItemStackTo(itemstack1, 1, 2, false)) {
                         return ItemStack.EMPTY;
                     }

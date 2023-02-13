@@ -5,7 +5,7 @@ import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 import com.grim3212.assorted.core.client.screen.AlloyForgeScreen;
 import com.grim3212.assorted.core.client.screen.GrindingMillScreen;
-import com.grim3212.assorted.core.common.blocks.AssortedCoreBlocks;
+import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.common.inventory.AlloyForgeContainer;
 import com.grim3212.assorted.core.common.inventory.CoreContainerTypes;
 import com.grim3212.assorted.core.common.inventory.GrindingMillContainer;
@@ -27,7 +27,7 @@ public class JEIAssortedCore implements IModPlugin {
     public static final RecipeType<AlloyForgeRecipe> ALLOY_FORGE = RecipeType.create(Constants.MOD_ID, "alloy_forge", AlloyForgeRecipe.class);
     public static final RecipeType<GrindingMillRecipe> GRINDING_MILL = RecipeType.create(Constants.MOD_ID, "grinding_mill", GrindingMillRecipe.class);
 
-    private static final ResourceLocation PLUGIN_ID = new ResourceLocation(Constants.MOD_ID, "assets/assortedcores");
+    private static final ResourceLocation PLUGIN_ID = new ResourceLocation(Constants.MOD_ID, "assets/assortedcore");
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -62,15 +62,15 @@ public class JEIAssortedCore implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(AssortedCoreBlocks.BASIC_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(AssortedCoreBlocks.INTERMEDIATE_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(AssortedCoreBlocks.ADVANCED_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(AssortedCoreBlocks.EXPERT_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
+        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.BASIC_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
+        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
+        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.ADVANCED_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
+        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.EXPERT_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
 
-        registration.addRecipeCatalyst(new ItemStack(AssortedCoreBlocks.BASIC_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(AssortedCoreBlocks.INTERMEDIATE_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(AssortedCoreBlocks.ADVANCED_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(AssortedCoreBlocks.EXPERT_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
+        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.BASIC_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
+        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
+        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.ADVANCED_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
+        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.EXPERT_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
     }
 
     @Override

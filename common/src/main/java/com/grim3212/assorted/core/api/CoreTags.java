@@ -1,7 +1,7 @@
 package com.grim3212.assorted.core.api;
 
 import com.grim3212.assorted.core.Constants;
-import com.grim3212.assorted.core.platform.Services;
+import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;

@@ -1,6 +1,7 @@
 package com.grim3212.assorted.core.common.inventory;
 
-import com.grim3212.assorted.core.platform.Services;
+import com.grim3212.assorted.core.CoreServices;
+import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -13,6 +14,6 @@ public class MachineFuelSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return Services.PLATFORM.getFuelTime(stack, null) > 0;
+        return CoreServices.MACHINES.getFuelTime(stack) > 0;
     }
 }

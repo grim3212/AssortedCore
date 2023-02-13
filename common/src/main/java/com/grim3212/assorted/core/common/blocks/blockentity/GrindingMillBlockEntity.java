@@ -1,12 +1,13 @@
 package com.grim3212.assorted.core.common.blocks.blockentity;
 
 import com.grim3212.assorted.core.Constants;
+import com.grim3212.assorted.core.CoreServices;
 import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.common.inventory.GrindingMillContainer;
-import com.grim3212.assorted.core.platform.Services;
+import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -56,7 +57,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
     protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
         if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
             ItemStack itemstack = recipeIn.getResultItem();
-            if (itemstack.isEmpty() || !Services.MACHINES.allowedInGrindingMillToolSlot(this.items.get(1))) {
+            if (itemstack.isEmpty() || !CoreServices.MACHINES.allowedInGrindingMillToolSlot(this.items.get(1))) {
                 return false;
             } else {
                 ItemStack outputSlot = this.items.get(this.outputSlot());
@@ -99,7 +100,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
                 this.items.set(1, ItemStack.EMPTY);
             }
 
-            if (Services.CONFIG.grindingMillHasBreakSound()) {
+            if (CoreServices.CONFIG.grindingMillHasBreakSound()) {
                 Block b = Block.byItem(ingredient.getItem());
                 if (b != null && b != Blocks.AIR) {
                     SoundType soundtype = b.getSoundType(b.defaultBlockState());
@@ -149,9 +150,9 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
             return false;
         } else if (index != this.fuelSlot()) {
             if (index == 1) {
-                return Services.MACHINES.allowedInGrindingMillToolSlot(stack);
+                return CoreServices.MACHINES.allowedInGrindingMillToolSlot(stack);
             } else {
-                return Services.MACHINES.isValidGrindingMillInput(this.level.getRecipeManager(), stack);
+                return CoreServices.MACHINES.isValidGrindingMillInput(this.level.getRecipeManager(), stack);
             }
         } else {
             return getBurnTime(stack) > 0;

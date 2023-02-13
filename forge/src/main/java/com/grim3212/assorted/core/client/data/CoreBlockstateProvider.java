@@ -2,7 +2,7 @@ package com.grim3212.assorted.core.client.data;
 
 import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.api.machines.MachineTier;
-import com.grim3212.assorted.core.common.blocks.AssortedCoreBlocks;
+import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.common.blocks.BaseMachineBlock;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -34,59 +34,59 @@ public class CoreBlockstateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        simpleBlock(AssortedCoreBlocks.TIN_ORE.get());
-        simpleBlock(AssortedCoreBlocks.SILVER_ORE.get());
-        simpleBlock(AssortedCoreBlocks.ALUMINUM_ORE.get());
-        simpleBlock(AssortedCoreBlocks.NICKEL_ORE.get());
-        simpleBlock(AssortedCoreBlocks.PLATINUM_ORE.get());
-        simpleBlock(AssortedCoreBlocks.LEAD_ORE.get());
-        simpleBlock(AssortedCoreBlocks.RUBY_ORE.get());
-        simpleBlock(AssortedCoreBlocks.PERIDOT_ORE.get());
-        simpleBlock(AssortedCoreBlocks.SAPPHIRE_ORE.get());
-        simpleBlock(AssortedCoreBlocks.TOPAZ_ORE.get());
-        simpleBlock(AssortedCoreBlocks.TIN_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.SILVER_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.ALUMINUM_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.NICKEL_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.PLATINUM_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.LEAD_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.RUBY_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.PERIDOT_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.SAPPHIRE_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.TOPAZ_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.BRONZE_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.ELECTRUM_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.INVAR_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.STEEL_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.MACHINE_CORE.get());
+        simpleBlock(CoreBlocks.TIN_ORE.get());
+        simpleBlock(CoreBlocks.SILVER_ORE.get());
+        simpleBlock(CoreBlocks.ALUMINUM_ORE.get());
+        simpleBlock(CoreBlocks.NICKEL_ORE.get());
+        simpleBlock(CoreBlocks.PLATINUM_ORE.get());
+        simpleBlock(CoreBlocks.LEAD_ORE.get());
+        simpleBlock(CoreBlocks.RUBY_ORE.get());
+        simpleBlock(CoreBlocks.PERIDOT_ORE.get());
+        simpleBlock(CoreBlocks.SAPPHIRE_ORE.get());
+        simpleBlock(CoreBlocks.TOPAZ_ORE.get());
+        simpleBlock(CoreBlocks.TIN_BLOCK.get());
+        simpleBlock(CoreBlocks.SILVER_BLOCK.get());
+        simpleBlock(CoreBlocks.ALUMINUM_BLOCK.get());
+        simpleBlock(CoreBlocks.NICKEL_BLOCK.get());
+        simpleBlock(CoreBlocks.PLATINUM_BLOCK.get());
+        simpleBlock(CoreBlocks.LEAD_BLOCK.get());
+        simpleBlock(CoreBlocks.RUBY_BLOCK.get());
+        simpleBlock(CoreBlocks.PERIDOT_BLOCK.get());
+        simpleBlock(CoreBlocks.SAPPHIRE_BLOCK.get());
+        simpleBlock(CoreBlocks.TOPAZ_BLOCK.get());
+        simpleBlock(CoreBlocks.BRONZE_BLOCK.get());
+        simpleBlock(CoreBlocks.ELECTRUM_BLOCK.get());
+        simpleBlock(CoreBlocks.INVAR_BLOCK.get());
+        simpleBlock(CoreBlocks.STEEL_BLOCK.get());
+        simpleBlock(CoreBlocks.MACHINE_CORE.get());
 
-        simpleBlock(AssortedCoreBlocks.DEEPSLATE_TIN_ORE.get());
-        simpleBlock(AssortedCoreBlocks.DEEPSLATE_SILVER_ORE.get());
-        simpleBlock(AssortedCoreBlocks.DEEPSLATE_ALUMINUM_ORE.get());
-        simpleBlock(AssortedCoreBlocks.DEEPSLATE_NICKEL_ORE.get());
-        simpleBlock(AssortedCoreBlocks.DEEPSLATE_PLATINUM_ORE.get());
-        simpleBlock(AssortedCoreBlocks.DEEPSLATE_LEAD_ORE.get());
-        simpleBlock(AssortedCoreBlocks.DEEPSLATE_RUBY_ORE.get());
-        simpleBlock(AssortedCoreBlocks.DEEPSLATE_PERIDOT_ORE.get());
-        simpleBlock(AssortedCoreBlocks.DEEPSLATE_SAPPHIRE_ORE.get());
-        simpleBlock(AssortedCoreBlocks.DEEPSLATE_TOPAZ_ORE.get());
+        simpleBlock(CoreBlocks.DEEPSLATE_TIN_ORE.get());
+        simpleBlock(CoreBlocks.DEEPSLATE_SILVER_ORE.get());
+        simpleBlock(CoreBlocks.DEEPSLATE_ALUMINUM_ORE.get());
+        simpleBlock(CoreBlocks.DEEPSLATE_NICKEL_ORE.get());
+        simpleBlock(CoreBlocks.DEEPSLATE_PLATINUM_ORE.get());
+        simpleBlock(CoreBlocks.DEEPSLATE_LEAD_ORE.get());
+        simpleBlock(CoreBlocks.DEEPSLATE_RUBY_ORE.get());
+        simpleBlock(CoreBlocks.DEEPSLATE_PERIDOT_ORE.get());
+        simpleBlock(CoreBlocks.DEEPSLATE_SAPPHIRE_ORE.get());
+        simpleBlock(CoreBlocks.DEEPSLATE_TOPAZ_ORE.get());
 
-        simpleBlock(AssortedCoreBlocks.RAW_TIN_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.RAW_SILVER_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.RAW_ALUMINUM_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.RAW_NICKEL_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.RAW_PLATINUM_BLOCK.get());
-        simpleBlock(AssortedCoreBlocks.RAW_LEAD_BLOCK.get());
+        simpleBlock(CoreBlocks.RAW_TIN_BLOCK.get());
+        simpleBlock(CoreBlocks.RAW_SILVER_BLOCK.get());
+        simpleBlock(CoreBlocks.RAW_ALUMINUM_BLOCK.get());
+        simpleBlock(CoreBlocks.RAW_NICKEL_BLOCK.get());
+        simpleBlock(CoreBlocks.RAW_PLATINUM_BLOCK.get());
+        simpleBlock(CoreBlocks.RAW_LEAD_BLOCK.get());
 
-        machine(AssortedCoreBlocks.BASIC_ALLOY_FORGE.get(), MachineTier.BASIC);
-        machine(AssortedCoreBlocks.INTERMEDIATE_ALLOY_FORGE.get(), MachineTier.INTERMEDIATE);
-        machine(AssortedCoreBlocks.ADVANCED_ALLOY_FORGE.get(), MachineTier.ADVANCED);
-        machine(AssortedCoreBlocks.EXPERT_ALLOY_FORGE.get(), MachineTier.EXPERT);
+        machine(CoreBlocks.BASIC_ALLOY_FORGE.get(), MachineTier.BASIC);
+        machine(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get(), MachineTier.INTERMEDIATE);
+        machine(CoreBlocks.ADVANCED_ALLOY_FORGE.get(), MachineTier.ADVANCED);
+        machine(CoreBlocks.EXPERT_ALLOY_FORGE.get(), MachineTier.EXPERT);
 
-        machine(AssortedCoreBlocks.BASIC_GRINDING_MILL.get(), MachineTier.BASIC);
-        machine(AssortedCoreBlocks.INTERMEDIATE_GRINDING_MILL.get(), MachineTier.INTERMEDIATE);
-        machine(AssortedCoreBlocks.ADVANCED_GRINDING_MILL.get(), MachineTier.ADVANCED);
-        machine(AssortedCoreBlocks.EXPERT_GRINDING_MILL.get(), MachineTier.EXPERT);
+        machine(CoreBlocks.BASIC_GRINDING_MILL.get(), MachineTier.BASIC);
+        machine(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get(), MachineTier.INTERMEDIATE);
+        machine(CoreBlocks.ADVANCED_GRINDING_MILL.get(), MachineTier.ADVANCED);
+        machine(CoreBlocks.EXPERT_GRINDING_MILL.get(), MachineTier.EXPERT);
     }
 
     private void machine(Block b, MachineTier tier) {

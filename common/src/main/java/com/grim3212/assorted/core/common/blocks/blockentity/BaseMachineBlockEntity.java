@@ -1,10 +1,11 @@
 package com.grim3212.assorted.core.common.blocks.blockentity;
 
 import com.google.common.collect.Lists;
+import com.grim3212.assorted.core.CoreServices;
 import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
 import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.blocks.BaseMachineBlock;
-import com.grim3212.assorted.core.platform.Services;
+import com.grim3212.assorted.lib.platform.Services;
 import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -244,7 +245,7 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements Worl
         if (fuel.isEmpty()) {
             return 0;
         } else {
-            return Services.PLATFORM.getFuelTime(fuel, this.recipeType);
+            return CoreServices.MACHINES.getFuelTime(fuel);
         }
     }
 

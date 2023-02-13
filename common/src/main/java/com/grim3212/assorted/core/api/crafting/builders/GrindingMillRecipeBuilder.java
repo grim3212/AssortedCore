@@ -3,7 +3,7 @@ package com.grim3212.assorted.core.api.crafting.builders;
 import com.google.gson.JsonObject;
 import com.grim3212.assorted.core.api.crafting.MachineIngredient;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
-import com.grim3212.assorted.core.platform.Services;
+import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;

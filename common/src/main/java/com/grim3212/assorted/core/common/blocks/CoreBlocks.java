@@ -2,9 +2,9 @@ package com.grim3212.assorted.core.common.blocks;
 
 import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.api.machines.MachineTier;
-import com.grim3212.assorted.core.common.items.AssortedCoreItems;
-import com.grim3212.assorted.core.registry.IRegistryObject;
-import com.grim3212.assorted.core.registry.RegistryProvider;
+import com.grim3212.assorted.core.common.items.CoreItems;
+import com.grim3212.assorted.lib.registry.IRegistryObject;
+import com.grim3212.assorted.lib.registry.RegistryProvider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -20,7 +20,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
-public class AssortedCoreBlocks {
+public class CoreBlocks {
 
     public static final RegistryProvider<Block> BLOCKS = RegistryProvider.create(Registries.BLOCK, Constants.MOD_ID);
 
@@ -85,7 +85,7 @@ public class AssortedCoreBlocks {
 
     private static <T extends Block> IRegistryObject<T> register(String name, Supplier<? extends T> sup, Function<IRegistryObject<T>, Supplier<? extends Item>> itemCreator) {
         IRegistryObject<T> ret = registerNoItem(name, sup);
-        AssortedCoreItems.ITEMS.register(name, itemCreator.apply(ret));
+        CoreItems.ITEMS.register(name, itemCreator.apply(ret));
         return ret;
     }
 

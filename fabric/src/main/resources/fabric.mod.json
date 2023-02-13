@@ -19,6 +19,9 @@
     ],
     "client": [
       "com.grim3212.assorted.core.AssortedCoreFabricClient"
+    ],
+    "jei_mod_plugin": [
+      "com.grim3212.assorted.core.compat.jei.JEIAssortedCore"
     ]
   },
   "mixins": [],
@@ -26,6 +29,7 @@
     "fabricloader": ">=0.14",
     "fabric-api": "*",
     "minecraft": "${fabric_mc_version_range}",
-    "java": ">=17"
+    "java": ">=17",
+    "assortedlib": ">=1.0.1"
   }
 }

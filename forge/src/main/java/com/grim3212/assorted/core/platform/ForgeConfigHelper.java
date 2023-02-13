@@ -1,7 +1,7 @@
 package com.grim3212.assorted.core.platform;
 
 import com.grim3212.assorted.core.common.handler.CoreConfig;
-import com.grim3212.assorted.core.platform.services.IConfigHelper;
+import com.grim3212.assorted.core.services.IConfigHelper;
 
 public class ForgeConfigHelper implements IConfigHelper {
     @Override

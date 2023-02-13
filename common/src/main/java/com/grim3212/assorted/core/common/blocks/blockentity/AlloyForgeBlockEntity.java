@@ -1,12 +1,13 @@
 package com.grim3212.assorted.core.common.blocks.blockentity;
 
 import com.grim3212.assorted.core.Constants;
+import com.grim3212.assorted.core.CoreServices;
 import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
 import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
 import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.common.inventory.AlloyForgeContainer;
-import com.grim3212.assorted.core.platform.Services;
+import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -138,7 +139,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
         if (index == this.outputSlot()) {
             return false;
         } else if (index != this.fuelSlot()) {
-            return Services.MACHINES.isValidAlloyForgeInput(this.level.getRecipeManager(), stack);
+            return CoreServices.MACHINES.isValidAlloyForgeInput(this.level.getRecipeManager(), stack);
         } else {
             return getBurnTime(stack) > 0;
         }

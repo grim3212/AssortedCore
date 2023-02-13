@@ -1,7 +1,8 @@
 package com.grim3212.assorted.core.common.inventory;
 
+import com.grim3212.assorted.core.CoreServices;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
-import com.grim3212.assorted.core.platform.Services;
+import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -50,7 +51,7 @@ public class AlloyForgeContainer extends BaseMachineContainer {
 
                 slot.onQuickCraft(itemstack1, itemstack);
             } else if (index != 2 && index != 1 && index != 0) {
-                if (Services.PLATFORM.getFuelTime(itemstack1, null) > 0) {
+                if (CoreServices.MACHINES.getFuelTime(itemstack1) > 0) {
                     if (!this.moveItemStackTo(itemstack1, 2, 3, false)) {
                         return ItemStack.EMPTY;
                     }

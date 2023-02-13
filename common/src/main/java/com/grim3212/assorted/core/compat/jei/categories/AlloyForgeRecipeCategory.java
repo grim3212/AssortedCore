@@ -5,7 +5,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
-import com.grim3212.assorted.core.common.blocks.AssortedCoreBlocks;
+import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.compat.jei.JEIAssortedCore;
 import com.grim3212.assorted.core.compat.jei.JEIHelpers;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -51,7 +51,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
         this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
 
         this.background = guiHelper.createDrawable(GUI, 31, 22, 105, 57);
-        Block alloyForge = AssortedCoreBlocks.BASIC_ALLOY_FORGE.get();
+        Block alloyForge = CoreBlocks.BASIC_ALLOY_FORGE.get();
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(alloyForge));
         this.localizedName = alloyForge.getName();
         this.cachedArrows = CacheBuilder.newBuilder().maximumSize(25).build(new CacheLoader<Integer, IDrawableAnimated>() {

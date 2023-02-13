@@ -15,9 +15,14 @@ dependencies {
     })
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
-    
+
     modImplementation "mezz.jei:jei-$jei_minecraft_version-fabric-api:$jei_version"
+    modRuntimeOnly "mezz.jei:jei-$jei_minecraft_version-fabric:$jei_version"
+
+    modImplementation group: 'com.grim3212.assorted.lib', name: 'assortedlib-fabric', version: "$assortedlib_version+$minecraft_version"
+
+    modImplementation "me.zeroeightsix:fiber:$fiber_version"
+    include "me.zeroeightsix:fiber:$fiber_version"
 
     implementation project(":common")
 }

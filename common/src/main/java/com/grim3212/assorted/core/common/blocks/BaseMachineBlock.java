@@ -1,7 +1,7 @@
 package com.grim3212.assorted.core.common.blocks;
 
 import com.grim3212.assorted.core.common.blocks.blockentity.BaseMachineBlockEntity;
-import com.grim3212.assorted.core.platform.Services;
+import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;

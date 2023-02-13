@@ -19,7 +19,6 @@ buildscript {
         classpath group: 'gradle.plugin.com.matthewprenger', name: 'CurseGradle', version: '1.4.0'
     }
 }
-apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
@@ -103,6 +102,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
+    implementation fg.deobf(group: 'com.grim3212.assorted.lib', name: 'assortedlib-forge', version: "$assortedlib_version+$minecraft_version")
 
     compileOnly project(":common")
     annotationProcessor 'org.spongepowered:mixin:0.8.5-SNAPSHOT:processor'
@@ -144,10 +144,6 @@ processResources {
 
 jar.finalizedBy('reobfJar')
 
-reobf {
-    jarJar {}
-}
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -155,7 +151,6 @@ publishing {
             artifactId project.archivesBaseName
             version project.version
             from components.java
-            jarJar.component(it, tasks.jarJar)
         }
     }
     repositories {
@@ -163,16 +158,6 @@ publishing {
             url "file://" + System.getenv("local_maven")
         }
     }
-}
-
-tasks.jarJar.configure {
-    archiveClassifier.set("")
-    from(rootProject.file("LICENSE"))
-    from(rootProject.file("README.md"))
-}
-
-jarJar {
-    enable()
 }
 
 //curseforge {

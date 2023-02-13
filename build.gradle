@@ -6,7 +6,6 @@ subprojects {
     java.withJavadocJar()
 
     jar {
-        archiveClassifier.set("slim")
         from(rootProject.file("LICENSE"))
         from(rootProject.file("README.md"))
         manifest {
@@ -57,7 +56,11 @@ subprojects {
             name = "ModMaven"
             url = "https://modmaven.dev"
         }
-        mavenLocal()
+
+        maven {
+            name = "AssortedMods"
+            url "https://maven.grimoid.com/mods"
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {

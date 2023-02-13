@@ -1,7 +1,7 @@
 package com.grim3212.assorted.core.client.screen;
 
 import com.grim3212.assorted.core.common.inventory.CoreContainerTypes;
-import com.grim3212.assorted.core.platform.Services;
+import com.grim3212.assorted.lib.platform.Services;
 
 public class CoreScreens {
     public static void init() {

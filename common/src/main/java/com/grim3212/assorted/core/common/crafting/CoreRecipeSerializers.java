@@ -3,8 +3,8 @@ package com.grim3212.assorted.core.common.crafting;
 import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipeSerializer;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipeSerializer;
-import com.grim3212.assorted.core.registry.IRegistryObject;
-import com.grim3212.assorted.core.registry.RegistryProvider;
+import com.grim3212.assorted.lib.registry.IRegistryObject;
+import com.grim3212.assorted.lib.registry.RegistryProvider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 

@@ -5,7 +5,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
-import com.grim3212.assorted.core.common.blocks.AssortedCoreBlocks;
+import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.compat.jei.JEIAssortedCore;
 import com.grim3212.assorted.core.compat.jei.JEIHelpers;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -51,7 +51,7 @@ public class GrindingMillRecipeCategory implements IRecipeCategory<GrindingMillR
         this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
 
         this.background = guiHelper.createDrawable(GUI, 50, 4, 86, 75);
-        Block alloyForge = AssortedCoreBlocks.BASIC_GRINDING_MILL.get();
+        Block alloyForge = CoreBlocks.BASIC_GRINDING_MILL.get();
         this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(alloyForge));
         this.localizedName = alloyForge.getName();
         this.cachedGears = CacheBuilder.newBuilder().maximumSize(25).build(new CacheLoader<Integer, IDrawableAnimated>() {

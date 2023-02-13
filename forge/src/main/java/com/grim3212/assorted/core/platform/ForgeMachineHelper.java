@@ -1,10 +1,13 @@
 package com.grim3212.assorted.core.platform;
 
 import com.grim3212.assorted.core.api.CoreTags;
-import com.grim3212.assorted.core.platform.services.IMachineHelper;
+import com.grim3212.assorted.core.services.IMachineHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.common.ToolActions;
 
@@ -21,10 +24,15 @@ public class ForgeMachineHelper implements IMachineHelper {
                     return TierSortingRegistry.getTiersLowerThan(itemTier.getTier()).contains(Tiers.IRON);
                 } else {
                     // Fallback to old method of determining if a pick is the correct level
-                    return itemTier.getTier().getLevel() >= 2;
+                    return itemTier.getTier().getLevel() >= 2 && itemTier instanceof PickaxeItem;
                 }
             }
         }
         return false;
+    }
+
+    @Override
+    public int getFuelTime(ItemStack stack) {
+        return ForgeHooks.getBurnTime(stack, null);
     }
 }

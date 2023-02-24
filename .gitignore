@@ -26,4 +26,4 @@ runserver
 logs
 
 # Data Generator cache
-common/src/main/generated/.cache
+common/src/generated/resources/.cache

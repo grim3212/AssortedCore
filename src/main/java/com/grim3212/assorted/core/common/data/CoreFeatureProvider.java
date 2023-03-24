@@ -1,12 +1,11 @@
 package com.grim3212.assorted.core.common.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-
-import org.apache.commons.compress.utils.Lists;
 
 import com.grim3212.assorted.core.AssortedCore;
 import com.grim3212.assorted.core.common.gen.CoreWorldGenTargets;
@@ -134,7 +133,7 @@ public class CoreFeatureProvider {
 	}
 
 	private static HolderSet.Direct<PlacedFeature> getPlacedFeaturesForBiome(BootstapContext<BiomeModifier> context) {
-		List<Holder<PlacedFeature>> features = Lists.newArrayList();
+		List<Holder<PlacedFeature>> features = new ArrayList<>();
 		HolderGetter<PlacedFeature> holdergetter = context.lookup(Registries.PLACED_FEATURE);
 
 		features.add(holdergetter.getOrThrow(placedFeatureResourceKey(ORE_ALUMINUM_KEY)));

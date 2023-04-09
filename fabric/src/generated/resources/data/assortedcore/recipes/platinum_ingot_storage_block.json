@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/platinum"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "assortedcore:platinum_ingot"
+  }
+}

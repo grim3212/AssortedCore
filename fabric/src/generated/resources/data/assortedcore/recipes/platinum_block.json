@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    },
+    {
+      "tag": "c:ingots/platinum"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:platinum_block"
+  }
+}

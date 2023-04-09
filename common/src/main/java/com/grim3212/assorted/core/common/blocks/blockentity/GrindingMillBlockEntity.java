@@ -1,13 +1,13 @@
 package com.grim3212.assorted.core.common.blocks.blockentity;
 
 import com.grim3212.assorted.core.Constants;
-import com.grim3212.assorted.core.CoreServices;
+import com.grim3212.assorted.core.CoreCommonMod;
 import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 import com.grim3212.assorted.core.api.machines.MachineTier;
+import com.grim3212.assorted.core.api.machines.MachineUtil;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.common.inventory.GrindingMillContainer;
-import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -28,10 +28,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
-
-    private static final int[] SLOTS_UP = new int[]{0, 1, 2};
-    private static final int[] SLOTS_DOWN = new int[]{3};
-    private static final int[] SLOTS_HORIZONTAL = new int[]{0, 1, 2};
 
     public GrindingMillBlockEntity(BlockEntityType<GrindingMillBlockEntity> tileEntityType, BlockPos pos, BlockState state, MachineTier tier) {
         super(tileEntityType, pos, state, tier, 4, 600, CoreRecipeTypes.GRINDING_MILL.get());
@@ -57,7 +53,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
     protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
         if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
             ItemStack itemstack = recipeIn.getResultItem();
-            if (itemstack.isEmpty() || !CoreServices.MACHINES.allowedInGrindingMillToolSlot(this.items.get(1))) {
+            if (itemstack.isEmpty() || !MachineUtil.allowedInGrindingMillToolSlot(this.items.get(1))) {
                 return false;
             } else {
                 ItemStack outputSlot = this.items.get(this.outputSlot());
@@ -65,7 +61,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
                     return true;
                 } else if (!outputSlot.sameItem(itemstack)) {
                     return false;
-                } else if (outputSlot.getCount() + itemstack.getCount() <= this.getMaxStackSize() && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
+                } else if (outputSlot.getCount() + itemstack.getCount() <= this.getInventory(null).getSlotLimit(outputSlot()) && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
                     return true;
                 } else {
                     return outputSlot.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize();
@@ -90,9 +86,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
                 outputSlot.grow(itemstack1.getCount());
             }
 
-            if (!this.level.isClientSide) {
-                this.setRecipeUsed(recipe);
-            }
+            this.setRecipeUsed(recipe);
 
             ingredient.shrink(millRecipe.getIngredient().getCount());
 
@@ -100,7 +94,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
                 this.items.set(1, ItemStack.EMPTY);
             }
 
-            if (CoreServices.CONFIG.grindingMillHasBreakSound()) {
+            if (CoreCommonMod.COMMON_CONFIG.grindingMillHasBreakSound.get()) {
                 Block b = Block.byItem(ingredient.getItem());
                 if (b != null && b != Blocks.AIR) {
                     SoundType soundtype = b.getSoundType(b.defaultBlockState());
@@ -112,7 +106,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
 
     @Override
     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
-        return new GrindingMillContainer(windowId, playerInventory, this, this.machineData);
+        return new GrindingMillContainer(windowId, playerInventory, this.getInventory(null), this.machineData);
     }
 
     @Override
@@ -120,27 +114,31 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
         return Component.translatable(Constants.MOD_ID + ".container.grinding_mill");
     }
 
+    private static final int[] SLOTS = new int[]{0, 1, 2};
+    private static final int[] SLOTS_DOWN = new int[]{3};
+    private static final List<Integer> INPUT_SLOTS = NonNullList.of(0, 1);
+
     @Override
     public int[] getSlotsForFace(Direction side) {
         if (side == Direction.DOWN) {
             return SLOTS_DOWN;
         } else {
-            return side == Direction.UP ? SLOTS_UP : SLOTS_HORIZONTAL;
+            return SLOTS;
         }
     }
 
     @Override
-    protected List<Integer> inputSlots() {
-        return NonNullList.of(0, 0, 1);
+    public List<Integer> inputSlots() {
+        return INPUT_SLOTS;
     }
 
     @Override
-    protected int fuelSlot() {
+    public int fuelSlot() {
         return 2;
     }
 
     @Override
-    protected int outputSlot() {
+    public int outputSlot() {
         return 3;
     }
 
@@ -150,9 +148,9 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
             return false;
         } else if (index != this.fuelSlot()) {
             if (index == 1) {
-                return CoreServices.MACHINES.allowedInGrindingMillToolSlot(stack);
+                return MachineUtil.allowedInGrindingMillToolSlot(stack);
             } else {
-                return CoreServices.MACHINES.isValidGrindingMillInput(this.level.getRecipeManager(), stack);
+                return MachineUtil.isValidGrindingMillInput(this.level.getRecipeManager(), stack);
             }
         } else {
             return getBurnTime(stack) > 0;

@@ -1,6 +1,7 @@
 package com.grim3212.assorted.core.common.blocks;
 
 import com.grim3212.assorted.core.common.blocks.blockentity.BaseMachineBlockEntity;
+import com.grim3212.assorted.lib.core.inventory.locking.StorageUtil;
 import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,7 +12,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -62,7 +62,7 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return (level1, blockPos, blockState, t) -> {
+        return level.isClientSide ? null : (level1, blockPos, blockState, t) -> {
             if (t instanceof BaseMachineBlockEntity machine) {
                 machine.tick();
             }
@@ -78,20 +78,19 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         if (stack.hasCustomHoverName()) {
             BlockEntity tileentity = worldIn.getBlockEntity(pos);
-            if (tileentity instanceof BaseMachineBlockEntity) {
-                ((BaseMachineBlockEntity) tileentity).setCustomName(stack.getHoverName());
+            if (tileentity instanceof BaseMachineBlockEntity machine) {
+                machine.setCustomName(stack.getHoverName());
             }
         }
-
     }
 
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             BlockEntity tileentity = worldIn.getBlockEntity(pos);
-            if (tileentity instanceof BaseMachineBlockEntity) {
-                Containers.dropContents(worldIn, pos, (BaseMachineBlockEntity) tileentity);
-                ((BaseMachineBlockEntity) tileentity).grantStoredRecipeExperience(worldIn, Vec3.atCenterOf(pos));
+            if (tileentity instanceof BaseMachineBlockEntity machine) {
+                Containers.dropContents(worldIn, pos, machine.getItems());
+                machine.grantStoredRecipeExperience(worldIn, Vec3.atCenterOf(pos));
                 worldIn.updateNeighbourForOutputSignal(pos, this);
             }
 
@@ -106,7 +105,11 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
 
     @Override
     public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
-        return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(worldIn.getBlockEntity(pos));
+        if (worldIn.getBlockEntity(pos) instanceof BaseMachineBlockEntity machine) {
+            return StorageUtil.getRedstoneSignalFromContainer(machine.getInventory(null));
+        }
+
+        return super.getAnalogOutputSignal(blockState, worldIn, pos);
     }
 
     @Override

@@ -23,6 +23,7 @@ import java.util.function.ToIntFunction;
 public class CoreBlocks {
 
     public static final RegistryProvider<Block> BLOCKS = RegistryProvider.create(Registries.BLOCK, Constants.MOD_ID);
+    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID);
 
     public static final IRegistryObject<CoreOreBlock> TIN_ORE = register("tin_ore", () -> new CoreOreBlock(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0f, 3.0f).requiresCorrectToolForDrops()));
     public static final IRegistryObject<CoreOreBlock> SILVER_ORE = register("silver_ore", () -> new CoreOreBlock(BlockBehaviour.Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0f, 3.0f).requiresCorrectToolForDrops()));
@@ -85,7 +86,7 @@ public class CoreBlocks {
 
     private static <T extends Block> IRegistryObject<T> register(String name, Supplier<? extends T> sup, Function<IRegistryObject<T>, Supplier<? extends Item>> itemCreator) {
         IRegistryObject<T> ret = registerNoItem(name, sup);
-        CoreItems.ITEMS.register(name, itemCreator.apply(ret));
+        ITEMS.register(name, itemCreator.apply(ret));
         return ret;
     }
 

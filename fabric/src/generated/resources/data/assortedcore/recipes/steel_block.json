@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:steel_block"
+  }
+}

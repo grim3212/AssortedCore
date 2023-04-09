@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/aluminum"
+    },
+    "C": {
+      "tag": "c:gear/copper"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    }
+  },
+  "pattern": [
+    "IAI",
+    "ACA",
+    "IAI"
+  ],
+  "result": {
+    "item": "assortedcore:machine_core"
+  }
+}

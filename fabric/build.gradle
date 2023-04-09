@@ -21,9 +21,6 @@ dependencies {
 
     modImplementation group: 'com.grim3212.assorted.lib', name: 'assortedlib-fabric', version: "$assortedlib_version+$minecraft_version"
 
-    modImplementation "me.zeroeightsix:fiber:$fiber_version"
-    include "me.zeroeightsix:fiber:$fiber_version"
-
     implementation project(":common")
 }
 
@@ -40,6 +37,14 @@ loom {
             setConfigName("Fabric Server")
             ideConfigGenerated(true)
             runDir("run")
+        }
+        datagenClient {
+            inherit client
+            name "Fabric Datagen"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/generated/resources/")}"
+            vmArg "-Dfabric-api.datagen.modid=${mod_id}"
+            runDir "build/datagen"
         }
     }
 }

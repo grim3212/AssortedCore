@@ -1,0 +1,15 @@
+{
+  "type": "assortedcore:grinding_mill",
+  "cookingtime": 600,
+  "experience": 0.4,
+  "ingredient": {
+    "count": 1,
+    "ingredient": {
+      "tag": "c:ores/silver"
+    }
+  },
+  "result": {
+    "count": 2,
+    "item": "assortedcore:silver_dust"
+  }
+}

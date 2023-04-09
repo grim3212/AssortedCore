@@ -1,20 +1,19 @@
 package com.grim3212.assorted.core.common.inventory;
 
-import com.grim3212.assorted.core.CoreServices;
-import com.grim3212.assorted.lib.platform.Services;
-import net.minecraft.world.Container;
-import net.minecraft.world.inventory.Slot;
+import com.grim3212.assorted.core.api.machines.MachineUtil;
+import com.grim3212.assorted.lib.core.inventory.IItemStorageHandler;
+import com.grim3212.assorted.lib.core.inventory.slot.SlotStorageHandler;
 import net.minecraft.world.item.ItemStack;
 
-public class GrindingMillToolSlot extends Slot {
+public class GrindingMillToolSlot extends SlotStorageHandler {
 
-    public GrindingMillToolSlot(Container forgeInventory, int id, int x, int y) {
+    public GrindingMillToolSlot(IItemStorageHandler forgeInventory, int id, int x, int y) {
         super(forgeInventory, id, x, y);
     }
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return CoreServices.MACHINES.allowedInGrindingMillToolSlot(stack);
+        return MachineUtil.allowedInGrindingMillToolSlot(stack);
     }
 
 }

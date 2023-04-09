@@ -31,7 +31,7 @@ archivesBaseName = "${mod_id}-forge"
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
 
-//    config "${mod_id}.mixins.json"
+    config "${mod_id}_forge.mixins.json"
 }
 
 minecraft {
@@ -48,10 +48,10 @@ minecraft {
         client {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
+            jvmArg "-XX:+AllowEnhancedClassRedefinition"
             taskName 'Client'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-//            args "-mixin.config=${mod_id}.mixins.json"
             mods {
                 modClientRun {
                     source sourceSets.main
@@ -63,10 +63,10 @@ minecraft {
         server {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
+            jvmArg "-XX:+AllowEnhancedClassRedefinition"
             taskName 'Server'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-//            args "-mixin.config=${mod_id}.mixins.json"
             mods {
                 modServerRun {
                     source sourceSets.main
@@ -78,11 +78,10 @@ minecraft {
         data {
             workingDirectory project.file('run')
             ideaModule "${rootProject.name}.${project.name}.main"
-            args '--mod', mod_id, '--all', '--output', file('../common/src/generated/resources/'), '--existing', file('../common/src/main/resources/')
+            args '--mod', mod_id, '--client', '--output', file('../common/src/generated/resources/'), '--existing', file('../common/src/main/resources/')
             taskName 'Data'
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-//            args "-mixin.config=${mod_id}.mixins.json"
             mods {
                 modDataRun {
                     source sourceSets.main
@@ -100,12 +99,12 @@ sourceSets.main.resources {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5-SNAPSHOT:processor'
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
     implementation fg.deobf(group: 'com.grim3212.assorted.lib', name: 'assortedlib-forge', version: "$assortedlib_version+$minecraft_version")
 
     compileOnly project(":common")
-    annotationProcessor 'org.spongepowered:mixin:0.8.5-SNAPSHOT:processor'
 }
 
 tasks.withType(JavaCompile) {
@@ -135,6 +134,7 @@ processResources {
     exclude('pack.mcmeta')
     // Exclude datagenerator .cache directory
     exclude '.cache'
+    exclude "${mod_id}_common.accesswidener"
 
     filesMatching('*.mixins.json') {
         expand "refmap_target": "${mod_id}."

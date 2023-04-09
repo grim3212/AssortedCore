@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    },
+    {
+      "tag": "c:ingots/electrum"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:electrum_block"
+  }
+}

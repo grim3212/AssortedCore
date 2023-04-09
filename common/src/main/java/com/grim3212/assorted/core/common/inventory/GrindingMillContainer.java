@@ -1,10 +1,12 @@
 package com.grim3212.assorted.core.common.inventory;
 
-import com.grim3212.assorted.core.CoreServices;
+import com.grim3212.assorted.core.api.machines.MachineUtil;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
+import com.grim3212.assorted.lib.core.inventory.IItemStorageHandler;
+import com.grim3212.assorted.lib.core.inventory.impl.ItemStackStorageHandler;
+import com.grim3212.assorted.lib.core.inventory.slot.SlotStorageHandler;
 import com.grim3212.assorted.lib.platform.Services;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -14,14 +16,14 @@ import net.minecraft.world.item.ItemStack;
 
 public class GrindingMillContainer extends BaseMachineContainer {
 
-    protected GrindingMillContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new SimpleContainer(4), new SimpleContainerData(4));
+    protected GrindingMillContainer(int id, Inventory playerInventory, FriendlyByteBuf byteBuf) {
+        this(id, playerInventory, new ItemStackStorageHandler(4), new SimpleContainerData(4));
     }
 
-    public GrindingMillContainer(int id, Inventory playerInventory, Container grindingMillInventory, ContainerData grindingMillData) {
-        super(CoreContainerTypes.GRINDING_MILL.get(), CoreRecipeTypes.GRINDING_MILL.get(), id, playerInventory, 4, grindingMillInventory, grindingMillData);
+    public GrindingMillContainer(int id, Inventory playerInventory, IItemStorageHandler grindingMillInventory, ContainerData grindingMillData) {
+        super(CoreContainerTypes.GRINDING_MILL.get(), CoreRecipeTypes.GRINDING_MILL.get(), id, playerInventory, grindingMillInventory, grindingMillData);
 
-        this.addSlot(new Slot(grindingMillInventory, 0, 51, 27));
+        this.addSlot(new SlotStorageHandler(grindingMillInventory, 0, 51, 27));
         this.addSlot(new GrindingMillToolSlot(grindingMillInventory, 1, 80, 5));
         this.addSlot(new MachineFuelSlot(grindingMillInventory, 2, 80, 62));
         this.addSlot(new MachineResultSlot(playerInventory.player, grindingMillInventory, 3, 115, 27));
@@ -55,11 +57,11 @@ public class GrindingMillContainer extends BaseMachineContainer {
                     if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (CoreServices.MACHINES.getFuelTime(itemstack1) > 0) {
+                } else if (Services.PLATFORM.getFuelTime(itemstack1) > 0) {
                     if (!this.moveItemStackTo(itemstack1, 2, 3, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (CoreServices.MACHINES.allowedInGrindingMillToolSlot(itemstack1)) {
+                } else if (MachineUtil.allowedInGrindingMillToolSlot(itemstack1)) {
                     if (!this.moveItemStackTo(itemstack1, 1, 2, false)) {
                         return ItemStack.EMPTY;
                     }

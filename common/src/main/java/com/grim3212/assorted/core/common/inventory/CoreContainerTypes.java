@@ -9,8 +9,9 @@ import net.minecraft.world.inventory.MenuType;
 
 public class CoreContainerTypes {
     public static final RegistryProvider<MenuType<?>> MENU_TYPES = RegistryProvider.create(Registries.MENU, Constants.MOD_ID);
-    public static final IRegistryObject<MenuType<AlloyForgeContainer>> ALLOY_FORGE = MENU_TYPES.register("alloy_forge", () -> Services.REGISTRY_UTIL.createMenuType((syncId, pInv, buf) -> new AlloyForgeContainer(syncId, pInv)));
-    public static final IRegistryObject<MenuType<GrindingMillContainer>> GRINDING_MILL = MENU_TYPES.register("grinding_mill", () -> Services.REGISTRY_UTIL.createMenuType((syncId, pInv, buf) -> new GrindingMillContainer(syncId, pInv)));
+
+    public static final IRegistryObject<MenuType<AlloyForgeContainer>> ALLOY_FORGE = MENU_TYPES.register("alloy_forge", () -> Services.PLATFORM.createMenuType(AlloyForgeContainer::new));
+    public static final IRegistryObject<MenuType<GrindingMillContainer>> GRINDING_MILL = MENU_TYPES.register("grinding_mill", () -> Services.PLATFORM.createMenuType(GrindingMillContainer::new));
 
     public static void init() {
     }

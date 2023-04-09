@@ -1,7 +1,7 @@
 package com.grim3212.assorted.core.common.inventory;
 
 import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
-import net.minecraft.world.Container;
+import com.grim3212.assorted.lib.core.inventory.IItemStorageHandler;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -16,11 +16,10 @@ public abstract class BaseMachineContainer extends AbstractContainerMenu {
     protected final ContainerData machineData;
     protected final Level world;
     protected final RecipeType<? extends BaseMachineRecipe> recipeType;
-    private final Container machineInventory;
+    private final IItemStorageHandler machineInventory;
 
-    public BaseMachineContainer(MenuType<? extends BaseMachineContainer> containerType, RecipeType<? extends BaseMachineRecipe> recipeType, int id, Inventory playerInventory, int slots, Container machineInventory, ContainerData machineData) {
+    public BaseMachineContainer(MenuType<? extends BaseMachineContainer> containerType, RecipeType<? extends BaseMachineRecipe> recipeType, int id, Inventory playerInventory, IItemStorageHandler machineInventory, ContainerData machineData) {
         super(containerType, id);
-        checkContainerSize(machineInventory, slots);
         checkContainerDataCount(machineData, 4);
         this.recipeType = recipeType;
         this.machineInventory = machineInventory;

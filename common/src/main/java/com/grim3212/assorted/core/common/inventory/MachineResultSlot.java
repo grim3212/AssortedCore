@@ -1,15 +1,16 @@
 package com.grim3212.assorted.core.common.inventory;
 
-import net.minecraft.world.Container;
+import com.grim3212.assorted.core.common.blocks.blockentity.BaseMachineBlockEntity;
+import com.grim3212.assorted.lib.core.inventory.IItemStorageHandler;
+import com.grim3212.assorted.lib.core.inventory.slot.SlotStorageHandler;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class MachineResultSlot extends Slot {
+public class MachineResultSlot extends SlotStorageHandler {
     private final Player player;
     private int removeCount;
 
-    public MachineResultSlot(Player player, Container inventoryIn, int slotIndex, int xPosition, int yPosition) {
+    public MachineResultSlot(Player player, IItemStorageHandler inventoryIn, int slotIndex, int xPosition, int yPosition) {
         super(inventoryIn, slotIndex, xPosition, yPosition);
         this.player = player;
     }
@@ -43,10 +44,9 @@ public class MachineResultSlot extends Slot {
     @Override
     protected void checkTakeAchievements(ItemStack stack) {
         stack.onCraftedBy(this.player.level, this.player, this.removeCount);
-        // TODO: Fix this
-//		if (!this.player.level.isClientSide && this.container instanceof BaseMachineBlockEntity) {
-//			((BaseMachineBlockEntity) this.container).unlockRecipes(this.player);
-//		}
+        if (!this.player.level.isClientSide && this.container instanceof BaseMachineBlockEntity) {
+            ((BaseMachineBlockEntity) this.container).unlockRecipes(this.player);
+        }
 
         this.removeCount = 0;
     }

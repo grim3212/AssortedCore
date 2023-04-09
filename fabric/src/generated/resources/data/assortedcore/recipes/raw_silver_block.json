@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:raw_materials/silver"
+    },
+    {
+      "tag": "c:raw_materials/silver"
+    },
+    {
+      "tag": "c:raw_materials/silver"
+    },
+    {
+      "tag": "c:raw_materials/silver"
+    },
+    {
+      "tag": "c:raw_materials/silver"
+    },
+    {
+      "tag": "c:raw_materials/silver"
+    },
+    {
+      "tag": "c:raw_materials/silver"
+    },
+    {
+      "tag": "c:raw_materials/silver"
+    },
+    {
+      "tag": "c:raw_materials/silver"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:raw_silver_block"
+  }
+}

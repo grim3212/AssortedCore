@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    },
+    {
+      "tag": "c:ingots/bronze"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:bronze_block"
+  }
+}

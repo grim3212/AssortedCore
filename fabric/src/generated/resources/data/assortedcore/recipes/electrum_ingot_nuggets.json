@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:nuggets/electrum"
+    },
+    {
+      "tag": "c:nuggets/electrum"
+    },
+    {
+      "tag": "c:nuggets/electrum"
+    },
+    {
+      "tag": "c:nuggets/electrum"
+    },
+    {
+      "tag": "c:nuggets/electrum"
+    },
+    {
+      "tag": "c:nuggets/electrum"
+    },
+    {
+      "tag": "c:nuggets/electrum"
+    },
+    {
+      "tag": "c:nuggets/electrum"
+    },
+    {
+      "tag": "c:nuggets/electrum"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:electrum_ingot"
+  }
+}

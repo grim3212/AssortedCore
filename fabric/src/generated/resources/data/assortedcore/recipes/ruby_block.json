@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    },
+    {
+      "tag": "c:gems/ruby"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:ruby_block"
+  }
+}

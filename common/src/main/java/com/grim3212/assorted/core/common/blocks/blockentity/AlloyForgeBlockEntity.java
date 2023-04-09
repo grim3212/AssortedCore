@@ -1,13 +1,12 @@
 package com.grim3212.assorted.core.common.blocks.blockentity;
 
 import com.grim3212.assorted.core.Constants;
-import com.grim3212.assorted.core.CoreServices;
 import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
 import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
 import com.grim3212.assorted.core.api.machines.MachineTier;
+import com.grim3212.assorted.core.api.machines.MachineUtil;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.common.inventory.AlloyForgeContainer;
-import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -23,10 +22,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
-
-    private static final int[] SLOTS_UP = new int[]{0, 1, 2};
-    private static final int[] SLOTS_DOWN = new int[]{3};
-    private static final int[] SLOTS_HORIZONTAL = new int[]{0, 1, 2};
 
     public AlloyForgeBlockEntity(BlockEntityType<AlloyForgeBlockEntity> tileEntityType, BlockPos pos, BlockState state, MachineTier tier) {
         super(tileEntityType, pos, state, tier, 4, 400, CoreRecipeTypes.ALLOY_FORGE.get());
@@ -55,12 +50,12 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
             if (itemstack.isEmpty()) {
                 return false;
             } else {
-                ItemStack outputSlot = this.items.get(3);
+                ItemStack outputSlot = this.items.get(outputSlot());
                 if (outputSlot.isEmpty()) {
                     return true;
                 } else if (!outputSlot.sameItem(itemstack)) {
                     return false;
-                } else if (outputSlot.getCount() + itemstack.getCount() <= this.getMaxStackSize() && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
+                } else if (outputSlot.getCount() + itemstack.getCount() <= this.getInventory(null).getSlotLimit(outputSlot()) && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
                     return true;
                 } else {
                     return outputSlot.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize();
@@ -78,16 +73,14 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
             ItemStack ingredient1 = this.items.get(0);
             ItemStack ingredient2 = this.items.get(1);
             ItemStack itemstack1 = recipe.getResultItem();
-            ItemStack outputSlot = this.items.get(3);
+            ItemStack outputSlot = this.items.get(this.outputSlot());
             if (outputSlot.isEmpty()) {
-                this.items.set(3, itemstack1.copy());
+                this.items.set(this.outputSlot(), itemstack1.copy());
             } else if (outputSlot.getItem() == itemstack1.getItem()) {
                 outputSlot.grow(itemstack1.getCount());
             }
 
-            if (!this.level.isClientSide) {
-                this.setRecipeUsed(recipe);
-            }
+            this.setRecipeUsed(recipe);
 
             // Flip shrink amounts if the recipe is in opposite positions
             if (forgeRecipe.getIngredient1().test(ingredient1)) {
@@ -102,7 +95,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
 
     @Override
     public AbstractContainerMenu createMenu(int windowId, Inventory playerInventory, Player playerEntity) {
-        return new AlloyForgeContainer(windowId, playerInventory, this, this.machineData);
+        return new AlloyForgeContainer(windowId, playerInventory, this.getInventory(null), this.machineData);
     }
 
     @Override
@@ -110,27 +103,32 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
         return Component.translatable(Constants.MOD_ID + ".container.alloy_forge");
     }
 
+
+    private static final int[] SLOTS = new int[]{0, 1, 2};
+    private static final int[] SLOTS_DOWN = new int[]{3};
+    private static final List<Integer> INPUT_SLOTS = NonNullList.of(0, 1);
+
     @Override
     public int[] getSlotsForFace(Direction side) {
         if (side == Direction.DOWN) {
             return SLOTS_DOWN;
         } else {
-            return side == Direction.UP ? SLOTS_UP : SLOTS_HORIZONTAL;
+            return SLOTS;
         }
     }
 
     @Override
-    protected List<Integer> inputSlots() {
-        return NonNullList.of(0, 0, 1);
+    public List<Integer> inputSlots() {
+        return INPUT_SLOTS;
     }
 
     @Override
-    protected int fuelSlot() {
+    public int fuelSlot() {
         return 2;
     }
 
     @Override
-    protected int outputSlot() {
+    public int outputSlot() {
         return 3;
     }
 
@@ -139,7 +137,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
         if (index == this.outputSlot()) {
             return false;
         } else if (index != this.fuelSlot()) {
-            return CoreServices.MACHINES.isValidAlloyForgeInput(this.level.getRecipeManager(), stack);
+            return MachineUtil.isValidAlloyForgeInput(this.level.getRecipeManager(), stack);
         } else {
             return getBurnTime(stack) > 0;
         }

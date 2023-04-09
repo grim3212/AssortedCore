@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 3.0,
+  "ingredient": {
+    "tag": "c:storage_blocks/raw_platinum"
+  },
+  "result": "assortedcore:platinum_block"
+}

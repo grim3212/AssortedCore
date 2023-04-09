@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    },
+    {
+      "tag": "c:ingots/invar"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:invar_block"
+  }
+}

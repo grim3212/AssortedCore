@@ -1,0 +1,15 @@
+{
+  "type": "assortedcore:grinding_mill",
+  "cookingtime": 300,
+  "experience": 0.0,
+  "ingredient": {
+    "count": 1,
+    "ingredient": {
+      "tag": "c:ingots/tin"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "assortedcore:tin_dust"
+  }
+}

@@ -1,6 +1,7 @@
 package com.grim3212.assorted.core.common.items;
 
 import com.grim3212.assorted.core.Constants;
+import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.lib.registry.IRegistryObject;
 import com.grim3212.assorted.lib.registry.RegistryProvider;
 import net.minecraft.core.registries.Registries;
@@ -10,7 +11,7 @@ import java.util.function.Supplier;
 
 public class CoreItems {
 
-    public static final RegistryProvider<Item> ITEMS = RegistryProvider.create(Registries.ITEM, Constants.MOD_ID);
+
 
     public static final IRegistryObject<Item> RUBY = register("ruby", () -> new Item(new Item.Properties()));
     public static final IRegistryObject<Item> PERIDOT = register("peridot", () -> new Item(new Item.Properties()));
@@ -76,7 +77,7 @@ public class CoreItems {
     public static final IRegistryObject<Item> RAW_LEAD = register("raw_lead", () -> new Item(new Item.Properties()));
 
     private static <T extends Item> IRegistryObject<T> register(final String name, final Supplier<T> sup) {
-        return ITEMS.register(name, sup);
+        return CoreBlocks.ITEMS.register(name, sup);
     }
 
     public static void init() {

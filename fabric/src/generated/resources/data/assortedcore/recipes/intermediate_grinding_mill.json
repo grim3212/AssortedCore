@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "tag": "c:ingots/steel"
+    },
+    "X": {
+      "item": "assortedcore:basic_grinding_mill"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SXS",
+    "SSS"
+  ],
+  "result": {
+    "item": "assortedcore:intermediate_grinding_mill"
+  }
+}

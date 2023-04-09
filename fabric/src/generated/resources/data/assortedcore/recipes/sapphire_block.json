@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    },
+    {
+      "tag": "c:gems/sapphire"
+    }
+  ],
+  "result": {
+    "item": "assortedcore:sapphire_block"
+  }
+}

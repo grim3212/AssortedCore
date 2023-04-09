@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "tag": "c:ingots/electrum"
+    },
+    "V": {
+      "tag": "c:ingots/invar"
+    },
+    "X": {
+      "item": "assortedcore:intermediate_alloy_forge"
+    }
+  },
+  "pattern": [
+    "VEV",
+    "EXE",
+    "VEV"
+  ],
+  "result": {
+    "item": "assortedcore:advanced_alloy_forge"
+  }
+}

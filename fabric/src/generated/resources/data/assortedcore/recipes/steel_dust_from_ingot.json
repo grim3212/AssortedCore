@@ -1,0 +1,15 @@
+{
+  "type": "assortedcore:grinding_mill",
+  "cookingtime": 300,
+  "experience": 0.0,
+  "ingredient": {
+    "count": 1,
+    "ingredient": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "result": {
+    "count": 1,
+    "item": "assortedcore:steel_dust"
+  }
+}

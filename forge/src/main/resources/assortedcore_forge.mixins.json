@@ -10,5 +10,5 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "assortedstorage.refmap.json"
+  "refmap": "assortedcore.refmap.json"
 }

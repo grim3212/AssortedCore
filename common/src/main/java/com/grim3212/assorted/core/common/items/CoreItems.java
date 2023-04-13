@@ -1,18 +1,13 @@
 package com.grim3212.assorted.core.common.items;
 
-import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.lib.registry.IRegistryObject;
-import com.grim3212.assorted.lib.registry.RegistryProvider;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 
 import java.util.function.Supplier;
 
 public class CoreItems {
-
-
-
+    
     public static final IRegistryObject<Item> RUBY = register("ruby", () -> new Item(new Item.Properties()));
     public static final IRegistryObject<Item> PERIDOT = register("peridot", () -> new Item(new Item.Properties()));
     public static final IRegistryObject<Item> SAPPHIRE = register("sapphire", () -> new Item(new Item.Properties()));

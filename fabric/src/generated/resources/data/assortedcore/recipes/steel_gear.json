@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:steel_gear"
-  }
+  },
+  "show_notification": true
 }

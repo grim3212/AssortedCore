@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:platinum_gear"
-  }
+  },
+  "show_notification": true
 }

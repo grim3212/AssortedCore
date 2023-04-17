@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:silver_gear"
-  }
+  },
+  "show_notification": true
 }

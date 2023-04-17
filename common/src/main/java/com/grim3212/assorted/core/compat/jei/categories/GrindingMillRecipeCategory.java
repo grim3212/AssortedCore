@@ -127,7 +127,7 @@ public class GrindingMillRecipeCategory implements IRecipeCategory<GrindingMillR
 
         recipeLayout.addSlot(RecipeIngredientRole.INPUT, 1, 23).addItemStacks(inputs.get(inputSlot));
         recipeLayout.addSlot(RecipeIngredientRole.INPUT, 30, 1).addItemStacks(inputs.get(toolSlot));
-        recipeLayout.addSlot(RecipeIngredientRole.OUTPUT, 65, 23).addItemStack(recipe.getResultItem());
+        recipeLayout.addSlot(RecipeIngredientRole.OUTPUT, 65, 23).addItemStack(JEIHelpers.getResultItem(recipe));
     }
 
     @Override

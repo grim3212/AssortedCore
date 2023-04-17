@@ -19,5 +19,6 @@
   ],
   "result": {
     "item": "assortedcore:advanced_grinding_mill"
-  }
+  },
+  "show_notification": true
 }

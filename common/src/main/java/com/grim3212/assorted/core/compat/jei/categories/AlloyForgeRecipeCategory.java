@@ -125,7 +125,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
 
         recipeLayout.addSlot(RecipeIngredientRole.INPUT, 1, 5).addItemStacks(inputs.get(inputSlot1));
         recipeLayout.addSlot(RecipeIngredientRole.INPUT, 25, 5).addItemStacks(inputs.get(inputSlot2));
-        recipeLayout.addSlot(RecipeIngredientRole.OUTPUT, 84, 5).addItemStack(recipe.getResultItem());
+        recipeLayout.addSlot(RecipeIngredientRole.OUTPUT, 84, 5).addItemStack(JEIHelpers.getResultItem(recipe));
     }
 
     @Override

@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:electrum_gear"
-  }
+  },
+  "show_notification": true
 }

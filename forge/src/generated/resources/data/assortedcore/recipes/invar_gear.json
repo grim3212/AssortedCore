@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:invar_gear"
-  }
+  },
+  "show_notification": true
 }

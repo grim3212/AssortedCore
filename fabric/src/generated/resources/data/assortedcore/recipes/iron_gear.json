@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:iron_gear"
-  }
+  },
+  "show_notification": true
 }

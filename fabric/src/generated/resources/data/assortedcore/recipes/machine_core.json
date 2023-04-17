@@ -19,5 +19,6 @@
   ],
   "result": {
     "item": "assortedcore:machine_core"
-  }
+  },
+  "show_notification": true
 }

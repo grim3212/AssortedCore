@@ -25,5 +25,6 @@
   ],
   "result": {
     "item": "assortedcore:basic_grinding_mill"
-  }
+  },
+  "show_notification": true
 }

@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:intermediate_alloy_forge"
-  }
+  },
+  "show_notification": true
 }

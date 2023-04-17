@@ -19,5 +19,6 @@
   ],
   "result": {
     "item": "assortedcore:basic_alloy_forge"
-  }
+  },
+  "show_notification": true
 }

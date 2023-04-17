@@ -46,7 +46,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
     @Override
     protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
         if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
-            ItemStack itemstack = recipeIn.getResultItem();
+            ItemStack itemstack = recipeIn.getResultItem(this.level.registryAccess());
             if (itemstack.isEmpty()) {
                 return false;
             } else {
@@ -72,7 +72,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
             AlloyForgeRecipe forgeRecipe = (AlloyForgeRecipe) recipe;
             ItemStack ingredient1 = this.items.get(0);
             ItemStack ingredient2 = this.items.get(1);
-            ItemStack itemstack1 = recipe.getResultItem();
+            ItemStack itemstack1 = recipe.getResultItem(this.level.registryAccess());
             ItemStack outputSlot = this.items.get(this.outputSlot());
             if (outputSlot.isEmpty()) {
                 this.items.set(this.outputSlot(), itemstack1.copy());

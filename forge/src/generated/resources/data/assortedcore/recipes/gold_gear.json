@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:gold_gear"
-  }
+  },
+  "show_notification": true
 }

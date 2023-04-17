@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:expert_alloy_forge"
-  }
+  },
+  "show_notification": true
 }

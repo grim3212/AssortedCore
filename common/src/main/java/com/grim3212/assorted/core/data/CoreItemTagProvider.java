@@ -5,7 +5,6 @@ import com.grim3212.assorted.core.common.items.CoreItems;
 import com.grim3212.assorted.lib.data.LibItemTagProvider;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -19,7 +18,7 @@ import java.util.function.Function;
 public class CoreItemTagProvider extends LibItemTagProvider {
 
 
-    public CoreItemTagProvider(PackOutput output, CompletableFuture<Provider> lookup, TagsProvider<Block> blockTags) {
+    public CoreItemTagProvider(PackOutput output, CompletableFuture<Provider> lookup, CompletableFuture<TagLookup<Block>> blockTags) {
         super(output, lookup, blockTags);
     }
 

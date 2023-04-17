@@ -19,5 +19,6 @@
   ],
   "result": {
     "item": "assortedcore:advanced_alloy_forge"
-  }
+  },
+  "show_notification": true
 }

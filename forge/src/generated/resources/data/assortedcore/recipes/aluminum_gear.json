@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:aluminum_gear"
-  }
+  },
+  "show_notification": true
 }

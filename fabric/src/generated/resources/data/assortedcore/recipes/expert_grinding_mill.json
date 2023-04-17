@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:expert_grinding_mill"
-  }
+  },
+  "show_notification": true
 }

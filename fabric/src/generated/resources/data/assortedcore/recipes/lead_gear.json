@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:lead_gear"
-  }
+  },
+  "show_notification": true
 }

@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:nickel_gear"
-  }
+  },
+  "show_notification": true
 }

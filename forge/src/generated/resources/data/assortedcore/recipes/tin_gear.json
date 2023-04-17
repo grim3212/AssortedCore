@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "assortedcore:tin_gear"
-  }
+  },
+  "show_notification": true
 }

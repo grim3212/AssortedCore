@@ -26,7 +26,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'com.matthewprenger.cursegradle'
 
-archivesBaseName = "${mod_id}-forge"
+archivesBaseName = "${mod_id}-forge-${minecraft_version}"
 
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"

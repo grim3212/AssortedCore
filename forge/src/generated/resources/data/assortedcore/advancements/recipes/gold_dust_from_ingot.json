@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:gold_dust_from_ingot"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

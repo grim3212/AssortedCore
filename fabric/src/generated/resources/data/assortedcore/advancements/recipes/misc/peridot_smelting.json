@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:peridot_smelting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

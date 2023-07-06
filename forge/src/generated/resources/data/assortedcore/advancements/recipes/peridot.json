@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:peridot"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

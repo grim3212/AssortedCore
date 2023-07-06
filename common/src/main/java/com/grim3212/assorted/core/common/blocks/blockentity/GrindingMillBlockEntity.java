@@ -23,8 +23,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
@@ -59,7 +59,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
                 ItemStack outputSlot = this.items.get(this.outputSlot());
                 if (outputSlot.isEmpty()) {
                     return true;
-                } else if (!outputSlot.sameItem(itemstack)) {
+                } else if (!ItemStack.isSameItem(outputSlot, itemstack)) {
                     return false;
                 } else if (outputSlot.getCount() + itemstack.getCount() <= this.getInventory(null).getSlotLimit(outputSlot()) && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
                     return true;

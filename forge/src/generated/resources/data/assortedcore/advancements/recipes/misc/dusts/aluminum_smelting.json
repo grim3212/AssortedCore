@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:dusts/aluminum_smelting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:dusts/iron_smelting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

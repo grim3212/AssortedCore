@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:quartz"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

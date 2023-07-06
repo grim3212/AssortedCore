@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:bronze_gear"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:ruby_storage_block"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

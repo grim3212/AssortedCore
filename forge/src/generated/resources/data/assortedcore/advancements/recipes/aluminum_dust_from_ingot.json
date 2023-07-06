@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:aluminum_dust_from_ingot"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

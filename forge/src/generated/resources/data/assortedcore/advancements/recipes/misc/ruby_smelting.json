@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:ruby_smelting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

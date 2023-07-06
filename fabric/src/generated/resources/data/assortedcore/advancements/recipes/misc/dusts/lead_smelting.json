@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:dusts/lead_smelting"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

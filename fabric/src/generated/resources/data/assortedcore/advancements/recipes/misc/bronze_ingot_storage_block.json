@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:bronze_ingot_storage_block"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

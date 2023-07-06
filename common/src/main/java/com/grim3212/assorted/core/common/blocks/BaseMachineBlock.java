@@ -25,8 +25,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseMachineBlock extends Block implements EntityBlock {
 

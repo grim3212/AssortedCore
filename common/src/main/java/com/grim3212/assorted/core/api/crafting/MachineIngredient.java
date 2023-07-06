@@ -6,8 +6,8 @@ import com.google.gson.JsonSyntaxException;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.function.Predicate;
 

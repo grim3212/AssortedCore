@@ -38,8 +38,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -306,11 +306,11 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements IInv
     }
 
     @Override
-    public void awardUsedRecipes(Player player) {
+    public void awardUsedRecipes(Player player, List<ItemStack> stacks) {
     }
 
     public void unlockRecipes(Player player) {
-        List<Recipe<?>> list = this.grantStoredRecipeExperience(player.level, player.position());
+        List<Recipe<?>> list = this.grantStoredRecipeExperience(player.level(), player.position());
         player.awardRecipes(list);
         this.recipes.clear();
     }

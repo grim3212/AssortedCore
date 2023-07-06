@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:invar_block"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

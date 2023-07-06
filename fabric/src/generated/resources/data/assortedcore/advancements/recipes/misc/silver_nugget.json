@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:silver_nugget"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

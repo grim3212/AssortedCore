@@ -82,7 +82,7 @@ public class CoreWorldGenData extends LibWorldGenProvider {
 
         HolderGetter<ConfiguredFeature<?, ?>> holderGetter = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        map.put(ORE_ALUMINUM_KEY, new PlacedFeature(holderGetter.getOrThrow(configuredFeatureResourceKey(ORE_ALUMINUM_KEY)), commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(16), VerticalAnchor.absolute(125)))));
+        map.put(ORE_ALUMINUM_KEY, new PlacedFeature(holderGetter.getOrThrow(configuredFeatureResourceKey(ORE_ALUMINUM_KEY)), commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(16), VerticalAnchor.absolute(125)))));
         map.put(ORE_NICKEL_KEY, new PlacedFeature(holderGetter.getOrThrow(configuredFeatureResourceKey(ORE_NICKEL_KEY)), commonOrePlacement(14, HeightRangePlacement.triangle(VerticalAnchor.absolute(-40), VerticalAnchor.absolute(40)))));
         map.put(ORE_TIN_KEY, new PlacedFeature(holderGetter.getOrThrow(configuredFeatureResourceKey(ORE_TIN_KEY)), commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(20), VerticalAnchor.absolute(256)))));
         map.put(ORE_LEAD_KEY, new PlacedFeature(holderGetter.getOrThrow(configuredFeatureResourceKey(ORE_LEAD_KEY)), commonOrePlacement(14, HeightRangePlacement.triangle(VerticalAnchor.absolute(-32), VerticalAnchor.absolute(32)))));

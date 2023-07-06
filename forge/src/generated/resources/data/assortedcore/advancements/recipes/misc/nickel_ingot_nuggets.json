@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:nickel_ingot_nuggets"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

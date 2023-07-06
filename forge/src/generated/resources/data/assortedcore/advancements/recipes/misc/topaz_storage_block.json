@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:topaz_storage_block"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

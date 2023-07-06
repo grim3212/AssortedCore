@@ -8,7 +8,6 @@ import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.compat.jei.JEIAssortedCore;
 import com.grim3212.assorted.core.compat.jei.JEIHelpers;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -22,6 +21,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -86,29 +86,30 @@ public class GrindingMillRecipeCategory implements IRecipeCategory<GrindingMillR
         return icon;
     }
 
+
     @Override
-    public void draw(GrindingMillRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
-        animatedFlame.draw(matrixStack, 30, 41);
+    public void draw(GrindingMillRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        animatedFlame.draw(guiGraphics, 30, 41);
 
         IDrawableAnimated gear = getGear(recipe);
-        gear.draw(matrixStack, 28, 21);
+        gear.draw(guiGraphics, 28, 21);
 
-        drawExperience(recipe, matrixStack, 0);
-        drawCookTime(recipe, matrixStack, 65);
+        drawExperience(recipe, guiGraphics, 0);
+        drawCookTime(recipe, guiGraphics, 65);
     }
 
-    protected void drawExperience(GrindingMillRecipe recipe, PoseStack matrixStack, int y) {
+    protected void drawExperience(GrindingMillRecipe recipe, GuiGraphics guiGraphics, int y) {
         float experience = recipe.getExperience();
         if (experience > 0) {
             Component experienceString = Component.translatable("gui.jei.category.smelting.experience", experience);
             Minecraft minecraft = Minecraft.getInstance();
             Font fontRenderer = minecraft.font;
             int stringWidth = fontRenderer.width(experienceString);
-            fontRenderer.draw(matrixStack, experienceString, background.getWidth() - stringWidth, y, 0xFF808080);
+            guiGraphics.drawString(fontRenderer, experienceString, background.getWidth() - stringWidth, y, 0xFF808080, false);
         }
     }
 
-    protected void drawCookTime(GrindingMillRecipe recipe, PoseStack matrixStack, int y) {
+    protected void drawCookTime(GrindingMillRecipe recipe, GuiGraphics guiGraphics, int y) {
         int cookTime = recipe.getCookTime();
         if (cookTime > 0) {
             int cookTimeSeconds = cookTime / 20;
@@ -116,7 +117,7 @@ public class GrindingMillRecipeCategory implements IRecipeCategory<GrindingMillR
             Minecraft minecraft = Minecraft.getInstance();
             Font fontRenderer = minecraft.font;
             int stringWidth = fontRenderer.width(timeString);
-            fontRenderer.draw(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
+            guiGraphics.drawString(fontRenderer, timeString, background.getWidth() - stringWidth, y, 0xFF808080, false);
         }
     }
 

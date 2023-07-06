@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:tin_block"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:tin_ingot_blasting_raw_ore"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

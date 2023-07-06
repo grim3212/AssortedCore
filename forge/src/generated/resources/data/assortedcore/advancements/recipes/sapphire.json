@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:sapphire"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

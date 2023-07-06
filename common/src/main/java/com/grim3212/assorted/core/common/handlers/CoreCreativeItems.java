@@ -4,14 +4,24 @@ import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.common.items.CoreItems;
 import com.grim3212.assorted.lib.core.creative.CreativeTabItems;
-import com.grim3212.assorted.lib.platform.Services;
+import com.grim3212.assorted.lib.registry.IRegistryObject;
+import com.grim3212.assorted.lib.registry.RegistryProvider;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public class CoreCreativeItems {
+
+    public static final RegistryProvider<CreativeModeTab> CREATIVE_TABS = RegistryProvider.create(Registries.CREATIVE_MODE_TAB, Constants.MOD_ID);
+
+    public static final IRegistryObject CREATIVE_TAB = CREATIVE_TABS.register("tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+            .title(Component.translatable("itemGroup." + Constants.MOD_ID))
+            .icon(() -> new ItemStack(CoreBlocks.PLATINUM_ORE.get()))
+            .displayItems((props, output) -> output.acceptAll(CoreCreativeItems.getCreativeItems())).build());
+
 
     private static List<ItemStack> getCreativeItems() {
         CreativeTabItems items = new CreativeTabItems();
@@ -146,6 +156,5 @@ public class CoreCreativeItems {
     }
 
     public static void init() {
-        Services.PLATFORM.registerCreativeTab(new ResourceLocation(Constants.MOD_ID, "tab"), Component.translatable("itemGroup." + Constants.MOD_ID), () -> new ItemStack(CoreBlocks.PLATINUM_ORE.get()), CoreCreativeItems::getCreativeItems);
     }
 }

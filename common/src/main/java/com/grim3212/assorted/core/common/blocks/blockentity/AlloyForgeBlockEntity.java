@@ -17,8 +17,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
@@ -53,7 +53,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
                 ItemStack outputSlot = this.items.get(outputSlot());
                 if (outputSlot.isEmpty()) {
                     return true;
-                } else if (!outputSlot.sameItem(itemstack)) {
+                } else if (!ItemStack.isSameItem(outputSlot, itemstack)) {
                     return false;
                 } else if (outputSlot.getCount() + itemstack.getCount() <= this.getInventory(null).getSlotLimit(outputSlot()) && outputSlot.getCount() + itemstack.getCount() <= outputSlot.getMaxStackSize()) {
                     return true;

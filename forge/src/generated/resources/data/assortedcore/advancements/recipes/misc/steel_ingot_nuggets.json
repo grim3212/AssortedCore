@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:steel_ingot_nuggets"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

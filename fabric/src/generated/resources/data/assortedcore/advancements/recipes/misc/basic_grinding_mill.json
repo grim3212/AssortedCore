@@ -43,5 +43,6 @@
     "recipes": [
       "assortedcore:basic_grinding_mill"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

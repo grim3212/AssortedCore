@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:tin_ingot_smelting_raw_ore"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

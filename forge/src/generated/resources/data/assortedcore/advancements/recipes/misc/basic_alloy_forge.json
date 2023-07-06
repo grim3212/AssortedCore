@@ -41,5 +41,6 @@
     "recipes": [
       "assortedcore:basic_alloy_forge"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

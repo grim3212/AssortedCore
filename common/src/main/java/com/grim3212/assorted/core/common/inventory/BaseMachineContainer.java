@@ -24,7 +24,7 @@ public abstract class BaseMachineContainer extends AbstractContainerMenu {
         this.recipeType = recipeType;
         this.machineInventory = machineInventory;
         this.machineData = machineData;
-        this.world = playerInventory.player.level;
+        this.world = playerInventory.player.level();
 
         this.addDataSlots(machineData);
     }

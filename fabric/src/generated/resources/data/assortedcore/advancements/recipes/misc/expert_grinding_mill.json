@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:expert_grinding_mill"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

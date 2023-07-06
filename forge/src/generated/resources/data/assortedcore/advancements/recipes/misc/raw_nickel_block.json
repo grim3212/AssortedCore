@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:raw_nickel_block"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:expert_alloy_forge"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

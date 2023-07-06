@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:electrum_gear"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

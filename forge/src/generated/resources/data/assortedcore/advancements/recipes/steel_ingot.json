@@ -39,5 +39,6 @@
     "recipes": [
       "assortedcore:steel_ingot"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

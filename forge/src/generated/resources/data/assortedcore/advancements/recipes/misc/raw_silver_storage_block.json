@@ -28,5 +28,6 @@
     "recipes": [
       "assortedcore:raw_silver_storage_block"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

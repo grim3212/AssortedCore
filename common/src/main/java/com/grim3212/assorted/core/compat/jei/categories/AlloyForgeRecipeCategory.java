@@ -8,7 +8,6 @@ import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.compat.jei.JEIAssortedCore;
 import com.grim3212.assorted.core.compat.jei.JEIHelpers;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -22,6 +21,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -87,27 +87,27 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
     }
 
     @Override
-    public void draw(AlloyForgeRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack matrixStack, double mouseX, double mouseY) {
-        animatedFlame.draw(matrixStack, 49, 23);
+    public void draw(AlloyForgeRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        animatedFlame.draw(guiGraphics, 49, 23);
 
         IDrawableAnimated arrow = getArrow(recipe);
-        arrow.draw(matrixStack, 47, 6);
+        arrow.draw(guiGraphics, 47, 6);
 
-        drawExperience(recipe, matrixStack, 45);
-        drawCookTime(recipe, matrixStack, 45);
+        drawExperience(recipe, guiGraphics, 45);
+        drawCookTime(recipe, guiGraphics, 45);
     }
 
-    protected void drawExperience(AlloyForgeRecipe recipe, PoseStack matrixStack, int y) {
+    protected void drawExperience(AlloyForgeRecipe recipe, GuiGraphics guiGraphics, int y) {
         float experience = recipe.getExperience();
         if (experience > 0) {
             Component experienceString = Component.translatable("gui.jei.category.smelting.experience", experience);
             Minecraft minecraft = Minecraft.getInstance();
             Font fontRenderer = minecraft.font;
-            fontRenderer.draw(matrixStack, experienceString, 0, y, 0xFF808080);
+            guiGraphics.drawString(fontRenderer, experienceString, 0, y, 0xFF808080, false);
         }
     }
 
-    protected void drawCookTime(AlloyForgeRecipe recipe, PoseStack matrixStack, int y) {
+    protected void drawCookTime(AlloyForgeRecipe recipe, GuiGraphics guiGraphics, int y) {
         int cookTime = recipe.getCookTime();
         if (cookTime > 0) {
             int cookTimeSeconds = cookTime / 20;
@@ -115,7 +115,7 @@ public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecip
             Minecraft minecraft = Minecraft.getInstance();
             Font fontRenderer = minecraft.font;
             int stringWidth = fontRenderer.width(timeString);
-            fontRenderer.draw(matrixStack, timeString, background.getWidth() - stringWidth, y, 0xFF808080);
+            guiGraphics.drawString(fontRenderer, timeString, background.getWidth() - stringWidth, y, 0xFF808080, false);
         }
     }
 

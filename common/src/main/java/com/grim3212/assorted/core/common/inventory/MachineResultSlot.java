@@ -43,8 +43,8 @@ public class MachineResultSlot extends SlotStorageHandler {
 
     @Override
     protected void checkTakeAchievements(ItemStack stack) {
-        stack.onCraftedBy(this.player.level, this.player, this.removeCount);
-        if (!this.player.level.isClientSide && this.container instanceof BaseMachineBlockEntity) {
+        stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
+        if (!this.player.level().isClientSide && this.container instanceof BaseMachineBlockEntity) {
             ((BaseMachineBlockEntity) this.container).unlockRecipes(this.player);
         }
 

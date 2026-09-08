@@ -6,12 +6,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 public class GrindingMillScreen extends AbstractContainerScreen<GrindingMillContainer> {
 
-    private static final ResourceLocation GRINDING_MILL_GUI_TEXTURE = new ResourceLocation(Constants.MOD_ID, "textures/gui/container/grinding_mill.png");
+    private static final Identifier GRINDING_MILL_GUI_TEXTURE = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/container/grinding_mill.png");
 
     public GrindingMillScreen(GrindingMillContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);

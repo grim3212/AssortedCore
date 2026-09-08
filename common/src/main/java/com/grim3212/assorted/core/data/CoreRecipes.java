@@ -13,7 +13,7 @@ import com.grim3212.assorted.lib.util.LibCommonTags;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -207,7 +207,7 @@ public class CoreRecipes extends ConditionalRecipeProvider {
     }
 
     private void grinding(TagKey<Item> ingredient, ItemStack result, float experience, int cookTime, Consumer<FinishedRecipe> consumer, String name) {
-        GrindingMillRecipeBuilder.recipe(new MachineIngredient(Ingredient.of(ingredient)), result, experience, cookTime).addCriterion("has_ingredient", has(ingredient)).build(consumer, new ResourceLocation(Constants.MOD_ID, getKeyPath(result.getItem()) + name));
+        GrindingMillRecipeBuilder.recipe(new MachineIngredient(Ingredient.of(ingredient)), result, experience, cookTime).addCriterion("has_ingredient", has(ingredient)).build(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, getKeyPath(result.getItem()) + name));
     }
 
     private void gear(TagKey<Item> material, ItemLike gear, Consumer<FinishedRecipe> consumer) {
@@ -215,32 +215,32 @@ public class CoreRecipes extends ConditionalRecipeProvider {
     }
 
     private void ingotDust(TagKey<Item> dust, ItemLike ingot, Consumer<FinishedRecipe> consumer) {
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(dust), RecipeCategory.MISC, ingot, 0.1F, 100).unlockedBy("has_dust", has(dust)).save(consumer, new ResourceLocation(Constants.MOD_ID, dust.location().getPath() + "_blasting"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(dust), RecipeCategory.MISC, ingot, 0.1F, 200).unlockedBy("has_dust", has(dust)).save(consumer, new ResourceLocation(Constants.MOD_ID, dust.location().getPath() + "_smelting"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(dust), RecipeCategory.MISC, ingot, 0.1F, 100).unlockedBy("has_dust", has(dust)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, dust.location().getPath() + "_blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(dust), RecipeCategory.MISC, ingot, 0.1F, 200).unlockedBy("has_dust", has(dust)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, dust.location().getPath() + "_smelting"));
     }
 
     private void rawStorageBlastingSmelting(TagKey<Item> rawStorage, ItemLike output, float experience, Consumer<FinishedRecipe> consumer) {
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(rawStorage), RecipeCategory.MISC, output, experience, 100).unlockedBy("has_storage", has(rawStorage)).save(consumer, new ResourceLocation(Constants.MOD_ID, getKeyPath(output.asItem()) + "_blasting_raw_storage"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(rawStorage), RecipeCategory.MISC, output, experience, 200).unlockedBy("has_storage", has(rawStorage)).save(consumer, new ResourceLocation(Constants.MOD_ID, getKeyPath(output.asItem()) + "_smelting_raw_storage"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(rawStorage), RecipeCategory.MISC, output, experience, 100).unlockedBy("has_storage", has(rawStorage)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, getKeyPath(output.asItem()) + "_blasting_raw_storage"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(rawStorage), RecipeCategory.MISC, output, experience, 200).unlockedBy("has_storage", has(rawStorage)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, getKeyPath(output.asItem()) + "_smelting_raw_storage"));
     }
 
     private void rawOreBlastingSmelting(TagKey<Item> ore, ItemLike output, float experience, Consumer<FinishedRecipe> consumer) {
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ore), RecipeCategory.MISC, output, experience, 100).unlockedBy("has_ore", has(ore)).save(consumer, new ResourceLocation(Constants.MOD_ID, getKeyPath(output.asItem()) + "_blasting_raw_ore"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ore), RecipeCategory.MISC, output, experience, 200).unlockedBy("has_ore", has(ore)).save(consumer, new ResourceLocation(Constants.MOD_ID, getKeyPath(output.asItem()) + "_smelting_raw_ore"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ore), RecipeCategory.MISC, output, experience, 100).unlockedBy("has_ore", has(ore)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, getKeyPath(output.asItem()) + "_blasting_raw_ore"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ore), RecipeCategory.MISC, output, experience, 200).unlockedBy("has_ore", has(ore)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, getKeyPath(output.asItem()) + "_smelting_raw_ore"));
     }
 
     private void blastingSmelting(TagKey<Item> ore, ItemLike output, float experience, Consumer<FinishedRecipe> consumer) {
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ore), RecipeCategory.MISC, output, experience, 100).unlockedBy("has_ore", has(ore)).save(consumer, new ResourceLocation(Constants.MOD_ID, getKeyPath(output.asItem()) + "_blasting"));
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ore), RecipeCategory.MISC, output, experience, 200).unlockedBy("has_ore", has(ore)).save(consumer, new ResourceLocation(Constants.MOD_ID, getKeyPath(output.asItem()) + "_smelting"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(ore), RecipeCategory.MISC, output, experience, 100).unlockedBy("has_ore", has(ore)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, getKeyPath(output.asItem()) + "_blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(ore), RecipeCategory.MISC, output, experience, 200).unlockedBy("has_ore", has(ore)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, getKeyPath(output.asItem()) + "_smelting"));
     }
 
     private void gemStorage(TagKey<Item> storageBlockTag, TagKey<Item> gemTag, ItemLike storageBlock, ItemLike gem, Consumer<FinishedRecipe> consumer) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, gem, 9).requires(Ingredient.of(storageBlockTag)).unlockedBy("has_gem", has(storageBlockTag)).save(consumer, new ResourceLocation(Constants.MOD_ID, getKeyPath(gem.asItem()) + "_storage_block"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, gem, 9).requires(Ingredient.of(storageBlockTag)).unlockedBy("has_gem", has(storageBlockTag)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, getKeyPath(gem.asItem()) + "_storage_block"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, storageBlock, 1).requires(Ingredient.of(gemTag), 9).unlockedBy("has_gem", has(gemTag)).save(consumer);
     }
 
     private void storage(TagKey<Item> storageBlockTag, TagKey<Item> nonStoreTag, ItemLike storageBlock, ItemLike nonStore, Consumer<FinishedRecipe> consumer) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, nonStore, 9).requires(Ingredient.of(storageBlockTag)).unlockedBy("has_storage_item", has(nonStoreTag)).save(consumer, new ResourceLocation(Constants.MOD_ID, getKeyPath(nonStore.asItem()) + "_storage_block"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, nonStore, 9).requires(Ingredient.of(storageBlockTag)).unlockedBy("has_storage_item", has(nonStoreTag)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, getKeyPath(nonStore.asItem()) + "_storage_block"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, storageBlock, 1).requires(Ingredient.of(nonStoreTag), 9).unlockedBy("has_storage_item", has(nonStoreTag)).save(consumer);
     }
 
@@ -251,7 +251,7 @@ public class CoreRecipes extends ConditionalRecipeProvider {
 
     private void ingotNugget(TagKey<Item> ingotTag, TagKey<Item> nuggetTag, ItemLike ingot, ItemLike nugget, Consumer<FinishedRecipe> consumer) {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, nugget, 9).requires(Ingredient.of(ingotTag)).unlockedBy("has_ingot", has(ingotTag)).save(consumer);
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ingot, 1).requires(Ingredient.of(nuggetTag), 9).unlockedBy("has_ingot", has(ingotTag)).save(consumer, new ResourceLocation(Constants.MOD_ID, getKeyPath(ingot.asItem()) + "_nuggets"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ingot, 1).requires(Ingredient.of(nuggetTag), 9).unlockedBy("has_ingot", has(ingotTag)).save(consumer, Identifier.fromNamespaceAndPath(Constants.MOD_ID, getKeyPath(ingot.asItem()) + "_nuggets"));
     }
 
     public String getKeyPath(Item i) {

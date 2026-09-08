@@ -3,7 +3,7 @@ package com.grim3212.assorted.core.api.crafting;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -15,7 +15,7 @@ public class AlloyForgeRecipe extends BaseMachineRecipe {
 	protected final MachineIngredient ingredient1;
 	protected final MachineIngredient ingredient2;
 
-	public AlloyForgeRecipe(ResourceLocation idIn, String groupIn, MachineIngredient ingredient1In, MachineIngredient ingredient2In, ItemStack resultIn, float experienceIn, int cookTimeIn) {
+	public AlloyForgeRecipe(Identifier idIn, String groupIn, MachineIngredient ingredient1In, MachineIngredient ingredient2In, ItemStack resultIn, float experienceIn, int cookTimeIn) {
 		super(idIn, groupIn, resultIn, experienceIn, cookTimeIn);
 		this.ingredient1 = ingredient1In;
 		this.ingredient2 = ingredient2In;

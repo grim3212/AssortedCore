@@ -6,7 +6,7 @@ import com.google.gson.JsonSyntaxException;
 import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -15,7 +15,7 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 public class AlloyForgeRecipeSerializer implements RecipeSerializer<AlloyForgeRecipe> {
 
     @Override
-    public AlloyForgeRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+    public AlloyForgeRecipe fromJson(Identifier recipeId, JsonObject json) {
         String s = GsonHelper.getAsString(json, "group", "");
         JsonElement jsonelementIngredient1 = (JsonElement) (GsonHelper.isArrayNode(json, "ingredient1") ? GsonHelper.getAsJsonArray(json, "ingredient1") : GsonHelper.getAsJsonObject(json, "ingredient1"));
         MachineIngredient ingredient1 = MachineIngredient.deserialize(jsonelementIngredient1);
@@ -29,7 +29,7 @@ public class AlloyForgeRecipeSerializer implements RecipeSerializer<AlloyForgeRe
             itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
         } else {
             String s1 = GsonHelper.getAsString(json, "result");
-            ResourceLocation resourcelocation = new ResourceLocation(s1);
+            Identifier resourcelocation = Identifier.parse(s1);
             itemstack = new ItemStack(Services.PLATFORM.getRegistry(Registries.ITEM).getValue(resourcelocation).orElseThrow(() -> {
                 return new IllegalStateException("Item: " + s1 + " does not exist");
             }));
@@ -40,7 +40,7 @@ public class AlloyForgeRecipeSerializer implements RecipeSerializer<AlloyForgeRe
     }
 
     @Override
-    public AlloyForgeRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public AlloyForgeRecipe fromNetwork(Identifier recipeId, FriendlyByteBuf buffer) {
         String s = buffer.readUtf(32767);
         MachineIngredient ingredient1 = MachineIngredient.read(buffer);
         MachineIngredient ingredient2 = MachineIngredient.read(buffer);

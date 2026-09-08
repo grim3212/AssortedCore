@@ -5,7 +5,7 @@ import com.grim3212.assorted.core.api.machines.MachineTier;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.common.blocks.BaseMachineBlock;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -98,8 +98,8 @@ public class CoreBlockstateProvider extends BlockStateProvider {
         getVariantBuilder(b).forAllStates(state -> ConfiguredModel.builder().modelFile(state.getValue(BaseMachineBlock.ON) ? machineOn : machineOff).rotationY((int) state.getValue(BaseMachineBlock.FACING).getOpposite().toYRot()).build());
     }
 
-    private ResourceLocation loc(String name) {
-        return new ResourceLocation(Constants.MOD_ID, name);
+    private Identifier loc(String name) {
+        return Identifier.fromNamespaceAndPath(Constants.MOD_ID, name);
     }
 
 }

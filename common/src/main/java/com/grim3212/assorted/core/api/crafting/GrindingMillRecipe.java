@@ -3,7 +3,7 @@ package com.grim3212.assorted.core.api.crafting;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -14,7 +14,7 @@ public class GrindingMillRecipe extends BaseMachineRecipe {
 
 	protected final MachineIngredient ingredient;
 
-	public GrindingMillRecipe(ResourceLocation idIn, String groupIn, MachineIngredient ingredientIn, ItemStack resultIn, float experienceIn, int cookTimeIn) {
+	public GrindingMillRecipe(Identifier idIn, String groupIn, MachineIngredient ingredientIn, ItemStack resultIn, float experienceIn, int cookTimeIn) {
 		super(idIn, groupIn, resultIn, experienceIn, cookTimeIn);
 		this.ingredient = ingredientIn;
 	}

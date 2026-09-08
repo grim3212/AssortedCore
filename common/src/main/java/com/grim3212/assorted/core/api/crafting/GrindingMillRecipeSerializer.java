@@ -6,7 +6,7 @@ import com.google.gson.JsonSyntaxException;
 import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -15,7 +15,7 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 public class GrindingMillRecipeSerializer implements RecipeSerializer<GrindingMillRecipe> {
 
     @Override
-    public GrindingMillRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+    public GrindingMillRecipe fromJson(Identifier recipeId, JsonObject json) {
         String s = GsonHelper.getAsString(json, "group", "");
         JsonElement jsonelementIngredient = (JsonElement) (GsonHelper.isArrayNode(json, "ingredient") ? GsonHelper.getAsJsonArray(json, "ingredient") : GsonHelper.getAsJsonObject(json, "ingredient"));
         MachineIngredient ingredient = MachineIngredient.deserialize(jsonelementIngredient);
@@ -27,7 +27,7 @@ public class GrindingMillRecipeSerializer implements RecipeSerializer<GrindingMi
             itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
         } else {
             String s1 = GsonHelper.getAsString(json, "result");
-            ResourceLocation resourcelocation = new ResourceLocation(s1);
+            Identifier resourcelocation = Identifier.parse(s1);
             itemstack = new ItemStack(Services.PLATFORM.getRegistry(Registries.ITEM).getValue(resourcelocation).orElseThrow(() -> {
                 return new IllegalStateException("Item: " + s1 + " does not exist");
             }));
@@ -38,7 +38,7 @@ public class GrindingMillRecipeSerializer implements RecipeSerializer<GrindingMi
     }
 
     @Override
-    public GrindingMillRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+    public GrindingMillRecipe fromNetwork(Identifier recipeId, FriendlyByteBuf buffer) {
         String s = buffer.readUtf(32767);
         MachineIngredient ingredient = MachineIngredient.read(buffer);
         ItemStack itemstack = buffer.readItem();

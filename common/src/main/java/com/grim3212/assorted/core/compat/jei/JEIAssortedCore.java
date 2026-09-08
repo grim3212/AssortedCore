@@ -18,7 +18,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 @JeiPlugin
@@ -27,10 +27,10 @@ public class JEIAssortedCore implements IModPlugin {
     public static final RecipeType<AlloyForgeRecipe> ALLOY_FORGE = RecipeType.create(Constants.MOD_ID, "alloy_forge", AlloyForgeRecipe.class);
     public static final RecipeType<GrindingMillRecipe> GRINDING_MILL = RecipeType.create(Constants.MOD_ID, "grinding_mill", GrindingMillRecipe.class);
 
-    private static final ResourceLocation PLUGIN_ID = new ResourceLocation(Constants.MOD_ID, "assets/assortedcore");
+    private static final Identifier PLUGIN_ID = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "assets/assortedcore");
 
     @Override
-    public ResourceLocation getPluginUid() {
+    public Identifier getPluginUid() {
         return PLUGIN_ID;
     }
 

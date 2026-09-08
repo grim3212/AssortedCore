@@ -8,9 +8,9 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -23,17 +23,17 @@ import java.util.Map;
 
 public class CoreWorldGenData extends LibWorldGenProvider {
 
-    public static final ResourceLocation ORE_ALUMINUM_KEY = new ResourceLocation(Constants.MOD_ID, "ore_aluminum");
-    public static final ResourceLocation ORE_NICKEL_KEY = new ResourceLocation(Constants.MOD_ID, "ore_nickel");
-    public static final ResourceLocation ORE_TIN_KEY = new ResourceLocation(Constants.MOD_ID, "ore_tin");
-    public static final ResourceLocation ORE_LEAD_KEY = new ResourceLocation(Constants.MOD_ID, "ore_lead");
-    public static final ResourceLocation ORE_SILVER_KEY = new ResourceLocation(Constants.MOD_ID, "ore_silver");
-    public static final ResourceLocation ORE_PLATINUM_KEY = new ResourceLocation(Constants.MOD_ID, "ore_platinum");
+    public static final Identifier ORE_ALUMINUM_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_aluminum");
+    public static final Identifier ORE_NICKEL_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_nickel");
+    public static final Identifier ORE_TIN_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_tin");
+    public static final Identifier ORE_LEAD_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_lead");
+    public static final Identifier ORE_SILVER_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_silver");
+    public static final Identifier ORE_PLATINUM_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_platinum");
 
-    public static final ResourceLocation ORE_RUBY_KEY = new ResourceLocation(Constants.MOD_ID, "ore_ruby");
-    public static final ResourceLocation ORE_SAPPHIRE_KEY = new ResourceLocation(Constants.MOD_ID, "ore_sapphire");
-    public static final ResourceLocation ORE_TOPAZ_KEY = new ResourceLocation(Constants.MOD_ID, "ore_topaz");
-    public static final ResourceLocation ORE_PERIDOT_KEY = new ResourceLocation(Constants.MOD_ID, "ore_peridot");
+    public static final Identifier ORE_RUBY_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_ruby");
+    public static final Identifier ORE_SAPPHIRE_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_sapphire");
+    public static final Identifier ORE_TOPAZ_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_topaz");
+    public static final Identifier ORE_PERIDOT_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_peridot");
 
     @Override
     public void addToWorldGem(RegistrySetBuilder builder) {
@@ -55,12 +55,12 @@ public class CoreWorldGenData extends LibWorldGenProvider {
         return Lists.newArrayList(Registries.CONFIGURED_FEATURE, Registries.PLACED_FEATURE);
     }
 
-    private static ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureResourceKey(ResourceLocation key) {
+    private static ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureResourceKey(Identifier key) {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, key);
     }
 
-    private static Map<ResourceLocation, ConfiguredFeature<?, ?>> getConfiguredFeatures() {
-        Map<ResourceLocation, ConfiguredFeature<?, ?>> map = new HashMap<>();
+    private static Map<Identifier, ConfiguredFeature<?, ?>> getConfiguredFeatures() {
+        Map<Identifier, ConfiguredFeature<?, ?>> map = new HashMap<>();
 
         map.put(ORE_ALUMINUM_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(CoreWorldGenTargets.ORE_ALUMINUM_TARGET_LIST, 12)));
         map.put(ORE_NICKEL_KEY, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(CoreWorldGenTargets.ORE_NICKEL_TARGET_LIST, 9)));
@@ -77,8 +77,8 @@ public class CoreWorldGenData extends LibWorldGenProvider {
         return map;
     }
 
-    private static Map<ResourceLocation, PlacedFeature> getPlacedFeatures(BootstapContext<PlacedFeature> context) {
-        Map<ResourceLocation, PlacedFeature> map = new HashMap<>();
+    private static Map<Identifier, PlacedFeature> getPlacedFeatures(BootstrapContext<PlacedFeature> context) {
+        Map<Identifier, PlacedFeature> map = new HashMap<>();
 
         HolderGetter<ConfiguredFeature<?, ?>> holderGetter = context.lookup(Registries.CONFIGURED_FEATURE);
 

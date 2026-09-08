@@ -16,7 +16,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
@@ -28,7 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -47,7 +47,7 @@ import java.util.Optional;
 
 public abstract class BaseMachineBlockEntity extends BlockEntity implements IInventoryBlockEntity, MenuProvider, Nameable, RecipeHolder, StackedContentsCompatible {
 
-    protected final Object2IntOpenHashMap<ResourceLocation> recipes = new Object2IntOpenHashMap<>();
+    protected final Object2IntOpenHashMap<Identifier> recipes = new Object2IntOpenHashMap<>();
     protected final RecipeType<? extends BaseMachineRecipe> recipeType;
     protected final MachineTier tier;
     protected int burnTime;
@@ -300,7 +300,7 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements IInv
     @Override
     public void setRecipeUsed(Recipe<?> recipe) {
         if (recipe != null) {
-            ResourceLocation resourcelocation = recipe.getId();
+            Identifier resourcelocation = recipe.getId();
             this.recipes.addTo(resourcelocation, 1);
         }
     }
@@ -318,7 +318,7 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements IInv
     public List<Recipe<?>> grantStoredRecipeExperience(Level world, Vec3 pos) {
         List<Recipe<?>> list = Lists.newArrayList();
 
-        for (Entry<ResourceLocation> entry : this.recipes.object2IntEntrySet()) {
+        for (Entry<Identifier> entry : this.recipes.object2IntEntrySet()) {
             world.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe) -> {
                 list.add(recipe);
                 splitAndSpawnExperience(world, pos, entry.getIntValue(), ((BaseMachineRecipe) recipe).getExperience());
@@ -347,7 +347,7 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements IInv
         CompoundTag compoundnbt = nbt.getCompound("RecipesUsed");
 
         for (String s : compoundnbt.getAllKeys()) {
-            this.recipes.put(new ResourceLocation(s), compoundnbt.getInt(s));
+            this.recipes.put(Identifier.parse(s), compoundnbt.getInt(s));
         }
 
         if (nbt.contains("CustomName", 8)) {

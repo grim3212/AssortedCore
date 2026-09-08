@@ -8,10 +8,10 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.advancements.triggers.RecipeUnlockedTrigger;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -55,8 +55,8 @@ public class AlloyForgeRecipeBuilder {
     }
 
     public void build(Consumer<FinishedRecipe> consumerIn, String save) {
-        ResourceLocation resourcelocation = Services.PLATFORM.getRegistry(Registries.ITEM).getRegistryName(this.result.getItem());
-        ResourceLocation resourcelocation1 = new ResourceLocation(save);
+        Identifier resourcelocation = Services.PLATFORM.getRegistry(Registries.ITEM).getRegistryName(this.result.getItem());
+        Identifier resourcelocation1 = Identifier.parse(save);
         if (resourcelocation1.equals(resourcelocation)) {
             throw new IllegalStateException("Recipe " + resourcelocation1 + " should remove its 'save' argument");
         } else {
@@ -64,20 +64,20 @@ public class AlloyForgeRecipeBuilder {
         }
     }
 
-    public void build(Consumer<FinishedRecipe> consumerIn, ResourceLocation id) {
+    public void build(Consumer<FinishedRecipe> consumerIn, Identifier id) {
         this.validate(id);
-        this.advancementBuilder.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
-        consumerIn.accept(new AlloyForgeRecipeBuilder.Result(id, this.group == null ? "" : this.group, this.ingredient1, this.ingredient2, this.result, this.experience, this.cookingTime, this.advancementBuilder, new ResourceLocation(id.getNamespace(), "recipes/" + id.getPath())));
+        this.advancementBuilder.parent(Identifier.parse("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
+        consumerIn.accept(new AlloyForgeRecipeBuilder.Result(id, this.group == null ? "" : this.group, this.ingredient1, this.ingredient2, this.result, this.experience, this.cookingTime, this.advancementBuilder, Identifier.fromNamespaceAndPath(id.getNamespace(), "recipes/" + id.getPath())));
     }
 
-    private void validate(ResourceLocation id) {
+    private void validate(Identifier id) {
         if (this.advancementBuilder.getCriteria().isEmpty()) {
             throw new IllegalStateException("No way of obtaining recipe " + id);
         }
     }
 
     public static class Result implements FinishedRecipe {
-        private final ResourceLocation id;
+        private final Identifier id;
         private final String group;
         private final MachineIngredient ingredient1;
         private final MachineIngredient ingredient2;
@@ -85,9 +85,9 @@ public class AlloyForgeRecipeBuilder {
         private final float experience;
         private final int cookingTime;
         private final Advancement.Builder advancementBuilder;
-        private final ResourceLocation advancementId;
+        private final Identifier advancementId;
 
-        public Result(ResourceLocation idIn, String groupIn, MachineIngredient ingredient1In, MachineIngredient ingredient2In, ItemStack resultIn, float experienceIn, int cookingTimeIn, Advancement.Builder advancementBuilderIn, ResourceLocation advancementIdIn) {
+        public Result(Identifier idIn, String groupIn, MachineIngredient ingredient1In, MachineIngredient ingredient2In, ItemStack resultIn, float experienceIn, int cookingTimeIn, Advancement.Builder advancementBuilderIn, Identifier advancementIdIn) {
             this.id = idIn;
             this.group = groupIn;
             this.ingredient1 = ingredient1In;
@@ -121,7 +121,7 @@ public class AlloyForgeRecipeBuilder {
         }
 
         @Override
-        public ResourceLocation getId() {
+        public Identifier getId() {
             return this.id;
         }
 
@@ -133,7 +133,7 @@ public class AlloyForgeRecipeBuilder {
 
         @Override
         @Nullable
-        public ResourceLocation getAdvancementId() {
+        public Identifier getAdvancementId() {
             return this.advancementId;
         }
     }

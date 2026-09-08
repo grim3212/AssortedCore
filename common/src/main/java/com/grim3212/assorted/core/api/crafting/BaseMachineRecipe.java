@@ -1,20 +1,20 @@
 package com.grim3212.assorted.core.api.crafting;
 
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 
 public abstract class BaseMachineRecipe implements Recipe<Container> {
 
-    protected final ResourceLocation id;
+    protected final Identifier id;
     protected final String group;
     protected final ItemStack result;
     protected final float experience;
     protected final int cookTime;
 
-    public BaseMachineRecipe(ResourceLocation idIn, String groupIn, ItemStack resultIn, float experienceIn, int cookTimeIn) {
+    public BaseMachineRecipe(Identifier idIn, String groupIn, ItemStack resultIn, float experienceIn, int cookTimeIn) {
         this.id = idIn;
         this.group = groupIn;
         this.result = resultIn;
@@ -51,7 +51,7 @@ public abstract class BaseMachineRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ResourceLocation getId() {
+    public Identifier getId() {
         return this.id;
     }
 

@@ -23,7 +23,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
@@ -31,12 +31,12 @@ import java.util.List;
 
 public class GrindingMillRecipeCategory implements IRecipeCategory<GrindingMillRecipe> {
 
-    public static final ResourceLocation UID = new ResourceLocation(Constants.MOD_ID, "grinding_mill");
+    public static final Identifier UID = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "grinding_mill");
     protected static final int inputSlot = 0;
     protected static final int toolSlot = 1;
     protected static final int fuelSlot = 2;
     protected static final int outputSlot = 3;
-    private static final ResourceLocation GUI = new ResourceLocation(Constants.MOD_ID, "textures/gui/container/grinding_mill.png");
+    private static final Identifier GUI = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/container/grinding_mill.png");
     protected final IDrawableStatic staticFlame;
     protected final IDrawableAnimated animatedFlame;
 

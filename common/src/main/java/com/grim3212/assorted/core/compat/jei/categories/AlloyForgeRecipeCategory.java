@@ -23,7 +23,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
@@ -31,12 +31,12 @@ import java.util.List;
 
 public class AlloyForgeRecipeCategory implements IRecipeCategory<AlloyForgeRecipe> {
 
-    public static final ResourceLocation UID = new ResourceLocation(Constants.MOD_ID, "alloy_forge");
+    public static final Identifier UID = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "alloy_forge");
     protected static final int inputSlot1 = 0;
     protected static final int inputSlot2 = 1;
     protected static final int fuelSlot = 2;
     protected static final int outputSlot = 3;
-    private static final ResourceLocation GUI = new ResourceLocation(Constants.MOD_ID, "textures/gui/container/alloy_forge.png");
+    private static final Identifier GUI = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/container/alloy_forge.png");
     protected final IDrawableStatic staticFlame;
     protected final IDrawableAnimated animatedFlame;
 

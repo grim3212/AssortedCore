@@ -3,7 +3,7 @@ package com.grim3212.assorted.core.api;
 import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -50,7 +50,7 @@ public class CoreTags {
         public static final TagKey<Block> RAW_STORAGE_BLOCKS_LEAD = commonTag("storage_blocks/raw_lead");
 
         private static TagKey<Block> commonTag(String name) {
-            return TagKey.create(Registries.BLOCK, new ResourceLocation(Services.PLATFORM.getCommonTagPrefix(), name));
+            return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Services.PLATFORM.getCommonTagPrefix(), name));
         }
     }
 
@@ -169,11 +169,11 @@ public class CoreTags {
         public static final TagKey<Item> RAW_MATERIALS_COPPER = commonTag("raw_materials/copper");
 
         private static TagKey<Item> commonTag(String name) {
-            return TagKey.create(Registries.ITEM, new ResourceLocation(Services.PLATFORM.getCommonTagPrefix(), name));
+            return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Services.PLATFORM.getCommonTagPrefix(), name));
         }
 
         private static TagKey<Item> modTag(String name) {
-            return TagKey.create(Registries.ITEM, new ResourceLocation(Constants.MOD_ID, name));
+            return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Constants.MOD_ID, name));
         }
     }
 }

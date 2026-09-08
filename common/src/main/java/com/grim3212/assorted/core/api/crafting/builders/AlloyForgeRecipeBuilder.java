@@ -1,32 +1,40 @@
 package com.grim3212.assorted.core.api.crafting.builders;
 
-import com.google.gson.JsonObject;
+import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
 import com.grim3212.assorted.core.api.crafting.MachineIngredient;
-import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
-import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.advancements.triggers.RecipeUnlockedTrigger;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.resources.Identifier;
+import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.Recipe;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Consumer;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-public class AlloyForgeRecipeBuilder {
+/**
+ * Builds an {@link AlloyForgeRecipe} for data generation.
+ * <p>
+ * Rewritten onto {@link RecipeBuilder}. The 1.20.1 version hand-rolled a {@code FinishedRecipe}
+ * that serialised itself to a {@code JsonObject}; in 26.x the provider hands a {@link RecipeOutput}
+ * the real recipe object and the recipe's own codec writes it, so there is no intermediate "result"
+ * type and no JSON here at all.
+ */
+public class AlloyForgeRecipeBuilder implements RecipeBuilder {
 
     private final ItemStack result;
     private final MachineIngredient ingredient1;
     private final MachineIngredient ingredient2;
     private final float experience;
     private final int cookingTime;
-    private final Advancement.Builder advancementBuilder = Advancement.Builder.advancement();
+    private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
+    @Nullable
     private String group;
 
     private AlloyForgeRecipeBuilder(ItemStack resultIn, MachineIngredient ingredient1In, MachineIngredient ingredient2In, float experienceIn, int cookingTimeIn) {
@@ -45,96 +53,40 @@ public class AlloyForgeRecipeBuilder {
         return new AlloyForgeRecipeBuilder(resultIn, new MachineIngredient(ingredient1In), new MachineIngredient(ingredient2In), experienceIn, cookingTimeIn);
     }
 
-    public AlloyForgeRecipeBuilder addCriterion(String name, CriterionTriggerInstance criterionIn) {
-        this.advancementBuilder.addCriterion(name, criterionIn);
+    @Override
+    public AlloyForgeRecipeBuilder unlockedBy(String name, Criterion<?> criterion) {
+        this.criteria.put(name, criterion);
         return this;
     }
 
-    public void build(Consumer<FinishedRecipe> consumerIn) {
-        this.build(consumerIn, Services.PLATFORM.getRegistry(Registries.ITEM).getRegistryName(this.result.getItem()));
+    @Override
+    public AlloyForgeRecipeBuilder group(@Nullable String groupIn) {
+        this.group = groupIn;
+        return this;
     }
 
-    public void build(Consumer<FinishedRecipe> consumerIn, String save) {
-        Identifier resourcelocation = Services.PLATFORM.getRegistry(Registries.ITEM).getRegistryName(this.result.getItem());
-        Identifier resourcelocation1 = Identifier.parse(save);
-        if (resourcelocation1.equals(resourcelocation)) {
-            throw new IllegalStateException("Recipe " + resourcelocation1 + " should remove its 'save' argument");
-        } else {
-            this.build(consumerIn, resourcelocation1);
-        }
+    @Override
+    public ResourceKey<Recipe<?>> defaultId() {
+        return RecipeBuilder.getDefaultRecipeId(this.result);
     }
 
-    public void build(Consumer<FinishedRecipe> consumerIn, Identifier id) {
+    @Override
+    public void save(RecipeOutput output, ResourceKey<Recipe<?>> id) {
         this.validate(id);
-        this.advancementBuilder.parent(Identifier.parse("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
-        consumerIn.accept(new AlloyForgeRecipeBuilder.Result(id, this.group == null ? "" : this.group, this.ingredient1, this.ingredient2, this.result, this.experience, this.cookingTime, this.advancementBuilder, Identifier.fromNamespaceAndPath(id.getNamespace(), "recipes/" + id.getPath())));
+
+        Advancement.Builder advancement = output.advancement()
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
+                .rewards(AdvancementRewards.Builder.recipe(id))
+                .requirements(AdvancementRequirements.Strategy.OR);
+        this.criteria.forEach(advancement::addCriterion);
+
+        AlloyForgeRecipe recipe = new AlloyForgeRecipe(this.group == null ? "" : this.group, this.ingredient1, this.ingredient2, this.result, this.experience, this.cookingTime);
+        output.accept(id, recipe, advancement.build(id.identifier().withPrefix("recipes/")));
     }
 
-    private void validate(Identifier id) {
-        if (this.advancementBuilder.getCriteria().isEmpty()) {
-            throw new IllegalStateException("No way of obtaining recipe " + id);
-        }
-    }
-
-    public static class Result implements FinishedRecipe {
-        private final Identifier id;
-        private final String group;
-        private final MachineIngredient ingredient1;
-        private final MachineIngredient ingredient2;
-        private final ItemStack result;
-        private final float experience;
-        private final int cookingTime;
-        private final Advancement.Builder advancementBuilder;
-        private final Identifier advancementId;
-
-        public Result(Identifier idIn, String groupIn, MachineIngredient ingredient1In, MachineIngredient ingredient2In, ItemStack resultIn, float experienceIn, int cookingTimeIn, Advancement.Builder advancementBuilderIn, Identifier advancementIdIn) {
-            this.id = idIn;
-            this.group = groupIn;
-            this.ingredient1 = ingredient1In;
-            this.ingredient2 = ingredient2In;
-            this.result = resultIn;
-            this.experience = experienceIn;
-            this.cookingTime = cookingTimeIn;
-            this.advancementBuilder = advancementBuilderIn;
-            this.advancementId = advancementIdIn;
-        }
-
-        @Override
-        public void serializeRecipeData(JsonObject json) {
-            if (!this.group.isEmpty()) {
-                json.addProperty("group", this.group);
-            }
-
-            json.add("ingredient1", this.ingredient1.serialize());
-            json.add("ingredient2", this.ingredient2.serialize());
-            JsonObject itemstack = new JsonObject();
-            itemstack.addProperty("item", Services.PLATFORM.getRegistry(Registries.ITEM).getRegistryName(this.result.getItem()).toString());
-            itemstack.addProperty("count", this.result.getCount());
-            json.add("result", itemstack);
-            json.addProperty("experience", this.experience);
-            json.addProperty("cookingtime", this.cookingTime);
-        }
-
-        @Override
-        public RecipeSerializer<?> getType() {
-            return CoreRecipeSerializers.ALLOY_FORGE.get();
-        }
-
-        @Override
-        public Identifier getId() {
-            return this.id;
-        }
-
-        @Override
-        @Nullable
-        public JsonObject serializeAdvancement() {
-            return this.advancementBuilder.serializeToJson();
-        }
-
-        @Override
-        @Nullable
-        public Identifier getAdvancementId() {
-            return this.advancementId;
+    private void validate(ResourceKey<Recipe<?>> id) {
+        if (this.criteria.isEmpty()) {
+            throw new IllegalStateException("No way of obtaining recipe " + id.identifier());
         }
     }
 }

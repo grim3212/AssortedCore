@@ -1,21 +1,28 @@
 package com.grim3212.assorted.core.api.crafting;
 
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeBookCategories;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 
-public abstract class BaseMachineRecipe implements Recipe<Container> {
+/**
+ * Shared behaviour for the machine recipes.
+ * <p>
+ * Two things changed shape in 26.x. Recipes no longer carry their own id - the recipe manager keys
+ * them by {@code ResourceKey<Recipe<?>>} - so the {@code id} field and {@code getId()} are gone.
+ * And {@code Recipe} is parameterised on {@link net.minecraft.world.item.crafting.RecipeInput}
+ * rather than {@code Container}, so machines pass a {@link MachineRecipeInput} holding only the
+ * slots a recipe may see.
+ */
+public abstract class BaseMachineRecipe implements Recipe<MachineRecipeInput> {
 
-    protected final Identifier id;
     protected final String group;
     protected final ItemStack result;
     protected final float experience;
     protected final int cookTime;
 
-    public BaseMachineRecipe(Identifier idIn, String groupIn, ItemStack resultIn, float experienceIn, int cookTimeIn) {
-        this.id = idIn;
+    public BaseMachineRecipe(String groupIn, ItemStack resultIn, float experienceIn, int cookTimeIn) {
         this.group = groupIn;
         this.result = resultIn;
         this.experience = experienceIn;
@@ -23,26 +30,27 @@ public abstract class BaseMachineRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
+    public ItemStack assemble(MachineRecipeInput input) {
         return this.result.copy();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return true;
     }
 
     public float getExperience() {
         return this.experience;
     }
 
-    @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
+    /**
+     * The recipe's result.
+     * <p>
+     * No longer an override: {@code Recipe} dropped {@code getResultItem}, because the recipe book
+     * reads results off {@link net.minecraft.world.item.crafting.display.RecipeDisplay} now. The
+     * machines still need it directly, so it stays as a plain accessor.
+     */
+    public ItemStack getResultItem() {
         return this.result;
     }
 
     @Override
-    public String getGroup() {
+    public String group() {
         return this.group;
     }
 
@@ -51,13 +59,32 @@ public abstract class BaseMachineRecipe implements Recipe<Container> {
     }
 
     @Override
-    public Identifier getId() {
-        return this.id;
+    public boolean isSpecial() {
+        return true;
     }
 
     @Override
-    public boolean isSpecial() {
-        return true;
+    public boolean showNotification() {
+        return false;
+    }
+
+    /**
+     * These recipes are crafted in their own machine blocks, never placed from the recipe book, so
+     * there is nothing to lay out into a crafting grid.
+     */
+    @Override
+    public PlacementInfo placementInfo() {
+        return PlacementInfo.NOT_PLACEABLE;
+    }
+
+    /**
+     * Required by the interface, but not meaningfully used: {@link #isSpecial()} keeps these
+     * recipes out of the recipe book entirely. Reusing the closest vanilla category rather than
+     * registering a custom one that nothing would ever display.
+     */
+    @Override
+    public RecipeBookCategory recipeBookCategory() {
+        return RecipeBookCategories.BLAST_FURNACE_MISC;
     }
 
     public abstract boolean validInput(ItemStack stack);

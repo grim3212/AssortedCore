@@ -1,63 +1,43 @@
 package com.grim3212.assorted.core.api.crafting;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
-import com.grim3212.assorted.lib.platform.Services;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.Identifier;
-import net.minecraft.util.GsonHelper;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 
-public class AlloyForgeRecipeSerializer implements RecipeSerializer<AlloyForgeRecipe> {
+/**
+ * Codecs for {@link AlloyForgeRecipe}.
+ * <p>
+ * {@code RecipeSerializer} is a record of a {@link MapCodec} and a {@link StreamCodec} in 26.x
+ * rather than an interface with {@code fromJson}/{@code fromNetwork}/{@code toNetwork}, so this is
+ * no longer something to implement - it holds the codecs and the single serializer instance.
+ */
+public final class AlloyForgeRecipeSerializer {
 
-    @Override
-    public AlloyForgeRecipe fromJson(Identifier recipeId, JsonObject json) {
-        String s = GsonHelper.getAsString(json, "group", "");
-        JsonElement jsonelementIngredient1 = (JsonElement) (GsonHelper.isArrayNode(json, "ingredient1") ? GsonHelper.getAsJsonArray(json, "ingredient1") : GsonHelper.getAsJsonObject(json, "ingredient1"));
-        MachineIngredient ingredient1 = MachineIngredient.deserialize(jsonelementIngredient1);
-        JsonElement jsonelementIngredient2 = (JsonElement) (GsonHelper.isArrayNode(json, "ingredient2") ? GsonHelper.getAsJsonArray(json, "ingredient2") : GsonHelper.getAsJsonObject(json, "ingredient2"));
-        MachineIngredient ingredient2 = MachineIngredient.deserialize(jsonelementIngredient2);
-        if (!json.has("result")) {
-            throw new JsonSyntaxException("Missing result, expected to find a string or object");
-        }
-        ItemStack itemstack;
-        if (json.get("result").isJsonObject()) {
-            itemstack = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-        } else {
-            String s1 = GsonHelper.getAsString(json, "result");
-            Identifier resourcelocation = Identifier.parse(s1);
-            itemstack = new ItemStack(Services.PLATFORM.getRegistry(Registries.ITEM).getValue(resourcelocation).orElseThrow(() -> {
-                return new IllegalStateException("Item: " + s1 + " does not exist");
-            }));
-        }
-        float f = GsonHelper.getAsFloat(json, "experience", 0.0F);
-        int i = GsonHelper.getAsInt(json, "cookingtime", 400);
-        return new AlloyForgeRecipe(recipeId, s, ingredient1, ingredient2, itemstack, f, i);
+    public static final MapCodec<AlloyForgeRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
+            MachineIngredient.CODEC.fieldOf("ingredient1").forGetter(AlloyForgeRecipe::getIngredient1),
+            MachineIngredient.CODEC.fieldOf("ingredient2").forGetter(AlloyForgeRecipe::getIngredient2),
+            ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+            Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(recipe -> recipe.experience),
+            Codec.INT.optionalFieldOf("cookingtime", 400).forGetter(recipe -> recipe.cookTime)
+    ).apply(instance, AlloyForgeRecipe::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, AlloyForgeRecipe> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
+            MachineIngredient.STREAM_CODEC, AlloyForgeRecipe::getIngredient1,
+            MachineIngredient.STREAM_CODEC, AlloyForgeRecipe::getIngredient2,
+            ItemStack.STREAM_CODEC, recipe -> recipe.result,
+            ByteBufCodecs.FLOAT, recipe -> recipe.experience,
+            ByteBufCodecs.VAR_INT, recipe -> recipe.cookTime,
+            AlloyForgeRecipe::new);
+
+    public static final RecipeSerializer<AlloyForgeRecipe> INSTANCE = new RecipeSerializer<>(CODEC, STREAM_CODEC);
+
+    private AlloyForgeRecipeSerializer() {
     }
-
-    @Override
-    public AlloyForgeRecipe fromNetwork(Identifier recipeId, FriendlyByteBuf buffer) {
-        String s = buffer.readUtf(32767);
-        MachineIngredient ingredient1 = MachineIngredient.read(buffer);
-        MachineIngredient ingredient2 = MachineIngredient.read(buffer);
-        ItemStack itemstack = buffer.readItem();
-        float f = buffer.readFloat();
-        int i = buffer.readVarInt();
-        return new AlloyForgeRecipe(recipeId, s, ingredient1, ingredient2, itemstack, f, i);
-    }
-
-    @Override
-    public void toNetwork(FriendlyByteBuf buffer, AlloyForgeRecipe recipe) {
-        buffer.writeUtf(recipe.group);
-        recipe.ingredient1.write(buffer);
-        recipe.ingredient2.write(buffer);
-        buffer.writeItem(recipe.result);
-        buffer.writeFloat(recipe.experience);
-        buffer.writeVarInt(recipe.cookTime);
-    }
-
 }

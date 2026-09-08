@@ -1,17 +1,36 @@
 package com.grim3212.assorted.core.api.crafting;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
-import net.minecraft.network.FriendlyByteBuf;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.function.Predicate;
 
+/**
+ * An {@link Ingredient} paired with a required count.
+ * <p>
+ * Hand-rolled JSON and {@code FriendlyByteBuf} serialization is gone in 26.x: recipes round-trip
+ * through a {@link MapCodec} and a {@link StreamCodec}, so this exposes those instead of the old
+ * {@code deserialize}/{@code read}/{@code write}/{@code serialize} pairs.
+ */
 public class MachineIngredient implements Predicate<ItemStack> {
+
+    public static final MapCodec<MachineIngredient> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Ingredient.CODEC.fieldOf("ingredient").forGetter(MachineIngredient::getBaseIngredient),
+            Codec.INT.optionalFieldOf("count", 1).forGetter(MachineIngredient::getCount)
+    ).apply(instance, MachineIngredient::new));
+
+    public static final Codec<MachineIngredient> CODEC = MAP_CODEC.codec();
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, MachineIngredient> STREAM_CODEC = StreamCodec.composite(
+            Ingredient.CONTENTS_STREAM_CODEC, MachineIngredient::getBaseIngredient,
+            ByteBufCodecs.VAR_INT, MachineIngredient::getCount,
+            MachineIngredient::new);
 
     private final Ingredient ingredient;
     private final int count;
@@ -23,19 +42,6 @@ public class MachineIngredient implements Predicate<ItemStack> {
     public MachineIngredient(Ingredient ingredient, int count) {
         this.ingredient = ingredient;
         this.count = count;
-    }
-
-    public static MachineIngredient read(FriendlyByteBuf buffer) {
-        return new MachineIngredient(Ingredient.fromNetwork(buffer), buffer.readInt());
-    }
-
-    public static MachineIngredient deserialize(@Nullable JsonElement json) {
-        if (json != null && !json.isJsonNull() && json.isJsonObject()) {
-            JsonObject obj = json.getAsJsonObject();
-            return new MachineIngredient(Ingredient.fromJson(obj.get("ingredient")), obj.get("count").getAsInt());
-        } else {
-            throw new JsonSyntaxException("Item cannot be null");
-        }
     }
 
     public int getCount() {
@@ -53,23 +59,15 @@ public class MachineIngredient implements Predicate<ItemStack> {
         return ingredient.test(t) && t.getCount() >= this.count;
     }
 
-    public void write(FriendlyByteBuf buffer) {
-        this.ingredient.toNetwork(buffer);
-        buffer.writeInt(this.count);
-    }
-
-    public JsonElement serialize() {
-        JsonObject obj = new JsonObject();
-        obj.add("ingredient", this.ingredient.toJson());
-        obj.addProperty("count", this.count);
-        return obj;
-    }
-
+    /**
+     * The stacks this ingredient accepts, each at the required count. Used for display.
+     * <p>
+     * {@code Ingredient.getItems()} returned baked {@code ItemStack}s; in 26.x an ingredient is a
+     * {@code HolderSet} and {@link Ingredient#items()} yields the item holders instead.
+     */
     public ItemStack[] getMatchingStacks() {
-        return Arrays.stream(this.ingredient.getItems()).toList().stream().map((stack) -> {
-            ItemStack clone = stack.copy();
-            clone.setCount(this.count);
-            return clone;
-        }).toArray(ItemStack[]::new);
+        return this.ingredient.items()
+                .map(holder -> new ItemStack(holder, this.count))
+                .toArray(ItemStack[]::new);
     }
 }

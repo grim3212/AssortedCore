@@ -3,8 +3,6 @@ package com.grim3212.assorted.core.api.crafting;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -15,24 +13,24 @@ public class AlloyForgeRecipe extends BaseMachineRecipe {
 	protected final MachineIngredient ingredient1;
 	protected final MachineIngredient ingredient2;
 
-	public AlloyForgeRecipe(Identifier idIn, String groupIn, MachineIngredient ingredient1In, MachineIngredient ingredient2In, ItemStack resultIn, float experienceIn, int cookTimeIn) {
-		super(idIn, groupIn, resultIn, experienceIn, cookTimeIn);
+	public AlloyForgeRecipe(String groupIn, MachineIngredient ingredient1In, MachineIngredient ingredient2In, ItemStack resultIn, float experienceIn, int cookTimeIn) {
+		super(groupIn, resultIn, experienceIn, cookTimeIn);
 		this.ingredient1 = ingredient1In;
 		this.ingredient2 = ingredient2In;
 	}
 
 	@Override
-	public boolean matches(Container inv, Level worldIn) {
-		return (this.ingredient1.test(inv.getItem(0)) && this.ingredient2.test(inv.getItem(1))) || (this.ingredient1.test(inv.getItem(1)) && this.ingredient2.test(inv.getItem(0)));
+	public boolean matches(MachineRecipeInput input, Level worldIn) {
+		return (this.ingredient1.test(input.getItem(0)) && this.ingredient2.test(input.getItem(1))) || (this.ingredient1.test(input.getItem(1)) && this.ingredient2.test(input.getItem(0)));
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
-		return CoreRecipeSerializers.ALLOY_FORGE.get();
+	public RecipeSerializer<AlloyForgeRecipe> getSerializer() {
+		return AlloyForgeRecipeSerializer.INSTANCE;
 	}
 
 	@Override
-	public RecipeType<?> getType() {
+	public RecipeType<AlloyForgeRecipe> getType() {
 		return CoreRecipeTypes.ALLOY_FORGE.get();
 	}
 

@@ -15,8 +15,10 @@ dependencies {
     implementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     implementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
-    modImplementation "mezz.jei:jei-${jei_minecraft_version}-fabric:${jei_version}"
-    modImplementation "com.grim3212.assorted.lib:assortedlib-fabric-${minecraft_version}:${assortedlib_version}"
+    // Loom 1.17 dropped modImplementation along with remapping: 26.x has no intermediary, so mod
+    // dependencies are ordinary dependencies now.
+    implementation "mezz.jei:jei-${jei_minecraft_version}-fabric:${jei_version}"
+    implementation "com.grim3212.assorted.lib:assortedlib-fabric-${minecraft_version}:${assortedlib_version}"
 
     implementation project(":common")
 }

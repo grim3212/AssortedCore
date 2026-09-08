@@ -5,7 +5,6 @@ import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.lib.platform.services.IPlatformHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.RecipeManager;
 
 public class MachineUtil {
@@ -14,7 +13,7 @@ public class MachineUtil {
         if (stack.is(CoreTags.Items.GRINDING_MILL_ALLOWED_TOOLS))
             return true;
 
-        return Services.PLATFORM.isTieredTool(stack, Tiers.IRON, IPlatformHelper.ToolType.PICKAXE);
+        return Services.PLATFORM.isTieredTool(stack, IPlatformHelper.ToolTier.IRON, IPlatformHelper.ToolType.PICKAXE);
     }
 
     public static boolean isValidAlloyForgeInput(RecipeManager manager, ItemStack stack) {

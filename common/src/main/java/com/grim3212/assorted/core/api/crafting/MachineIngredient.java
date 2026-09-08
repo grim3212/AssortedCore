@@ -6,9 +6,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -62,12 +65,11 @@ public class MachineIngredient implements Predicate<ItemStack> {
     /**
      * The stacks this ingredient accepts, each at the required count. Used for display.
      * <p>
-     * {@code Ingredient.getItems()} returned baked {@code ItemStack}s; in 26.x an ingredient is a
-     * {@code HolderSet} and {@link Ingredient#items()} yields the item holders instead.
+     * {@code Ingredient.getItems()} is gone and {@code Ingredient#items()} is deprecated: an
+     * ingredient describes itself with a {@link SlotDisplay}, which is resolved to stacks against
+     * the caller's {@link ContextMap}.
      */
-    public ItemStack[] getMatchingStacks() {
-        return this.ingredient.items()
-                .map(holder -> new ItemStack(holder, this.count))
-                .toArray(ItemStack[]::new);
+    public List<ItemStack> getMatchingStacks(ContextMap context) {
+        return this.ingredient.display().resolveForStacks(context).stream().map((stack) -> stack.copyWithCount(this.count)).toList();
     }
 }

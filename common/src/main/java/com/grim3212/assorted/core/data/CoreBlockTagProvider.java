@@ -3,7 +3,9 @@ package com.grim3212.assorted.core.data;
 import com.grim3212.assorted.core.api.CoreTags;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.lib.data.LibBlockTagProvider;
+import net.minecraft.data.tags.TagAppender;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -20,7 +22,11 @@ public class CoreBlockTagProvider extends LibBlockTagProvider {
     }
 
     @Override
-    public void addCommonTags(Function<TagKey<Block>, IntrinsicTagAppender<Block>> tagger) {
+    public void addCommonTags(Function<TagKey<Block>, TagAppender<Block>> appender) {
+        // The intrinsic tag appender is gone; TagAppender only accepts ResourceKeys. Wrap it back
+        // into something that takes blocks so the tag lists below stay readable.
+        Function<TagKey<Block>, BlockTagger> tagger = (tag) -> new BlockTagger(appender.apply(tag));
+
         tagger.apply(BlockTags.MINEABLE_WITH_PICKAXE).add(CoreBlocks.TIN_ORE.get(), CoreBlocks.SILVER_ORE.get(), CoreBlocks.ALUMINUM_ORE.get(), CoreBlocks.NICKEL_ORE.get(), CoreBlocks.PLATINUM_ORE.get(), CoreBlocks.LEAD_ORE.get(), CoreBlocks.RUBY_ORE.get(), CoreBlocks.PERIDOT_ORE.get(), CoreBlocks.SAPPHIRE_ORE.get(), CoreBlocks.TOPAZ_ORE.get());
         tagger.apply(BlockTags.MINEABLE_WITH_PICKAXE).add(CoreBlocks.DEEPSLATE_TIN_ORE.get(), CoreBlocks.DEEPSLATE_SILVER_ORE.get(), CoreBlocks.DEEPSLATE_ALUMINUM_ORE.get(), CoreBlocks.DEEPSLATE_NICKEL_ORE.get(), CoreBlocks.DEEPSLATE_PLATINUM_ORE.get(), CoreBlocks.DEEPSLATE_LEAD_ORE.get(), CoreBlocks.DEEPSLATE_RUBY_ORE.get(), CoreBlocks.PERIDOT_ORE.get(), CoreBlocks.DEEPSLATE_SAPPHIRE_ORE.get(), CoreBlocks.DEEPSLATE_TOPAZ_ORE.get());
         tagger.apply(BlockTags.MINEABLE_WITH_PICKAXE).add(CoreBlocks.TIN_BLOCK.get(), CoreBlocks.SILVER_BLOCK.get(), CoreBlocks.ALUMINUM_BLOCK.get(), CoreBlocks.NICKEL_BLOCK.get(), CoreBlocks.PLATINUM_BLOCK.get(), CoreBlocks.LEAD_BLOCK.get(), CoreBlocks.RUBY_BLOCK.get(), CoreBlocks.PERIDOT_BLOCK.get(), CoreBlocks.SAPPHIRE_BLOCK.get(), CoreBlocks.TOPAZ_BLOCK.get());
@@ -59,7 +65,7 @@ public class CoreBlockTagProvider extends LibBlockTagProvider {
         tagger.apply(CoreTags.Blocks.ORES_TOPAZ).add(CoreBlocks.TOPAZ_ORE.get(), CoreBlocks.DEEPSLATE_TOPAZ_ORE.get());
 
         tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.TIN_BLOCK.get());
-        tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS).add(Blocks.COPPER_BLOCK);
+        tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS).add(Blocks.COPPER_BLOCK.weathering().unaffected());
         tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.SILVER_BLOCK.get());
         tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.ALUMINUM_BLOCK.get());
         tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.NICKEL_BLOCK.get());
@@ -75,7 +81,7 @@ public class CoreBlockTagProvider extends LibBlockTagProvider {
         tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS).add(CoreBlocks.STEEL_BLOCK.get());
 
         tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS_TIN).add(CoreBlocks.TIN_BLOCK.get());
-        tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS_COPPER).add(Blocks.COPPER_BLOCK);
+        tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS_COPPER).add(Blocks.COPPER_BLOCK.weathering().unaffected());
         tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS_SILVER).add(CoreBlocks.SILVER_BLOCK.get());
         tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS_ALUMINUM).add(CoreBlocks.ALUMINUM_BLOCK.get());
         tagger.apply(CoreTags.Blocks.STORAGE_BLOCKS_NICKEL).add(CoreBlocks.NICKEL_BLOCK.get());
@@ -98,5 +104,21 @@ public class CoreBlockTagProvider extends LibBlockTagProvider {
         tagger.apply(CoreTags.Blocks.RAW_STORAGE_BLOCKS_NICKEL).add(CoreBlocks.RAW_NICKEL_BLOCK.get());
         tagger.apply(CoreTags.Blocks.RAW_STORAGE_BLOCKS_PLATINUM).add(CoreBlocks.RAW_PLATINUM_BLOCK.get());
         tagger.apply(CoreTags.Blocks.RAW_STORAGE_BLOCKS_LEAD).add(CoreBlocks.RAW_LEAD_BLOCK.get());
+    }
+
+    private record BlockTagger(TagAppender<Block> appender) {
+
+        BlockTagger add(Block... blocks) {
+            for (Block block : blocks) {
+                this.appender.add(BuiltInRegistries.BLOCK.getResourceKey(block).orElseThrow());
+            }
+
+            return this;
+        }
+
+        BlockTagger addTag(TagKey<Block> tag) {
+            this.appender.addTag(tag);
+            return this;
+        }
     }
 }

@@ -68,7 +68,7 @@ public class BaseMachineInventory extends ItemStackStorageHandler {
         }
 
         ItemStack itemstack = this.getStackInSlot(slotIn);
-        boolean flag = !stack.isEmpty() && ItemStack.isSameItemSameTags(stack, itemstack);
+        boolean flag = !stack.isEmpty() && ItemStack.isSameItemSameComponents(stack, itemstack);
         this.machine.getItems().set(newSlot, stack);
         if (stack.getCount() > this.getSlotLimit(newSlot)) {
             stack.setCount(this.getSlotLimit(newSlot));

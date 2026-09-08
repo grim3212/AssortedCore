@@ -3,13 +3,15 @@ package com.grim3212.assorted.core.data;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.common.items.CoreItems;
 import com.grim3212.assorted.lib.data.LibBlockLootProvider;
+import net.minecraft.core.HolderLookup;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class CoreBlockLoot extends LibBlockLootProvider {
 
-    public CoreBlockLoot() {
-        super(() -> CoreBlocks.BLOCKS.getEntries().stream().map(Supplier::get).collect(Collectors.toList()));
+    // Loot sub providers are handed the registry lookup at construction now.
+    public CoreBlockLoot(HolderLookup.Provider registries) {
+        super(registries, () -> CoreBlocks.BLOCKS.getEntries().stream().map(Supplier::get).collect(Collectors.toList()));
     }
 
     @Override

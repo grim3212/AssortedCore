@@ -12,12 +12,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -52,7 +54,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
     @Override
     protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
         if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
-            ItemStack itemstack = recipeIn.getResultItem(this.level.registryAccess());
+            ItemStack itemstack = recipeIn.getResultItem();
             if (itemstack.isEmpty() || !MachineUtil.allowedInGrindingMillToolSlot(this.items.get(1))) {
                 return false;
             } else {
@@ -73,12 +75,13 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
     }
 
     @Override
-    protected void combine(@Nullable BaseMachineRecipe recipe) {
+    protected void combine(@Nullable RecipeHolder<BaseMachineRecipe> holder) {
+        BaseMachineRecipe recipe = holder == null ? null : holder.value();
         if (recipe != null && this.canCombine(recipe)) {
             GrindingMillRecipe millRecipe = (GrindingMillRecipe) recipe;
             ItemStack ingredient = this.items.get(0);
             ItemStack toolSlot = this.items.get(1);
-            ItemStack itemstack1 = recipe.getResultItem(this.level.registryAccess());
+            ItemStack itemstack1 = recipe.getResultItem();
             ItemStack outputSlot = this.items.get(this.outputSlot());
             if (outputSlot.isEmpty()) {
                 this.items.set(this.outputSlot(), itemstack1.copy());
@@ -86,18 +89,24 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
                 outputSlot.grow(itemstack1.getCount());
             }
 
-            this.setRecipeUsed(recipe);
+            this.setRecipeUsed(holder);
 
             ingredient.shrink(millRecipe.getIngredient().getCount());
 
-            if (toolSlot.hurt(1, this.getLevel().random, (ServerPlayer) null)) {
-                this.items.set(1, ItemStack.EMPTY);
+            // ItemStack#hurt is gone; damage now runs through hurtAndBreak, which needs a
+            // ServerLevel and clears the stack itself when it breaks.
+            if (this.getLevel() instanceof ServerLevel serverLevel) {
+                toolSlot.hurtAndBreak(1, serverLevel, (ServerPlayer) null, (item) -> {
+                });
+                if (toolSlot.isEmpty()) {
+                    this.items.set(1, ItemStack.EMPTY);
+                }
             }
 
             if (CoreCommonMod.COMMON_CONFIG.grindingMillHasBreakSound.get()) {
                 Block b = Block.byItem(ingredient.getItem());
                 if (b != null && b != Blocks.AIR) {
-                    SoundType soundtype = b.getSoundType(b.defaultBlockState());
+                    SoundType soundtype = b.defaultBlockState().getSoundType();
                     this.getLevel().playSound((Player) null, this.getBlockPos(), soundtype.getBreakSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
                 }
             }
@@ -150,7 +159,7 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
             if (index == 1) {
                 return MachineUtil.allowedInGrindingMillToolSlot(stack);
             } else {
-                return MachineUtil.isValidGrindingMillInput(this.level.getRecipeManager(), stack);
+                return MachineUtil.isValidGrindingMillInput(this.level, stack);
             }
         } else {
             return getBurnTime(stack) > 0;

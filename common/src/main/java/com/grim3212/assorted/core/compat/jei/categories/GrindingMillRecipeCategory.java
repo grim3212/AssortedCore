@@ -17,17 +17,16 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.types.IRecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
-import java.util.List;
 
 public class GrindingMillRecipeCategory implements IRecipeCategory<GrindingMillRecipe> {
 
@@ -76,9 +75,18 @@ public class GrindingMillRecipeCategory implements IRecipeCategory<GrindingMillR
         return this.cachedGears.getUnchecked(cookTime);
     }
 
+    /**
+     * See {@link AlloyForgeRecipeCategory}: categories report their size and paint their own
+     * background now.
+     */
     @Override
-    public IDrawable getBackground() {
-        return background;
+    public int getWidth() {
+        return background.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return background.getHeight();
     }
 
     @Override
@@ -88,7 +96,8 @@ public class GrindingMillRecipeCategory implements IRecipeCategory<GrindingMillR
 
 
     @Override
-    public void draw(GrindingMillRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(GrindingMillRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
+        background.draw(guiGraphics, 0, 0);
         animatedFlame.draw(guiGraphics, 30, 41);
 
         IDrawableAnimated gear = getGear(recipe);
@@ -98,18 +107,18 @@ public class GrindingMillRecipeCategory implements IRecipeCategory<GrindingMillR
         drawCookTime(recipe, guiGraphics, 65);
     }
 
-    protected void drawExperience(GrindingMillRecipe recipe, GuiGraphics guiGraphics, int y) {
+    protected void drawExperience(GrindingMillRecipe recipe, GuiGraphicsExtractor guiGraphics, int y) {
         float experience = recipe.getExperience();
         if (experience > 0) {
             Component experienceString = Component.translatable("gui.jei.category.smelting.experience", experience);
             Minecraft minecraft = Minecraft.getInstance();
             Font fontRenderer = minecraft.font;
             int stringWidth = fontRenderer.width(experienceString);
-            guiGraphics.drawString(fontRenderer, experienceString, background.getWidth() - stringWidth, y, 0xFF808080, false);
+            guiGraphics.text(fontRenderer, experienceString, background.getWidth() - stringWidth, y, 0xFF808080, false);
         }
     }
 
-    protected void drawCookTime(GrindingMillRecipe recipe, GuiGraphics guiGraphics, int y) {
+    protected void drawCookTime(GrindingMillRecipe recipe, GuiGraphicsExtractor guiGraphics, int y) {
         int cookTime = recipe.getCookTime();
         if (cookTime > 0) {
             int cookTimeSeconds = cookTime / 20;
@@ -117,22 +126,19 @@ public class GrindingMillRecipeCategory implements IRecipeCategory<GrindingMillR
             Minecraft minecraft = Minecraft.getInstance();
             Font fontRenderer = minecraft.font;
             int stringWidth = fontRenderer.width(timeString);
-            guiGraphics.drawString(fontRenderer, timeString, background.getWidth() - stringWidth, y, 0xFF808080, false);
+            guiGraphics.text(fontRenderer, timeString, background.getWidth() - stringWidth, y, 0xFF808080, false);
         }
     }
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder recipeLayout, GrindingMillRecipe recipe, IFocusGroup focusGroup) {
-        List<List<ItemStack>> inputs = JEIHelpers.getMachineIngredientStacks(recipe.getIngredient());
-        inputs.add(JEIHelpers.grindingMillAcceptedTools);
-
-        recipeLayout.addSlot(RecipeIngredientRole.INPUT, 1, 23).addItemStacks(inputs.get(inputSlot));
-        recipeLayout.addSlot(RecipeIngredientRole.INPUT, 30, 1).addItemStacks(inputs.get(toolSlot));
-        recipeLayout.addSlot(RecipeIngredientRole.OUTPUT, 65, 23).addItemStack(JEIHelpers.getResultItem(recipe));
+        JEIHelpers.addMachineIngredient(recipeLayout.addSlot(RecipeIngredientRole.INPUT, 1, 23), recipe.getIngredient());
+        recipeLayout.addSlot(RecipeIngredientRole.INPUT, 30, 1).addItemStacks(JEIHelpers.grindingMillAcceptedTools);
+        recipeLayout.addSlot(RecipeIngredientRole.OUTPUT, 65, 23).add(recipe.getResultItem());
     }
 
     @Override
-    public RecipeType<GrindingMillRecipe> getRecipeType() {
+    public IRecipeType<GrindingMillRecipe> getRecipeType() {
         return JEIAssortedCore.GRINDING_MILL;
     }
 

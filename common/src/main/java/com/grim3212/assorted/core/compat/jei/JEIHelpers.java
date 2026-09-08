@@ -4,14 +4,10 @@ import com.google.common.collect.Lists;
 import com.grim3212.assorted.core.api.crafting.MachineIngredient;
 import com.grim3212.assorted.core.api.machines.MachineUtil;
 import com.grim3212.assorted.lib.platform.Services;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.RegistryAccess;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,24 +19,12 @@ public class JEIHelpers {
         grindingMillAcceptedTools = Services.PLATFORM.getRegistry(Registries.ITEM).getValues().filter((item) -> MachineUtil.allowedInGrindingMillToolSlot(new ItemStack(item))).map((item) -> new ItemStack(item)).collect(Collectors.toList());
     }
 
-    public static List<List<ItemStack>> getMachineIngredientStacks(MachineIngredient... machineIngredients) {
-        List<List<ItemStack>> ingredients = Lists.newArrayList();
-
-        for (MachineIngredient ingredient : machineIngredients) {
-            ingredients.add(Arrays.asList(ingredient.getMatchingStacks()));
-        }
-
-        return ingredients;
-    }
-
-    public static ItemStack getResultItem(Recipe<?> recipe) {
-        Minecraft minecraft = Minecraft.getInstance();
-        ClientLevel level = minecraft.level;
-        if (level == null) {
-            throw new NullPointerException("level must not be null.");
-        }
-        RegistryAccess registryAccess = level.registryAccess();
-        return recipe.getResultItem(registryAccess);
+    /**
+     * Fills a recipe slot from a machine ingredient. The stacks come out of the ingredient's
+     * {@code SlotDisplay}, which needs the slot's own context map to resolve.
+     */
+    public static void addMachineIngredient(IRecipeSlotBuilder slot, MachineIngredient ingredient) {
+        slot.addItemStacks(ingredient.getMatchingStacks(slot.getContextMap()));
     }
 
 }

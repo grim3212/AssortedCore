@@ -2,13 +2,16 @@ package com.grim3212.assorted.core.client.screen;
 
 import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.common.inventory.GrindingMillContainer;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
+/**
+ * See {@link AlloyForgeScreen} for why {@code renderBg} became {@code extractBackground}.
+ */
 public class GrindingMillScreen extends AbstractContainerScreen<GrindingMillContainer> {
 
     private static final Identifier GRINDING_MILL_GUI_TEXTURE = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/container/grinding_mill.png");
@@ -18,25 +21,18 @@ public class GrindingMillScreen extends AbstractContainerScreen<GrindingMillCont
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(guiGraphics);
-        super.render(guiGraphics, mouseX, mouseY, partialTicks);
-        this.renderTooltip(guiGraphics, mouseX, mouseY);
-    }
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTicks) {
+        super.extractBackground(graphics, mouseX, mouseY, partialTicks);
 
-    @Override
-    protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int x, int y) {
-        RenderSystem.clearColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, GRINDING_MILL_GUI_TEXTURE);
         int i = this.leftPos;
         int j = this.topPos;
-        guiGraphics.blit(GRINDING_MILL_GUI_TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, GRINDING_MILL_GUI_TEXTURE, i, j, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
         if (this.menu.isBurning()) {
             int k = this.menu.getBurnLeftScaled();
-            guiGraphics.blit(GRINDING_MILL_GUI_TEXTURE, i + 81, j + 46 + 12 - k, 176, 12 - k, 14, k + 1);
+            graphics.blit(RenderPipelines.GUI_TEXTURED, GRINDING_MILL_GUI_TEXTURE, i + 81, j + 46 + 12 - k, 176.0F, (float) (12 - k), 14, k + 1, 256, 256);
         }
 
         int l = this.menu.getCookProgressionScaled();
-        guiGraphics.blit(GRINDING_MILL_GUI_TEXTURE, i + 77, j + 25, 176, 14, l + 1, 20);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, GRINDING_MILL_GUI_TEXTURE, i + 77, j + 25, 176.0F, 14.0F, l + 1, 20, 256, 256);
     }
 }

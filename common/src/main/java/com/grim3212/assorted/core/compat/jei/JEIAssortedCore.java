@@ -15,17 +15,17 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.types.IRecipeType;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 
 @JeiPlugin
 public class JEIAssortedCore implements IModPlugin {
 
-    public static final RecipeType<AlloyForgeRecipe> ALLOY_FORGE = RecipeType.create(Constants.MOD_ID, "alloy_forge", AlloyForgeRecipe.class);
-    public static final RecipeType<GrindingMillRecipe> GRINDING_MILL = RecipeType.create(Constants.MOD_ID, "grinding_mill", GrindingMillRecipe.class);
+    public static final IRecipeType<AlloyForgeRecipe> ALLOY_FORGE = IRecipeType.create(Constants.MOD_ID, "alloy_forge", AlloyForgeRecipe.class);
+    public static final IRecipeType<GrindingMillRecipe> GRINDING_MILL = IRecipeType.create(Constants.MOD_ID, "grinding_mill", GrindingMillRecipe.class);
 
     private static final Identifier PLUGIN_ID = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "assets/assortedcore");
 
@@ -60,17 +60,21 @@ public class JEIAssortedCore implements IModPlugin {
         registration.addRecipeTransferHandler(GrindingMillContainer.class, CoreContainerTypes.GRINDING_MILL.get(), GRINDING_MILL, 0, 2, 4, 36);
     }
 
+    /**
+     * Catalysts are registered as crafting stations now, one call per category rather than one per
+     * block. {@code RecipeTypes.FUELING} was also split per cooking block into SMELTING_FUEL /
+     * BLASTING_FUEL / SMOKING_FUEL; these machines burn whatever the vanilla fuel registry accepts,
+     * which is the furnace fuel list, so they are stations for the smelting fuel category.
+     */
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.BASIC_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.ADVANCED_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.EXPERT_ALLOY_FORGE.get()), ALLOY_FORGE, RecipeTypes.FUELING);
+        ItemLike[] alloyForges = new ItemLike[]{CoreBlocks.BASIC_ALLOY_FORGE.get(), CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get(), CoreBlocks.ADVANCED_ALLOY_FORGE.get(), CoreBlocks.EXPERT_ALLOY_FORGE.get()};
+        ItemLike[] grindingMills = new ItemLike[]{CoreBlocks.BASIC_GRINDING_MILL.get(), CoreBlocks.INTERMEDIATE_GRINDING_MILL.get(), CoreBlocks.ADVANCED_GRINDING_MILL.get(), CoreBlocks.EXPERT_GRINDING_MILL.get()};
 
-        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.BASIC_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.ADVANCED_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
-        registration.addRecipeCatalyst(new ItemStack(CoreBlocks.EXPERT_GRINDING_MILL.get()), GRINDING_MILL, RecipeTypes.FUELING);
+        registration.addCraftingStation(ALLOY_FORGE, alloyForges);
+        registration.addCraftingStation(GRINDING_MILL, grindingMills);
+        registration.addCraftingStation(RecipeTypes.SMELTING_FUEL, alloyForges);
+        registration.addCraftingStation(RecipeTypes.SMELTING_FUEL, grindingMills);
     }
 
     @Override

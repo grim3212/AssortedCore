@@ -3,7 +3,9 @@ package com.grim3212.assorted.core.data;
 import com.grim3212.assorted.core.api.CoreTags;
 import com.grim3212.assorted.core.common.items.CoreItems;
 import com.grim3212.assorted.lib.data.LibItemTagProvider;
+import net.minecraft.data.tags.TagAppender;
 import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -23,7 +25,10 @@ public class CoreItemTagProvider extends LibItemTagProvider {
     }
 
     @Override
-    public void addCommonTags(Function<TagKey<Item>, IntrinsicTagAppender<Item>> tagger, BiConsumer<TagKey<Block>, TagKey<Item>> copier) {
+    public void addCommonTags(Function<TagKey<Item>, TagAppender<Item>> appender, BiConsumer<TagKey<Block>, TagKey<Item>> copier) {
+        // See CoreBlockTagProvider: TagAppender only accepts ResourceKeys now.
+        Function<TagKey<Item>, ItemTagger> tagger = (tag) -> new ItemTagger(appender.apply(tag));
+
         tagger.apply(CoreTags.Items.GRINDING_MILL_ALLOWED_TOOLS).add(Items.IRON_PICKAXE, Items.DIAMOND_PICKAXE, Items.NETHERITE_PICKAXE);
 
         copier.accept(CoreTags.Blocks.ORES, CoreTags.Items.ORES);
@@ -193,5 +198,21 @@ public class CoreItemTagProvider extends LibItemTagProvider {
         tagger.apply(CoreTags.Items.GEARS_GOLD).add(CoreItems.GOLD_GEAR.get());
 
         tagger.apply(ItemTags.PIGLIN_LOVED).add(CoreItems.GOLD_DUST.get(), CoreItems.GOLD_GEAR.get());
+    }
+
+    private record ItemTagger(TagAppender<Item> appender) {
+
+        ItemTagger add(Item... items) {
+            for (Item item : items) {
+                this.appender.add(BuiltInRegistries.ITEM.getResourceKey(item).orElseThrow());
+            }
+
+            return this;
+        }
+
+        ItemTagger addTag(TagKey<Item> tag) {
+            this.appender.addTag(tag);
+            return this;
+        }
     }
 }

@@ -15,6 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -46,7 +47,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
     @Override
     protected boolean canCombine(@Nullable BaseMachineRecipe recipeIn) {
         if (!this.items.get(0).isEmpty() && !this.items.get(1).isEmpty() && recipeIn != null) {
-            ItemStack itemstack = recipeIn.getResultItem(this.level.registryAccess());
+            ItemStack itemstack = recipeIn.getResultItem();
             if (itemstack.isEmpty()) {
                 return false;
             } else {
@@ -67,12 +68,13 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
     }
 
     @Override
-    protected void combine(@Nullable BaseMachineRecipe recipe) {
+    protected void combine(@Nullable RecipeHolder<BaseMachineRecipe> holder) {
+        BaseMachineRecipe recipe = holder == null ? null : holder.value();
         if (recipe != null && this.canCombine(recipe)) {
             AlloyForgeRecipe forgeRecipe = (AlloyForgeRecipe) recipe;
             ItemStack ingredient1 = this.items.get(0);
             ItemStack ingredient2 = this.items.get(1);
-            ItemStack itemstack1 = recipe.getResultItem(this.level.registryAccess());
+            ItemStack itemstack1 = recipe.getResultItem();
             ItemStack outputSlot = this.items.get(this.outputSlot());
             if (outputSlot.isEmpty()) {
                 this.items.set(this.outputSlot(), itemstack1.copy());
@@ -80,7 +82,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
                 outputSlot.grow(itemstack1.getCount());
             }
 
-            this.setRecipeUsed(recipe);
+            this.setRecipeUsed(holder);
 
             // Flip shrink amounts if the recipe is in opposite positions
             if (forgeRecipe.getIngredient1().test(ingredient1)) {
@@ -137,7 +139,7 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
         if (index == this.outputSlot()) {
             return false;
         } else if (index != this.fuelSlot()) {
-            return MachineUtil.isValidAlloyForgeInput(this.level.getRecipeManager(), stack);
+            return MachineUtil.isValidAlloyForgeInput(this.level, stack);
         } else {
             return getBurnTime(stack) > 0;
         }

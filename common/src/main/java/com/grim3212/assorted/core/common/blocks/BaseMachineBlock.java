@@ -5,9 +5,10 @@ import com.grim3212.assorted.lib.core.inventory.locking.StorageUtil;
 import com.grim3212.assorted.lib.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,14 +23,15 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseMachineBlock extends Block implements EntityBlock {
 
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    // DirectionProperty was folded back into a plain EnumProperty<Direction> in 26.x.
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty ON = BooleanProperty.create("on");
 
     public BaseMachineBlock(Properties properties) {
@@ -37,9 +39,13 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(ON, false));
     }
 
+    /**
+     * {@code use} split into {@code useItemOn} / {@code useWithoutItem}; opening the machine does
+     * not care what is in hand, so this is the hand-agnostic half.
+     */
     @Override
-    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        if (!worldIn.isClientSide) {
+    protected InteractionResult useWithoutItem(BlockState state, Level worldIn, BlockPos pos, Player player, BlockHitResult hit) {
+        if (!worldIn.isClientSide()) {
             MenuProvider inamedcontainerprovider = this.getMenuProvider(state, worldIn, pos);
             if (inamedcontainerprovider != null) {
                 Services.PLATFORM.openMenu((ServerPlayer) player, inamedcontainerprovider, buf -> buf.writeBlockPos(pos));
@@ -61,7 +67,7 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : (level1, blockPos, blockState, t) -> {
+        return level.isClientSide() ? null : (level1, blockPos, blockState, t) -> {
             if (t instanceof BaseMachineBlockEntity machine) {
                 machine.tick();
             }
@@ -75,7 +81,8 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
 
     @Override
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-        if (stack.hasCustomHoverName()) {
+        // hasCustomHoverName() is gone - a custom name is just the CUSTOM_NAME data component now.
+        if (stack.has(DataComponents.CUSTOM_NAME)) {
             BlockEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof BaseMachineBlockEntity machine) {
                 machine.setCustomName(stack.getHoverName());
@@ -83,41 +90,43 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
         }
     }
 
+    /**
+     * Replaces {@code onRemove}. 26.x splits removal in two: the block entity is already gone by
+     * the time this runs, and it only fires for a real removal, so the "did the block actually
+     * change" guard and the super call are no longer needed here.
+     */
     @Override
-    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (!state.is(newState.getBlock())) {
-            BlockEntity tileentity = worldIn.getBlockEntity(pos);
-            if (tileentity instanceof BaseMachineBlockEntity machine) {
-                Containers.dropContents(worldIn, pos, machine.getItems());
-                machine.grantStoredRecipeExperience(worldIn, Vec3.atCenterOf(pos));
-                worldIn.updateNeighbourForOutputSignal(pos, this);
-            }
-
-            super.onRemove(state, worldIn, pos, newState, isMoving);
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel worldIn, BlockPos pos, boolean movedByPiston) {
+        BlockEntity tileentity = worldIn.getBlockEntity(pos);
+        if (tileentity instanceof BaseMachineBlockEntity machine) {
+            Containers.dropContents(worldIn, pos, machine.getItems());
+            machine.grantStoredRecipeExperience(worldIn, Vec3.atCenterOf(pos));
         }
+
+        worldIn.updateNeighbourForOutputSignal(pos, this);
     }
 
     @Override
-    public boolean hasAnalogOutputSignal(BlockState state) {
+    protected boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
+    protected int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos, Direction direction) {
         if (worldIn.getBlockEntity(pos) instanceof BaseMachineBlockEntity machine) {
             return StorageUtil.getRedstoneSignalFromContainer(machine.getInventory(null));
         }
 
-        return super.getAnalogOutputSignal(blockState, worldIn, pos);
+        return super.getAnalogOutputSignal(blockState, worldIn, pos, direction);
     }
 
     @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
+    protected BlockState rotate(BlockState state, Rotation rot) {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+    protected BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 

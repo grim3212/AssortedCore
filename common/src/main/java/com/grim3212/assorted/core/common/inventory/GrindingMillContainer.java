@@ -25,7 +25,7 @@ public class GrindingMillContainer extends BaseMachineContainer {
 
         this.addSlot(new SlotStorageHandler(grindingMillInventory, 0, 51, 27));
         this.addSlot(new GrindingMillToolSlot(grindingMillInventory, 1, 80, 5));
-        this.addSlot(new MachineFuelSlot(grindingMillInventory, 2, 80, 62));
+        this.addSlot(new MachineFuelSlot(this.world, grindingMillInventory, 2, 80, 62));
         this.addSlot(new MachineResultSlot(playerInventory.player, grindingMillInventory, 3, 115, 27));
 
         for (int i = 0; i < 3; ++i) {
@@ -57,7 +57,7 @@ public class GrindingMillContainer extends BaseMachineContainer {
                     if (!this.moveItemStackTo(itemstack1, 0, 2, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (Services.PLATFORM.getFuelTime(itemstack1) > 0) {
+                } else if (Services.PLATFORM.getFuelTime(this.world, itemstack1) > 0) {
                     if (!this.moveItemStackTo(itemstack1, 2, 3, false)) {
                         return ItemStack.EMPTY;
                     }

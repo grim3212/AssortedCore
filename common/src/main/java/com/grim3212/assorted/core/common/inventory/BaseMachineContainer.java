@@ -1,6 +1,7 @@
 package com.grim3212.assorted.core.common.inventory;
 
 import com.grim3212.assorted.core.api.crafting.BaseMachineRecipe;
+import com.grim3212.assorted.core.api.machines.MachineUtil;
 import com.grim3212.assorted.lib.core.inventory.IItemStorageHandler;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +39,7 @@ public abstract class BaseMachineContainer extends AbstractContainerMenu {
     }
 
     protected boolean hasRecipe(ItemStack stack) {
-        return this.world.getRecipeManager().getAllRecipesFor((RecipeType<BaseMachineRecipe>) this.recipeType).stream().anyMatch((recipe) -> {
+        return MachineUtil.recipesOfType(this.world, (RecipeType<BaseMachineRecipe>) this.recipeType).anyMatch((recipe) -> {
             return recipe.validInput(stack);
         });
     }

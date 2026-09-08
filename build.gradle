@@ -30,6 +30,11 @@ subprojects {
     }
 
     repositories {
+        // AssortedLib 4.0.0 is not published anywhere yet for 26.2. Build it locally first with
+        //   cd ../AssortedLib && ./gradlew publishToMavenLocal
+        // and this picks it up; remote AssortedMods below stays the source for released versions.
+        mavenLocal()
+
         mavenCentral()
 
         maven {

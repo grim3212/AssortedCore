@@ -106,6 +106,8 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
             if (CoreCommonMod.COMMON_CONFIG.grindingMillHasBreakSound.get()) {
                 Block b = Block.byItem(ingredient.getItem());
                 if (b != null && b != Blocks.AIR) {
+                    // NeoForge-only deprecation; the level/pos-aware form is not on the vanilla jar.
+                    @SuppressWarnings("deprecation")
                     SoundType soundtype = b.defaultBlockState().getSoundType();
                     this.getLevel().playSound((Player) null, this.getBlockPos(), soundtype.getBreakSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
                 }

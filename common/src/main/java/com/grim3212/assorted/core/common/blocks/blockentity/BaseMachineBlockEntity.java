@@ -219,6 +219,8 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements IInv
                     flag1 = true;
                     // The crafting remainder is a nullable ItemStackTemplate now rather than an
                     // Item plus a hasCraftingRemainingItem() flag.
+                    // NeoForge-only deprecation; its replacement is not on the vanilla jar.
+                    @SuppressWarnings("deprecation")
                     ItemStackTemplate remainder = fuelSlot.getItem().getCraftingRemainder();
                     if (remainder != null)
                         this.items.set(this.fuelSlot(), remainder.create());

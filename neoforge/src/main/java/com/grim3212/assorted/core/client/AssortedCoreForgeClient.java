@@ -1,16 +1,21 @@
 package com.grim3212.assorted.core.client;
 
 import com.grim3212.assorted.core.Constants;
-import net.minecraftforge.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD, modid = Constants.MOD_ID)
+/**
+ * {@code @Mod.EventBusSubscriber} no longer nests under {@code @Mod} and no longer picks a bus, and
+ * hanging client setup off {@code FMLConstructModEvent} is not the idiom any more: {@code @Mod}
+ * takes a {@code dist} now, so a client-only entry point is simply a second {@code @Mod} class for
+ * the same mod id whose constructor runs only on the client.
+ */
+@Mod(value = Constants.MOD_ID, dist = Dist.CLIENT)
 public class AssortedCoreForgeClient {
 
-    @SubscribeEvent
-    public static void initClientSide(final FMLConstructModEvent event) {
+    public AssortedCoreForgeClient(IEventBus modBus, ModContainer modContainer) {
         CoreClient.init();
     }
 }

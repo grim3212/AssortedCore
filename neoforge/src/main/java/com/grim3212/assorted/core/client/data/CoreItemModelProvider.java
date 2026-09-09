@@ -1,29 +1,34 @@
 package com.grim3212.assorted.core.client.data;
 
 import com.grim3212.assorted.core.Constants;
-import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.common.items.CoreItems;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 
-public class CoreItemModelProvider extends ItemModelProvider {
+import java.util.stream.Stream;
 
-    public CoreItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, Constants.MOD_ID, existingFileHelper);
-    }
+/**
+ * Forge's {@code ItemModelProvider} and {@code ItemModelBuilder} are gone, and so is the idea of an
+ * item model being a single json: an item now points at a data-driven {@code ItemModel} in
+ * {@code assets/<ns>/items/}, which in turn names the model to draw. {@link ItemModelGenerators}
+ * writes both halves, so {@code generatedItem} is just
+ * {@link ItemModelGenerators#generateFlatItem}.
+ * <p>
+ * Block items are not listed here at all - they are {@link CoreBlockstateProvider}'s, where
+ * {@link ModelProvider} points each one at its block model on its own. See that class for why the
+ * two providers narrow what they know about.
+ */
+public class CoreItemModelProvider extends ModelProvider {
 
-    private static String name(Item i) {
-        return ForgeRegistries.ITEMS.getKey(i).getPath();
-    }
-
-    private static String name(Block i) {
-        return ForgeRegistries.BLOCKS.getKey(i).getPath();
+    public CoreItemModelProvider(PackOutput output) {
+        super(output, Constants.MOD_ID);
     }
 
     @Override
@@ -32,138 +37,82 @@ public class CoreItemModelProvider extends ItemModelProvider {
     }
 
     @Override
-    protected void registerModels() {
-        genericBlock(CoreBlocks.TIN_ORE.get());
-        genericBlock(CoreBlocks.SILVER_ORE.get());
-        genericBlock(CoreBlocks.ALUMINUM_ORE.get());
-        genericBlock(CoreBlocks.NICKEL_ORE.get());
-        genericBlock(CoreBlocks.PLATINUM_ORE.get());
-        genericBlock(CoreBlocks.LEAD_ORE.get());
-        genericBlock(CoreBlocks.RUBY_ORE.get());
-        genericBlock(CoreBlocks.PERIDOT_ORE.get());
-        genericBlock(CoreBlocks.SAPPHIRE_ORE.get());
-        genericBlock(CoreBlocks.TOPAZ_ORE.get());
-        genericBlock(CoreBlocks.TIN_BLOCK.get());
-        genericBlock(CoreBlocks.SILVER_BLOCK.get());
-        genericBlock(CoreBlocks.ALUMINUM_BLOCK.get());
-        genericBlock(CoreBlocks.NICKEL_BLOCK.get());
-        genericBlock(CoreBlocks.PLATINUM_BLOCK.get());
-        genericBlock(CoreBlocks.LEAD_BLOCK.get());
-        genericBlock(CoreBlocks.RUBY_BLOCK.get());
-        genericBlock(CoreBlocks.PERIDOT_BLOCK.get());
-        genericBlock(CoreBlocks.SAPPHIRE_BLOCK.get());
-        genericBlock(CoreBlocks.TOPAZ_BLOCK.get());
-        genericBlock(CoreBlocks.BRONZE_BLOCK.get());
-        genericBlock(CoreBlocks.ELECTRUM_BLOCK.get());
-        genericBlock(CoreBlocks.INVAR_BLOCK.get());
-        genericBlock(CoreBlocks.STEEL_BLOCK.get());
-
-        genericBlock(CoreBlocks.DEEPSLATE_TIN_ORE.get());
-        genericBlock(CoreBlocks.DEEPSLATE_SILVER_ORE.get());
-        genericBlock(CoreBlocks.DEEPSLATE_ALUMINUM_ORE.get());
-        genericBlock(CoreBlocks.DEEPSLATE_NICKEL_ORE.get());
-        genericBlock(CoreBlocks.DEEPSLATE_PLATINUM_ORE.get());
-        genericBlock(CoreBlocks.DEEPSLATE_LEAD_ORE.get());
-        genericBlock(CoreBlocks.DEEPSLATE_RUBY_ORE.get());
-        genericBlock(CoreBlocks.DEEPSLATE_PERIDOT_ORE.get());
-        genericBlock(CoreBlocks.DEEPSLATE_SAPPHIRE_ORE.get());
-        genericBlock(CoreBlocks.DEEPSLATE_TOPAZ_ORE.get());
-
-        genericBlock(CoreBlocks.RAW_TIN_BLOCK.get());
-        genericBlock(CoreBlocks.RAW_SILVER_BLOCK.get());
-        genericBlock(CoreBlocks.RAW_ALUMINUM_BLOCK.get());
-        genericBlock(CoreBlocks.RAW_NICKEL_BLOCK.get());
-        genericBlock(CoreBlocks.RAW_PLATINUM_BLOCK.get());
-        genericBlock(CoreBlocks.RAW_LEAD_BLOCK.get());
-
-        genericBlock(CoreBlocks.MACHINE_CORE.get());
-        genericBlock(CoreBlocks.BASIC_ALLOY_FORGE.get());
-        genericBlock(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get());
-        genericBlock(CoreBlocks.ADVANCED_ALLOY_FORGE.get());
-        genericBlock(CoreBlocks.EXPERT_ALLOY_FORGE.get());
-        genericBlock(CoreBlocks.BASIC_GRINDING_MILL.get());
-        genericBlock(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get());
-        genericBlock(CoreBlocks.ADVANCED_GRINDING_MILL.get());
-        genericBlock(CoreBlocks.EXPERT_GRINDING_MILL.get());
-
-        generatedItem(CoreItems.TIN_INGOT.get());
-        generatedItem(CoreItems.SILVER_INGOT.get());
-        generatedItem(CoreItems.ALUMINUM_INGOT.get());
-        generatedItem(CoreItems.NICKEL_INGOT.get());
-        generatedItem(CoreItems.PLATINUM_INGOT.get());
-        generatedItem(CoreItems.LEAD_INGOT.get());
-        generatedItem(CoreItems.BRONZE_INGOT.get());
-        generatedItem(CoreItems.ELECTRUM_INGOT.get());
-        generatedItem(CoreItems.INVAR_INGOT.get());
-        generatedItem(CoreItems.STEEL_INGOT.get());
-
-        generatedItem(CoreItems.RAW_TIN.get());
-        generatedItem(CoreItems.RAW_SILVER.get());
-        generatedItem(CoreItems.RAW_ALUMINUM.get());
-        generatedItem(CoreItems.RAW_NICKEL.get());
-        generatedItem(CoreItems.RAW_PLATINUM.get());
-        generatedItem(CoreItems.RAW_LEAD.get());
-
-        generatedItem(CoreItems.TIN_NUGGET.get());
-        generatedItem(CoreItems.COPPER_NUGGET.get());
-        generatedItem(CoreItems.SILVER_NUGGET.get());
-        generatedItem(CoreItems.ALUMINUM_NUGGET.get());
-        generatedItem(CoreItems.NICKEL_NUGGET.get());
-        generatedItem(CoreItems.PLATINUM_NUGGET.get());
-        generatedItem(CoreItems.LEAD_NUGGET.get());
-        generatedItem(CoreItems.BRONZE_NUGGET.get());
-        generatedItem(CoreItems.ELECTRUM_NUGGET.get());
-        generatedItem(CoreItems.INVAR_NUGGET.get());
-        generatedItem(CoreItems.STEEL_NUGGET.get());
-
-        generatedItem(CoreItems.TIN_DUST.get());
-        generatedItem(CoreItems.COPPER_DUST.get());
-        generatedItem(CoreItems.SILVER_DUST.get());
-        generatedItem(CoreItems.ALUMINUM_DUST.get());
-        generatedItem(CoreItems.NICKEL_DUST.get());
-        generatedItem(CoreItems.PLATINUM_DUST.get());
-        generatedItem(CoreItems.LEAD_DUST.get());
-        generatedItem(CoreItems.BRONZE_DUST.get());
-        generatedItem(CoreItems.ELECTRUM_DUST.get());
-        generatedItem(CoreItems.INVAR_DUST.get());
-        generatedItem(CoreItems.STEEL_DUST.get());
-        generatedItem(CoreItems.IRON_DUST.get());
-        generatedItem(CoreItems.GOLD_DUST.get());
-
-        generatedItem(CoreItems.TIN_GEAR.get());
-        generatedItem(CoreItems.COPPER_GEAR.get());
-        generatedItem(CoreItems.SILVER_GEAR.get());
-        generatedItem(CoreItems.ALUMINUM_GEAR.get());
-        generatedItem(CoreItems.NICKEL_GEAR.get());
-        generatedItem(CoreItems.PLATINUM_GEAR.get());
-        generatedItem(CoreItems.LEAD_GEAR.get());
-        generatedItem(CoreItems.BRONZE_GEAR.get());
-        generatedItem(CoreItems.ELECTRUM_GEAR.get());
-        generatedItem(CoreItems.INVAR_GEAR.get());
-        generatedItem(CoreItems.STEEL_GEAR.get());
-        generatedItem(CoreItems.IRON_GEAR.get());
-        generatedItem(CoreItems.GOLD_GEAR.get());
-
-        generatedItem(CoreItems.RUBY.get());
-        generatedItem(CoreItems.PERIDOT.get());
-        generatedItem(CoreItems.SAPPHIRE.get());
-        generatedItem(CoreItems.TOPAZ.get());
+    protected Stream<? extends Holder<Block>> getKnownBlocks() {
+        return Stream.empty();
     }
 
-    private ItemModelBuilder generatedItem(String name) {
-        return withExistingParent(name, "item/generated").texture("layer0", prefix("item/" + name));
+    @Override
+    protected Stream<? extends Holder<Item>> getKnownItems() {
+        return super.getKnownItems().filter(holder -> !(holder.value() instanceof BlockItem));
     }
 
-    private ItemModelBuilder generatedItem(Item i) {
-        return generatedItem(name(i));
+    @Override
+    protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+        generatedItem(itemModels, CoreItems.TIN_INGOT.get());
+        generatedItem(itemModels, CoreItems.SILVER_INGOT.get());
+        generatedItem(itemModels, CoreItems.ALUMINUM_INGOT.get());
+        generatedItem(itemModels, CoreItems.NICKEL_INGOT.get());
+        generatedItem(itemModels, CoreItems.PLATINUM_INGOT.get());
+        generatedItem(itemModels, CoreItems.LEAD_INGOT.get());
+        generatedItem(itemModels, CoreItems.BRONZE_INGOT.get());
+        generatedItem(itemModels, CoreItems.ELECTRUM_INGOT.get());
+        generatedItem(itemModels, CoreItems.INVAR_INGOT.get());
+        generatedItem(itemModels, CoreItems.STEEL_INGOT.get());
+
+        generatedItem(itemModels, CoreItems.RAW_TIN.get());
+        generatedItem(itemModels, CoreItems.RAW_SILVER.get());
+        generatedItem(itemModels, CoreItems.RAW_ALUMINUM.get());
+        generatedItem(itemModels, CoreItems.RAW_NICKEL.get());
+        generatedItem(itemModels, CoreItems.RAW_PLATINUM.get());
+        generatedItem(itemModels, CoreItems.RAW_LEAD.get());
+
+        generatedItem(itemModels, CoreItems.TIN_NUGGET.get());
+        generatedItem(itemModels, CoreItems.COPPER_NUGGET.get());
+        generatedItem(itemModels, CoreItems.SILVER_NUGGET.get());
+        generatedItem(itemModels, CoreItems.ALUMINUM_NUGGET.get());
+        generatedItem(itemModels, CoreItems.NICKEL_NUGGET.get());
+        generatedItem(itemModels, CoreItems.PLATINUM_NUGGET.get());
+        generatedItem(itemModels, CoreItems.LEAD_NUGGET.get());
+        generatedItem(itemModels, CoreItems.BRONZE_NUGGET.get());
+        generatedItem(itemModels, CoreItems.ELECTRUM_NUGGET.get());
+        generatedItem(itemModels, CoreItems.INVAR_NUGGET.get());
+        generatedItem(itemModels, CoreItems.STEEL_NUGGET.get());
+
+        generatedItem(itemModels, CoreItems.TIN_DUST.get());
+        generatedItem(itemModels, CoreItems.COPPER_DUST.get());
+        generatedItem(itemModels, CoreItems.SILVER_DUST.get());
+        generatedItem(itemModels, CoreItems.ALUMINUM_DUST.get());
+        generatedItem(itemModels, CoreItems.NICKEL_DUST.get());
+        generatedItem(itemModels, CoreItems.PLATINUM_DUST.get());
+        generatedItem(itemModels, CoreItems.LEAD_DUST.get());
+        generatedItem(itemModels, CoreItems.BRONZE_DUST.get());
+        generatedItem(itemModels, CoreItems.ELECTRUM_DUST.get());
+        generatedItem(itemModels, CoreItems.INVAR_DUST.get());
+        generatedItem(itemModels, CoreItems.STEEL_DUST.get());
+        generatedItem(itemModels, CoreItems.IRON_DUST.get());
+        generatedItem(itemModels, CoreItems.GOLD_DUST.get());
+
+        generatedItem(itemModels, CoreItems.TIN_GEAR.get());
+        generatedItem(itemModels, CoreItems.COPPER_GEAR.get());
+        generatedItem(itemModels, CoreItems.SILVER_GEAR.get());
+        generatedItem(itemModels, CoreItems.ALUMINUM_GEAR.get());
+        generatedItem(itemModels, CoreItems.NICKEL_GEAR.get());
+        generatedItem(itemModels, CoreItems.PLATINUM_GEAR.get());
+        generatedItem(itemModels, CoreItems.LEAD_GEAR.get());
+        generatedItem(itemModels, CoreItems.BRONZE_GEAR.get());
+        generatedItem(itemModels, CoreItems.ELECTRUM_GEAR.get());
+        generatedItem(itemModels, CoreItems.INVAR_GEAR.get());
+        generatedItem(itemModels, CoreItems.STEEL_GEAR.get());
+        generatedItem(itemModels, CoreItems.IRON_GEAR.get());
+        generatedItem(itemModels, CoreItems.GOLD_GEAR.get());
+
+        generatedItem(itemModels, CoreItems.RUBY.get());
+        generatedItem(itemModels, CoreItems.PERIDOT.get());
+        generatedItem(itemModels, CoreItems.SAPPHIRE.get());
+        generatedItem(itemModels, CoreItems.TOPAZ.get());
     }
 
-    private ItemModelBuilder genericBlock(Block b) {
-        String name = name(b);
-        return withExistingParent(name, prefix("block/" + name));
-    }
-
-    private Identifier prefix(String name) {
-        return Identifier.fromNamespaceAndPath(Constants.MOD_ID, name);
+    private void generatedItem(ItemModelGenerators itemModels, Item i) {
+        itemModels.generateFlatItem(i, ModelTemplates.FLAT_ITEM);
     }
 }

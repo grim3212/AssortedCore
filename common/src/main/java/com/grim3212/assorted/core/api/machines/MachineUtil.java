@@ -1,6 +1,7 @@
 package com.grim3212.assorted.core.api.machines;
 
 import com.grim3212.assorted.core.api.CoreTags;
+import com.grim3212.assorted.core.common.crafting.ClientMachineRecipes;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.lib.platform.services.IPlatformHelper;
@@ -29,11 +30,20 @@ public class MachineUtil {
      * {@code RecipeManager#getAllRecipesFor} is gone, and the recipe manager itself only exists on
      * the server now - {@link Level#recipeAccess()} hands back a {@code RecipeAccess} that carries
      * nothing but property sets and stonecutter recipes. So this walks
-     * {@code ServerLevel#recipeAccess()} and filters by type, and is simply empty on the client.
+     * {@code ServerLevel#recipeAccess()} and filters by type on the server, and reads the recipes
+     * the server sent us on the client.
+     *
+     * @see ClientMachineRecipes
      */
     @SuppressWarnings("unchecked")
     public static <T extends Recipe<?>> Stream<T> recipesOfType(@Nullable Level level, RecipeType<T> recipeType) {
         if (!(level instanceof ServerLevel serverLevel)) {
+            if (recipeType == CoreRecipeTypes.ALLOY_FORGE.get()) {
+                return (Stream<T>) ClientMachineRecipes.alloyForge().stream();
+            }
+            if (recipeType == CoreRecipeTypes.GRINDING_MILL.get()) {
+                return (Stream<T>) ClientMachineRecipes.grindingMill().stream();
+            }
             return Stream.empty();
         }
 

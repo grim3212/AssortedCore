@@ -4,6 +4,7 @@ import com.grim3212.assorted.core.client.data.CoreBlockstateProvider;
 import com.grim3212.assorted.core.client.data.CoreItemModelProvider;
 import com.grim3212.assorted.core.common.blocks.blockentity.BaseMachineBlockEntity;
 import com.grim3212.assorted.core.common.blocks.blockentity.CoreBlockEntityTypes;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.data.*;
 import com.grim3212.assorted.lib.data.ForgeBlockTagProvider;
 import com.grim3212.assorted.lib.data.ForgeItemTagProvider;
@@ -20,6 +21,8 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.Collections;
@@ -38,7 +41,23 @@ public class AssortedCoreForge {
         modBus.addListener(this::gatherClientData);
         modBus.addListener(this::registerCapabilities);
 
+        NeoForge.EVENT_BUS.addListener(this::onDatapackSync);
+
         CoreCommonMod.init();
+    }
+
+    /**
+     * Vanilla stopped sending recipes to the client in 1.21.2 - only recipe property sets and
+     * stonecutter recipes go over now - so a recipe type whose recipes are needed client side has to
+     * opt in. {@code sendRecipes} is NeoForge's mechanism for that; the client picks them up in
+     * {@code AssortedCoreForgeClient} from {@code RecipesReceivedEvent}.
+     * <p>
+     * The event fires for a joining player and again for everyone after {@code /reload}, and this
+     * listener is deliberately on the common {@code @Mod} class so it is registered on both physical
+     * sides, as NeoForge's docs require.
+     */
+    private void onDatapackSync(final OnDatapackSyncEvent event) {
+        event.sendRecipes(CoreRecipeTypes.ALLOY_FORGE.get(), CoreRecipeTypes.GRINDING_MILL.get());
     }
 
     /**

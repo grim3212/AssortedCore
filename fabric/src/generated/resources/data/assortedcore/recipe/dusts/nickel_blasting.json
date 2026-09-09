@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 0.1,
+  "ingredient": "#c:dusts/nickel",
+  "result": {
+    "id": "assortedcore:nickel_ingot"
+  }
+}

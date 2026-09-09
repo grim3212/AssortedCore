@@ -42,7 +42,7 @@ neoForge {
             clientData()
             gameDirectory = project.file('run')
             programArguments.addAll '--mod', mod_id, '--all',
-                    '--output', file('../common/src/generated/client/').getAbsolutePath(),
+                    '--output', file('src/generated/client/').getAbsolutePath(),
                     '--existing', file('../common/src/main/resources/').getAbsolutePath()
         }
 
@@ -50,7 +50,7 @@ neoForge {
             serverData()
             gameDirectory = project.file('run')
             programArguments.addAll '--mod', mod_id, '--all',
-                    '--output', file('../common/src/generated/server/').getAbsolutePath(),
+                    '--output', file('src/generated/server/').getAbsolutePath(),
                     '--existing', file('../common/src/main/resources/').getAbsolutePath()
         }
 
@@ -60,11 +60,11 @@ neoForge {
     }
 }
 
+// Each loader generates into its own module, so no two trees can produce the same file. Two roots
+// within it because client and server datagen write separately; Minecraft merges resource roots.
 sourceSets.main.resources {
-    srcDir 'src/generated/resources'
-    // Two roots because client and server datagen write separately; Minecraft merges resource roots.
-    srcDir '../common/src/generated/client'
-    srcDir '../common/src/generated/server'
+    srcDir 'src/generated/client'
+    srcDir 'src/generated/server'
     exclude '**/.cache'
 }
 

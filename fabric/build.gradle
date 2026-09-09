@@ -55,7 +55,7 @@ loom {
 }
 
 sourceSets {
-    main.resources.srcDirs += ['src/generated/resources', '../common/src/generated/client', '../common/src/generated/server']
+    main.resources.srcDirs += ['src/generated/resources']
 }
 
 processResources {

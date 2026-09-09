@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": "#c:ingots/lead",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    " M ",
+    "MSM",
+    " M "
+  ],
+  "result": {
+    "id": "assortedcore:lead_gear"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "assortedcore:grinding_mill",
+  "cookingtime": 300,
+  "ingredient": {
+    "ingredient": "#c:ingots/invar"
+  },
+  "result": {
+    "id": "assortedcore:invar_dust"
+  }
+}

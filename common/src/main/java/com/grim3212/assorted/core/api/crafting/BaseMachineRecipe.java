@@ -1,6 +1,7 @@
 package com.grim3212.assorted.core.api.crafting;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeBookCategories;
@@ -18,11 +19,11 @@ import net.minecraft.world.item.crafting.RecipeBookCategory;
 public abstract class BaseMachineRecipe implements Recipe<MachineRecipeInput> {
 
     protected final String group;
-    protected final ItemStack result;
+    protected final ItemStackTemplate result;
     protected final float experience;
     protected final int cookTime;
 
-    public BaseMachineRecipe(String groupIn, ItemStack resultIn, float experienceIn, int cookTimeIn) {
+    public BaseMachineRecipe(String groupIn, ItemStackTemplate resultIn, float experienceIn, int cookTimeIn) {
         this.group = groupIn;
         this.result = resultIn;
         this.experience = experienceIn;
@@ -31,7 +32,7 @@ public abstract class BaseMachineRecipe implements Recipe<MachineRecipeInput> {
 
     @Override
     public ItemStack assemble(MachineRecipeInput input) {
-        return this.result.copy();
+        return this.result.create();
     }
 
     public float getExperience() {
@@ -44,8 +45,16 @@ public abstract class BaseMachineRecipe implements Recipe<MachineRecipeInput> {
      * No longer an override: {@code Recipe} dropped {@code getResultItem}, because the recipe book
      * reads results off {@link net.minecraft.world.item.crafting.display.RecipeDisplay} now. The
      * machines still need it directly, so it stays as a plain accessor.
+     * <p>
+     * The result is stored as an {@link ItemStackTemplate} - since 26.x a stack cannot be built
+     * before its item's default data components are bound, so recipes carry the template and only
+     * realise a stack when one is actually needed.
      */
     public ItemStack getResultItem() {
+        return this.result.create();
+    }
+
+    public ItemStackTemplate getResultTemplate() {
         return this.result;
     }
 

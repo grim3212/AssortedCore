@@ -10,7 +10,7 @@ import net.minecraft.advancements.triggers.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import org.jetbrains.annotations.Nullable;
@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class GrindingMillRecipeBuilder implements RecipeBuilder {
 
-    private final ItemStack result;
+    private final ItemStackTemplate result;
     private final MachineIngredient ingredient;
     private final float experience;
     private final int cookingTime;
@@ -32,18 +32,18 @@ public class GrindingMillRecipeBuilder implements RecipeBuilder {
     @Nullable
     private String group;
 
-    private GrindingMillRecipeBuilder(ItemStack resultIn, MachineIngredient ingredientIn, float experienceIn, int cookingTimeIn) {
+    private GrindingMillRecipeBuilder(ItemStackTemplate resultIn, MachineIngredient ingredientIn, float experienceIn, int cookingTimeIn) {
         this.result = resultIn;
         this.ingredient = ingredientIn;
         this.experience = experienceIn;
         this.cookingTime = cookingTimeIn;
     }
 
-    public static GrindingMillRecipeBuilder recipe(MachineIngredient ingredientIn, ItemStack resultIn, float experienceIn, int cookingTimeIn) {
+    public static GrindingMillRecipeBuilder recipe(MachineIngredient ingredientIn, ItemStackTemplate resultIn, float experienceIn, int cookingTimeIn) {
         return new GrindingMillRecipeBuilder(resultIn, ingredientIn, experienceIn, cookingTimeIn);
     }
 
-    public static GrindingMillRecipeBuilder recipe(Ingredient ingredientIn, ItemStack resultIn, float experienceIn, int cookingTimeIn) {
+    public static GrindingMillRecipeBuilder recipe(Ingredient ingredientIn, ItemStackTemplate resultIn, float experienceIn, int cookingTimeIn) {
         return new GrindingMillRecipeBuilder(resultIn, new MachineIngredient(ingredientIn), experienceIn, cookingTimeIn);
     }
 

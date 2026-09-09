@@ -35,11 +35,22 @@ neoForge {
             programArgument '--nogui'
         }
 
-        data {
+        // Two data runs with SEPARATE output roots. GatherDataEvent split into .Client and
+        // .Server, MDG 2.x has no combined run type, and each run prunes anything in its output it
+        // did not generate - pointing both at one tree made the second delete the first's output.
+        clientData {
             clientData()
             gameDirectory = project.file('run')
             programArguments.addAll '--mod', mod_id, '--all',
-                    '--output', file('../common/src/generated/resources/').getAbsolutePath(),
+                    '--output', file('../common/src/generated/client/').getAbsolutePath(),
+                    '--existing', file('../common/src/main/resources/').getAbsolutePath()
+        }
+
+        serverData {
+            serverData()
+            gameDirectory = project.file('run')
+            programArguments.addAll '--mod', mod_id, '--all',
+                    '--output', file('../common/src/generated/server/').getAbsolutePath(),
                     '--existing', file('../common/src/main/resources/').getAbsolutePath()
         }
 
@@ -51,8 +62,10 @@ neoForge {
 
 sourceSets.main.resources {
     srcDir 'src/generated/resources'
-    srcDir '../common/src/generated/resources'
-    exclude 'src/generated/**/.cache'
+    // Two roots because client and server datagen write separately; Minecraft merges resource roots.
+    srcDir '../common/src/generated/client'
+    srcDir '../common/src/generated/server'
+    exclude '**/.cache'
 }
 
 dependencies {

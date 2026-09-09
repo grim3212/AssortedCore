@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "M": "#c:ingots/platinum",
+    "S": "#c:rods/wooden"
+  },
+  "pattern": [
+    " M ",
+    "MSM",
+    " M "
+  ],
+  "result": {
+    "id": "assortedcore:platinum_gear"
+  }
+}

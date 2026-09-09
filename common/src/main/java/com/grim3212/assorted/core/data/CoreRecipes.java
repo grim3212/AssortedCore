@@ -20,7 +20,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Recipe;
@@ -123,56 +123,56 @@ public class CoreRecipes extends ConditionalRecipeProvider {
         gear(LibCommonTags.Items.INGOTS_IRON, CoreItems.IRON_GEAR.get());
         gear(LibCommonTags.Items.INGOTS_GOLD, CoreItems.GOLD_GEAR.get());
 
-        alloy(ItemTags.COALS, 4, CoreTags.Items.DUSTS_IRON, 1, new ItemStack(CoreItems.STEEL_INGOT.get(), 1), 0.5F, 800);
-        alloy(CoreTags.Items.DUSTS_COPPER, 3, CoreTags.Items.DUSTS_TIN, 1, new ItemStack(CoreItems.BRONZE_INGOT.get(), 4), 0.5F);
-        alloy(CoreTags.Items.DUSTS_IRON, 2, CoreTags.Items.DUSTS_NICKEL, 1, new ItemStack(CoreItems.INVAR_INGOT.get(), 3), 0.7F, 500);
-        alloy(CoreTags.Items.DUSTS_SILVER, CoreTags.Items.DUSTS_GOLD, new ItemStack(CoreItems.ELECTRUM_INGOT.get(), 2), 0.7F);
+        alloy(ItemTags.COALS, 4, CoreTags.Items.DUSTS_IRON, 1, new ItemStackTemplate(CoreItems.STEEL_INGOT.get(), 1), 0.5F, 800);
+        alloy(CoreTags.Items.DUSTS_COPPER, 3, CoreTags.Items.DUSTS_TIN, 1, new ItemStackTemplate(CoreItems.BRONZE_INGOT.get(), 4), 0.5F);
+        alloy(CoreTags.Items.DUSTS_IRON, 2, CoreTags.Items.DUSTS_NICKEL, 1, new ItemStackTemplate(CoreItems.INVAR_INGOT.get(), 3), 0.7F, 500);
+        alloy(CoreTags.Items.DUSTS_SILVER, CoreTags.Items.DUSTS_GOLD, new ItemStackTemplate(CoreItems.ELECTRUM_INGOT.get(), 2), 0.7F);
 
-        grinding(CoreTags.Items.ORES_TIN, new ItemStack(CoreItems.TIN_DUST.get(), 2), 0.2F, 600);
-        grinding(CoreTags.Items.ORES_COPPER, new ItemStack(CoreItems.COPPER_DUST.get(), 2), 0.2F, 600);
-        grinding(CoreTags.Items.ORES_SILVER, new ItemStack(CoreItems.SILVER_DUST.get(), 2), 0.4F, 600);
-        grinding(CoreTags.Items.ORES_ALUMINUM, new ItemStack(CoreItems.ALUMINUM_DUST.get(), 2), 0.2F, 600);
-        grinding(CoreTags.Items.ORES_NICKEL, new ItemStack(CoreItems.NICKEL_DUST.get(), 2), 0.2F, 600);
-        grinding(CoreTags.Items.ORES_PLATINUM, new ItemStack(CoreItems.PLATINUM_DUST.get(), 2), 0.5F, 600);
-        grinding(CoreTags.Items.ORES_LEAD, new ItemStack(CoreItems.LEAD_DUST.get(), 2), 0.2F, 600);
-        grinding(CoreTags.Items.ORES_RUBY, new ItemStack(CoreItems.RUBY.get(), 2), 0.3F, 600);
-        grinding(CoreTags.Items.ORES_PERIDOT, new ItemStack(CoreItems.PERIDOT.get(), 2), 0.3F, 600);
-        grinding(CoreTags.Items.ORES_SAPPHIRE, new ItemStack(CoreItems.SAPPHIRE.get(), 2), 0.3F, 600);
-        grinding(CoreTags.Items.ORES_TOPAZ, new ItemStack(CoreItems.TOPAZ.get(), 2), 0.3F, 600);
+        grinding(CoreTags.Items.ORES_TIN, new ItemStackTemplate(CoreItems.TIN_DUST.get(), 2), 0.2F, 600);
+        grinding(CoreTags.Items.ORES_COPPER, new ItemStackTemplate(CoreItems.COPPER_DUST.get(), 2), 0.2F, 600);
+        grinding(CoreTags.Items.ORES_SILVER, new ItemStackTemplate(CoreItems.SILVER_DUST.get(), 2), 0.4F, 600);
+        grinding(CoreTags.Items.ORES_ALUMINUM, new ItemStackTemplate(CoreItems.ALUMINUM_DUST.get(), 2), 0.2F, 600);
+        grinding(CoreTags.Items.ORES_NICKEL, new ItemStackTemplate(CoreItems.NICKEL_DUST.get(), 2), 0.2F, 600);
+        grinding(CoreTags.Items.ORES_PLATINUM, new ItemStackTemplate(CoreItems.PLATINUM_DUST.get(), 2), 0.5F, 600);
+        grinding(CoreTags.Items.ORES_LEAD, new ItemStackTemplate(CoreItems.LEAD_DUST.get(), 2), 0.2F, 600);
+        grinding(CoreTags.Items.ORES_RUBY, new ItemStackTemplate(CoreItems.RUBY.get(), 2), 0.3F, 600);
+        grinding(CoreTags.Items.ORES_PERIDOT, new ItemStackTemplate(CoreItems.PERIDOT.get(), 2), 0.3F, 600);
+        grinding(CoreTags.Items.ORES_SAPPHIRE, new ItemStackTemplate(CoreItems.SAPPHIRE.get(), 2), 0.3F, 600);
+        grinding(CoreTags.Items.ORES_TOPAZ, new ItemStackTemplate(CoreItems.TOPAZ.get(), 2), 0.3F, 600);
 
-        grinding(LibCommonTags.Items.ORES_GOLD, new ItemStack(CoreItems.GOLD_DUST.get(), 2), 0.2F, 600);
-        grinding(LibCommonTags.Items.ORES_IRON, new ItemStack(CoreItems.IRON_DUST.get(), 2), 0.2F, 600);
-        grinding(LibCommonTags.Items.ORES_DIAMOND, new ItemStack(Items.DIAMOND, 2), 0.3F, 600);
-        grinding(LibCommonTags.Items.ORES_EMERALD, new ItemStack(Items.EMERALD, 2), 0.3F, 600);
-        grinding(LibCommonTags.Items.ORES_COAL, new ItemStack(Items.COAL, 3), 0.1F, 600);
-        grinding(LibCommonTags.Items.ORES_REDSTONE, new ItemStack(Items.REDSTONE, 5), 0.2F, 600);
-        grinding(LibCommonTags.Items.ORES_LAPIS, new ItemStack(Items.LAPIS_LAZULI, 5), 0.2F, 600);
-        grinding(LibCommonTags.Items.ORES_QUARTZ, new ItemStack(Items.QUARTZ, 2), 0.2F, 600);
+        grinding(LibCommonTags.Items.ORES_GOLD, new ItemStackTemplate(CoreItems.GOLD_DUST.get(), 2), 0.2F, 600);
+        grinding(LibCommonTags.Items.ORES_IRON, new ItemStackTemplate(CoreItems.IRON_DUST.get(), 2), 0.2F, 600);
+        grinding(LibCommonTags.Items.ORES_DIAMOND, new ItemStackTemplate(Items.DIAMOND, 2), 0.3F, 600);
+        grinding(LibCommonTags.Items.ORES_EMERALD, new ItemStackTemplate(Items.EMERALD, 2), 0.3F, 600);
+        grinding(LibCommonTags.Items.ORES_COAL, new ItemStackTemplate(Items.COAL, 3), 0.1F, 600);
+        grinding(LibCommonTags.Items.ORES_REDSTONE, new ItemStackTemplate(Items.REDSTONE, 5), 0.2F, 600);
+        grinding(LibCommonTags.Items.ORES_LAPIS, new ItemStackTemplate(Items.LAPIS_LAZULI, 5), 0.2F, 600);
+        grinding(LibCommonTags.Items.ORES_QUARTZ, new ItemStackTemplate(Items.QUARTZ, 2), 0.2F, 600);
 
-        grindingDustFromIngot(LibCommonTags.Items.INGOTS_GOLD, new ItemStack(CoreItems.GOLD_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(LibCommonTags.Items.INGOTS_IRON, new ItemStack(CoreItems.IRON_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(LibCommonTags.Items.INGOTS_GOLD, new ItemStackTemplate(CoreItems.GOLD_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(LibCommonTags.Items.INGOTS_IRON, new ItemStackTemplate(CoreItems.IRON_DUST.get(), 1), 0.0F, 300);
 
-        grindingDustFromIngot(CoreTags.Items.INGOTS_TIN, new ItemStack(CoreItems.TIN_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(CoreTags.Items.INGOTS_COPPER, new ItemStack(CoreItems.COPPER_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(CoreTags.Items.INGOTS_SILVER, new ItemStack(CoreItems.SILVER_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(CoreTags.Items.INGOTS_ALUMINUM, new ItemStack(CoreItems.ALUMINUM_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(CoreTags.Items.INGOTS_NICKEL, new ItemStack(CoreItems.NICKEL_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(CoreTags.Items.INGOTS_PLATINUM, new ItemStack(CoreItems.PLATINUM_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(CoreTags.Items.INGOTS_LEAD, new ItemStack(CoreItems.LEAD_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(CoreTags.Items.INGOTS_BRONZE, new ItemStack(CoreItems.BRONZE_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(CoreTags.Items.INGOTS_ELECTRUM, new ItemStack(CoreItems.ELECTRUM_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(CoreTags.Items.INGOTS_STEEL, new ItemStack(CoreItems.STEEL_DUST.get(), 1), 0.0F, 300);
-        grindingDustFromIngot(CoreTags.Items.INGOTS_INVAR, new ItemStack(CoreItems.INVAR_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_TIN, new ItemStackTemplate(CoreItems.TIN_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_COPPER, new ItemStackTemplate(CoreItems.COPPER_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_SILVER, new ItemStackTemplate(CoreItems.SILVER_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_ALUMINUM, new ItemStackTemplate(CoreItems.ALUMINUM_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_NICKEL, new ItemStackTemplate(CoreItems.NICKEL_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_PLATINUM, new ItemStackTemplate(CoreItems.PLATINUM_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_LEAD, new ItemStackTemplate(CoreItems.LEAD_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_BRONZE, new ItemStackTemplate(CoreItems.BRONZE_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_ELECTRUM, new ItemStackTemplate(CoreItems.ELECTRUM_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_STEEL, new ItemStackTemplate(CoreItems.STEEL_DUST.get(), 1), 0.0F, 300);
+        grindingDustFromIngot(CoreTags.Items.INGOTS_INVAR, new ItemStackTemplate(CoreItems.INVAR_DUST.get(), 1), 0.0F, 300);
 
-        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_GOLD, new ItemStack(CoreItems.GOLD_DUST.get(), 2), 0.0F, 300);
-        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_IRON, new ItemStack(CoreItems.IRON_DUST.get(), 2), 0.0F, 300);
-        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_TIN, new ItemStack(CoreItems.TIN_DUST.get(), 2), 0.0F, 300);
-        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_COPPER, new ItemStack(CoreItems.COPPER_DUST.get(), 2), 0.0F, 300);
-        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_SILVER, new ItemStack(CoreItems.SILVER_DUST.get(), 2), 0.0F, 300);
-        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_ALUMINUM, new ItemStack(CoreItems.ALUMINUM_DUST.get(), 2), 0.0F, 300);
-        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_NICKEL, new ItemStack(CoreItems.NICKEL_DUST.get(), 2), 0.0F, 300);
-        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_PLATINUM, new ItemStack(CoreItems.PLATINUM_DUST.get(), 2), 0.0F, 300);
-        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_LEAD, new ItemStack(CoreItems.LEAD_DUST.get(), 2), 0.0F, 300);
+        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_GOLD, new ItemStackTemplate(CoreItems.GOLD_DUST.get(), 2), 0.0F, 300);
+        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_IRON, new ItemStackTemplate(CoreItems.IRON_DUST.get(), 2), 0.0F, 300);
+        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_TIN, new ItemStackTemplate(CoreItems.TIN_DUST.get(), 2), 0.0F, 300);
+        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_COPPER, new ItemStackTemplate(CoreItems.COPPER_DUST.get(), 2), 0.0F, 300);
+        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_SILVER, new ItemStackTemplate(CoreItems.SILVER_DUST.get(), 2), 0.0F, 300);
+        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_ALUMINUM, new ItemStackTemplate(CoreItems.ALUMINUM_DUST.get(), 2), 0.0F, 300);
+        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_NICKEL, new ItemStackTemplate(CoreItems.NICKEL_DUST.get(), 2), 0.0F, 300);
+        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_PLATINUM, new ItemStackTemplate(CoreItems.PLATINUM_DUST.get(), 2), 0.0F, 300);
+        grindingDustFromRawOre(CoreTags.Items.RAW_MATERIALS_LEAD, new ItemStackTemplate(CoreItems.LEAD_DUST.get(), 2), 0.0F, 300);
 
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, CoreBlocks.MACHINE_CORE.get()).define('A', CoreTags.Items.INGOTS_ALUMINUM).define('C', CoreTags.Items.GEARS_COPPER).define('I', LibCommonTags.Items.INGOTS_IRON).pattern("IAI").pattern("ACA").pattern("IAI").unlockedBy("has_iron", has(LibCommonTags.Items.INGOTS_IRON)).save(this.output);
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, CoreBlocks.BASIC_ALLOY_FORGE.get()).define('X', CoreBlocks.MACHINE_CORE.get()).define('B', Blocks.BLAST_FURNACE).define('I', LibCommonTags.Items.INGOTS_IRON).pattern("III").pattern("BXB").pattern("III").unlockedBy("has_iron", has(LibCommonTags.Items.INGOTS_IRON)).unlockedBy("has_blast_furnace", has(Blocks.BLAST_FURNACE)).save(this.output);
@@ -186,36 +186,36 @@ public class CoreRecipes extends ConditionalRecipeProvider {
         ShapedRecipeBuilder.shaped(this.items, RecipeCategory.MISC, CoreBlocks.EXPERT_GRINDING_MILL.get()).define('X', CoreBlocks.ADVANCED_GRINDING_MILL.get()).define('P', CoreTags.Items.INGOTS_PLATINUM).pattern(" P ").pattern("PXP").pattern(" P ").unlockedBy("has_platinum", has(CoreTags.Items.INGOTS_PLATINUM)).save(this.output);
     }
 
-    private void alloy(TagKey<Item> ingredient1, int ingredient1Count, TagKey<Item> ingredient2, int ingredient2Count, ItemStack result, float experience) {
+    private void alloy(TagKey<Item> ingredient1, int ingredient1Count, TagKey<Item> ingredient2, int ingredient2Count, ItemStackTemplate result, float experience) {
         alloy(ingredient1, ingredient1Count, ingredient2, ingredient2Count, result, experience, 400);
     }
 
-    private void alloy(TagKey<Item> ingredient1, TagKey<Item> ingredient2, ItemStack result, float experience) {
+    private void alloy(TagKey<Item> ingredient1, TagKey<Item> ingredient2, ItemStackTemplate result, float experience) {
         alloy(ingredient1, ingredient2, result, experience, 400);
     }
 
-    private void alloy(TagKey<Item> ingredient1, TagKey<Item> ingredient2, ItemStack result, float experience, int cookTime) {
+    private void alloy(TagKey<Item> ingredient1, TagKey<Item> ingredient2, ItemStackTemplate result, float experience, int cookTime) {
         alloy(ingredient1, 1, ingredient2, 1, result, experience, cookTime);
     }
 
-    private void alloy(TagKey<Item> ingredient1, int ingredient1Count, TagKey<Item> ingredient2, int ingredient2Count, ItemStack result, float experience, int cookTime) {
+    private void alloy(TagKey<Item> ingredient1, int ingredient1Count, TagKey<Item> ingredient2, int ingredient2Count, ItemStackTemplate result, float experience, int cookTime) {
         AlloyForgeRecipeBuilder.recipe(new MachineIngredient(this.tag(ingredient1), ingredient1Count), new MachineIngredient(this.tag(ingredient2), ingredient2Count), result, experience, cookTime).unlockedBy("has_ingredient1", has(ingredient1)).unlockedBy("has_ingredient2", has(ingredient2)).save(this.output);
     }
 
-    private void grindingDustFromRawOre(TagKey<Item> ingredient, ItemStack result, float experience, int cookTime) {
+    private void grindingDustFromRawOre(TagKey<Item> ingredient, ItemStackTemplate result, float experience, int cookTime) {
         grinding(ingredient, result, experience, cookTime, "_from_raw_ore");
     }
 
-    private void grindingDustFromIngot(TagKey<Item> ingredient, ItemStack result, float experience, int cookTime) {
+    private void grindingDustFromIngot(TagKey<Item> ingredient, ItemStackTemplate result, float experience, int cookTime) {
         grinding(ingredient, result, experience, cookTime, "_from_ingot");
     }
 
-    private void grinding(TagKey<Item> ingredient, ItemStack result, float experience, int cookTime) {
+    private void grinding(TagKey<Item> ingredient, ItemStackTemplate result, float experience, int cookTime) {
         grinding(ingredient, result, experience, cookTime, "");
     }
 
-    private void grinding(TagKey<Item> ingredient, ItemStack result, float experience, int cookTime, String name) {
-        GrindingMillRecipeBuilder.recipe(new MachineIngredient(this.tag(ingredient)), result, experience, cookTime).unlockedBy("has_ingredient", has(ingredient)).save(this.output, key(getKeyPath(result.getItem()) + name));
+    private void grinding(TagKey<Item> ingredient, ItemStackTemplate result, float experience, int cookTime, String name) {
+        GrindingMillRecipeBuilder.recipe(new MachineIngredient(this.tag(ingredient)), result, experience, cookTime).unlockedBy("has_ingredient", has(ingredient)).save(this.output, key(getKeyPath(result.item().value()) + name));
     }
 
     private void gear(TagKey<Item> material, ItemLike gear) {

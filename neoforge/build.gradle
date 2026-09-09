@@ -42,7 +42,7 @@ neoForge {
             clientData()
             gameDirectory = project.file('run')
             programArguments.addAll '--mod', mod_id, '--all',
-                    '--output', file('src/generated/client/').getAbsolutePath(),
+                    '--output', file('../common/src/generated/client/').getAbsolutePath(),
                     '--existing', file('../common/src/main/resources/').getAbsolutePath()
         }
 
@@ -50,7 +50,7 @@ neoForge {
             serverData()
             gameDirectory = project.file('run')
             programArguments.addAll '--mod', mod_id, '--all',
-                    '--output', file('src/generated/server/').getAbsolutePath(),
+                    '--output', file('../common/src/generated/server/').getAbsolutePath(),
                     '--existing', file('../common/src/main/resources/').getAbsolutePath()
         }
 
@@ -60,11 +60,12 @@ neoForge {
     }
 }
 
-// Each loader generates into its own module, so no two trees can produce the same file. Two roots
-// within it because client and server datagen write separately; Minecraft merges resource roots.
+// The NeoForge datagen owns the shared output - it is the side with the model providers - and
+// writes into common so BOTH loaders can consume it. Two roots because client and server datagen
+// write separately and each prunes only its own tree; Minecraft merges resource roots.
 sourceSets.main.resources {
-    srcDir 'src/generated/client'
-    srcDir 'src/generated/server'
+    srcDir '../common/src/generated/client'
+    srcDir '../common/src/generated/server'
     exclude '**/.cache'
 }
 

@@ -127,7 +127,10 @@ public class GrindingMillBlockEntity extends BaseMachineBlockEntity {
 
     private static final int[] SLOTS = new int[]{0, 1, 2};
     private static final int[] SLOTS_DOWN = new int[]{3};
-    private static final List<Integer> INPUT_SLOTS = NonNullList.of(0, 1);
+    // Only slot 0 feeds the recipe; slot 1 is the tool, which canCombine checks separately.
+    // Was NonNullList.of(0, 1), whose first argument is the list's default value rather than
+    // an element, so this was really [1] - the tool slot, and never the ingredient.
+    private static final List<Integer> INPUT_SLOTS = List.of(0);
 
     @Override
     public int[] getSlotsForFace(Direction side) {

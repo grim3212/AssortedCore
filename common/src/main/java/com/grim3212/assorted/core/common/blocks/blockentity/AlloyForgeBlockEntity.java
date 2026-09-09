@@ -108,7 +108,9 @@ public class AlloyForgeBlockEntity extends BaseMachineBlockEntity {
 
     private static final int[] SLOTS = new int[]{0, 1, 2};
     private static final int[] SLOTS_DOWN = new int[]{3};
-    private static final List<Integer> INPUT_SLOTS = NonNullList.of(0, 1);
+    // Both slots feed the recipe. Was NonNullList.of(0, 1), whose first argument is the list's
+    // default value rather than an element, so this was really [1] - only the second input.
+    private static final List<Integer> INPUT_SLOTS = List.of(0, 1);
 
     @Override
     public int[] getSlotsForFace(Direction side) {

@@ -24,6 +24,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -384,6 +385,29 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements IInv
         ContainerHelper.saveAllItems(output, this.items);
         output.store("RecipesUsed", RECIPES_USED_CODEC, this.recipes);
         output.storeNullable("CustomName", ComponentSerialization.CODEC, this.customName);
+    }
+
+    /**
+     * Drops the machine's inventory and pops the experience it banked when the block goes away.
+     * <p>
+     * The block used to do this from {@code onRemove}, but that split in two in 26.x: by the time
+     * the block's {@code affectNeighborsAfterRemoval} runs the block entity has already been
+     * removed from the chunk, so anything that needs it has to happen here instead. This is the
+     * same hook vanilla's furnace uses.
+     */
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+
+        if (this.level == null) {
+            return;
+        }
+
+        Containers.dropContents(this.level, pos, this.items);
+
+        if (this.level instanceof ServerLevel serverLevel) {
+            this.grantStoredRecipeExperience(serverLevel, Vec3.atCenterOf(pos));
+        }
     }
 
     @Override

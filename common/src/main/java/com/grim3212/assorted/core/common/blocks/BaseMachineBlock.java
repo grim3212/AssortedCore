@@ -8,7 +8,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +24,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseMachineBlock extends Block implements EntityBlock {
@@ -93,16 +91,12 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
     /**
      * Replaces {@code onRemove}. 26.x splits removal in two: the block entity is already gone by
      * the time this runs, and it only fires for a real removal, so the "did the block actually
-     * change" guard and the super call are no longer needed here.
+     * change" guard and the super call are no longer needed here. Dropping the inventory and
+     * popping the banked experience needs the block entity, so it lives on
+     * {@link BaseMachineBlockEntity#preRemoveSideEffects} instead.
      */
     @Override
     protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel worldIn, BlockPos pos, boolean movedByPiston) {
-        BlockEntity tileentity = worldIn.getBlockEntity(pos);
-        if (tileentity instanceof BaseMachineBlockEntity machine) {
-            Containers.dropContents(worldIn, pos, machine.getItems());
-            machine.grantStoredRecipeExperience(worldIn, Vec3.atCenterOf(pos));
-        }
-
         worldIn.updateNeighbourForOutputSignal(pos, this);
     }
 

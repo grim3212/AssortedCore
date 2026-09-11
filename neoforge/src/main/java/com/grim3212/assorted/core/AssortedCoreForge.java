@@ -1,5 +1,6 @@
 package com.grim3212.assorted.core;
 
+import com.grim3212.assorted.core.client.data.CoreLanguageProvider;
 import com.grim3212.assorted.core.client.data.CoreBlockstateProvider;
 import com.grim3212.assorted.core.client.data.CoreItemModelProvider;
 import com.grim3212.assorted.core.common.blocks.blockentity.BaseMachineBlockEntity;
@@ -82,6 +83,7 @@ public class AssortedCoreForge {
 
         event.addProvider(new CoreBlockstateProvider(packOutput));
         event.addProvider(new CoreItemModelProvider(packOutput));
+        event.addProvider(new CoreLanguageProvider(packOutput));
     }
 
     /**

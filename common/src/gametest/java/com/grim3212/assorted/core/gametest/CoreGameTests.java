@@ -13,8 +13,6 @@ import java.util.function.Consumer;
  * structure. Every test that runs the game forward uses the EXPERT tier - its 0.25 speed modifier
  * keeps a smelt inside a sane {@code max_ticks}.
  * <p>
- * Manual checks that need a human are in {@code TESTING-CHECKLIST.md}.
- * <p>
  * The tests themselves are split by feature into the {@code *Tests} classes in this package,
  * with shared helpers in {@code CoreTestSupport}; this only lists them.
  */

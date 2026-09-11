@@ -121,7 +121,7 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
 
     // NeoForge deprecates this in its patches in favour of a level/pos-aware extension that
     // does not exist in the vanilla jar this module compiles against, so it cannot be replaced
-    // from common. See PORTING-26.2.md.
+    // from common.
     @SuppressWarnings("deprecation")
     @Override
     protected BlockState mirror(BlockState state, Mirror mirrorIn) {

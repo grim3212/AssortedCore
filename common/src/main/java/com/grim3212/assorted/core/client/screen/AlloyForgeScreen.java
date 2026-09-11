@@ -10,10 +10,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 /**
- * The GUI went retained-mode in 26.x: screens no longer draw, they record elements into a
- * {@link GuiGraphicsExtractor} that {@code GuiRenderer} plays back later. So {@code renderBg} is
- * replaced by {@code extractBackground}, and the {@code render} override that used to sequence
- * background/contents/tooltip by hand is gone - the base screen already does that.
+ * The alloy forge screen. It records its background into a {@link GuiGraphicsExtractor}; the base
+ * screen draws the rest.
  */
 public class AlloyForgeScreen extends AbstractContainerScreen<AlloyForgeContainer> {
 

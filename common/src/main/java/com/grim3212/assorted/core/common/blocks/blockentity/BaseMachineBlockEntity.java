@@ -185,11 +185,8 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements IInv
     }
 
     /**
-     * Looks up the recipe the machine's input slots currently satisfy.
-     * <p>
-     * The recipe manager only exists server side in 26.x, so this is empty on the client. It also
-     * hands the recipe a {@link MachineRecipeInput} of just the input slots rather than a container
-     * wrapping the whole inventory.
+     * The recipe the input slots currently satisfy. Always empty on the client, which has no recipe
+     * manager.
      */
     @SuppressWarnings("unchecked")
     public Optional<RecipeHolder<BaseMachineRecipe>> checkRecipe() {
@@ -388,12 +385,8 @@ public abstract class BaseMachineBlockEntity extends BlockEntity implements IInv
     }
 
     /**
-     * Drops the machine's inventory and pops the experience it banked when the block goes away.
-     * <p>
-     * The block used to do this from {@code onRemove}, but that split in two in 26.x: by the time
-     * the block's {@code affectNeighborsAfterRemoval} runs the block entity has already been
-     * removed from the chunk, so anything that needs it has to happen here instead. This is the
-     * same hook vanilla's furnace uses.
+     * Drops the inventory and banked experience when the block goes away. It has to happen here:
+     * the block entity is already gone by {@code affectNeighborsAfterRemoval}.
      */
     @Override
     public void preRemoveSideEffects(BlockPos pos, BlockState state) {

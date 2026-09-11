@@ -5,16 +5,9 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
- * Automated in-world checks for AssortedCore.
- * <p>
- * The bodies live in common because the behaviour they check is common; each loader module only
- * registers them into {@code Registries.TEST_FUNCTION} through its own hook, and
- * {@code data/assortedcore/test_instance/*.json} pairs each one with the shared {@code test_box}
- * structure. Every test that runs the game forward uses the EXPERT tier - its 0.25 speed modifier
- * keeps a smelt inside a sane {@code max_ticks}.
- * <p>
- * The tests themselves are split by feature into the {@code *Tests} classes in this package,
- * with shared helpers in {@code CoreTestSupport}; this only lists them.
+ * Automated in-world checks for AssortedCore. Tests that run the game forward use the EXPERT tier
+ * so a smelt fits inside {@code max_ticks}. The tests live in the {@code *Tests} classes; this only
+ * lists them.
  */
 public final class CoreGameTests {
 

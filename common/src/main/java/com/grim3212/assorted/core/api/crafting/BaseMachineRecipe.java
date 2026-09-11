@@ -8,13 +8,8 @@ import net.minecraft.world.item.crafting.RecipeBookCategories;
 import net.minecraft.world.item.crafting.RecipeBookCategory;
 
 /**
- * Shared behaviour for the machine recipes.
- * <p>
- * Two things changed shape in 26.x. Recipes no longer carry their own id - the recipe manager keys
- * them by {@code ResourceKey<Recipe<?>>} - so the {@code id} field and {@code getId()} are gone.
- * And {@code Recipe} is parameterised on {@link net.minecraft.world.item.crafting.RecipeInput}
- * rather than {@code Container}, so machines pass a {@link MachineRecipeInput} holding only the
- * slots a recipe may see.
+ * Shared behaviour for the machine recipes, which match a {@link MachineRecipeInput} of just the
+ * input slots.
  */
 public abstract class BaseMachineRecipe implements Recipe<MachineRecipeInput> {
 
@@ -40,15 +35,8 @@ public abstract class BaseMachineRecipe implements Recipe<MachineRecipeInput> {
     }
 
     /**
-     * The recipe's result.
-     * <p>
-     * No longer an override: {@code Recipe} dropped {@code getResultItem}, because the recipe book
-     * reads results off {@link net.minecraft.world.item.crafting.display.RecipeDisplay} now. The
-     * machines still need it directly, so it stays as a plain accessor.
-     * <p>
-     * The result is stored as an {@link ItemStackTemplate} - since 26.x a stack cannot be built
-     * before its item's default data components are bound, so recipes carry the template and only
-     * realise a stack when one is actually needed.
+     * The recipe's result. Stored as an {@link ItemStackTemplate} because a stack cannot be built
+     * before item components are bound.
      */
     public ItemStack getResultItem() {
         return this.result.create();

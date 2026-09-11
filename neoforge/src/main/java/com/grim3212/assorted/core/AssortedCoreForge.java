@@ -48,14 +48,9 @@ public class AssortedCoreForge {
     }
 
     /**
-     * Vanilla stopped sending recipes to the client in 1.21.2 - only recipe property sets and
-     * stonecutter recipes go over now - so a recipe type whose recipes are needed client side has to
-     * opt in. {@code sendRecipes} is NeoForge's mechanism for that; the client picks them up in
-     * {@code AssortedCoreForgeClient} from {@code RecipesReceivedEvent}.
-     * <p>
-     * The event fires for a joining player and again for everyone after {@code /reload}, and this
-     * listener is deliberately on the common {@code @Mod} class so it is registered on both physical
-     * sides, as NeoForge's docs require.
+     * Sends the machine recipes to clients, which vanilla no longer does. Fires on join and after
+     * {@code /reload}, on both sides as NeoForge requires; the client reads them from
+     * {@code RecipesReceivedEvent}.
      */
     private void onDatapackSync(final OnDatapackSyncEvent event) {
         event.sendRecipes(CoreRecipeTypes.ALLOY_FORGE.get(), CoreRecipeTypes.GRINDING_MILL.get());
@@ -87,11 +82,8 @@ public class AssortedCoreForge {
     }
 
     /**
-     * This used to be a mixin on {@code BaseMachineBlockEntity} overriding {@code getCapability}.
-     * Block entities do not answer capability lookups themselves any more - a capability is
-     * registered per {@link BlockEntityType} from {@link RegisterCapabilitiesEvent} - so the mixin
-     * was deleted and the registration lives here, mirroring what the Fabric side does with
-     * {@code ItemStorage.SIDED}.
+     * Exposes the machines' sided inventory to NeoForge, as Fabric does with {@code
+     * ItemStorage.SIDED}.
      */
     private void registerCapabilities(final RegisterCapabilitiesEvent event) {
         registerMachineItemHandler(event, CoreBlockEntityTypes.BASIC_ALLOY_FORGE);

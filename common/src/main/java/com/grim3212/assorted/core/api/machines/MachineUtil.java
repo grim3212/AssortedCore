@@ -25,13 +25,8 @@ public class MachineUtil {
     }
 
     /**
-     * Every recipe of one type currently loaded.
-     * <p>
-     * {@code RecipeManager#getAllRecipesFor} is gone, and the recipe manager itself only exists on
-     * the server now - {@link Level#recipeAccess()} hands back a {@code RecipeAccess} that carries
-     * nothing but property sets and stonecutter recipes. So this walks
-     * {@code ServerLevel#recipeAccess()} and filters by type on the server, and reads the recipes
-     * the server sent us on the client.
+     * Every loaded recipe of one type. The recipe manager only exists on the server, so the client
+     * reads the recipes the server sent it.
      *
      * @see ClientMachineRecipes
      */

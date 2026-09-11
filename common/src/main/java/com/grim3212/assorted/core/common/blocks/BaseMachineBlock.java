@@ -89,10 +89,7 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
     }
 
     /**
-     * Replaces {@code onRemove}. 26.x splits removal in two: the block entity is already gone by
-     * the time this runs, and it only fires for a real removal, so the "did the block actually
-     * change" guard and the super call are no longer needed here. Dropping the inventory and
-     * popping the banked experience needs the block entity, so it lives on
+     * Runs after the block entity is gone, so the inventory and banked experience are dropped from
      * {@link BaseMachineBlockEntity#preRemoveSideEffects} instead.
      */
     @Override

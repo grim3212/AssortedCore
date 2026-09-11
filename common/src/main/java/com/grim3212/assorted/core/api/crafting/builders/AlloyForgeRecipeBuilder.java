@@ -18,14 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Builds an {@link AlloyForgeRecipe} for data generation.
- * <p>
- * Rewritten onto {@link RecipeBuilder}. The 1.20.1 version hand-rolled a {@code FinishedRecipe}
- * that serialised itself to a {@code JsonObject}; in 26.x the provider hands a {@link RecipeOutput}
- * the real recipe object and the recipe's own codec writes it, so there is no intermediate "result"
- * type and no JSON here at all.
- */
+/** Builds an {@link AlloyForgeRecipe} for data generation; the recipe's codec writes the json. */
 public class AlloyForgeRecipeBuilder implements RecipeBuilder {
 
     private final ItemStackTemplate result;

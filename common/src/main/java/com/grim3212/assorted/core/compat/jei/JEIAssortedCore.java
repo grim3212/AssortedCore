@@ -90,10 +90,8 @@ public class JEIAssortedCore implements IModPlugin {
     }
 
     /**
-     * Catalysts are registered as crafting stations now, one call per category rather than one per
-     * block. {@code RecipeTypes.FUELING} was also split per cooking block into SMELTING_FUEL /
-     * BLASTING_FUEL / SMOKING_FUEL; these machines burn whatever the vanilla fuel registry accepts,
-     * which is the furnace fuel list, so they are stations for the smelting fuel category.
+     * Registers the machines as crafting stations. They burn furnace fuel, so they are stations for
+     * {@code SMELTING_FUEL} too.
      */
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
@@ -120,13 +118,9 @@ public class JEIAssortedCore implements IModPlugin {
     }
 
     /**
-     * Replaces the listed recipes after a sync.
-     * <p>
-     * JEI's plugins are loaded once per connection, and on Fabric there is nothing making that wait
-     * for our packet, so recipes can arrive after {@link #registerRecipes} has already run. A
-     * datapack reload sends them again mid-session as well. Either way the previous set is hidden
-     * and the new one added; the lists are swapped wholesale, so an identity check is enough to
-     * spot a set JEI has not seen.
+     * Replaces the listed recipes after a sync. On Fabric they can arrive after {@link
+     * #registerRecipes}, and a reload sends them again; the lists are replaced wholesale, so
+     * identity spots a new set.
      */
     private static void onRecipesUpdated() {
         IJeiRuntime jeiRuntime = runtime;

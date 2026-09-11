@@ -6,11 +6,7 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import java.util.List;
 
 /**
- * The inputs a machine offers to a recipe.
- * <p>
- * Recipes used to match against a raw {@code Container}, which meant handing a recipe the whole
- * machine inventory including fuel and output slots. 26.x introduced {@link RecipeInput} for
- * exactly this, so a machine now passes just the slots a recipe is allowed to see.
+ * The input slots a machine offers a recipe, so a recipe never sees the fuel or output slots.
  *
  * @param items The input slots, in the order the recipe expects them.
  */

@@ -42,12 +42,7 @@ final class CoreTestSupport {
 
     static final BlockPos MACHINE = new BlockPos(4, 1, 4);
 
-    // ------------------------------------------------------------------------------------------
-    // Wave two: ore drops, the recipe tree, tier speed, persistence and assets. These lean on two
-    // things that turn out to work headlessly - ServerLevel#recipeAccess resolves real recipes, and
-    // the mod's own assets are on the classpath - which is what makes these checklist lines
-    // automatable at all.
-    // ------------------------------------------------------------------------------------------
+    // Ore drops, recipes, tier speed, persistence and assets.
 
     /** An ore, and the item it drops when it is mined without Silk Touch. */
     record OreDrop(Block ore, Item drop) {
@@ -91,10 +86,8 @@ final class CoreTestSupport {
     }
 
     /**
-     * Rolls a block's own loot table against a fixed random source, so a Fortune roll is
-     * reproducible rather than a coin flip. The BLOCK parameter set wants BLOCK_STATE, ORIGIN and
-     * TOOL; the tool is what both {@code match_tool} (Silk Touch) and {@code apply_bonus} (Fortune)
-     * read.
+     * Rolls a block's loot table with a fixed seed, so a Fortune roll is reproducible. {@code tool}
+     * is what Silk Touch and Fortune read.
      */
     static List<ItemStack> rollDrops(GameTestHelper helper, Block block, ItemStack tool, long seed) {
         ResourceKey<LootTable> key = block.getLootTable().orElse(null);

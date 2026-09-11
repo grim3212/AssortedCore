@@ -100,13 +100,8 @@ final class MachineTests {
     }
 
     /**
-     * A hopper above pushes an ingredient in, a hopper below pulls the result out. This is the
-     * sided inventory bridge - {@code ResourceHandler} on NeoForge, the transfer API on Fabric -
-     * and it is the part of the port most likely to differ between the two.
-     * <p>
-     * Insertion goes to the first slot that accepts the stack, which for every face but DOWN is
-     * input 1; only DOWN exposes the output slot, so the hopper below can take the result and
-     * nothing else.
+     * A hopper above feeds an ingredient in and a hopper below takes the result out, through each
+     * loader's sided inventory. Only the DOWN face exposes the output slot.
      */
     private static void hoppersFeedAndEmptyMachine(GameTestHelper helper) {
         BlockPos above = MACHINE.above();
@@ -175,10 +170,8 @@ final class MachineTests {
     }
 
     /**
-     * Each tier is faster than the one below it. {@code getCookTime()} is the recipe's own cook
-     * time scaled by the tier's speed modifier, and it is exactly what {@code tick()} counts up to,
-     * so asserting it shrinks is the same claim as "the bar fills quicker" without spending 400
-     * ticks on the basic tier to prove it. One machine per position, so nothing has to be replaced.
+     * Each tier cooks faster than the one below. {@code getCookTime()} is what {@code tick()}
+     * counts up to, so checking it shrinks avoids running every machine to completion.
      */
     private static void machineTiersGetFaster(GameTestHelper helper) {
         Block[] mills = {CoreBlocks.BASIC_GRINDING_MILL.get(), CoreBlocks.INTERMEDIATE_GRINDING_MILL.get(),

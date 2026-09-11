@@ -14,17 +14,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.stream.Stream;
 
-/**
- * Forge's {@code ItemModelProvider} and {@code ItemModelBuilder} are gone, and so is the idea of an
- * item model being a single json: an item now points at a data-driven {@code ItemModel} in
- * {@code assets/<ns>/items/}, which in turn names the model to draw. {@link ItemModelGenerators}
- * writes both halves, so {@code generatedItem} is just
- * {@link ItemModelGenerators#generateFlatItem}.
- * <p>
- * Block items are not listed here at all - they are {@link CoreBlockstateProvider}'s, where
- * {@link ModelProvider} points each one at its block model on its own. See that class for why the
- * two providers narrow what they know about.
- */
+/** Item models for everything but block items, which {@link CoreBlockstateProvider} models. */
 public class CoreItemModelProvider extends ModelProvider {
 
     public CoreItemModelProvider(PackOutput output) {

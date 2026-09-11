@@ -15,11 +15,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * An {@link Ingredient} paired with a required count.
- * <p>
- * Hand-rolled JSON and {@code FriendlyByteBuf} serialization is gone in 26.x: recipes round-trip
- * through a {@link MapCodec} and a {@link StreamCodec}, so this exposes those instead of the old
- * {@code deserialize}/{@code read}/{@code write}/{@code serialize} pairs.
+ * An {@link Ingredient} with a required count, serialized through a {@link MapCodec} and a
+ * {@link StreamCodec}.
  */
 public class MachineIngredient implements Predicate<ItemStack> {
 
@@ -63,11 +60,8 @@ public class MachineIngredient implements Predicate<ItemStack> {
     }
 
     /**
-     * The stacks this ingredient accepts, each at the required count. Used for display.
-     * <p>
-     * {@code Ingredient.getItems()} is gone and {@code Ingredient#items()} is deprecated: an
-     * ingredient describes itself with a {@link SlotDisplay}, which is resolved to stacks against
-     * the caller's {@link ContextMap}.
+     * The stacks this ingredient accepts at its count, resolved from its {@link SlotDisplay}. For
+     * display.
      */
     public List<ItemStack> getMatchingStacks(ContextMap context) {
         return this.ingredient.display().resolveForStacks(context).stream().map((stack) -> stack.copyWithCount(this.count)).toList();

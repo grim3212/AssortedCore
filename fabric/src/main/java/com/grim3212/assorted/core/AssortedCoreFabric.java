@@ -15,12 +15,9 @@ public class AssortedCoreFabric implements ModInitializer {
     public void onInitialize() {
         CoreCommonMod.init();
 
-        // Vanilla stopped sending recipes to the client in 1.21.2, so a recipe type whose recipes are
-        // needed client side has to opt in. Fabric's counterpart to NeoForge's
-        // OnDatapackSyncEvent#sendRecipes is per serializer, and it handles the sending itself: the
-        // recipes land in the client's own RecipeAccess, and ClientRecipeSynchronizedEvent tells the
-        // client they arrived. Registered from the main entry point so it runs on both physical
-        // sides - the client has to declare which serializers it can decode.
+        // Recipes are not synced to clients by default. This opts the serializer in; it runs on
+        // both sides
+        // because the client declares which serializers it can decode.
         RecipeSynchronization.synchronizeRecipeSerializer(AlloyForgeRecipeSerializer.INSTANCE);
         RecipeSynchronization.synchronizeRecipeSerializer(GrindingMillRecipeSerializer.INSTANCE);
 

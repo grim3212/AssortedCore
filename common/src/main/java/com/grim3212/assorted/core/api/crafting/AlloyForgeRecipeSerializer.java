@@ -9,13 +9,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
-/**
- * Codecs for {@link AlloyForgeRecipe}.
- * <p>
- * {@code RecipeSerializer} is a record of a {@link MapCodec} and a {@link StreamCodec} in 26.x
- * rather than an interface with {@code fromJson}/{@code fromNetwork}/{@code toNetwork}, so this is
- * no longer something to implement - it holds the codecs and the single serializer instance.
- */
+/** The codecs and serializer instance for {@link AlloyForgeRecipe}. */
 public final class AlloyForgeRecipeSerializer {
 
     public static final MapCodec<AlloyForgeRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(

@@ -7,19 +7,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * The machine recipes the server has told this client about.
- * <p>
- * 1.21.2 stopped syncing recipes: {@code ClientboundUpdateRecipesPacket} carries only recipe
- * property sets and stonecutter recipes, and the client's {@code RecipeAccess} exposes nothing else,
- * so a recipe type whose recipes are needed client side - by JEI, and by the container's own
- * shift-click check - has to opt in to being sent. Both loaders have their own mechanism for that
- * and each fills this cache from its client entry point: NeoForge from
- * {@code OnDatapackSyncEvent#sendRecipes} plus {@code RecipesReceivedEvent}, Fabric from
- * {@code RecipeSynchronization#synchronizeRecipeSerializer} plus
- * {@code ClientRecipeSynchronizedEvent}. Both fire on login and again after {@code /reload}.
- * <p>
- * The lists are swapped wholesale rather than mutated, so readers can hold on to one and compare it
- * by identity to notice a reload.
+ * The machine recipes the server sent this client. Recipes are not synced by default, so each
+ * loader opts this type in and fills this on login and after {@code /reload}. The lists are
+ * replaced wholesale, so a reader can spot a reload by identity.
  */
 public final class ClientMachineRecipes {
 

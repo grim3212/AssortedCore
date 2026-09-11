@@ -3,7 +3,7 @@ package com.grim3212.assorted.core.data;
 import com.google.common.collect.Lists;
 import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.common.worldgen.CoreWorldGenTargets;
-import com.grim3212.assorted.lib.data.LibWorldGenProvider;
+import com.grim3212.assorted.lib.data.LibDatapackRegistryProvider;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistrySetBuilder;
@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CoreWorldGenData extends LibWorldGenProvider {
+public class CoreWorldGenData extends LibDatapackRegistryProvider {
 
     public static final Identifier ORE_ALUMINUM_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_aluminum");
     public static final Identifier ORE_NICKEL_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_nickel");
@@ -36,7 +36,7 @@ public class CoreWorldGenData extends LibWorldGenProvider {
     public static final Identifier ORE_PERIDOT_KEY = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "ore_peridot");
 
     @Override
-    public void addToWorldGem(RegistrySetBuilder builder) {
+    public void addEntries(RegistrySetBuilder builder) {
         builder.add(Registries.CONFIGURED_FEATURE, context -> {
             CoreWorldGenData.getConfiguredFeatures().forEach((r, f) -> {
                 context.register(ResourceKey.create(Registries.CONFIGURED_FEATURE, r), f);

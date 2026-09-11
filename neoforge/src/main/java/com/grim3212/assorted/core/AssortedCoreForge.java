@@ -8,7 +8,7 @@ import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.data.*;
 import com.grim3212.assorted.lib.data.ForgeBlockTagProvider;
 import com.grim3212.assorted.lib.data.ForgeItemTagProvider;
-import com.grim3212.assorted.lib.data.ForgeWorldGenProvider;
+import com.grim3212.assorted.lib.data.ForgeDatapackRegistryProvider;
 import com.grim3212.assorted.lib.inventory.ForgePlatformInventoryStorageHandlerSided;
 import com.grim3212.assorted.lib.registry.IRegistryObject;
 import net.minecraft.core.HolderLookup;
@@ -74,7 +74,7 @@ public class AssortedCoreForge {
         ForgeBlockTagProvider blockTagProvider = event.addProvider(new ForgeBlockTagProvider(packOutput, lookupProvider, Constants.MOD_ID, new CoreBlockTagProvider(packOutput, lookupProvider)));
         event.addProvider(new ForgeItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter(), Constants.MOD_ID, new CoreItemTagProvider(packOutput, lookupProvider, blockTagProvider.contentsGetter())));
         event.addProvider(new LootTableProvider(packOutput, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(CoreBlockLoot::new, LootContextParamSets.BLOCK)), lookupProvider));
-        event.addProvider(new ForgeWorldGenProvider(Constants.MOD_ID, new CoreWorldGenData()).datpackEntriesProvider(packOutput, lookupProvider));
+        event.addProvider(new ForgeDatapackRegistryProvider(Constants.MOD_ID, new CoreWorldGenData()).datpackEntriesProvider(packOutput, lookupProvider));
     }
 
     private void gatherClientData(final GatherDataEvent.Client event) {

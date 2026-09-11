@@ -2,6 +2,10 @@ package com.grim3212.assorted.core.gametest;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.minecraft.resources.FileToIdConverter;
+import net.minecraft.server.MinecraftServer;
+import com.grim3212.assorted.lib.platform.Services;
+import java.io.BufferedReader;
 import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.api.machines.MachineUtil;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
@@ -84,6 +88,7 @@ public final class CoreGameTests {
         out.accept("machine_tiers_get_faster", CoreGameTests::machineTiersGetFaster);
         out.accept("machine_keeps_contents_across_reload", CoreGameTests::machineKeepsContentsAcrossReload);
         out.accept("every_block_and_item_has_model_and_name", CoreGameTests::everyBlockAndItemHasModelAndName);
+        out.accept("every_recipe_loads_or_is_conditioned_off", CoreGameTests::everyRecipeLoadsOrIsConditionedOff);
     }
 
     private static final BlockPos MACHINE = new BlockPos(4, 1, 4);
@@ -600,6 +605,37 @@ public final class CoreGameTests {
         }
 
         helper.assertTrue(problems.isEmpty(), problems.size() + " missing assets: " + String.join("; ", problems));
+        helper.succeed();
+    }
+    /**
+     * Every recipe file this mod ships either loaded, or carries this loader's load conditions and was
+     * skipped by them. A file with neither failed to parse. On Fabric that was every conditional
+     * recipe for a while: Fabric's datagen wrote them without conditions, and the NeoForge copy that
+     * shadowed it carries a key Fabric ignores - so only this loader's own key counts.
+     */
+    private static void everyRecipeLoadsOrIsConditionedOff(GameTestHelper helper) {
+        MinecraftServer server = helper.getLevel().getServer();
+        FileToIdConverter recipes = FileToIdConverter.json("recipe");
+        String conditionsKey = Services.PLATFORM.getPlatformName().equals("Fabric") ? "fabric:load_conditions" : "neoforge:conditions";
+        List<String> failed = new ArrayList<>();
+
+        recipes.listMatchingResources(server.getResourceManager()).forEach((file, resource) -> {
+            Identifier id = recipes.fileToId(file);
+            if (!id.getNamespace().equals(Constants.MOD_ID) || server.getRecipeManager().byKey(ResourceKey.create(Registries.RECIPE, id)).isPresent()) {
+                return;
+            }
+
+            try (BufferedReader reader = resource.openAsReader()) {
+                JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
+                if (!json.has(conditionsKey)) {
+                    failed.add(id.toString());
+                }
+            } catch (IOException e) {
+                failed.add(id + " (" + e.getMessage() + ")");
+            }
+        });
+
+        helper.assertTrue(failed.isEmpty(), failed.size() + " recipes failed to load without being conditioned off: " + String.join(", ", failed.subList(0, Math.min(10, failed.size()))));
         helper.succeed();
     }
 }

@@ -6,7 +6,6 @@ import com.grim3212.assorted.lib.core.inventory.IItemStorageHandler;
 import com.grim3212.assorted.lib.core.inventory.impl.ItemStackStorageHandler;
 import com.grim3212.assorted.lib.core.inventory.slot.SlotStorageHandler;
 import com.grim3212.assorted.lib.platform.Services;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -16,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class GrindingMillContainer extends BaseMachineContainer {
 
-    protected GrindingMillContainer(int id, Inventory playerInventory, FriendlyByteBuf byteBuf) {
+    protected GrindingMillContainer(int id, Inventory playerInventory) {
         this(id, playerInventory, new ItemStackStorageHandler(4), new SimpleContainerData(4));
     }
 

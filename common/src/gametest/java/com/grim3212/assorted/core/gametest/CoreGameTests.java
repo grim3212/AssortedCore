@@ -17,6 +17,7 @@ public final class CoreGameTests {
     /** Every test in this mod, named once, so both loaders register the same set. */
     public static void forEach(BiConsumer<String, Consumer<GameTestHelper>> out) {
         MachineTests.register(out);
+        MenuTests.register(out);
         OreTests.register(out);
         AssetTests.register(out);
     }

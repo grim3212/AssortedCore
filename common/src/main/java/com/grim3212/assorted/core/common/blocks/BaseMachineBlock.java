@@ -46,7 +46,7 @@ public abstract class BaseMachineBlock extends Block implements EntityBlock {
         if (!worldIn.isClientSide()) {
             MenuProvider inamedcontainerprovider = this.getMenuProvider(state, worldIn, pos);
             if (inamedcontainerprovider != null) {
-                Services.PLATFORM.openMenu((ServerPlayer) player, inamedcontainerprovider, buf -> buf.writeBlockPos(pos));
+                Services.PLATFORM.openMenu((ServerPlayer) player, inamedcontainerprovider);
             }
         }
 

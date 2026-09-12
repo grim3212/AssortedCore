@@ -32,8 +32,11 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import static com.grim3212.assorted.lib.test.TestSupport.craft;
+
 /**
- * Helpers and constants shared by AssortedCore's gametest classes, which import them statically.
+ * Helpers and constants shared by AssortedCore's gametest classes, which import them statically,
+ * alongside AssortedLib's {@code TestSupport}.
  */
 final class CoreTestSupport {
 
@@ -117,12 +120,7 @@ final class CoreTestSupport {
 
     /** {@code CraftingInput.of} wants exactly width * height stacks, so the size is passed in. */
     static void assertCrafts(GameTestHelper helper, int width, int height, List<ItemStack> grid, Item expected, int count, String what) {
-        CraftingInput input = CraftingInput.of(width, height, grid);
-        var found = helper.getLevel().recipeAccess().getRecipeFor(RecipeType.CRAFTING, input, helper.getLevel());
-        helper.assertTrue(found.isPresent(), "no crafting recipe matched for " + what);
-
-        // assemble takes only the input in 26.2; the registries argument is gone.
-        ItemStack result = found.get().value().assemble(input);
+        ItemStack result = craft(helper, CraftingInput.of(width, height, grid), what);
         helper.assertTrue(result.is(expected), what + " crafted " + result + " instead of " + expected);
         helper.assertValueEqual(result.getCount(), count, what + " result count");
     }

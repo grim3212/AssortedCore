@@ -1,11 +1,50 @@
 # Assorted Core
 
-The core mod that all of the other Assorted Mods depend on. Contains reusable blocks and items as well as provides reusable code for the other mods. 
+The core mod that all of the other Assorted Mods depend on. Contains reusable blocks and items as
+well as provides reusable code for the other mods.
+
+Minecraft 26.2, on both NeoForge and Fabric from a single source tree. Requires
+[Assorted Lib](https://github.com/grim3212/AssortedLib). Branches are per Minecraft version; `26.2`
+is the current one.
 
 ## Issue Reporting
+
 Please include the following
 
-* Minecraft Version
-* Forge version
+* Minecraft version
+* Loader and its version — NeoForge, or Fabric Loader together with Fabric API
 * Assorted Core version
-* Crash reports
+* Assorted Lib version
+* The full `latest.log`, plus the crash report if the game crashed
+
+## Building
+
+JDK 25 and the bundled Gradle wrapper. `common/` holds the loader-agnostic code; both loader
+modules compile those sources inline rather than depending on a common jar, so there is nothing to
+install between them.
+
+Assorted Lib is consumed as a Maven artifact, so publish it first:
+
+```bash
+cd ../AssortedLib && ./gradlew publishToMavenLocal
+```
+
+Then from this repository:
+
+```bash
+./gradlew build                        # every module; jars land in <module>/build/libs
+./gradlew :neoforge:runClient
+./gradlew :fabric:runClient
+./gradlew :neoforge:runGameTestServer  # headless gametests, non-zero exit on failure
+./gradlew :fabric:runGameTest
+./gradlew :neoforge:runClientData      # datagen
+./gradlew :neoforge:runServerData
+./gradlew :fabric:runDatagenClient
+```
+
+Generated resources are committed. Datagen output is regenerated, never hand-edited.
+`TESTING-CHECKLIST.md` lists the in-game checks the gametests cannot cover.
+
+## License
+
+[LGPL-3.0-only](LICENSE).

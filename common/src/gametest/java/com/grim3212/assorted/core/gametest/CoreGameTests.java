@@ -21,5 +21,6 @@ public final class CoreGameTests {
         RecipeBookTests.register(out);
         OreTests.register(out);
         AssetTests.register(out);
+        ManualLinkTests.register(out);
     }
 }

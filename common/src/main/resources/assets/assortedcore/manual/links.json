@@ -2,7 +2,9 @@
   "links": [
     {
       "page": "assortedcore:machines/core",
-      "blocks": ["assortedcore:machine_core"]
+      "blocks": [
+        "assortedcore:machine_core"
+      ]
     },
     {
       "page": "assortedcore:machines/alloy_forge",
@@ -23,15 +25,115 @@
       ]
     },
     {
-      "page": "assortedcore:metals/steel",
-      "items": ["assortedcore:steel_ingot"]
-    },
-    {
-      "page": "assortedcore:metals/alloys",
+      "page": "assortedcore:machines/alloying",
+      "blocks": [
+        "assortedcore:bronze_block",
+        "assortedcore:electrum_block",
+        "assortedcore:invar_block"
+      ],
       "items": [
         "assortedcore:bronze_ingot",
         "assortedcore:electrum_ingot",
-        "assortedcore:invar_ingot"
+        "assortedcore:invar_ingot",
+        "assortedcore:bronze_nugget",
+        "assortedcore:electrum_nugget",
+        "assortedcore:invar_nugget"
+      ]
+    },
+    {
+      "page": "assortedcore:metals/ores",
+      "blocks": [
+        "assortedcore:tin_ore",
+        "assortedcore:silver_ore",
+        "assortedcore:aluminum_ore",
+        "assortedcore:nickel_ore",
+        "assortedcore:platinum_ore",
+        "assortedcore:lead_ore",
+        "assortedcore:deepslate_tin_ore",
+        "assortedcore:deepslate_silver_ore",
+        "assortedcore:deepslate_aluminum_ore",
+        "assortedcore:deepslate_nickel_ore",
+        "assortedcore:deepslate_platinum_ore",
+        "assortedcore:deepslate_lead_ore",
+        "assortedcore:tin_block",
+        "assortedcore:silver_block",
+        "assortedcore:aluminum_block",
+        "assortedcore:nickel_block",
+        "assortedcore:platinum_block",
+        "assortedcore:lead_block",
+        "assortedcore:raw_tin_block",
+        "assortedcore:raw_silver_block",
+        "assortedcore:raw_aluminum_block",
+        "assortedcore:raw_nickel_block",
+        "assortedcore:raw_platinum_block",
+        "assortedcore:raw_lead_block"
+      ],
+      "items": [
+        "assortedcore:tin_ingot",
+        "assortedcore:silver_ingot",
+        "assortedcore:aluminum_ingot",
+        "assortedcore:nickel_ingot",
+        "assortedcore:platinum_ingot",
+        "assortedcore:lead_ingot",
+        "assortedcore:tin_nugget",
+        "assortedcore:silver_nugget",
+        "assortedcore:aluminum_nugget",
+        "assortedcore:nickel_nugget",
+        "assortedcore:platinum_nugget",
+        "assortedcore:lead_nugget",
+        "assortedcore:copper_nugget",
+        "assortedcore:raw_tin",
+        "assortedcore:raw_silver",
+        "assortedcore:raw_aluminum",
+        "assortedcore:raw_nickel",
+        "assortedcore:raw_platinum",
+        "assortedcore:raw_lead"
+      ]
+    },
+    {
+      "page": "assortedcore:metals/dusts",
+      "items": [
+        "assortedcore:tin_dust",
+        "assortedcore:silver_dust",
+        "assortedcore:aluminum_dust",
+        "assortedcore:nickel_dust",
+        "assortedcore:platinum_dust",
+        "assortedcore:lead_dust",
+        "assortedcore:bronze_dust",
+        "assortedcore:electrum_dust",
+        "assortedcore:invar_dust",
+        "assortedcore:steel_dust",
+        "assortedcore:copper_dust",
+        "assortedcore:iron_dust",
+        "assortedcore:gold_dust"
+      ]
+    },
+    {
+      "page": "assortedcore:metals/steel",
+      "blocks": [
+        "assortedcore:steel_block"
+      ],
+      "items": [
+        "assortedcore:steel_ingot",
+        "assortedcore:steel_nugget"
+      ]
+    },
+    {
+      "page": "assortedcore:metals/gears",
+      "items": [
+        "assortedcore:tin_gear",
+        "assortedcore:silver_gear",
+        "assortedcore:aluminum_gear",
+        "assortedcore:nickel_gear",
+        "assortedcore:platinum_gear",
+        "assortedcore:lead_gear",
+        "assortedcore:bronze_gear",
+        "assortedcore:electrum_gear",
+        "assortedcore:invar_gear",
+        "assortedcore:steel_gear",
+        "assortedcore:copper_gear",
+        "assortedcore:iron_gear",
+        "assortedcore:gold_gear"
       ]
     },
     {
@@ -41,6 +143,28 @@
         "assortedcore:peridot",
         "assortedcore:sapphire",
         "assortedcore:topaz"
+      ]
+    },
+    {
+      "page": "assortedcore:gems/smelting",
+      "blocks": [
+        "assortedcore:ruby_ore",
+        "assortedcore:peridot_ore",
+        "assortedcore:sapphire_ore",
+        "assortedcore:topaz_ore",
+        "assortedcore:deepslate_ruby_ore",
+        "assortedcore:deepslate_peridot_ore",
+        "assortedcore:deepslate_sapphire_ore",
+        "assortedcore:deepslate_topaz_ore"
+      ]
+    },
+    {
+      "page": "assortedcore:gems/storage",
+      "blocks": [
+        "assortedcore:ruby_block",
+        "assortedcore:peridot_block",
+        "assortedcore:sapphire_block",
+        "assortedcore:topaz_block"
       ]
     }
   ]

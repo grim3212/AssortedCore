@@ -5,7 +5,8 @@
 - The alloy forge and the grinding mill now support the Minecraft recipe book
 - The basic alloy forge's front texture had a transparent row across it, which showed as a gap.
 - Added a section to Assorted Lib's instruction manual covering the machines, the ores and metals,
-  and the gems. Right clicking a machine, ingot or gem with the manual opens its page.
+  and the gems. Every block and item this mod adds opens a page when it is right clicked with the
+  manual.
 - Requires Assorted Lib 4.1.0.
 
 ## 10.0.0

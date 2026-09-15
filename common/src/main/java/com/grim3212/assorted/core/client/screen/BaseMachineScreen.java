@@ -36,12 +36,6 @@ public abstract class BaseMachineScreen<T extends BaseMachineContainer> extends 
         return new ScreenPosition(this.leftPos + BUTTON_X, this.topPos + BUTTON_Y);
     }
 
-    /** Ordinary sized result slot, unlike the crafting table. */
-    @Override
-    protected boolean isBiggerResultSlot() {
-        return false;
-    }
-
     /** For JEI. */
     public @Nullable ScreenRectangle getRecipeBookArea() {
         return this.book.bookArea();

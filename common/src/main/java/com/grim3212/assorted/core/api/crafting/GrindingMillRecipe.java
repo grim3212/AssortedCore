@@ -1,14 +1,20 @@
 package com.grim3212.assorted.core.api.crafting;
 
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
+import com.grim3212.assorted.lib.manual.IManualRecipeProvider;
+import com.grim3212.assorted.lib.manual.ManualRecipeView;
+import com.grim3212.assorted.lib.manual.ManualSlot;
+
+import java.util.List;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 
-public class GrindingMillRecipe extends BaseMachineRecipe {
+public class GrindingMillRecipe extends BaseMachineRecipe implements IManualRecipeProvider {
 
 	protected final MachineIngredient ingredient;
 
@@ -43,5 +49,12 @@ public class GrindingMillRecipe extends BaseMachineRecipe {
 
 	public MachineIngredient getIngredient() {
 		return ingredient;
+	}
+
+	/** No {@code RecipeDisplay} to read: these are {@code isSpecial} and kept out of the recipe book. */
+	@Override
+	public ManualRecipeView manualView() {
+		return ManualRecipeView.shaped(1, 1, List.of(this.ingredient.manualSlot()),
+				ManualSlot.of(new SlotDisplay.ItemStackSlotDisplay(this.getResultTemplate())));
 	}
 }

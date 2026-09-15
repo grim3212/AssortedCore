@@ -6,7 +6,10 @@ import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 import com.grim3212.assorted.core.client.screen.AlloyForgeScreen;
 import com.grim3212.assorted.core.client.screen.GrindingMillScreen;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
-import com.grim3212.assorted.core.common.crafting.ClientMachineRecipes;
+import com.grim3212.assorted.core.api.machines.MachineUtil;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
+import com.grim3212.assorted.lib.crafting.SyncedRecipes;
+import net.minecraft.world.item.crafting.RecipeMap;
 import com.grim3212.assorted.core.common.inventory.AlloyForgeContainer;
 import com.grim3212.assorted.core.common.inventory.CoreContainerTypes;
 import com.grim3212.assorted.core.common.inventory.GrindingMillContainer;
@@ -35,7 +38,7 @@ public class JEIAssortedCore implements IModPlugin {
     private static final Identifier PLUGIN_ID = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "assets/assortedcore");
 
     static {
-        ClientMachineRecipes.addUpdateListener(JEIAssortedCore::onRecipesUpdated);
+        SyncedRecipes.addUpdateListener(JEIAssortedCore::onRecipesUpdated);
     }
 
     /**
@@ -44,6 +47,9 @@ public class JEIAssortedCore implements IModPlugin {
      */
     private static List<AlloyForgeRecipe> shownAlloyForge = List.of();
     private static List<GrindingMillRecipe> shownGrindingMill = List.of();
+
+    /** Replaced wholesale on each sync, so identity spots a fresh one. */
+    private static RecipeMap shownFrom = RecipeMap.EMPTY;
 
     @Nullable
     private static IJeiRuntime runtime;
@@ -60,18 +66,16 @@ public class JEIAssortedCore implements IModPlugin {
         registration.addRecipeCategories(new GrindingMillRecipeCategory(guiHelper));
     }
 
-    /**
-     * The recipes come from {@link ClientMachineRecipes} rather than the recipe manager, which does
-     * not exist on the client any more.
-     */
+    /** From {@link SyncedRecipes}: there is no recipe manager on the client. */
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         // The accepted tool list fills the grinding mill's tool slot, and JEI walks every slot as
         // the recipes go in to build its ingredient index, so it has to be built first.
         JEIHelpers.hydrateLists();
 
-        shownAlloyForge = ClientMachineRecipes.alloyForge();
-        shownGrindingMill = ClientMachineRecipes.grindingMill();
+        shownFrom = SyncedRecipes.recipes();
+        shownAlloyForge = alloyForgeRecipes();
+        shownGrindingMill = grindingMillRecipes();
 
         registration.addRecipes(ALLOY_FORGE, shownAlloyForge);
         registration.addRecipes(GRINDING_MILL, shownGrindingMill);
@@ -128,9 +132,8 @@ public class JEIAssortedCore implements IModPlugin {
             return;
         }
 
-        List<AlloyForgeRecipe> alloyForge = ClientMachineRecipes.alloyForge();
-        List<GrindingMillRecipe> grindingMill = ClientMachineRecipes.grindingMill();
-        if (alloyForge == shownAlloyForge && grindingMill == shownGrindingMill) {
+        RecipeMap current = SyncedRecipes.recipes();
+        if (current == shownFrom) {
             return;
         }
 
@@ -138,10 +141,19 @@ public class JEIAssortedCore implements IModPlugin {
         recipeManager.hideRecipes(ALLOY_FORGE, shownAlloyForge);
         recipeManager.hideRecipes(GRINDING_MILL, shownGrindingMill);
 
-        shownAlloyForge = alloyForge;
-        shownGrindingMill = grindingMill;
+        shownFrom = current;
+        shownAlloyForge = alloyForgeRecipes();
+        shownGrindingMill = grindingMillRecipes();
 
-        recipeManager.addRecipes(ALLOY_FORGE, alloyForge);
-        recipeManager.addRecipes(GRINDING_MILL, grindingMill);
+        recipeManager.addRecipes(ALLOY_FORGE, shownAlloyForge);
+        recipeManager.addRecipes(GRINDING_MILL, shownGrindingMill);
+    }
+
+    private static List<AlloyForgeRecipe> alloyForgeRecipes() {
+        return MachineUtil.recipesOfType(null, CoreRecipeTypes.ALLOY_FORGE.get()).toList();
+    }
+
+    private static List<GrindingMillRecipe> grindingMillRecipes() {
+        return MachineUtil.recipesOfType(null, CoreRecipeTypes.GRINDING_MILL.get()).toList();
     }
 }

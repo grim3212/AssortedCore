@@ -4,6 +4,7 @@ import com.grim3212.assorted.core.Constants;
 import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipe;
 import com.grim3212.assorted.core.client.screen.AlloyForgeScreen;
+import com.grim3212.assorted.core.client.screen.BaseMachineScreen;
 import com.grim3212.assorted.core.client.screen.GrindingMillScreen;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.api.machines.MachineUtil;
@@ -85,6 +86,7 @@ public class JEIAssortedCore implements IModPlugin {
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(AlloyForgeScreen.class, 78, 28, 24, 16, ALLOY_FORGE);
         registration.addRecipeClickArea(GrindingMillScreen.class, 78, 25, 20, 20, GRINDING_MILL);
+        registration.addGenericGuiContainerHandler(BaseMachineScreen.class, new MachineRecipeBookGuiHandler());
     }
 
     @Override

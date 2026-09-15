@@ -50,6 +50,8 @@
   "block.assortedcore.tin_ore": "Tin Ore",
   "block.assortedcore.topaz_block": "Block of Topaz",
   "block.assortedcore.topaz_ore": "Topaz Ore",
+  "gui.assortedcore.recipebook.toggleRecipes.alloyable": "Showing Alloyable",
+  "gui.assortedcore.recipebook.toggleRecipes.grindable": "Showing Grindable",
   "item.assortedcore.aluminum_dust": "Aluminum Dust",
   "item.assortedcore.aluminum_gear": "Aluminum Gear",
   "item.assortedcore.aluminum_ingot": "Aluminum Ingot",

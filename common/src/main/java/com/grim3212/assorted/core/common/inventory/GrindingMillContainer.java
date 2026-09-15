@@ -36,6 +36,8 @@ public class GrindingMillContainer extends BaseMachineContainer {
         for (int k = 0; k < 9; ++k) {
             this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
+
+        this.defineInputSlots(1);
     }
 
     @Override

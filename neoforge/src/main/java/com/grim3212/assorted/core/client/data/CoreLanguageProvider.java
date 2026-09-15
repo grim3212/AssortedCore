@@ -25,6 +25,10 @@ public class CoreLanguageProvider extends LibLanguageProvider {
         this.add("assortedcore.container.alloy_forge", "Alloy Forge");
         this.add("assortedcore.container.grinding_mill", "Grinding Mill");
 
+        // The recipe book's "only what I can make" toggle, one name per machine.
+        this.add("gui.assortedcore.recipebook.toggleRecipes.alloyable", "Showing Alloyable");
+        this.add("gui.assortedcore.recipebook.toggleRecipes.grindable", "Showing Grindable");
+
         this.add("tag.item.assortedcore.grinding_mill_allowed_tools", "Grinding Mill Tools");
         this.add("tag.item.c.gear", "Gears");
 

@@ -1,9 +1,10 @@
 package com.grim3212.assorted.core.client.screen;
 
 import com.grim3212.assorted.core.Constants;
+import com.grim3212.assorted.core.common.blocks.CoreBlocks;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeBookCategories;
 import com.grim3212.assorted.core.common.inventory.GrindingMillContainer;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -12,12 +13,13 @@ import net.minecraft.world.entity.player.Inventory;
 /**
  * See {@link AlloyForgeScreen} for why {@code renderBg} became {@code extractBackground}.
  */
-public class GrindingMillScreen extends AbstractContainerScreen<GrindingMillContainer> {
+public class GrindingMillScreen extends BaseMachineScreen<GrindingMillContainer> {
 
     private static final Identifier GRINDING_MILL_GUI_TEXTURE = Identifier.fromNamespaceAndPath(Constants.MOD_ID, "textures/gui/container/grinding_mill.png");
+    private static final Component FILTER_NAME = Component.translatable("gui.assortedcore.recipebook.toggleRecipes.grindable");
 
     public GrindingMillScreen(GrindingMillContainer screenContainer, Inventory inv, Component titleIn) {
-        super(screenContainer, inv, titleIn);
+        super(screenContainer, inv, titleIn, FILTER_NAME, CoreBlocks.BASIC_GRINDING_MILL.get(), CoreRecipeBookCategories.GRINDING_MILL.get());
     }
 
     @Override

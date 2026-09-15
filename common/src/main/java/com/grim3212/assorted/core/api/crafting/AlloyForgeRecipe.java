@@ -1,5 +1,7 @@
 package com.grim3212.assorted.core.api.crafting;
 
+import com.grim3212.assorted.core.common.blocks.CoreBlocks;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeBookCategories;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.lib.manual.IManualRecipeProvider;
 import com.grim3212.assorted.lib.manual.ManualRecipeView;
@@ -9,6 +11,7 @@ import java.util.List;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
@@ -57,7 +60,27 @@ public class AlloyForgeRecipe extends BaseMachineRecipe implements IManualRecipe
 		return ingredient2;
 	}
 
-	/** No {@code RecipeDisplay} to read: these are {@code isSpecial} and kept out of the recipe book. */
+	/** {@link #matches} takes the two in either order; the book lays them out in this one. */
+	@Override
+	public List<MachineIngredient> machineIngredients() {
+		return List.of(this.ingredient1, this.ingredient2);
+	}
+
+	@Override
+	public RecipeBookCategory recipeBookCategory() {
+		return CoreRecipeBookCategories.ALLOY_FORGE.get();
+	}
+
+	@Override
+	protected SlotDisplay craftingStationDisplay() {
+		return new SlotDisplay.Composite(List.of(
+				new SlotDisplay.ItemSlotDisplay(CoreBlocks.BASIC_ALLOY_FORGE.get().asItem()),
+				new SlotDisplay.ItemSlotDisplay(CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get().asItem()),
+				new SlotDisplay.ItemSlotDisplay(CoreBlocks.ADVANCED_ALLOY_FORGE.get().asItem()),
+				new SlotDisplay.ItemSlotDisplay(CoreBlocks.EXPERT_ALLOY_FORGE.get().asItem())));
+	}
+
+	/** Its own view, not {@link #display()}: the manual keeps the ingredients unresolved for tooltips. */
 	@Override
 	public ManualRecipeView manualView() {
 		return ManualRecipeView.shaped(2, 1, List.of(this.ingredient1.manualSlot(), this.ingredient2.manualSlot()),

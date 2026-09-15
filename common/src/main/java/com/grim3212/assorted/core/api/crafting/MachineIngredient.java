@@ -40,9 +40,10 @@ public class MachineIngredient implements Predicate<ItemStack> {
         this(ingredient, 1);
     }
 
+    /** A count below one would ask for nothing, and divide by zero in the recipe book placer. */
     public MachineIngredient(Ingredient ingredient, int count) {
         this.ingredient = ingredient;
-        this.count = count;
+        this.count = Math.max(1, count);
     }
 
     public int getCount() {

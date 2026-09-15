@@ -1,8 +1,8 @@
 package com.grim3212.assorted.core.api.machines;
 
 import com.grim3212.assorted.core.api.CoreTags;
-import com.grim3212.assorted.core.common.crafting.ClientMachineRecipes;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
+import com.grim3212.assorted.lib.crafting.SyncedRecipes;
 import com.grim3212.assorted.lib.platform.Services;
 import com.grim3212.assorted.lib.platform.services.IPlatformHelper;
 import net.minecraft.server.level.ServerLevel;
@@ -26,23 +26,17 @@ public class MachineUtil {
 
     /**
      * Every loaded recipe of one type. The recipe manager only exists on the server, so the client
-     * reads the recipes the server sent it.
+     * reads what the server sent it; the machine types are asked for in {@code CoreCommonMod}.
      *
-     * @see ClientMachineRecipes
+     * @see SyncedRecipes
      */
     @SuppressWarnings("unchecked")
     public static <T extends Recipe<?>> Stream<T> recipesOfType(@Nullable Level level, RecipeType<T> recipeType) {
-        if (!(level instanceof ServerLevel serverLevel)) {
-            if (recipeType == CoreRecipeTypes.ALLOY_FORGE.get()) {
-                return (Stream<T>) ClientMachineRecipes.alloyForge().stream();
-            }
-            if (recipeType == CoreRecipeTypes.GRINDING_MILL.get()) {
-                return (Stream<T>) ClientMachineRecipes.grindingMill().stream();
-            }
-            return Stream.empty();
-        }
+        Stream<RecipeHolder<?>> recipes = level instanceof ServerLevel serverLevel
+                ? serverLevel.recipeAccess().getRecipes().stream()
+                : SyncedRecipes.recipes().values().stream();
 
-        return serverLevel.recipeAccess().getRecipes().stream().map(RecipeHolder::value).filter((recipe) -> recipe.getType() == recipeType).map((recipe) -> (T) recipe);
+        return recipes.map(RecipeHolder::value).filter((recipe) -> recipe.getType() == recipeType).map((recipe) -> (T) recipe);
     }
 
     public static boolean isValidAlloyForgeInput(@Nullable Level level, ItemStack stack) {

@@ -5,7 +5,6 @@ import com.grim3212.assorted.core.client.data.CoreBlockstateProvider;
 import com.grim3212.assorted.core.client.data.CoreItemModelProvider;
 import com.grim3212.assorted.core.common.blocks.blockentity.BaseMachineBlockEntity;
 import com.grim3212.assorted.core.common.blocks.blockentity.CoreBlockEntityTypes;
-import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.data.*;
 import com.grim3212.assorted.lib.data.ForgeBlockTagProvider;
 import com.grim3212.assorted.lib.data.ForgeItemTagProvider;
@@ -22,8 +21,6 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.Collections;
@@ -42,18 +39,7 @@ public class AssortedCoreForge {
         modBus.addListener(this::gatherClientData);
         modBus.addListener(this::registerCapabilities);
 
-        NeoForge.EVENT_BUS.addListener(this::onDatapackSync);
-
         CoreCommonMod.init();
-    }
-
-    /**
-     * Sends the machine recipes to clients, which vanilla no longer does. Fires on join and after
-     * {@code /reload}, on both sides as NeoForge requires; the client reads them from
-     * {@code RecipesReceivedEvent}.
-     */
-    private void onDatapackSync(final OnDatapackSyncEvent event) {
-        event.sendRecipes(CoreRecipeTypes.ALLOY_FORGE.get(), CoreRecipeTypes.GRINDING_MILL.get());
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.grim3212.assorted.core.api.crafting;
 
 import com.mojang.serialization.Codec;
+import com.grim3212.assorted.lib.manual.ManualSlot;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -65,5 +66,10 @@ public class MachineIngredient implements Predicate<ItemStack> {
      */
     public List<ItemStack> getMatchingStacks(ContextMap context) {
         return this.ingredient.display().resolveForStacks(context).stream().map((stack) -> stack.copyWithCount(this.count)).toList();
+    }
+
+    /** Unresolved, so the manual keeps the tag behind the slot for its tooltip. */
+    public ManualSlot manualSlot() {
+        return ManualSlot.of(this.ingredient.display(), this.count);
     }
 }

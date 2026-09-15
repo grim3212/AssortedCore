@@ -1,0 +1,63 @@
+{
+  "sort_order": 0,
+  "pages": [
+    {
+      "id": "core",
+      "type": "assortedlib:recipe",
+      "title": "manual.assortedcore.chapter.machines.core.title",
+      "text": "manual.assortedcore.chapter.machines.core",
+      "recipes": ["assortedcore:machine_core"]
+    },
+    {
+      "id": "tiers",
+      "type": "assortedlib:item",
+      "title": "manual.assortedcore.chapter.machines.tiers.title",
+      "text": "manual.assortedcore.chapter.machines.tiers",
+      "items": [
+        "assortedcore:basic_alloy_forge",
+        "assortedcore:intermediate_alloy_forge",
+        "assortedcore:advanced_alloy_forge",
+        "assortedcore:expert_alloy_forge"
+      ]
+    },
+    {
+      "id": "alloy_forge",
+      "type": "assortedlib:recipe",
+      "title": "manual.assortedcore.chapter.machines.alloy_forge.title",
+      "text": "manual.assortedcore.chapter.machines.alloy_forge",
+      "recipes": ["assortedcore:basic_alloy_forge"]
+    },
+    {
+      "id": "alloying",
+      "type": "assortedlib:recipe",
+      "title": "manual.assortedcore.chapter.machines.alloying.title",
+      "text": "manual.assortedcore.chapter.machines.alloying",
+      "recipes": [
+        "assortedcore:steel_ingot",
+        "assortedcore:bronze_ingot",
+        "assortedcore:electrum_ingot",
+        "assortedcore:invar_ingot"
+      ],
+      "interval": 60
+    },
+    {
+      "id": "grinding_mill",
+      "type": "assortedlib:recipe",
+      "title": "manual.assortedcore.chapter.machines.grinding_mill.title",
+      "text": "manual.assortedcore.chapter.machines.grinding_mill",
+      "recipes": ["assortedcore:basic_grinding_mill"]
+    },
+    {
+      "id": "grinding",
+      "type": "assortedlib:recipe",
+      "title": "manual.assortedcore.chapter.machines.grinding.title",
+      "text": "manual.assortedcore.chapter.machines.grinding",
+      "recipes": [
+        "assortedcore:aluminum_dust",
+        "assortedcore:aluminum_dust_from_ingot",
+        "assortedcore:aluminum_dust_from_raw_ore"
+      ],
+      "interval": 60
+    }
+  ]
+}

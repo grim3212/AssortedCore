@@ -5,15 +5,18 @@ import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipe;
 import com.grim3212.assorted.core.api.crafting.MachineRecipeDisplay;
 import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeBookCategories;
+import com.grim3212.assorted.core.common.crafting.MachineRecipeBackfill;
 import com.grim3212.assorted.core.common.inventory.BaseMachineContainer;
 import com.grim3212.assorted.core.common.items.CoreItems;
 import io.netty.buffer.Unpooled;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.RecipeBookMenu;
@@ -46,6 +49,7 @@ final class RecipeBookTests {
         out.accept("machine_recipe_book_fills_the_machine", RecipeBookTests::machineRecipeBookFillsTheMachine);
         out.accept("machine_recipe_book_asks_for_a_ghost", RecipeBookTests::machineRecipeBookAsksForAGhost);
         out.accept("machine_display_survives_the_network", RecipeBookTests::machineDisplaySurvivesTheNetwork);
+        out.accept("machine_recipe_backfills_on_join", RecipeBookTests::machineRecipeBackfillsOnJoin);
     }
 
     /** {@code ServerRecipeBook} drops a special recipe before sending it, and the book draws only a display. */
@@ -85,6 +89,29 @@ final class RecipeBookTests {
 
         helper.assertValueEqual(received, sent, "the machine display after a round trip");
         helper.assertValueEqual(buffer.readableBytes(), 0, "bytes left over after reading the machine display");
+        helper.succeed();
+    }
+
+    /** TODO(11.0.0): remove with {@link MachineRecipeBackfill}. The advancement is done, so it can never grant again. */
+    private static void machineRecipeBackfillsOnJoin(GameTestHelper helper) {
+        ServerPlayer player = helper.makeMockServerPlayerInLevel();
+        RecipeHolder<AlloyForgeRecipe> steel = steelRecipe(helper);
+
+        AdvancementHolder advancement = helper.getLevel().getServer().getAdvancements().get(STEEL.identifier().withPrefix("recipes/"));
+        if (advancement == null) {
+            throw helper.assertionException("no recipe advancement generated for " + STEEL.identifier());
+        }
+
+        for (String criterion : advancement.value().criteria().keySet()) {
+            player.getAdvancements().award(advancement, criterion);
+        }
+
+        // What an upgraded save looks like: advancement done, recipe never stored.
+        player.getRecipeBook().remove(steel.id());
+        helper.assertFalse(player.getRecipeBook().contains(steel.id()), "the recipe book kept a recipe the test just removed");
+
+        MachineRecipeBackfill.award(player);
+        helper.assertTrue(player.getRecipeBook().contains(steel.id()), "an already earned machine recipe was not backfilled");
         helper.succeed();
     }
 

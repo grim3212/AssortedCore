@@ -41,21 +41,21 @@ public class CoreManualProvider extends LibManualProvider {
     private void addMachines() {
         ChapterBuilder machines = this.chapter("machines");
 
-        machines.recipes("core", "machine_core").opens(CoreBlocks.MACHINE_CORE.get());
+        machines.recipes("core", CoreBlocks.MACHINE_CORE.get()).opens(CoreBlocks.MACHINE_CORE.get());
         machines.items("tiers", CoreBlocks.BASIC_ALLOY_FORGE.get().asItem(),
                 CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get().asItem(),
                 CoreBlocks.ADVANCED_ALLOY_FORGE.get().asItem(),
                 CoreBlocks.EXPERT_ALLOY_FORGE.get().asItem());
-        machines.recipes("alloy_forge", "basic_alloy_forge")
+        machines.recipes("alloy_forge", CoreBlocks.BASIC_ALLOY_FORGE.get())
                 .opens(CoreBlocks.BASIC_ALLOY_FORGE.get(), CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get(),
                         CoreBlocks.ADVANCED_ALLOY_FORGE.get(), CoreBlocks.EXPERT_ALLOY_FORGE.get());
-        machines.recipes("alloying", "steel_ingot", "bronze_ingot", "electrum_ingot", "invar_ingot").every(60)
+        machines.recipes("alloying", CoreItems.STEEL_INGOT.get(), CoreItems.BRONZE_INGOT.get(), CoreItems.ELECTRUM_INGOT.get(), CoreItems.INVAR_INGOT.get()).every(60)
                 .opensEveryItem(family(ALLOYS, "_ingot", "_nugget"))
                 .opensEveryBlock(family(ALLOYS, "_block"));
-        machines.recipes("grinding_mill", "basic_grinding_mill")
+        machines.recipes("grinding_mill", CoreBlocks.BASIC_GRINDING_MILL.get())
                 .opens(CoreBlocks.BASIC_GRINDING_MILL.get(), CoreBlocks.INTERMEDIATE_GRINDING_MILL.get(),
                         CoreBlocks.ADVANCED_GRINDING_MILL.get(), CoreBlocks.EXPERT_GRINDING_MILL.get());
-        machines.recipes("grinding", "aluminum_dust", "aluminum_dust_from_ingot", "aluminum_dust_from_raw_ore")
+        machines.recipesById("grinding", recipeId(CoreItems.ALUMINUM_DUST.get()), recipeId("aluminum_dust_from_ingot"), recipeId("aluminum_dust_from_raw_ore"))
                 .every(60);
     }
 
@@ -71,12 +71,12 @@ public class CoreManualProvider extends LibManualProvider {
                 .opensEveryItem(family(ORE_METALS, "_ingot", "_nugget"))
                 .opensEveryItem(raw(ORE_METALS))
                 .opensEveryItem(id -> id.getPath().equals("copper_nugget"));
-        metals.recipes("dusts", "dusts/aluminum_smelting", "dusts/aluminum_blasting").every(60)
+        metals.recipesById("dusts", recipeId("dusts/aluminum_smelting"), recipeId("dusts/aluminum_blasting")).every(60)
                 .opensEveryItem(suffix("_dust"));
-        metals.recipes("steel", "steel_ingot")
+        metals.recipes("steel", CoreItems.STEEL_INGOT.get())
                 .opens(CoreItems.STEEL_INGOT.get(), CoreItems.STEEL_NUGGET.get())
                 .opens(CoreBlocks.STEEL_BLOCK.get());
-        metals.recipes("gears", "steel_gear", "copper_gear", "iron_gear").every(60)
+        metals.recipes("gears", CoreItems.STEEL_GEAR.get(), CoreItems.COPPER_GEAR.get(), CoreItems.IRON_GEAR.get()).every(60)
                 .opensEveryItem(suffix("_gear"));
     }
 
@@ -86,11 +86,11 @@ public class CoreManualProvider extends LibManualProvider {
         gems.items("gems", CoreItems.RUBY.get(), CoreItems.PERIDOT.get(), CoreItems.SAPPHIRE.get(),
                         CoreItems.TOPAZ.get()).every(50)
                 .opens(CoreItems.RUBY.get(), CoreItems.PERIDOT.get(), CoreItems.SAPPHIRE.get(), CoreItems.TOPAZ.get());
-        gems.recipes("smelting", "ruby_smelting", "peridot_smelting", "sapphire_smelting", "topaz_smelting")
+        gems.recipesById("smelting", recipeId("ruby_smelting"), recipeId("peridot_smelting"), recipeId("sapphire_smelting"), recipeId("topaz_smelting"))
                 .every(60)
                 .opensEveryBlock(family(GEMS, "_ore"))
                 .opensEveryBlock(deepslate(GEMS));
-        gems.recipes("storage", "ruby_block", "peridot_block", "sapphire_block", "topaz_block").every(60)
+        gems.recipes("storage", CoreBlocks.RUBY_BLOCK.get(), CoreBlocks.PERIDOT_BLOCK.get(), CoreBlocks.SAPPHIRE_BLOCK.get(), CoreBlocks.TOPAZ_BLOCK.get()).every(60)
                 .opensEveryBlock(family(GEMS, "_block"));
     }
 

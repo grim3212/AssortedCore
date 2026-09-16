@@ -1,3 +1,4 @@
 {
-  "icon": "assortedcore:machine_core"
+  "icon": "assortedcore:machine_core",
+  "sort_order": 20
 }

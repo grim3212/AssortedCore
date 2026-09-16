@@ -31,7 +31,7 @@ public class CoreManualProvider extends LibManualProvider {
 
     @Override
     protected void addChapters() {
-        this.section(0, CoreBlocks.MACHINE_CORE.get());
+        this.section(20, CoreBlocks.MACHINE_CORE.get());
 
         this.addMachines();
         this.addMetals();

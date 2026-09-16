@@ -18,7 +18,9 @@ public final class CoreGameTests {
     public static void forEach(BiConsumer<String, Consumer<GameTestHelper>> out) {
         MachineTests.register(out);
         MenuTests.register(out);
+        RecipeBookTests.register(out);
         OreTests.register(out);
         AssetTests.register(out);
+        ManualLinkTests.register(out);
     }
 }

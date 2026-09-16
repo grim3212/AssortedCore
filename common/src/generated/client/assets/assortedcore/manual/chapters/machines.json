@@ -1,63 +1,68 @@
 {
-  "sort_order": 0,
   "pages": [
     {
-      "id": "core",
       "type": "assortedlib:recipe",
-      "title": "manual.assortedcore.chapter.machines.core.title",
+      "id": "core",
+      "recipes": [
+        "assortedcore:machine_core"
+      ],
       "text": "manual.assortedcore.chapter.machines.core",
-      "recipes": ["assortedcore:machine_core"]
+      "title": "manual.assortedcore.chapter.machines.core.title"
     },
     {
-      "id": "tiers",
       "type": "assortedlib:item",
-      "title": "manual.assortedcore.chapter.machines.tiers.title",
-      "text": "manual.assortedcore.chapter.machines.tiers",
+      "id": "tiers",
       "items": [
         "assortedcore:basic_alloy_forge",
         "assortedcore:intermediate_alloy_forge",
         "assortedcore:advanced_alloy_forge",
         "assortedcore:expert_alloy_forge"
-      ]
+      ],
+      "text": "manual.assortedcore.chapter.machines.tiers",
+      "title": "manual.assortedcore.chapter.machines.tiers.title"
     },
     {
+      "type": "assortedlib:recipe",
       "id": "alloy_forge",
-      "type": "assortedlib:recipe",
-      "title": "manual.assortedcore.chapter.machines.alloy_forge.title",
+      "recipes": [
+        "assortedcore:basic_alloy_forge"
+      ],
       "text": "manual.assortedcore.chapter.machines.alloy_forge",
-      "recipes": ["assortedcore:basic_alloy_forge"]
+      "title": "manual.assortedcore.chapter.machines.alloy_forge.title"
     },
     {
-      "id": "alloying",
       "type": "assortedlib:recipe",
-      "title": "manual.assortedcore.chapter.machines.alloying.title",
-      "text": "manual.assortedcore.chapter.machines.alloying",
+      "id": "alloying",
+      "interval": 60,
       "recipes": [
         "assortedcore:steel_ingot",
         "assortedcore:bronze_ingot",
         "assortedcore:electrum_ingot",
         "assortedcore:invar_ingot"
       ],
-      "interval": 60
+      "text": "manual.assortedcore.chapter.machines.alloying",
+      "title": "manual.assortedcore.chapter.machines.alloying.title"
     },
     {
+      "type": "assortedlib:recipe",
       "id": "grinding_mill",
-      "type": "assortedlib:recipe",
-      "title": "manual.assortedcore.chapter.machines.grinding_mill.title",
+      "recipes": [
+        "assortedcore:basic_grinding_mill"
+      ],
       "text": "manual.assortedcore.chapter.machines.grinding_mill",
-      "recipes": ["assortedcore:basic_grinding_mill"]
+      "title": "manual.assortedcore.chapter.machines.grinding_mill.title"
     },
     {
-      "id": "grinding",
       "type": "assortedlib:recipe",
-      "title": "manual.assortedcore.chapter.machines.grinding.title",
-      "text": "manual.assortedcore.chapter.machines.grinding",
+      "id": "grinding",
+      "interval": 60,
       "recipes": [
         "assortedcore:aluminum_dust",
         "assortedcore:aluminum_dust_from_ingot",
         "assortedcore:aluminum_dust_from_raw_ore"
       ],
-      "interval": 60
+      "text": "manual.assortedcore.chapter.machines.grinding",
+      "title": "manual.assortedcore.chapter.machines.grinding.title"
     }
   ]
 }

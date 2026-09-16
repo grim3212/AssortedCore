@@ -1,5 +1,7 @@
 package com.grim3212.assorted.core.api.crafting;
 
+import com.grim3212.assorted.core.common.blocks.CoreBlocks;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeBookCategories;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.lib.manual.IManualRecipeProvider;
 import com.grim3212.assorted.lib.manual.ManualRecipeView;
@@ -9,6 +11,7 @@ import java.util.List;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.RecipeBookCategory;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
@@ -51,7 +54,27 @@ public class GrindingMillRecipe extends BaseMachineRecipe implements IManualReci
 		return ingredient;
 	}
 
-	/** No {@code RecipeDisplay} to read: these are {@code isSpecial} and kept out of the recipe book. */
+	/** The tool slot is worn down, not consumed, so it is not an ingredient. */
+	@Override
+	public List<MachineIngredient> machineIngredients() {
+		return List.of(this.ingredient);
+	}
+
+	@Override
+	public RecipeBookCategory recipeBookCategory() {
+		return CoreRecipeBookCategories.GRINDING_MILL.get();
+	}
+
+	@Override
+	protected SlotDisplay craftingStationDisplay() {
+		return new SlotDisplay.Composite(List.of(
+				new SlotDisplay.ItemSlotDisplay(CoreBlocks.BASIC_GRINDING_MILL.get().asItem()),
+				new SlotDisplay.ItemSlotDisplay(CoreBlocks.INTERMEDIATE_GRINDING_MILL.get().asItem()),
+				new SlotDisplay.ItemSlotDisplay(CoreBlocks.ADVANCED_GRINDING_MILL.get().asItem()),
+				new SlotDisplay.ItemSlotDisplay(CoreBlocks.EXPERT_GRINDING_MILL.get().asItem())));
+	}
+
+	/** Its own view, not {@link #display()}: the manual keeps the ingredient unresolved for tooltips. */
 	@Override
 	public ManualRecipeView manualView() {
 		return ManualRecipeView.shaped(1, 1, List.of(this.ingredient.manualSlot()),

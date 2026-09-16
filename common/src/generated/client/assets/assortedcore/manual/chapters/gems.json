@@ -1,44 +1,44 @@
 {
-  "sort_order": 20,
   "pages": [
     {
-      "id": "gems",
       "type": "assortedlib:item",
-      "title": "manual.assortedcore.chapter.gems.gems.title",
-      "text": "manual.assortedcore.chapter.gems.gems",
+      "id": "gems",
+      "interval": 50,
       "items": [
         "assortedcore:ruby",
         "assortedcore:peridot",
         "assortedcore:sapphire",
         "assortedcore:topaz"
       ],
-      "interval": 50
+      "text": "manual.assortedcore.chapter.gems.gems",
+      "title": "manual.assortedcore.chapter.gems.gems.title"
     },
     {
-      "id": "smelting",
       "type": "assortedlib:recipe",
-      "title": "manual.assortedcore.chapter.gems.smelting.title",
-      "text": "manual.assortedcore.chapter.gems.smelting",
+      "id": "smelting",
+      "interval": 60,
       "recipes": [
         "assortedcore:ruby_smelting",
         "assortedcore:peridot_smelting",
         "assortedcore:sapphire_smelting",
         "assortedcore:topaz_smelting"
       ],
-      "interval": 60
+      "text": "manual.assortedcore.chapter.gems.smelting",
+      "title": "manual.assortedcore.chapter.gems.smelting.title"
     },
     {
-      "id": "storage",
       "type": "assortedlib:recipe",
-      "title": "manual.assortedcore.chapter.gems.storage.title",
-      "text": "manual.assortedcore.chapter.gems.storage",
+      "id": "storage",
+      "interval": 60,
       "recipes": [
         "assortedcore:ruby_block",
         "assortedcore:peridot_block",
         "assortedcore:sapphire_block",
         "assortedcore:topaz_block"
       ],
-      "interval": 60
+      "text": "manual.assortedcore.chapter.gems.storage",
+      "title": "manual.assortedcore.chapter.gems.storage.title"
     }
-  ]
+  ],
+  "sort_order": 20
 }

@@ -150,7 +150,11 @@ final class CoreTestSupport {
     }
 
     static JsonObject readLang(GameTestHelper helper) {
-        String path = "/assets/" + Constants.MOD_ID + "/lang/en_us.json";
+        return readJson(helper, "/assets/" + Constants.MOD_ID + "/lang/en_us.json");
+    }
+
+    /** A json the mod ships, read off the classpath rather than through a resource pack. */
+    static JsonObject readJson(GameTestHelper helper, String path) {
         try (InputStream in = CoreTestSupport.class.getResourceAsStream(path)) {
             helper.assertTrue(in != null, path + " is not on the classpath");
             return JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();

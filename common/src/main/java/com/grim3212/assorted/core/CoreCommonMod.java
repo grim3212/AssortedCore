@@ -4,6 +4,8 @@ import com.grim3212.assorted.core.common.blocks.CoreBlocks;
 import com.grim3212.assorted.core.common.blocks.blockentity.CoreBlockEntityTypes;
 import com.grim3212.assorted.core.api.crafting.AlloyForgeRecipeSerializer;
 import com.grim3212.assorted.core.api.crafting.GrindingMillRecipeSerializer;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeBookCategories;
+import com.grim3212.assorted.core.common.crafting.CoreRecipeDisplays;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeSerializers;
 import com.grim3212.assorted.core.common.crafting.CoreRecipeTypes;
 import com.grim3212.assorted.core.common.handlers.CoreCreativeItems;
@@ -25,6 +27,8 @@ public class CoreCommonMod {
         CoreBlockEntityTypes.init();
         CoreRecipeSerializers.init();
         CoreRecipeTypes.init();
+        CoreRecipeBookCategories.init();
+        CoreRecipeDisplays.init();
         CoreContainerTypes.init();
         CoreBiomeModifiers.init();
         CoreCreativeItems.init();

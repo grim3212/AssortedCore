@@ -1,10 +1,12 @@
 package com.grim3212.assorted.core;
 
 import com.grim3212.assorted.core.client.data.CoreLanguageProvider;
+import com.grim3212.assorted.core.client.data.CoreManualProvider;
 import com.grim3212.assorted.core.client.data.CoreBlockstateProvider;
 import com.grim3212.assorted.core.client.data.CoreItemModelProvider;
 import com.grim3212.assorted.core.common.blocks.blockentity.BaseMachineBlockEntity;
 import com.grim3212.assorted.core.common.blocks.blockentity.CoreBlockEntityTypes;
+import com.grim3212.assorted.core.common.crafting.MachineRecipeBackfill;
 import com.grim3212.assorted.core.data.*;
 import com.grim3212.assorted.lib.data.ForgeBlockTagProvider;
 import com.grim3212.assorted.lib.data.ForgeItemTagProvider;
@@ -16,12 +18,15 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 import java.util.Collections;
 import java.util.List;
@@ -38,8 +43,16 @@ public class AssortedCoreForge {
         modBus.addListener(this::gatherServerData);
         modBus.addListener(this::gatherClientData);
         modBus.addListener(this::registerCapabilities);
+        NeoForge.EVENT_BUS.addListener(this::onPlayerLoggedIn);
 
         CoreCommonMod.init();
+    }
+
+    /** TODO(11.0.0): remove along with {@link MachineRecipeBackfill}. */
+    private void onPlayerLoggedIn(final PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            MachineRecipeBackfill.award(player);
+        }
     }
 
     /**
@@ -65,6 +78,7 @@ public class AssortedCoreForge {
         event.addProvider(new CoreBlockstateProvider(packOutput));
         event.addProvider(new CoreItemModelProvider(packOutput));
         event.addProvider(new CoreLanguageProvider(packOutput));
+        event.addProvider(new CoreManualProvider(packOutput));
     }
 
     /**

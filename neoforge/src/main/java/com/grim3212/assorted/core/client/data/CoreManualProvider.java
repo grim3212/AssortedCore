@@ -42,7 +42,7 @@ public class CoreManualProvider extends LibManualProvider {
         ChapterBuilder machines = this.chapter("machines");
 
         machines.recipes("core", CoreBlocks.MACHINE_CORE.get()).opens(CoreBlocks.MACHINE_CORE.get());
-        machines.items("tiers", CoreBlocks.BASIC_ALLOY_FORGE.get().asItem(),
+        machines.recipes("tiers", CoreBlocks.BASIC_ALLOY_FORGE.get().asItem(),
                 CoreBlocks.INTERMEDIATE_ALLOY_FORGE.get().asItem(),
                 CoreBlocks.ADVANCED_ALLOY_FORGE.get().asItem(),
                 CoreBlocks.EXPERT_ALLOY_FORGE.get().asItem());
@@ -83,7 +83,7 @@ public class CoreManualProvider extends LibManualProvider {
     private void addGems() {
         ChapterBuilder gems = this.chapter("gems");
 
-        gems.items("gems", CoreItems.RUBY.get(), CoreItems.PERIDOT.get(), CoreItems.SAPPHIRE.get(),
+        gems.recipes("gems", CoreItems.RUBY.get(), CoreItems.PERIDOT.get(), CoreItems.SAPPHIRE.get(),
                         CoreItems.TOPAZ.get()).every(50)
                 .opens(CoreItems.RUBY.get(), CoreItems.PERIDOT.get(), CoreItems.SAPPHIRE.get(), CoreItems.TOPAZ.get());
         gems.recipesById("smelting", recipeId("ruby_smelting"), recipeId("peridot_smelting"), recipeId("sapphire_smelting"), recipeId("topaz_smelting"))

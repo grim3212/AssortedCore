@@ -10,9 +10,9 @@
       "title": "manual.assortedcore.chapter.machines.core.title"
     },
     {
-      "type": "assortedlib:item",
+      "type": "assortedlib:recipe",
       "id": "tiers",
-      "items": [
+      "recipes": [
         "assortedcore:basic_alloy_forge",
         "assortedcore:intermediate_alloy_forge",
         "assortedcore:advanced_alloy_forge",

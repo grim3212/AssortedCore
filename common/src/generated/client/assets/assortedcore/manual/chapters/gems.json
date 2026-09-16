@@ -1,10 +1,10 @@
 {
   "pages": [
     {
-      "type": "assortedlib:item",
+      "type": "assortedlib:recipe",
       "id": "gems",
       "interval": 50,
-      "items": [
+      "recipes": [
         "assortedcore:ruby",
         "assortedcore:peridot",
         "assortedcore:sapphire",

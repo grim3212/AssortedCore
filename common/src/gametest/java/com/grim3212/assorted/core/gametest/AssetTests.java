@@ -34,6 +34,7 @@ final class AssetTests {
     }
 
     static void register(BiConsumer<String, Consumer<GameTestHelper>> out) {
+        out.accept("jei_plugin_is_registered_on_fabric", AssetTests::jeiPluginIsRegisteredOnFabric);
         out.accept("every_block_and_item_has_model_and_name", AssetTests::everyBlockAndItemHasModelAndName);
         out.accept("every_recipe_loads_or_is_conditioned_off", AssetTests::everyRecipeLoadsOrIsConditionedOff);
         out.accept("every_item_tag_has_a_name", AssetTests::everyItemTagHasAName);
@@ -130,6 +131,15 @@ final class AssetTests {
                 .sorted()
                 .toList();
         helper.assertTrue(missing.isEmpty(), "item tags with no name in any lang file: " + missing);
+        helper.succeed();
+    }
+
+    /**
+     * JEI finds a plugin by annotation on NeoForge but by entrypoint on Fabric, so the annotation
+     * alone leaves the pages missing on one loader only.
+     */
+    private static void jeiPluginIsRegisteredOnFabric(GameTestHelper helper) {
+        com.grim3212.assorted.lib.test.TestSupport.assertJeiPluginIsRegistered(helper, "assortedcore", "com.grim3212.assorted.core.compat.jei.JEIAssortedCore");
         helper.succeed();
     }
 }

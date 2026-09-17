@@ -22,5 +22,6 @@ public final class CoreGameTests {
         OreTests.register(out);
         AssetTests.register(out);
         ManualLinkTests.register(out);
+        CrossLoaderDataTests.register(out);
     }
 }

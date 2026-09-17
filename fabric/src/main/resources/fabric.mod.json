@@ -20,9 +20,6 @@
     "client": [
       "com.grim3212.assorted.core.AssortedCoreFabricClient"
     ],
-    "fabric-datagen": [
-      "com.grim3212.assorted.core.AssortedCoreFabricDatagen"
-    ],
     "jei_mod_plugin": [
       "com.grim3212.assorted.core.compat.jei.JEIAssortedCore"
     ]
